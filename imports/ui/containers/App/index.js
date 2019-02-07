@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 import AccountsUIWrapper from "../../components/AccountsWrapper";
 

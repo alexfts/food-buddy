@@ -12,10 +12,8 @@ class App extends Component {
         <div className="login-wrapper">
           <AccountsUIWrapper />
         </div>
-        {/* <p>Welcome to Food Buddy</p> */}
-        <div>
-          <Profile />
-        </div>
+        <p>Welcome to Food Buddy</p>
+        <div />
       </div>
     );
   }

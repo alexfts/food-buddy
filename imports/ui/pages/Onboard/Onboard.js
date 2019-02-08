@@ -157,4 +157,4 @@ export default withTracker(() => {
   return {
     tags: Tags.find({}).fetch()
   };
-})(withStyles(styles))(Onboard);
+})(withStyles(styles)(Onboard));

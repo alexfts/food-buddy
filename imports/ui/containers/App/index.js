@@ -4,6 +4,7 @@ import AccountsUIWrapper from '../../components/AccountsWrapper';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import Profile from '../../pages/Profile/';
+import { Typography } from '@material-ui/core';
 
 class App extends Component {
   render() {
@@ -12,8 +13,7 @@ class App extends Component {
         <div className="login-wrapper">
           <AccountsUIWrapper />
         </div>
-        <p>Welcome to Food Buddy</p>
-        <div />
+        <Typography>Welcome to Food Buddy</Typography>
       </div>
     );
   }

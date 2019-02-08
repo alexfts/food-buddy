@@ -4,12 +4,17 @@ import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
-const TagInput = ({ tag }) => {
+const TagInput = ({ tag, deleteTag }) => {
   return (
     <li>
-      <Button variant="outlined" color="primary" className={classes.button}>
+      <Button
+        variant="outlined"
+        color="primary"
+        className={classes.button}
+        onClick={deleteTag(tag._id)}
+      >
         {tag.title}
-        <input type="text" id={tag._id} onChange={() => {}} />
+        {/* <input type="text" id={tag._id} onChange={() => {}} /> */}
       </Button>
     </li>
   );

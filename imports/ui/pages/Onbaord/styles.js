@@ -1,8 +1,14 @@
 const styles = theme => ({
-  // tagButton: {
-  //   background: theme.palette.primary.main,
-  //   color: '#fff'
-  // }
+  root: {
+    width: '90%'
+  },
+  backButton: {
+    marginRight: theme.spacing.unit
+  },
+  instructions: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit
+  }
 });
 
 export default styles;

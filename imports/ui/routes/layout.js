@@ -13,25 +13,20 @@ import { Tags } from '../../api/tags';
 import { Accounts } from 'meteor/accounts-base';
 
 const Layout = ({ loggedOut }) => {
-  //   if (loading) {
-  //     // console.log(users.length);
-  //     return <FullScreenLoader inverted />;
-  //   }
-
   if (!loggedOut) {
     if (!Meteor.userId()) {
       return <FullScreenLoader inverted />;
     }
     return (
       <Fragment>
-      <Header />
-      <Switch>
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/onboard" component={Onboard} />
-        <Route exact path="/results" component={Results} />
-        <Redirect from="*" to="/home" />
-      </Switch>
+        <Header />
+        <Switch>
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/onboard" component={Onboard} />
+          <Route exact path="/results" component={Results} />
+          <Redirect from="*" to="/home" />
+        </Switch>
       </Fragment>
     );
   } else {

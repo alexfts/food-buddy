@@ -23,13 +23,13 @@ const Layout = ({ loggedOut }) => {
     }
     return (
       <Fragment>
-      <Header />
-      <Switch>
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/onboard" component={Onboard} />
-        <Redirect from="*" to="/home" />
-      </Switch>
+        <Header />
+        <Switch>
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/onboard" component={Onboard} />
+          {/* <Redirect from="*" to="/home" /> */}
+        </Switch>
       </Fragment>
     );
   } else {

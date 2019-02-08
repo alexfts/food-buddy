@@ -2,6 +2,18 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 export const Tags = new Mongo.Collection('tags');
 
+Meteor.methods({
+  'tags.toggleTag'(tag) {
+    if (tag.owner !== this.userId) {
+      throw new Meteor.Error(
+        'tags.toggleTag.not-authorized',
+        'You are not allowed to change tags.'
+      );
+    }
+    ToDos.update({ _id: tag._id }, { $set: { selected: !tag.selected } });
+  }
+});
+
 if (Meteor.isServer) {
   Meteor.publish('tags', function tagsPublication() {
     if (!this.userId) {

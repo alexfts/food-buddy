@@ -21,7 +21,8 @@
     "react-final-form": "^4.0.2",
     "react-gravatar": "^2.6.3",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "react-select": "^2.3.0"
   },
   "meteor": {
     "mainModule": {

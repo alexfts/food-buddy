@@ -12,6 +12,9 @@ import { BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
+    console.log(this.props.users);
+    console.log(this.props.tags);
+    console.log(this.props.tagCategories);
     return (
       <div className="app-wrapper">
         <div className="login-wrapper">

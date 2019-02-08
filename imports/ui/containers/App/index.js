@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './styles.css';
-import AccountsWrapper from "../../components/AccountsWrapper";
-import Header from "../../components/Header";
-import { withTracker } from "meteor/react-meteor-data";
-import { Tags } from "../../../api/tags";
+import AccountsWrapper from '../../components/AccountsWrapper';
+import Header from '../../components/Header';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Tags } from '../../../api/tags';
+import { TagCategories } from '../../../api/tagCategories';
 import Profile from '../../pages/Profile/';
 import { Typography } from '@material-ui/core';
 import Layout from '../../routes/layout';
@@ -19,7 +20,7 @@ class App extends Component {
         <BrowserRouter>
           <Layout />
         </BrowserRouter>
-        
+
         <Typography>Welcome to Food Buddy</Typography>
       </div>
     );
@@ -28,10 +29,14 @@ class App extends Component {
 
 export default withTracker(() => {
   Meteor.subscribe('tags');
+  Meteor.subscribe('tagCategories');
+  Meteor.subscribe('users');
 
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    tags: Tags.find({}).fetch()
+    tags: Tags.find({}).fetch(),
+    tagCategories: TagCategories.find({}).fetch(),
+    users: Meteor.users.find({}).fetch()
   };
 })(App);

@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 import { Grid, Avatar } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
+import TagInput from '../../components/TagInput';
+
+import './styles';
 
 const tags = ['seafood', 'japanese', 'italian', 'burgers', 'vergetarian'];
 
@@ -22,6 +25,7 @@ const Profile = () => {
           {tags.map(tag => {
             return (
               <Grid item xs={1}>
+                {/* <TagInput key={tag.id} tag={tag} /> */}
                 {tag}
               </Grid>
             );

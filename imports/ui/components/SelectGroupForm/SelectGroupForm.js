@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 function inputComponent({ inputRef, ...props }) {
   return <div ref={inputRef} {...props} />;
@@ -180,6 +182,9 @@ class SelectGroupForm extends Component {
             fullwidth
           />
         </NoSsr>
+        <Button component={Link} to="/results">
+          Show results
+        </Button>
       </div>
     );
   }

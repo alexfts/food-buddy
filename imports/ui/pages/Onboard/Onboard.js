@@ -12,9 +12,10 @@ import {
 } from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
+import Cuisine from '../../components/Tags_Cuisine';
 
 function getSteps() {
-  return ['Cuisine', 'Food Types', 'Dietary Preferences', 'Extra'];
+  return ['Cuisine', 'Food Types', 'Dietary Preferences and Others'];
 }
 
 function getStepContent(stepIndex) {
@@ -25,8 +26,6 @@ function getStepContent(stepIndex) {
       return 'Select your favourite Food Types';
     case 2:
       return 'Select any dietary preferences';
-    case 3:
-      return 'Extra';
     default:
       return 'Unknown stepIndex';
   }

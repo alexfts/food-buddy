@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter, Link } from 'react-router-dom';
 import styles from './styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -68,8 +69,10 @@ class Header extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose} 
+                  component={Link}
+                  to={`/profile`}>Profile</MenuItem>
+                  <MenuItem onClick={Meteor.logout}>Logout</MenuItem>
                 </Menu>
               </div>
             )}
@@ -84,4 +87,4 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Header);
+export default withRouter(withStyles(styles)(Header));

@@ -21,9 +21,9 @@ const Profile = () => {
 
       <Grid container>
         <Grid item>
-          {tags.map(tags => {
+          {/* {tags.map(tags => {
             return <Grid item xs={1} />;
-          })}
+          })} */}
         </Grid>
       </Grid>
     </Fragment>

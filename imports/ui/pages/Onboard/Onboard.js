@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tags } from '../../../api/tags';
+import { TagCategories } from '../../../api/tagCategories';
 import { Meteor } from 'meteor/meteor';
 import {
   Button,
-  Step,
-  StepLabel,
-  Stepper,
+  Card,
+  MobileStepper,
+  Paper,
   Typography
 } from '@material-ui/core';
 import styles from './styles';
@@ -16,61 +17,26 @@ import FoodTypes from '../../components/Tags_FoodTypes';
 import DietandExtras from '../../components/Tags_DietandExtras';
 import { withTracker } from 'meteor/react-meteor-data';
 
-function getSteps() {
-  return ['Cuisine', 'Food Types', 'Dietary Preferences and Others'];
-}
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+// import { autoPlay } from 'react-swipeable-views-utils';
 
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return (
-        <ul>
-          {this.props.tags.map(tag => (
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={deleteTag(tag._id)}
-            >
-              <Cuisine />
-            </Button>
-          ))}
-        </ul>
-      );
-    case 1:
-      return (
-        <ul>
-          {this.props.tags.map(tag => (
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={deleteTag(tag._id)}
-            >
-              <FoodTypes />
-            </Button>
-          ))}
-        </ul>
-      );
-    case 2:
-      return (
-        <ul>
-          {this.props.tags.map(tag => (
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={deleteTag(tag._id)}
-            >
-              <DietandExtras />
-            </Button>
-          ))}
-        </ul>
-      );
-    default:
-      return 'Unknown section';
+const tutorialSteps = [
+  {
+    label:
+      'We want to get to know you better! Please select your favourite cusines:',
+    tagSection: <Cuisine />
+  },
+  {
+    label: 'Select your favourite food types:'
+    // tagSection: <FoodTypes />
+  },
+  {
+    label: 'Select any dietary preferences and extra info:'
+    // tagSection: <DietandExtras />
   }
-}
+];
 
 class Onboard extends React.Component {
   state = {
@@ -78,83 +44,98 @@ class Onboard extends React.Component {
   };
 
   handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
+    this.setState(prevState => ({
+      activeStep: prevState.activeStep + 1
     }));
   };
 
   handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1
+    this.setState(prevState => ({
+      activeStep: prevState.activeStep - 1
     }));
   };
 
-  handleReset = () => {
-    this.setState({
-      activeStep: 0
-    });
+  handleStepChange = activeStep => {
+    this.setState({ activeStep });
   };
 
   render() {
-    const { classes } = this.props;
-    const steps = getSteps();
+    const { classes, theme } = this.props;
     const { activeStep } = this.state;
+    const maxSteps = tutorialSteps.length;
 
     return (
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map(label => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
+      <div className={classes.container}>
+        <Paper square elevation={0} className={classes.header}>
+          <Typography>{tutorialSteps[activeStep].label}</Typography>
+        </Paper>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={activeStep}
+          onChangeIndex={this.handleStepChange}
+          enableMouseEvents
+        >
+          {tutorialSteps.map((step, index) => (
+            <div key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <div>
+                  <Typography> {step.label}</Typography>
+                  <div>{step.tagSection}</div>
+                </div>
+              ) : null}
+            </div>
           ))}
-        </Stepper>
-        <div>
-          {this.state.activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>
-                All steps completed
-              </Typography>
-              <Button onClick={this.handleReset}>Reset</Button>
-            </div>
-          ) : (
-            <div>
-              <Typography className={classes.instructions}>
-                {getStepContent(activeStep)}
-              </Typography>
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={this.handleBack}
-                  className={classes.backButton}
-                >
-                  Back
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
+        </SwipeableViews>
+
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          className={classes.mobileStepper}
+          nextButton={
+            <Button
+              size="small"
+              onClick={this.handleNext}
+              disabled={activeStep === maxSteps - 1}
+            >
+              Next
+              {theme.direction === 'rtl' ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={this.handleBack}
+              disabled={activeStep === 0}
+            >
+              {theme.direction === 'rtl' ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+              Back
+            </Button>
+          }
+        />
       </div>
     );
   }
 }
 
 Onboard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
-
-// export default withStyles(styles)(Onboard);
 
 export default withTracker(() => {
   Meteor.subscribe('tags');
+  Meteor.subscribe('tagCategories');
   return {
-    tags: Tags.find({}).fetch()
+    tags: Tags.find({}).fetch(),
+    tagCategories: TagCategories.find({}).fetch()
   };
-})(withStyles(styles)(Onboard));
+})(withStyles(styles, { withTheme: true })(Onboard));

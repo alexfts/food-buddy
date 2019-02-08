@@ -33,11 +33,6 @@ const Profile = ({ currentUser, currentUserId, tags }) => {
 
       <Grid container>
         <Grid item>
-<<<<<<< HEAD
-          {/* {tags.map(tags => {
-            return <Grid item xs={1} />;
-          })} */}
-=======
           {tags.map(tag => {
             return (
               <Grid item xs={1}>
@@ -45,7 +40,6 @@ const Profile = ({ currentUser, currentUserId, tags }) => {
               </Grid>
             );
           })}
->>>>>>> 4261af1538c7913e3730ca46a5ecef9f57eaf7e6
         </Grid>
       </Grid>
     </Fragment>

@@ -50,15 +50,16 @@ import SwipeableViews from 'react-swipeable-views';
 // {tagCategories.map(tagcat =>)}
 const tutorialSteps = [
   {
-    label: 'Cuisine',
+    label:
+      'We want to get to know you better! Please select your favourite cusines:',
     tagSection: <Cuisine tagCategories="Cuisine" />
   },
   {
-    label: 'Food Types'
+    label: 'Select your favourite food types:'
     // tagSection: <FoodTypes />
   },
   {
-    label: 'Diet Preferences and Extras'
+    label: 'Select any dietary preferences and extra info:'
     // tagSection: <DietandExtras />
   }
 ];

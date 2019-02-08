@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Onboard from '../pages/Onboard';
 import Login from '../pages/Login';
+import Results from '../pages/Results';
 import FullScreenLoader from '../components/Loader';
 import { withTracker } from 'meteor/react-meteor-data';
 import Header from '../components/Header/Header';
@@ -28,7 +29,8 @@ const Layout = ({ loggedOut }) => {
           <Route exact path="/home" component={Home} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/onboard" component={Onboard} />
-          {/* <Redirect from="*" to="/home" /> */}
+          <Route exact path="/results" component={Results} />
+          <Redirect from="*" to="/home" />
         </Switch>
       </Fragment>
     );

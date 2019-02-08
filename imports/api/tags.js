@@ -10,7 +10,6 @@ Meteor.methods({
         'You are not allowed to change tags.'
       );
     }
-    ToDos.update({ _id: tag._id }, { $set: { selected: !tag.selected } });
   }
 });
 

@@ -72,7 +72,9 @@ class Header extends React.Component {
                   <MenuItem onClick={this.handleClose} 
                   component={Link}
                   to={`/profile`}>Profile</MenuItem>
-                  <MenuItem onClick={Meteor.logout}>Logout</MenuItem>
+                  <MenuItem onClick={Meteor.logout}  
+                  component={Link}
+                  to={`/welcome`}>Logout</MenuItem>
                 </Menu>
               </div>
             )}

@@ -6,23 +6,25 @@ import { TagCategories } from '../../../api/tagCategories';
 import { Button, Card, Typography } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 
-const Cuisine = ({ tags, tagCategories }) => {
+const Cuisine = ({ tags }) => {
+  console.log(tags);
   return (
     <ul>
-      {tags.map(tag => {
-        tag.title === 'Cuisine' ? (
-          <li>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={deleteTag(tag._id)}
-            >
-              {/* {tag.title} */}
-            </Button>
-          </li>
-        ) : null;
-      })}
+      {tags.map(
+        tag => {
+          tag.title;
+        }
+        // <li>
+        //   <Button
+        //     variant="outlined"
+        //     color="primary"
+        //     className={classes.button}
+        //     // onClick={deleteTag(tag._id)}
+        //   >
+
+        //   </Button>
+        // </li>
+      )}
     </ul>
   );
 };

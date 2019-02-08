@@ -22,37 +22,11 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 // import { autoPlay } from 'react-swipeable-views-utils';
 
-//   renderCardForStep = step => {
-//     switch (step) {
-//       case 1:
-//         return <Cuisine />;
-//       case 2:
-//         return <FoodTypes />;
-//       case 3:
-//         return <DietandExtras />;
-//       default:
-//         return 'Unknown step';
-//     }
-//   };
-
-//     return (
-//       <div className={classes.container}>
-//         <Card className={classes.card}>
-//           <Typography component="h2">
-//             We want to get to know you better. Please select your preferred
-//             <span color="primary"> cuisine</span>.
-//           </Typography>
-//           {/* {renderCardForStep(activeStep)} */}
-//         </Card>
-
-// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-// {tagCategories.map(tagcat =>)}
 const tutorialSteps = [
   {
     label:
       'We want to get to know you better! Please select your favourite cusines:',
-    tagSection: <Cuisine tagCategories="Cuisine" />
+    tagSection: <Cuisine />
   },
   {
     label: 'Select your favourite food types:'

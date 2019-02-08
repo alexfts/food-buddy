@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tags } from '../../../api/tags';
+import { Tags } from '../../../api/tags';
 import { Meteor } from 'meteor/meteor';
 import {
   Button,
@@ -25,7 +25,7 @@ function getStepContent(stepIndex) {
     case 0:
       return (
         <ul>
-          {tags.map(tag => (
+          {this.props.tags.map(tag => (
             <Button
               variant="outlined"
               color="primary"
@@ -40,7 +40,7 @@ function getStepContent(stepIndex) {
     case 1:
       return (
         <ul>
-          {tags.map(tag => (
+          {this.props.tags.map(tag => (
             <Button
               variant="outlined"
               color="primary"
@@ -55,7 +55,7 @@ function getStepContent(stepIndex) {
     case 2:
       return (
         <ul>
-          {tags.map(tag => (
+          {this.props.tags.map(tag => (
             <Button
               variant="outlined"
               color="primary"

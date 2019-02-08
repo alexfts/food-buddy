@@ -4,7 +4,6 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Onboard from '../pages/Onboard';
 import Login from '../pages/Login';
-import { Tags } from '../../api/tags';
 import FullScreenLoader from '../components/Loader';
 import { withTracker } from 'meteor/react-meteor-data';
 import Header from '../components/Header/Header';

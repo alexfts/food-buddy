@@ -4,8 +4,6 @@ import AccountsWrapper from "../../components/AccountsWrapper";
 import Header from "../../components/Header";
 import { withTracker } from "meteor/react-meteor-data";
 import { Tags } from "../../../api/tags";
-import { withTracker } from 'meteor/react-meteor-data';
-import { Tags } from '../../../api/tags';
 import Profile from '../../pages/Profile/';
 import { Typography } from '@material-ui/core';
 

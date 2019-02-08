@@ -9,9 +9,9 @@ import { Meteor } from 'meteor/meteor';
 import './styles';
 
 const Profile = ({ currentUser, tags }) => {
-  // const userTags = currentUser.profile.tags.map(userTags =>
-  //   tags.find(tag => tag._id === userTags._id)
-  // );
+  const userTags = currentUser.profile.tags.map(userTags =>
+    tags.find(tag => tag._id === userTags._id)
+  );
 
   return (
     <Fragment>
@@ -33,7 +33,7 @@ const Profile = ({ currentUser, tags }) => {
       {/*TODO Map all tags and highlight ones that are already selected  */}
 
       <Grid container>
-        {/* <Grid item>{userTags}</Grid> */}
+        <Grid item>{userTags}</Grid>
         <Typography>All Tags</Typography>
         <Grid item>
           {tags.map(tag => {

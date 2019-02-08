@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import './styles.css';
-import AccountsUIWrapper from '../../components/AccountsWrapper';
+import AccountsWrapper from '../../components/AccountsWrapper';
+import Header from '../../components/Header';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
-import { Meteor } from 'meteor/meteor';
+import Profile from '../../pages/Profile/';
+import { Typography } from '@material-ui/core';
+import Layout from '../../routes/layout';
+import { BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
-    console.log(this.props.tags);
-    console.log(this.props.users);
-    console.log(this.props.tagCategories);
     return (
       <div className="app-wrapper">
         <div className="login-wrapper">
-          <AccountsUIWrapper />
+          <AccountsWrapper />
         </div>
-        <p>Welcome to Food Buddy</p>
-        <div />
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+
+        <Typography>Welcome to Food Buddy</Typography>
       </div>
     );
   }

@@ -1,0 +1,27 @@
+body,
+html {
+  background: #f9a825;
+  width: 100vw;
+  height: 100%;
+}
+
+#root {
+  background: #f9a825;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  /* color: #212121; */
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #fff;
+}

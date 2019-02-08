@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Home = () => {
-  return <div>hihihi</div>;
+  return <div>home page</div>;
 };
 
 export default Home;

@@ -13,11 +13,6 @@ import { Tags } from '../../api/tags';
 import { Accounts } from 'meteor/accounts-base';
 
 const Layout = ({ loggedOut }) => {
-  //   if (loading) {
-  //     // console.log(users.length);
-  //     return <FullScreenLoader inverted />;
-  //   }
-
   if (!loggedOut) {
     if (!Meteor.userId()) {
       return <FullScreenLoader inverted />;

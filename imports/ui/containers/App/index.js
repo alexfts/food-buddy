@@ -6,6 +6,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import Profile from '../../pages/Profile/';
 import { Typography } from '@material-ui/core';
+import Layout from '../../routes/layout';
+import { BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -14,9 +16,11 @@ class App extends Component {
         <div className="login-wrapper">
           <AccountsWrapper />
         </div>
-        {/* <Header /> */}
-        {/* <Typography>Welcome to Food Buddy</Typography> */}
-        <Profile />
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+
+        <Typography>Welcome to Food Buddy</Typography>
       </div>
     );
   }

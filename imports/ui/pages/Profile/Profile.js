@@ -5,6 +5,7 @@ import Gravatar from 'react-gravatar';
 import TagInput from '../../components/TagInput';
 
 import './styles';
+import { Meteor } from 'meteor/meteor';
 
 const tags = ['seafood', 'japanese', 'italian', 'burgers', 'vergetarian'];
 
@@ -13,7 +14,7 @@ const Profile = () => {
     <Fragment>
       <div>
         <Avatar>
-          <Gravatar email={'test@test.com'} />
+          <Gravatar email={Meteor.user.email} />
         </Avatar>
         <div>test</div>
       </div>

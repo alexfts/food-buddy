@@ -2,21 +2,31 @@ import React, { Fragment } from 'react';
 import { Grid, Avatar } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
+import { TagCategories } from '../../../api/tagCategories';
+import { Tags } from '../../../api/tags';
 import TagInput from '../../components/TagInput';
-
 import './styles';
 import { Meteor } from 'meteor/meteor';
 
-const tags = ['seafood', 'japanese', 'italian', 'burgers', 'vergetarian'];
+// const tags = ['seafood', 'japanese', 'italian', 'burgers', 'vergetarian'];
+// console.log(currentUser);
 
-const Profile = () => {
+// console.log(this.props.currentUser);
+const Profile = ({ currentUser, currentUserId, tags }) => {
+  console.log(currentUser, currentUserId);
+  console.log(tags);
+
   return (
     <Fragment>
       <div>
-        <Avatar>
-          <Gravatar email={Meteor.user.email} />
-        </Avatar>
-        <div>test</div>
+        {currentUser ? (
+          <Avatar>
+            <Gravatar email={currentUser.emails[0].address} />
+          </Avatar>
+        ) : (
+          <div>something</div>
+        )}
+        {currentUser ? currentUser.username : <div> something</div>}
       </div>
 
       {/*TODO Map all tags and highlight ones that are already selected  */}
@@ -26,8 +36,7 @@ const Profile = () => {
           {tags.map(tag => {
             return (
               <Grid item xs={1}>
-                {/* <TagInput key={tag.id} tag={tag} /> */}
-                {tag}
+                {tag.title}
               </Grid>
             );
           })}
@@ -37,4 +46,11 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withTracker(() => {
+  return {
+    currentUser: Meteor.user(),
+    tags: Tags.find({}).fetch()
+
+    // currentUserId: Meteor.userId()
+  };
+})(Profile);

@@ -1,5 +1,6 @@
 const styles = theme => ({
   root: {
+    background: theme.palette.primary.main,
     width: '90%'
   },
   backButton: {

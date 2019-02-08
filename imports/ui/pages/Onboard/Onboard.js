@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { tags } from '../../../api/tags';
 import { Meteor } from 'meteor/meteor';
-import TagInput from '../../components/TagInput/TagInput';
 import {
   Button,
   Step,
@@ -13,6 +12,9 @@ import {
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import Cuisine from '../../components/Tags_Cuisine';
+import FoodTypes from '../../components/Tags_FoodTypes';
+import DietandExtras from '../../components/Tags_DietandExtras';
+import { withTracker } from 'meteor/react-meteor-data';
 
 function getSteps() {
   return ['Cuisine', 'Food Types', 'Dietary Preferences and Others'];
@@ -21,13 +23,52 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'Select your favourite cuisines:';
+      return (
+        <ul>
+          {tags.map(tag => (
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={deleteTag(tag._id)}
+            >
+              <Cuisine />
+            </Button>
+          ))}
+        </ul>
+      );
     case 1:
-      return 'Select your favourite Food Types';
+      return (
+        <ul>
+          {tags.map(tag => (
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={deleteTag(tag._id)}
+            >
+              <FoodTypes />
+            </Button>
+          ))}
+        </ul>
+      );
     case 2:
-      return 'Select any dietary preferences';
+      return (
+        <ul>
+          {tags.map(tag => (
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={deleteTag(tag._id)}
+            >
+              <DietandExtras />
+            </Button>
+          ))}
+        </ul>
+      );
     default:
-      return 'Unknown stepIndex';
+      return 'Unknown section';
   }
 }
 
@@ -109,4 +150,11 @@ Onboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Onboard);
+// export default withStyles(styles)(Onboard);
+
+export default withTracker(() => {
+  Meteor.subscribe('tags');
+  return {
+    tags: Tags.find({}).fetch()
+  };
+})(withStyles(styles)(Onboard));

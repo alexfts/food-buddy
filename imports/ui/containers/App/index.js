@@ -20,8 +20,6 @@ class App extends Component {
         <BrowserRouter>
           <Layout />
         </BrowserRouter>
-
-        <Typography>Welcome to Food Buddy</Typography>
       </div>
     );
   }

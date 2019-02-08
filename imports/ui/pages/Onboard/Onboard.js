@@ -14,6 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Cuisine from '../../components/Tags_Cuisine';
 import FoodTypes from '../../components/Tags_FoodTypes';
 import DietandExtras from '../../components/Tags_DietandExtras';
+import { withTracker } from 'meteor/react-meteor-data';
 
 function getSteps() {
   return ['Cuisine', 'Food Types', 'Dietary Preferences and Others'];

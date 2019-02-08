@@ -3,9 +3,7 @@ import { Grid, Avatar } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 
-const tags = ['seafood', 'japanese', 'italian', 'burgers', 'vergetarian'].join(
-  ', '
-);
+const tags = ['seafood', 'japanese', 'italian', 'burgers', 'vergetarian'];
 
 const Profile = () => {
   return (
@@ -21,8 +19,12 @@ const Profile = () => {
 
       <Grid container>
         <Grid item>
-          {tags.map(tags => {
-            return <Grid item xs={1} />;
+          {tags.map(tag => {
+            return (
+              <Grid item xs={1}>
+                {tag}
+              </Grid>
+            );
           })}
         </Grid>
       </Grid>

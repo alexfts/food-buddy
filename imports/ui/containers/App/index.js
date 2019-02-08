@@ -13,7 +13,8 @@ class App extends Component {
         <div className="login-wrapper">
           <AccountsUIWrapper />
         </div>
-        <Typography>Welcome to Food Buddy</Typography>
+        {/* <Typography>Welcome to Food Buddy</Typography> */}
+        <Profile />
       </div>
     );
   }

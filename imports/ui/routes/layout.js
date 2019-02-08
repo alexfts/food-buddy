@@ -4,13 +4,13 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Onboard from '../pages/Onboard';
 import Login from '../pages/Login';
+import Results from '../pages/Results';
 import FullScreenLoader from '../components/Loader';
 import { withTracker } from 'meteor/react-meteor-data';
+import Header from '../components/Header/Header';
 import { TagCategories } from '../../api/tagCategories';
 import { Tags } from '../../api/tags';
 import { Accounts } from 'meteor/accounts-base';
-
-// import NavBar from '../components/NavBar/NavBar';
 
 const Layout = ({ loggedOut }) => {
   //   if (loading) {
@@ -23,12 +23,16 @@ const Layout = ({ loggedOut }) => {
       return <FullScreenLoader inverted />;
     }
     return (
+      <Fragment>
+      <Header />
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/onboard" component={Onboard} />
+        <Route exact path="/results" component={Results} />
         <Redirect from="*" to="/home" />
       </Switch>
+      </Fragment>
     );
   } else {
     return (

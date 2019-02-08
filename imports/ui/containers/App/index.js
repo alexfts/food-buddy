@@ -4,30 +4,30 @@ import AccountsWrapper from "../../components/AccountsWrapper";
 import Header from "../../components/Header";
 import { withTracker } from "meteor/react-meteor-data";
 import { Tags } from "../../../api/tags";
+import { withTracker } from 'meteor/react-meteor-data';
+import { Tags } from '../../../api/tags';
+import { Typography } from '@material-ui/core';
 
 class App extends Component {
-
-render() {
-
+  render() {
     return (
       <div className="app-wrapper">
         <div className="login-wrapper">
           <AccountsWrapper />
         </div>
-        <Header />
-        <p>Welcome to Food Buddy</p>
-    </div>
-    );   
-}
+        {/* <Header /> */}
+        <Typography>Welcome to Food Buddy</Typography>
+      </div>
+    );
+  }
 }
 
 export default withTracker(() => {
-    Meteor.subscribe('tags'); 
+  Meteor.subscribe('tags');
 
   return {
-    currentUser: Meteor.user(), 
-    currentUserId: Meteor.userId(), 
+    currentUser: Meteor.user(),
+    currentUserId: Meteor.userId(),
     tags: Tags.find({}).fetch()
   };
-
 })(App);

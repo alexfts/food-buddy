@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import Home from '../pages/Home';
+import Profile from '../pages/Profile';
 import { withTracker } from 'meteor/react-meteor-data';
 
 // import NavBar from '../components/NavBar/NavBar';
@@ -11,6 +12,7 @@ const Layout = props => {
   return (
     <Switch>
       <Route exact path="/home" component={Home} />
+      <Route exact path="/profile" component={Profile} />
     </Switch>
   );
   //   } else {

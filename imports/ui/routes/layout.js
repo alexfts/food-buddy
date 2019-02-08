@@ -36,7 +36,7 @@ export default withTracker(() => {
   return {
     // the withtracker method lets us write a mongodb query and store the info in a prop called todos.
     // the Todos.find({}) is the mongodb query equivalent for SELECT * FROM Todos.
-    currentUser: Meteor.user()
+    currentUser: Meteor.user(),
     // currentUserId: Meteor.userId()
     // tags: Tags.find({}).fetch()
   };

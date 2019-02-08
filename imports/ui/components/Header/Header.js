@@ -6,11 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// import Switch from '@material-ui/core/Switch';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -40,21 +36,13 @@ class Header extends React.Component {
 
     return (
       <div className={classes.root}>
-        {/* <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
-        </FormGroup> */}
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
+            <IconButton className={classes.menuButton} href="/home" color="inherit" aria-label="Menu">
+                <img src='/cheers_logo.png' width="40" alt="Logo" />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Photos
+                <img src='/food_buddy_wordmark.png' width="40" alt="App Name" />
             </Typography>
             {auth && (
               <div>

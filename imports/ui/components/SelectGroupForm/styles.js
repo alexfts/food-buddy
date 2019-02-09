@@ -10,6 +10,13 @@ const styles = theme => ({
     display: 'flex',
     padding: 0
   },
+  chipAvatar: {
+    width: '30px',
+    height: '30px'
+  },
+  avatar: {
+    marginRight: '10px'
+  },
   valueContainer: {
     display: 'flex',
     flexWrap: 'wrap',

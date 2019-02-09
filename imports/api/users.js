@@ -63,9 +63,6 @@ if (Meteor.isServer) {
       );
     }
     // TODO pull user tags by id
-    return Meteor.users.find(
-      { _id: { $ne: this.userId } },
-      { fields: { username: 1, profile: 1 } }
-    );
+    return Meteor.users.find();
   });
 }

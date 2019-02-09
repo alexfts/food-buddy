@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
+import { Typography, Fab, Modal } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
@@ -25,7 +25,13 @@ class Home extends Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Open Modal</Button>
+        <Fab
+          aria-label="Add"
+          className={classes.fabButton}
+          onClick={this.handleOpen}
+        >
+          <AddIcon />
+        </Fab>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

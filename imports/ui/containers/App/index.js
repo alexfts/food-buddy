@@ -31,6 +31,6 @@ export default withTracker(() => {
     currentUserId: Meteor.userId(),
     tags: Tags.find({}).fetch(),
     tagCategories: TagCategories.find({}).fetch(),
-    users: Meteor.users.find({}).fetch()
+    users: Meteor.users.find().fetch()
   };
 })(App);

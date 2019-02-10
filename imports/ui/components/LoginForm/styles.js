@@ -1,5 +1,6 @@
 const styles = theme => ({
   accountForm: {
+    lineHeight: 5,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: '400px'
@@ -9,9 +10,15 @@ const styles = theme => ({
     color: 'red'
   },
   formButton: {
+    backgroundColor: 'rgba(255,255,255, 0.2)',
     border: '1px solid #fff',
+    borderRadius: '2px',
     color: '#fff',
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    width: 150,
+    '&:hover': {
+      background: 'rgba(0,0,0, 0.25)'
+    }
   },
   formControl: {
     marginBottom: theme.spacing.unit * 2,
@@ -24,9 +31,13 @@ const styles = theme => ({
     '&:hover': {
       cursor: 'pointer'
     },
-    alignSelf: 'flex-end',
-    paddingTop: '10px'
+    textAlign: 'right',
+    paddingTop: '10px',
+    width: '100%'
   }
+  // ::-webkit-input-placeholder: {
+  //   color: 'green'
+  // }
 });
 
 export default styles;

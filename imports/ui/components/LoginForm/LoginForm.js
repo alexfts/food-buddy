@@ -193,7 +193,7 @@ class LoginForm extends Component {
               <Grid
                 container
                 direction="row"
-                justify="space-between"
+                justify="center"
                 alignItems="center"
               >
                 <Button
@@ -201,10 +201,10 @@ class LoginForm extends Component {
                   className={classes.formButton}
                   variant="contained"
                   size="large"
-                  color="secondary"
+                  // color="secondary"
                   disabled={submitting || pristine || hasValidationErrors}
                 >
-                  {this.state.formToggle ? 'Login' : 'Create Account'}
+                  {this.state.formToggle ? 'Login' : 'Create'}
                 </Button>
               </Grid>
             </FormControl>

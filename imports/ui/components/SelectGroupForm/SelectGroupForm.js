@@ -19,6 +19,7 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import TopMatches from '../TopMatches';
 
 /** Components to customize the style and behaviour of Select
  *  See https://react-select.com/components#replacing-components
@@ -160,7 +161,7 @@ function ValueContainer(props) {
   );
 }
 
-const MAX_BUDDIES = 10;
+const MAX_BUDDIES = 10; // Limit selections
 
 class SelectGroupForm extends Component {
   state = {
@@ -226,6 +227,9 @@ class SelectGroupForm extends Component {
           />
         </NoSsr>
         <Divider />
+        {this.state.multi && this.state.multi.length > 0 && (
+          <TopMatches userids={this.state.multi.map(({ value }) => value)} />
+        )}
       </div>
     );
   }

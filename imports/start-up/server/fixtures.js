@@ -38,7 +38,7 @@ Meteor.startup(() => {
       profile: {
         name: 'bob',
         tags: Tags.find({
-          title: { $in: ['Mediterranean', 'Gluten free'] }
+          title: { $in: ['Mediterranean', 'Gluten free', 'Burgers'] }
         }).map(tag => tag._id)
       }
     });

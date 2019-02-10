@@ -199,7 +199,7 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Typography>Choose your group</Typography>
+        <Typography variant="h1">Choose your group</Typography>
         <NoSsr>
           <Select
             className={classes.select}
@@ -226,7 +226,6 @@ class SelectGroupForm extends Component {
             fullwidth
           />
         </NoSsr>
-        <Divider />
         {this.state.multi && this.state.multi.length > 0 && (
           <TopMatches userids={this.state.multi.map(({ value }) => value)} />
         )}

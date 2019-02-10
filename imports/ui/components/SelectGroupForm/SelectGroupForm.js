@@ -18,7 +18,6 @@ import {
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import TopMatches from '../TopMatches';
 
 /** Components to customize the style and behaviour of Select
@@ -199,7 +198,7 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Typography variant="h1">Choose your group</Typography>
+        <Typography variant="h4">Choose your group</Typography>
         <NoSsr>
           <Select
             className={classes.select}

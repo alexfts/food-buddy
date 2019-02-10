@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const getUserTags = user => {
   return user.profile.tags.map(tagid => ({ tagid, user }));
@@ -48,19 +49,25 @@ const TopMatches = ({
   const selectedUsers = users.filter(user => userids.includes(user._id));
   const matches = match([...selectedUsers, currentUser], tags, tagCategories);
   return (
-    <Grid container spacing={16}>
-      {matches.map(({ tagid, users }) => {
-        const tag = tags.find(tag => tag._id === tagid);
-        const category = tagCategories.find(
-          categ => categ._id === tag.categoryid
-        );
-        return (
-          <Grid item xs={12} sm={6} key={tagid} className={classes.matches}>
-            {JSON.stringify(tag)}
-          </Grid>
-        );
-      })}
-    </Grid>
+    <div>
+      <Typography variant="h5">Your top matches:</Typography>
+      <Grid container spacing={16}>
+        {matches.map(({ tagid, users }) => {
+          const tag = tags.find(tag => tag._id === tagid);
+          const category = tagCategories.find(
+            categ => categ._id === tag.categoryid
+          );
+          return (
+            <Grid item xs={12} sm={6} key={tagid} className={classes.matches}>
+              {tag.title}
+              <Button component={Link} to={`/results`}>
+                Find restaurants!
+              </Button>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </div>
   );
 };
 

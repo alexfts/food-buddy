@@ -63,6 +63,9 @@ if (Meteor.isServer) {
       );
     }
     // TODO pull user tags by id
-    return Meteor.users.find();
+    return Meteor.users.find(
+      {},
+      { fields: { username: 1, profile: 1, 'emails.address': 1 } }
+    );
   });
 }

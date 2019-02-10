@@ -11,11 +11,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-
 class Header extends React.Component {
   state = {
     auth: true,
-    anchorEl: null,
+    anchorEl: null
   };
 
   handleChange = event => {
@@ -39,11 +38,16 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} href="/home" color="inherit" aria-label="Menu">
-                <img src='/cheers_logo.png' width="40" alt="Logo" />
+            <IconButton
+              className={classes.menuButton}
+              href="/home"
+              color="inherit"
+              aria-label="Menu"
+            >
+              <img src="/cheers_logo.png" width="40" alt="Logo" />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-                <img src='/food_buddy_wordmark.png' width="40" alt="App Name" />
+              <img src="/food_buddy_wordmark.png" width="40" alt="App Name" />
             </Typography>
             {auth && (
               <div>
@@ -60,21 +64,29 @@ class Header extends React.Component {
                   anchorEl={anchorEl}
                   anchorOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: 'right'
                   }}
                   transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: 'right'
                   }}
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose} 
-                  component={Link}
-                  to={`/profile`}>Profile</MenuItem>
-                  <MenuItem onClick={Meteor.logout}  
-                  component={Link}
-                  to={`/welcome`}>Logout</MenuItem>
+                  <MenuItem
+                    onClick={this.handleClose}
+                    component={Link}
+                    to={`/profile`}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={e => Meteor.logout()}
+                    component={Link}
+                    to={`/welcome`}
+                  >
+                    Logout
+                  </MenuItem>
                 </Menu>
               </div>
             )}
@@ -86,7 +98,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withRouter(withStyles(styles)(Header));

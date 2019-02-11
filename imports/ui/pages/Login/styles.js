@@ -8,13 +8,20 @@ const styles = theme => ({
   root: {
     background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)',
     backgroundImage: 'url("/pasta.png"), url("/berrybowl.png")',
-    [theme.breakpoints.up('sm')]: {
-      backgroundImage: 'url("/BG.png")',
-      backgroundSize: 'cover'
-      //   background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)'
-    },
+    backgroundPosition: 'top left, bottom right',
+    backgroundRepeat: 'no-repeat, no-repeat',
+    backgroundAttachment: 'fixed, fixed',
+    backgroundSize: '45%',
+
     height: '100vh',
-    width: '100vw'
+    width: '100vw',
+
+    [theme.breakpoints.down('sm')]: {
+      backgroundSize: '25%'
+    },
+    [theme.breakpoints.up('md')]: {
+      backgroundSize: '25%'
+    }
   },
 
   logo: {
@@ -26,11 +33,11 @@ const styles = theme => ({
     }
   },
   textLogo: {
-    paddingBottom: '2.2rem',
-    height: 50,
-    [theme.breakpoints.up('sm')]: {
-      height: 45
-    }
+    // paddingBottom: '2.2rem',
+    height: 50
+    // [theme.breakpoints.up('sm')]: {
+    //   height: 45
+    // }
   },
   loginForm: {
     display: 'flex',

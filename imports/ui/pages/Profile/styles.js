@@ -9,10 +9,16 @@ const styles = theme => ({
   root: {
     padding: '5%'
   },
-  paper: {
+  paperUser: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 2,
+    borderRadius: 3
+  },
+  paperTags: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2.5,
+    paddingBottom: theme.spacing.unit * 3,
     borderRadius: 3
   },
 
@@ -23,10 +29,13 @@ const styles = theme => ({
     // justifyContent: 'space-between',
   },
   // profileAvatar: {},
+  avatarStyle: {
+    marginBottom: '0.8rem',
+    height: 80,
+    width: 80
+  },
   gravatar: {
-    marginBottom: '0.6rem',
-    height: 50,
-    width: 50
+    transform: 'scale(1.7)'
   },
   userStyle: {
     fontWeight: 500,

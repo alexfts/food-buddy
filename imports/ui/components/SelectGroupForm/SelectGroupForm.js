@@ -160,20 +160,26 @@ function ValueContainer(props) {
   );
 }
 
-const MAX_BUDDIES = 10; // Limit selections
-
 class SelectGroupForm extends Component {
   state = {
-    multi: null
+    multi: null,
+    matches: null
   };
 
   handleChange = value => {
-    if (value && value.length > MAX_BUDDIES) {
-      value = value.slice(0, MAX_BUDDIES);
-    }
-    this.setState({
-      multi: value
-    });
+    this.setState(
+      {
+        multi: value
+      },
+      () => {
+        const userids = this.state.multi.map(({ value }) => value);
+        Meteor.call(
+          'users.findMatches',
+          [...userids, this.props.currentUserId],
+          (err, matches) => this.setState({ matches })
+        );
+      }
+    );
   };
 
   render() {
@@ -225,9 +231,14 @@ class SelectGroupForm extends Component {
             fullwidth
           />
         </NoSsr>
-        {this.state.multi && this.state.multi.length > 0 && (
-          <TopMatches userids={this.state.multi.map(({ value }) => value)} />
-        )}
+        {this.state.multi &&
+          this.state.multi.length > 0 &&
+          this.state.matches && (
+            <TopMatches
+              userids={this.state.multi.map(({ value }) => value)}
+              matches={this.state.matches}
+            />
+          )}
       </div>
     );
   }

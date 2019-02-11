@@ -14,21 +14,32 @@ import { Accounts } from 'meteor/accounts-base';
 import { withRouter } from 'react-router';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
-const Layout = ({ loggedOut }) => {
+const isOnboarded = user => {
+  return user.profile && user.profile.tags && user.profile.tags.length > 0;
+};
+
+const Layout = ({ loggedOut, currentUser, currentUserId }) => {
   if (!loggedOut) {
-    if (!Meteor.userId()) {
+    if (!currentUser) {
       return <FullScreenLoader inverted />;
     }
     return (
       <Fragment>
         <Header />
-        <Switch>
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/onboard" component={Onboard} />
-          <Route exact path="/results" component={Results} />
-          <Redirect from="*" to="/home" />
-        </Switch>
+        {currentUser && isOnboarded(currentUser) ? (
+          <Switch>
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/onboard" component={Onboard} />
+            <Route exact path="/results" component={Results} />
+            <Redirect from="*" to="/home" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/onboard" component={Onboard} />
+            <Redirect from="*" to="/onboard" />
+          </Switch>
+        )}
       </Fragment>
     );
   } else {
@@ -48,6 +59,8 @@ export default withRouter(
     return {
       //the withtracker method lets us write a mongodb query and store the info in a prop called todos.
       //the Todos.find({}) is the mongodb query equivalent for SELECT * FROM Todos.
+      currentUser: Meteor.user(),
+      currentUserId: Meteor.userId(),
       loggedOut:
         !Meteor.user() &&
         !Meteor.loggingIn() &&

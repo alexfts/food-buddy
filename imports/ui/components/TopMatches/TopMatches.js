@@ -8,49 +8,20 @@ import { TagCategories } from '../../../api/tagCategories';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const getUserTags = user => {
-  return user.profile.tags.map(tagid => ({ tagid, user }));
-};
-
-// TODO account for categories
-const match = users => {
-  let allUserTags = users
-    .map(getUserTags)
-    .reduce((a, b) => a.concat(b), [])
-    .reduce((acc, { tagid, user }) => {
-      if (acc.hasOwnProperty(tagid)) {
-        acc[tagid].push(user);
-      } else {
-        acc[tagid] = [user];
-      }
-      return acc;
-    }, {});
-
-  allUserTags = Object.keys(allUserTags).map(tagid => ({
-    tagid, // todo intersect tags from different categories
-    users: allUserTags[tagid]
-  }));
-
-  allUserTags.sort((a, b) => {
-    return b.users.length - a.users.length;
-  });
-
-  return allUserTags;
-};
-
 const TopMatches = ({
   userids,
   users,
   currentUser,
+  currentUserId,
   tags,
   tagCategories,
-  classes
+  classes,
+  matches
 }) => {
-  const selectedUsers = users.filter(user => userids.includes(user._id));
-  const matches = match([...selectedUsers, currentUser], tags, tagCategories);
-  return (
+  return matches ? (
     <div>
       <Typography variant="h5">Your top matches:</Typography>
+
       <Grid container spacing={16}>
         {matches.map(({ tagid, users }) => {
           const tag = tags.find(tag => tag._id === tagid);
@@ -76,6 +47,8 @@ const TopMatches = ({
         })}
       </Grid>
     </div>
+  ) : (
+    <div>U suck</div>
   );
 };
 

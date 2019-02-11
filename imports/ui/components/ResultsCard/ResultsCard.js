@@ -15,13 +15,14 @@ function MediaCard(props) {
     <Card className={classes.card}>
    
       <CardActionArea>
-
+{/* Link to website from api details */}
         <a
             href="https://google.com"
             target="_blank"
             rel="noopener noreferrer"
             className={classes.hrefLink}
         >
+        {/* image from photo details */}
         <CardMedia
           className={classes.media}
           component='img'
@@ -36,13 +37,13 @@ function MediaCard(props) {
             Pull restaurant rating
           </Typography>
           <Typography component="p">
-            Pull restaurant price
+            Pull restaurant price_level
           </Typography>
           <Typography component="p">
             Pull restaurant distance
           </Typography>
           <Typography component="p">
-            Pull restaurant address
+            Pull restaurant formatted_address from details
           </Typography>
         </CardContent>
         </a>

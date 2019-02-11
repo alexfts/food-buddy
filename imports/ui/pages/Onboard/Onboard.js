@@ -154,7 +154,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import { TagCategories } from '../../../api/tagCategories';
 
 const styles = theme => ({
   root: {

@@ -112,13 +112,13 @@ class LoginForm extends Component {
             {!this.state.formToggle && (
               <FormControl fullWidth className={classes.formControl}>
                 <Field
-                  name="username"
+                  name="email"
                   render={({ input, meta }) => (
                     <Fragment>
                       <TextField
                         {...input}
-                        label="Username"
-                        id="username"
+                        label="Email"
+                        id="email"
                         autoComplete="off"
                       />
                       {meta.touched && meta.invalid && (
@@ -133,13 +133,13 @@ class LoginForm extends Component {
             )}
             <FormControl fullWidth className={classes.formControl}>
               <Field
-                name="email"
+                name="username"
                 render={({ input, meta }) => (
                   <Fragment>
                     <TextField
                       {...input}
-                      id="email"
-                      label="Email"
+                      id="username"
+                      label="Username"
                       type="text"
                       autoComplete="off"
                     />
@@ -172,6 +172,22 @@ class LoginForm extends Component {
                   </Fragment>
                 )}
               />
+              <Typography>
+                <button
+                  className={classes.formToggle}
+                  type="button"
+                  onClick={() => {
+                    form.reset();
+                    this.setState({
+                      formToggle: !this.state.formToggle
+                    });
+                  }}
+                >
+                  {this.state.formToggle
+                    ? 'Create an account'
+                    : 'Login to existing account'}
+                </button>
+              </Typography>
             </FormControl>
             <FormControl className={classes.formControl}>
               <Grid
@@ -188,24 +204,8 @@ class LoginForm extends Component {
                   color="secondary"
                   disabled={submitting || pristine || hasValidationErrors}
                 >
-                  {this.state.formToggle ? 'Enter' : 'Create Account'}
+                  {this.state.formToggle ? 'Login' : 'Create Account'}
                 </Button>
-                <Typography>
-                  <button
-                    className={classes.formToggle}
-                    type="button"
-                    onClick={() => {
-                      form.reset();
-                      this.setState({
-                        formToggle: !this.state.formToggle
-                      });
-                    }}
-                  >
-                    {this.state.formToggle
-                      ? 'Create an account.'
-                      : 'Login to existing account.'}
-                  </button>
-                </Typography>
               </Grid>
             </FormControl>
             {hasSubmitErrors && (

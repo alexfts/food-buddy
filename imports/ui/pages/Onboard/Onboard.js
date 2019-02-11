@@ -151,6 +151,8 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
 
@@ -196,13 +198,16 @@ function getSteps() {
 
 class Onboard extends React.Component {
   state = {
-    activeStep: 0
+    activeStep: 0,
+    selectedTags: []
   };
 
   getStepContent = step => {
     switch (step) {
       case 0:
-        return [`tags `, `tags `];
+        console.log(this.props.tags);
+        // return this.props.tags.map(tag => tag[tag]);
+        return this.props.tags.map(tag => [<li>{tag.title}</li>]);
       case 1:
         return 'An ad group contains one or more ads which target a shared set of keywords.';
       case 2:

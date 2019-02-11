@@ -152,6 +152,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
+import { TagCategories } from '../../../api/tagCategories';
 
 const styles = theme => ({
   root: {

@@ -20,3 +20,4 @@ static-html
 react-meteor-data
 accounts-ui-unstyled
 accounts-password
+aldeed:collection2@3.0.0

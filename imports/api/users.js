@@ -2,8 +2,12 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { Tags } from './tags';
 
+/**
+ * Once the user is onboarded, Users collection must contain profile object
+ * with name (user's name) and tags (a list of _id's from Tags collection)
+ */
+
 Meteor.methods({
-  // save food preferences
   'users.updateUserTags'(tagids) {
     if (!this.userId) {
       throw new Meteor.Error(
@@ -31,27 +35,49 @@ Meteor.methods({
     Meteor.users.update(this.userId, {
       $set: { 'profile.tags': tagids }
     });
+  },
+
+  'users.updateName'(name) {
+    if (!this.userId) {
+      throw new Meteor.Error(
+        'users.updateName.not-authorized',
+        'You are not logged in.'
+      );
+    }
+
+    if (!name || !(name instanceof String)) {
+      throw new Meteor.Error('users.updateName.invalid-name', 'Invalid name.');
+    }
+
+    Meteor.users.update(this.userId, {
+      $set: { 'profile.name': name }
+    });
+  },
+
+  'users.findMatches'(userids) {
+    if (!this.userId) {
+      throw new Meteor.Error(
+        'users.findMatches.not-authorized',
+        'You are not logged in.'
+      );
+    }
+    if (!userids || !(userids instanceof Array)) {
+      throw new Meteor.Error(
+        'users.findMatches.invalid-input',
+        'Invalid input.'
+      );
+    }
+
+    const users = userids.map(userid => {
+      const user = Meteor.users.findOne({ _id: userid });
+      if (!user)
+        throw new Meteor.Error(
+          'users.findMatches.invalid-input',
+          'Invalid input.'
+        );
+      return user;
+    });
   }
-
-  // @TODO match users' preferences
-  // 'users.match'(userids) {
-  //   if (!this.userId) {
-  //     throw new Meteor.Error(
-  //       'users.match.not-authorized',
-  //       'You are not logged in.'
-  //     );
-  //   }
-  //   if (!userids || !(userids instanceof Array)) {
-  //     throw new Meteor.Error('users.match.invalid-input', 'Invalid input.');
-  //   }
-
-  //   const users = userids.map(userid => {
-  //     const user = Meteor.users.findOne({ _id: userid });
-  //     if (!user)
-  //       throw new Meteor.Error('users.match.invalid-input', 'Invalid input.');
-  //     return user;
-  //   });
-  // }
 });
 
 if (Meteor.isServer) {
@@ -62,10 +88,9 @@ if (Meteor.isServer) {
         'You are not logged in.'
       );
     }
-    // TODO pull user tags by id
     return Meteor.users.find(
-      { _id: { $ne: this.userId } },
-      { fields: { username: 1, profile: 1 } }
+      {},
+      { fields: { username: 1, profile: 1, 'emails.address': 1 } }
     );
   });
 }

@@ -2,18 +2,39 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import PropTypes from 'prop-types';
-import NoSsr from '@material-ui/core/NoSsr';
+import Gravatar from 'react-gravatar';
 import Select from 'react-select';
 import { withTracker } from 'meteor/react-meteor-data';
-import Chip from '@material-ui/core/Chip';
+import {
+  NoSsr,
+  Chip,
+  MenuItem,
+  TextField,
+  Typography,
+  Avatar,
+  Paper,
+  Button,
+  Divider
+} from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import TopMatches from '../TopMatches';
+
+/** Components to customize the style and behaviour of Select
+ *  See https://react-select.com/components#replacing-components
+ *  For full reference
+ **/
+
+const selectComponents = {
+  Control,
+  Menu,
+  MultiValue,
+  NoOptionsMessage,
+  Option,
+  Placeholder,
+  SingleValue,
+  ValueContainer
+};
 
 function inputComponent({ inputRef, ...props }) {
   return <div ref={inputRef} {...props} />;
@@ -68,9 +89,18 @@ function MultiValue(props) {
       className={classNames(props.selectProps.classes.chip, {
         [props.selectProps.classes.chipFocused]: props.isFocused
       })}
+      avatar={
+        <Avatar>
+          <Gravatar
+            email={props.data.email}
+            className={props.selectProps.classes.chipAvatar}
+          />
+        </Avatar>
+      }
       label={props.children}
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
+      color="primary"
     />
   );
 }
@@ -98,7 +128,15 @@ function Option(props) {
       }}
       {...props.innerProps}
     >
-      {props.children}
+      <Avatar className={props.selectProps.classes.avatar}>
+        <Gravatar email={props.data.email} />
+      </Avatar>
+      <Typography
+        className={props.selectProps.classes.singleValue}
+        {...props.innerProps}
+      >
+        {props.children}
+      </Typography>
     </MenuItem>
   );
 }
@@ -122,16 +160,7 @@ function ValueContainer(props) {
   );
 }
 
-const components = {
-  Control,
-  Menu,
-  MultiValue,
-  NoOptionsMessage,
-  Option,
-  Placeholder,
-  SingleValue,
-  ValueContainer
-};
+const MAX_BUDDIES = 10; // Limit selections
 
 class SelectGroupForm extends Component {
   state = {
@@ -139,6 +168,9 @@ class SelectGroupForm extends Component {
   };
 
   handleChange = value => {
+    if (value && value.length > MAX_BUDDIES) {
+      value = value.slice(0, MAX_BUDDIES);
+    }
     this.setState({
       multi: value
     });
@@ -148,7 +180,12 @@ class SelectGroupForm extends Component {
     const { classes, users, currentUserId } = this.props;
     const suggestions = users
       .filter(user => user._id !== currentUserId)
-      .map(user => ({ label: user.username, value: user._id }));
+      .filter(user => user.profile && user.profile.tags) // only onboarded users
+      .map(user => ({
+        label: user.username, // react-select searches through 'label' values
+        value: user._id,
+        email: user.emails[0].address
+      }));
 
     const selectStyles = {
       input: base => ({
@@ -161,20 +198,26 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Typography>Choose your group</Typography>
+        <Typography variant="h4">Choose your group</Typography>
         <NoSsr>
           <Select
             className={classes.select}
             classes={classes}
             styles={selectStyles}
             textFieldProps={{
-              label: 'Your Buddies',
+              label: `You have picked ${
+                this.state.multi ? this.state.multi.length : 0
+              } ${
+                this.state.multi && this.state.multi.length === 1
+                  ? 'buddy'
+                  : 'buddies'
+              }`,
               InputLabelProps: {
                 shrink: true
               }
             }}
             options={suggestions}
-            components={components}
+            components={selectComponents}
             value={this.state.multi}
             onChange={this.handleChange}
             placeholder="Search a buddy"
@@ -182,9 +225,9 @@ class SelectGroupForm extends Component {
             fullwidth
           />
         </NoSsr>
-        <Button component={Link} to="/results">
-          Show results
-        </Button>
+        {this.state.multi && this.state.multi.length > 0 && (
+          <TopMatches userids={this.state.multi.map(({ value }) => value)} />
+        )}
       </div>
     );
   }

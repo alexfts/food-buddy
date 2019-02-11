@@ -16,13 +16,12 @@ const Login = ({ classes }) => {
           alignItems="center"
           justify="center"
         >
+          <img className={classes.logo} src="/cheers_logo.png" alt="Logo" />
           <img
-            className={classes.logo}
-            src="/cheers_logo.png"
-            alt="Logo"
-            width="150"
+            className={classes.textLogo}
+            src="/Food_Buddy.png"
+            alt="Food Buddy app"
           />
-          <img src="/Food_Buddy.png" alt="Food Buddy app" height="40" />
         </Grid>
 
         {/* <Grid container item xs={12} sm={12} md={6}> */}

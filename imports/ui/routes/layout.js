@@ -12,6 +12,7 @@ import { TagCategories } from '../../api/tagCategories';
 import { Tags } from '../../api/tags';
 import { Accounts } from 'meteor/accounts-base';
 import { withRouter } from 'react-router';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 const Layout = ({ loggedOut }) => {
   if (!loggedOut) {

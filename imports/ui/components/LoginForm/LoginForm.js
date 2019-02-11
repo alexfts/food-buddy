@@ -95,10 +95,13 @@ class LoginForm extends Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <Form
         onSubmit={this.onSubmit}
-        validate={values => validate(values, this.state.formToggle)}
+        validate={values => {
+          return validate(values, this.state.formToggle);
+        }}
         render={({
           handleSubmit,
           form,
@@ -107,9 +110,39 @@ class LoginForm extends Component {
           hasValidationErrors,
           hasSubmitErrors,
           submitError
-        }) => (
-          <form onSubmit={handleSubmit} className={classes.accountForm}>
-            {!this.state.formToggle && (
+        }) => {
+          console.log('SUBMITTING', submitting);
+          console.log('PRISTINE', pristine);
+          console.log('VALID ERRORS', hasValidationErrors);
+          return (
+            <form onSubmit={handleSubmit} className={classes.accountForm}>
+              {!this.state.formToggle && (
+                <FormControl fullWidth className={classes.formControl}>
+                  <Field
+                    name="email"
+                    render={({ input, meta }) => (
+                      <Fragment>
+                        <TextField
+                          {...input}
+                          id="outlined-email-input"
+                          label="Email"
+                          className={classes.textField}
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          margin="normal"
+                          variant="outlined"
+                        />
+                        {meta.touched && meta.invalid && (
+                          <Typography className={classes.errorMessage}>
+                            {meta.error}
+                          </Typography>
+                        )}
+                      </Fragment>
+                    )}
+                  />
+                </FormControl>
+              )}
               <FormControl fullWidth className={classes.formControl}>
                 <Field
                   name="username"
@@ -117,9 +150,13 @@ class LoginForm extends Component {
                     <Fragment>
                       <TextField
                         {...input}
+                        id="outlined-username-input"
                         label="Username"
-                        id="username"
+                        type="username"
                         autoComplete="off"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
                       />
                       {meta.touched && meta.invalid && (
                         <Typography className={classes.errorMessage}>
@@ -130,66 +167,29 @@ class LoginForm extends Component {
                   )}
                 />
               </FormControl>
-            )}
-            <FormControl fullWidth className={classes.formControl}>
-              <Field
-                name="email"
-                render={({ input, meta }) => (
-                  <Fragment>
-                    <TextField
-                      {...input}
-                      id="email"
-                      label="Email"
-                      type="text"
-                      autoComplete="off"
-                    />
-                    {meta.touched && meta.invalid && (
-                      <Typography className={classes.errorMessage}>
-                        {meta.error}
-                      </Typography>
-                    )}
-                  </Fragment>
-                )}
-              />
-            </FormControl>
-            <FormControl fullWidth className={classes.formControl}>
-              <Field
-                name="password"
-                render={({ input, meta }) => (
-                  <Fragment>
-                    <TextField
-                      {...input}
-                      id="password"
-                      label="Password"
-                      type="password"
-                      autoComplete="off"
-                    />
-                    {meta.touched && meta.invalid && (
-                      <Typography className={classes.errorMessage}>
-                        {meta.error}
-                      </Typography>
-                    )}
-                  </Fragment>
-                )}
-              />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Button
-                  type="submit"
-                  className={classes.formButton}
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  disabled={submitting || pristine || hasValidationErrors}
-                >
-                  {this.state.formToggle ? 'Enter' : 'Create Account'}
-                </Button>
+              <FormControl fullWidth className={classes.formControl}>
+                <Field
+                  name="password"
+                  render={({ input, meta }) => (
+                    <Fragment>
+                      <TextField
+                        {...input}
+                        id="outlined-password-input"
+                        label="Password"
+                        className={classes.textField}
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        variant="outlined"
+                      />
+                      {meta.touched && meta.invalid && (
+                        <Typography className={classes.errorMessage}>
+                          {meta.error}
+                        </Typography>
+                      )}
+                    </Fragment>
+                  )}
+                />
                 <Typography>
                   <button
                     className={classes.formToggle}
@@ -202,19 +202,42 @@ class LoginForm extends Component {
                     }}
                   >
                     {this.state.formToggle
-                      ? 'Create an account.'
-                      : 'Login to existing account.'}
+                      ? 'Create an account'
+                      : 'Login to existing account'}
                   </button>
                 </Typography>
-              </Grid>
-            </FormControl>
-            {hasSubmitErrors && (
-              <Typography className={classes.errorMessage}>
-                {submitError}
-              </Typography>
-            )}
-          </form>
-        )}
+              </FormControl>
+              <FormControl className={classes.formControl}>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Button
+                    type="submit"
+                    // className={classes.formButton}
+                    classes={{
+                      root: classes.button, // class name, e.g. `classes-nesting-root-x`
+                      label: classes.label // class name, e.g. `classes-nesting-label-x`
+                    }}
+                    variant="contained"
+                    size="large"
+                    // color="secondary"
+                    disabled={submitting || pristine || hasValidationErrors}
+                  >
+                    {this.state.formToggle ? 'Login' : 'Create'}
+                  </Button>
+                </Grid>
+              </FormControl>
+              {hasSubmitErrors && (
+                <Typography className={classes.errorMessage}>
+                  {submitError}
+                </Typography>
+              )}
+            </form>
+          );
+        }}
       />
     );
   }

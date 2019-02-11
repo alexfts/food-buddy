@@ -7,7 +7,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import {
+  AccountCircle,
+  PowerSettingsNew,
+  LocalDining,
+  Restaurant
+} from '@material-ui/icons';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -38,58 +43,69 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              href="/home"
-              color="inherit"
-              aria-label="Menu"
-            >
-              <img src="/cheers_logo.png" width="40" alt="Logo" />
-            </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              <img src="/food_buddy_wordmark.png" width="40" alt="App Name" />
-            </Typography>
-            {auth && (
-              <div>
-                <IconButton
-                  aria-owns={open ? 'menu-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem
-                    onClick={this.handleClose}
-                    component={Link}
-                    to={`/profile`}
+            <div className={classes.flex}>
+              <IconButton
+                className={classes.logo}
+                href="/home"
+                color="inherit"
+                aria-label="Menu"
+              >
+                <img src="/logo-thick.png" width="60" alt="Food Buddy logo" />
+              </IconButton>{' '}
+              <IconButton
+                className={classes.logoText}
+                href="/home"
+                color="inherit"
+                aria-label="Menu"
+              >
+                <img src="/Food_Buddy.png" height="30" alt="Food Buddy App" />
+              </IconButton>
+              {auth && (
+                <div>
+                  <IconButton
+                    aria-owns={open ? 'menu-appbar' : undefined}
+                    aria-haspopup="true"
+                    onClick={this.handleMenu}
+                    color="inherit"
                   >
-                    Profile
-                  </MenuItem>
-                  <MenuItem
-                    onClick={e => Meteor.logout()}
-                    component={Link}
-                    to={`/welcome`}
+                    <AccountCircle className={classes.menu} />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left'
+                    }}
+                    transformOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'center'
+                    }}
+                    open={open}
+                    onClose={this.handleClose}
                   >
-                    Logout
-                  </MenuItem>
-                </Menu>
-              </div>
-            )}
+                    <MenuItem
+                      className={classes.menuItem}
+                      onClick={this.handleClose}
+                      component={Link}
+                      to={`/profile`}
+                    >
+                      <Restaurant className={classes.menuIcon} />
+                      Profile
+                    </MenuItem>
+                    <MenuItem
+                      className={classes.menuItem}
+                      onClick={Meteor.logout}
+                      component={Link}
+                      to={`/welcome`}
+                    >
+                      <PowerSettingsNew className={classes.menuIcon} />
+                      Logout
+                    </MenuItem>
+                  </Menu>
+                </div>
+              )}
+            </div>
           </Toolbar>
         </AppBar>
       </div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Fab, Modal } from '@material-ui/core';
@@ -24,6 +24,7 @@ class Home extends Component {
     const { classes } = this.props;
 
     return (
+      <Fragment>
       <div>
         <Fab
           aria-label="Add"
@@ -44,6 +45,12 @@ class Home extends Component {
           </div>
         </Modal>
       </div>
+      <div>
+        <iframe width="600" height="450"
+        src="https://www.google.com/maps/embed/v1/search?q=indian%20or%20thai%20restaurants%20near%20me&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E">
+        </iframe>
+      </div>
+      </Fragment>
     );
   }
 }

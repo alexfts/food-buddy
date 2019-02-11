@@ -14,6 +14,7 @@ const Results = ({ location }) => {
 
       <Grid container>
         <Grid item>
+          {/* Only show cards with open_now: true */}
           <ResultsCard />
         </Grid>
       </Grid>
@@ -23,8 +24,6 @@ const Results = ({ location }) => {
 
 export default Results;
 
-// <!DOCTYPE html>
-// <html>
 //   <head>
 //     <script>
 //       // This example requires the Places library. Include the libraries=places
@@ -68,4 +67,3 @@ export default Results;
 //     src="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=indian&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E">
 //     </script>
 //   </body>
-// </html>

@@ -1,6 +1,6 @@
 const styles = theme => ({
   container: {
-    background: theme.palette.primary.main,
+    // background: theme.palette.primary.main,
     width: '80%'
   },
   stepper: {

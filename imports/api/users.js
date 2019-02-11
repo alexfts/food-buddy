@@ -77,6 +77,33 @@ Meteor.methods({
         );
       return user;
     });
+
+    const getUserTags = user => {
+      return user.profile.tags.map(tagid => ({ tagid, user }));
+    };
+
+    let allUserTags = users
+      .map(getUserTags)
+      .reduce((a, b) => a.concat(b), [])
+      .reduce((acc, { tagid, user }) => {
+        if (acc.hasOwnProperty(tagid)) {
+          acc[tagid].push(user);
+        } else {
+          acc[tagid] = [user];
+        }
+        return acc;
+      }, {});
+
+    allUserTags = Object.keys(allUserTags).map(tagid => ({
+      tagid, // @TODO intersect tags from different categories
+      users: allUserTags[tagid]
+    }));
+
+    allUserTags.sort((a, b) => {
+      return b.users.length - a.users.length;
+    });
+
+    return allUserTags;
   }
 });
 

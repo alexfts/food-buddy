@@ -3,16 +3,16 @@ import { Tags } from '../../api/tags';
 import { TagCategories } from '../../api/tagCategories';
 import { Accounts } from 'meteor/accounts-base';
 
-Meteor.startup(() => {
+Meteor.startup(async () => {
   if (TagCategories.find().count() === 0) {
-    TagCategories.insert({ title: 'Cuisine' }, (error, result) => {
-      if (error) {
-        console.log(error.invalidKeys);
-      }
-    });
-    TagCategories.insert({ title: 'Food types' });
-    TagCategories.insert({ title: 'Preferences' });
-    TagCategories.insert({ title: 'Extra' });
+    try {
+      await TagCategories.insert({ title: 'Cuisine' });
+      await TagCategories.insert({ title: 'Food types' });
+      await TagCategories.insert({ title: 'Preferences' });
+      await TagCategories.insert({ title: 'Extra' });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (Tags.find().count() === 0) {
@@ -42,7 +42,7 @@ Meteor.startup(() => {
   }
 
   if (Meteor.users.find().count() === 0) {
-    user = Accounts.createUser({
+    Accounts.createUser({
       email: 'test@test.com',
       password: 'password',
       username: 'test',
@@ -53,7 +53,7 @@ Meteor.startup(() => {
         }).map(tag => tag._id)
       }
     });
-    user = Accounts.createUser({
+    Accounts.createUser({
       email: 'hobs@hobs.com',
       password: 'hobs',
       username: 'username',
@@ -74,6 +74,11 @@ Meteor.startup(() => {
           tag => tag._id
         )
       }
+    });
+    Accounts.createUser({
+      email: 'not@onboarded.com',
+      password: 'password',
+      username: 'not_onboarded'
     });
   }
 });

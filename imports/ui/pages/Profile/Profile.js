@@ -1,65 +1,109 @@
 import React, { Fragment, Component } from 'react';
-import { Grid, Avatar, Typography, withStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import {
+  Button,
+  Grid,
+  Avatar,
+  Typography,
+  Paper,
+  withStyles
+} from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 
-const Profile = ({ currentUser, tags }) => {
-  console.log(
-    currentUser.profile.tags.filter(userTag => {
-      console.log(userTag);
-      console.log(tags);
-      return tags.find(tag => tag._id === userTag);
-    })
-  );
-  // if (currentUser) {
-  //   const mappedTags = currentUser.profile.tags.map(userTags => {
-  //     tags.find(tag => tag._id);
-  //   });
+const Profile = ({ currentUser, tags, classes }) => {
+  console.log(tags);
 
-  //   console.log(mappedTags);
-  // }
-
-  // const userTags = Meteor.user().profile.tags.map(userTags =>
-  //   tags.find(tag => tag._id === userTag._id)
-  // );
+  // render() {
+  //   const { classes, currentUser, tags } = this.props;
 
   return (
     <Fragment>
-      <Grid container className="profilecContainer">
-        <Grid item>
-          {currentUser ? (
-            <Avatar>
-              <Gravatar email={currentUser.emails[0].address} />
-            </Avatar>
-          ) : (
-            <div>something</div>
-          )}
-          <div>
-            {currentUser ? currentUser.username : <div> something</div>}
+      <div className={classes.root}>
+        <Paper square elevation={0} className={classes.paperUser}>
+          <div className={classes.userCard}>
+            <div className={classes.profileAvatar}>
+              {currentUser ? (
+                <Avatar className={classes.avatarStyle}>
+                  <Gravatar
+                    className={classes.gravatar}
+                    email={currentUser.emails[0].address}
+                  />
+                </Avatar>
+              ) : (
+                <div>user@email.com</div>
+              )}
+            </div>
+
+            <div>
+              {currentUser ? (
+                <Typography className={classes.userStyle}>
+                  {currentUser.username}
+                </Typography>
+              ) : (
+                <div>username</div>
+              )}
+            </div>
           </div>
-        </Grid>
-      </Grid>
+        </Paper>
 
-      {/*TODO Map all tags and highlight ones that are already selected  */}
+        {/*TODO Map all tags and highlight ones that are already selected  */}
+        <div className={classes.divider} />
+        <Paper square elevation={0} className={classes.paperTags}>
+          <Typography>Your Tags</Typography>
+          <ul>
+            {currentUser.profile.tags.map(selectedTag => {
+              return tags.map(tag => {
+                if (tag._id === selectedTag) {
+                  return (
+                    <li>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        className={classes.tagButton}
+                        key={tag._id}
+                      >
+                        {tag.title}
+                      </Button>
+                    </li>
+                  );
+                }
+              });
+            })}
+          </ul>
+        </Paper>
 
-      <Grid container>
-        {/* <Grid item>{userTags}</Grid> */}
-        <Typography>All Tags</Typography>
-        <Grid item>
+        <div className={classes.divider} />
+
+        <Paper square elevation={0} className={classes.paperTags}>
+          <Typography variant="h6" className={classes.tagTitle}>
+            All Tags:
+          </Typography>
+
           {tags.map(tag => {
             return (
-              <Grid item xs={4}>
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.tagButton}
+                key={tag._id}
+              >
                 {tag.title}
-              </Grid>
+              </Button>
             );
           })}
-        </Grid>
-      </Grid>
+        </Paper>
+      </div>
     </Fragment>
   );
+};
+// }
+
+Profile.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default withTracker(() => {
@@ -67,4 +111,4 @@ export default withTracker(() => {
     currentUser: Meteor.user(),
     tags: Tags.find({}).fetch()
   };
-})(Profile);
+})(withStyles(styles)(Profile));

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './styles.css';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from '../../theme';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
@@ -13,6 +15,7 @@ class App extends Component {
       <div className="app-wrapper">
         <div className="login-wrapper">{/* <LoginForm /> */}</div>
         <MuiThemeProvider theme={theme}>
+          <CssBaseline />
           <BrowserRouter>
             <Layout />
           </BrowserRouter>

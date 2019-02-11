@@ -95,6 +95,7 @@ class LoginForm extends Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <Form
         onSubmit={this.onSubmit}
@@ -117,9 +118,14 @@ class LoginForm extends Component {
                     <Fragment>
                       <TextField
                         {...input}
+                        id="outlined-email-input"
                         label="Email"
-                        id="email"
-                        autoComplete="off"
+                        className={classes.textField}
+                        type="email"
+                        name="email"
+                        autoComplete="email"
+                        margin="normal"
+                        variant="outlined"
                       />
                       {meta.touched && meta.invalid && (
                         <Typography className={classes.errorMessage}>
@@ -138,10 +144,13 @@ class LoginForm extends Component {
                   <Fragment>
                     <TextField
                       {...input}
-                      id="username"
+                      id="outlined-username-input"
                       label="Username"
-                      type="text"
+                      type="username"
                       autoComplete="off"
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
                     />
                     {meta.touched && meta.invalid && (
                       <Typography className={classes.errorMessage}>
@@ -159,10 +168,13 @@ class LoginForm extends Component {
                   <Fragment>
                     <TextField
                       {...input}
-                      id="password"
+                      id="outlined-password-input"
                       label="Password"
+                      className={classes.textField}
                       type="password"
-                      autoComplete="off"
+                      autoComplete="current-password"
+                      margin="normal"
+                      variant="outlined"
                     />
                     {meta.touched && meta.invalid && (
                       <Typography className={classes.errorMessage}>
@@ -198,7 +210,11 @@ class LoginForm extends Component {
               >
                 <Button
                   type="submit"
-                  className={classes.formButton}
+                  // className={classes.formButton}
+                  classes={{
+                    root: classes.button, // class name, e.g. `classes-nesting-root-x`
+                    label: classes.label // class name, e.g. `classes-nesting-label-x`
+                  }}
                   variant="contained"
                   size="large"
                   // color="secondary"

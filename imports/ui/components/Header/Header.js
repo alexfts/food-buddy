@@ -51,9 +51,15 @@ class Header extends React.Component {
                 aria-label="Menu"
               >
                 <img src="/cheers_logo.png" width="60" alt="Food Buddy logo" />
+              </IconButton>{' '}
+              <IconButton
+                className={classes.logoText}
+                href="/home"
+                color="inherit"
+                aria-label="Menu"
+              >
+                <img src="/Food_Buddy.png" height="30" alt="Food Buddy App" />
               </IconButton>
-              <img src="/Food_Buddy.png" height="30" alt="Food Buddy App" />
-
               {auth && (
                 <div>
                   <IconButton
@@ -69,11 +75,11 @@ class Header extends React.Component {
                     anchorEl={anchorEl}
                     anchorOrigin={{
                       vertical: 'top',
-                      horizontal: 'right'
+                      horizontal: 'left'
                     }}
                     transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right'
+                      vertical: 'bottom',
+                      horizontal: 'center'
                     }}
                     open={open}
                     onClose={this.handleClose}

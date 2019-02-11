@@ -7,17 +7,21 @@ const styles = theme => ({
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    maxWidth: 1200,
+    margin: 'auto'
   },
   logo: {
-    marginTop: -6,
-    marginRight: 20
+    marginTop: -6
+    // marginRight: 20
   },
   menu: {
-    height: '2.5rem',
-    width: '2.5rem'
+    height: '2.3rem',
+    width: '2.3rem'
   },
   menuIcon: {
+    // color: '#f0792b',
+    color: theme.palette.primary.main,
     paddingRight: 15,
     width: 40
     // height: '1.5rem',

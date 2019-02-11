@@ -20,18 +20,18 @@ const styles = theme => ({
   },
 
   logo: {
-    paddingBottom: '0.7rem',
+    paddingBottom: '1.3rem',
     height: 'auto',
-    width: 220,
+    width: 120,
     [theme.breakpoints.up('sm')]: {
       width: 100
     }
   },
   textLogo: {
-    padding: '1rem 0',
-    height: 85,
+    paddingBottom: '2.2rem',
+    height: 50,
     [theme.breakpoints.up('sm')]: {
-      height: 40
+      height: 45
     }
   },
   loginForm: {

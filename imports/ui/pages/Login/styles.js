@@ -11,16 +11,20 @@ const styles = theme => ({
     backgroundPosition: 'top left, bottom right',
     backgroundRepeat: 'no-repeat, no-repeat',
     backgroundAttachment: 'fixed, fixed',
-    backgroundSize: '45%',
+    // backgroundSize: '20%, 15%',
+    backgroundSize: '36%, 26%',
 
     height: '100vh',
     width: '100vw',
 
-    [theme.breakpoints.down('sm')]: {
-      backgroundSize: '25%'
+    // [theme.breakpoints.down('xs')]: {
+    //   backgroundSize: '5%, 5%'
+    // },
+    [theme.breakpoints.up('sm')]: {
+      backgroundSize: '30%, 22%'
     },
     [theme.breakpoints.up('md')]: {
-      backgroundSize: '25%'
+      backgroundSize: '20%, 15%'
     }
   },
 
@@ -44,6 +48,8 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+
+    paddingTop: '1rem',
     height: '100%'
   }
 });

@@ -119,17 +119,16 @@ class LoginForm extends Component {
               {!this.state.formToggle && (
                 <FormControl fullWidth className={classes.formControl}>
                   <Field
-                    name="email"
+                    name="username"
                     render={({ input, meta }) => (
                       <Fragment>
                         <TextField
                           {...input}
-                          id="outlined-email-input"
-                          label="Email"
+                          id="outlined-username-input"
+                          label="Username"
+                          type="username"
+                          autoComplete="off"
                           className={classes.textField}
-                          type="email"
-                          name="email"
-                          autoComplete="email"
                           margin="normal"
                           variant="outlined"
                         />
@@ -145,16 +144,17 @@ class LoginForm extends Component {
               )}
               <FormControl fullWidth className={classes.formControl}>
                 <Field
-                  name="username"
+                  name="email"
                   render={({ input, meta }) => (
                     <Fragment>
                       <TextField
                         {...input}
-                        id="outlined-username-input"
-                        label="Username"
-                        type="username"
-                        autoComplete="off"
+                        id="outlined-email-input"
+                        label="Email"
                         className={classes.textField}
+                        type="email"
+                        name="email"
+                        autoComplete="email"
                         margin="normal"
                         variant="outlined"
                       />

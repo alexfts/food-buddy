@@ -1,10 +1,10 @@
 const styles = theme => ({
   accountForm: {
     lineHeight: 5,
-    width: 400
-    // [theme.breakpoints.up('sm')]: {
-    //   width: '400px'
-    // }
+    width: 400,
+    [theme.breakpoints.down('xs')]: {
+      width: 300
+    }
   },
   errorMessage: {
     color: 'red'
@@ -54,10 +54,9 @@ const styles = theme => ({
     // backgroundColor: 'rgba(255,255,255, 0.2)',
     border: '1px solid #fff',
     marginTop: theme.spacing.unit * 3,
-    textTransform: 'capitalize',
     width: 150,
     '&:hover': {
-      color: theme.palette.secondary.main
+      background: 'rgba(0,0,0, 0.25)'
     }
   },
   label: {

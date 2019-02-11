@@ -50,7 +50,7 @@ class Header extends React.Component {
                 color="inherit"
                 aria-label="Menu"
               >
-                <img src="/cheers_logo.png" width="60" alt="Food Buddy logo" />
+                <img src="/logo-thick.png" width="60" alt="Food Buddy logo" />
               </IconButton>{' '}
               <IconButton
                 className={classes.logoText}

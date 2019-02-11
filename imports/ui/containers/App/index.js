@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './styles.css';
-
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
-import { Typography } from '@material-ui/core';
 import Layout from '../../routes/layout';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -13,9 +12,11 @@ class App extends Component {
     return (
       <div className="app-wrapper">
         <div className="login-wrapper">{/* <LoginForm /> */}</div>
-        <BrowserRouter>
-          <Layout />
-        </BrowserRouter>
+        <MuiThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Layout />
+          </BrowserRouter>
+        </MuiThemeProvider>
       </div>
     );
   }

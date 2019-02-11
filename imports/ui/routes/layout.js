@@ -11,6 +11,7 @@ import Header from '../components/Header/Header';
 import { TagCategories } from '../../api/tagCategories';
 import { Tags } from '../../api/tags';
 import { Accounts } from 'meteor/accounts-base';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 const Layout = ({ loggedOut }) => {
   if (!loggedOut) {

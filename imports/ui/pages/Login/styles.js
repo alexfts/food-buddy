@@ -6,14 +6,12 @@ const styles = theme => ({
     alignItems: 'center'
   },
   root: {
-    [theme.breakpoints.down('sm')]: {
-      background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)'
-    },
+    background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)',
+    backgroundImage: 'url("/pasta.png"), url("/berrybowl.png")',
     [theme.breakpoints.up('sm')]: {
       backgroundImage: 'url("/BG.png")',
       backgroundSize: 'cover'
       //   background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)'
-      //   backgroundImage: none
     },
     height: '100vh',
     width: '100vw'

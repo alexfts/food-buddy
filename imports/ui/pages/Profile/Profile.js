@@ -9,8 +9,6 @@ import styles from './styles';
 const Profile = ({ currentUser, tags }) => {
   console.log(
     currentUser.profile.tags.filter(userTag => {
-      console.log(userTag);
-      console.log(tags);
       return tags.find(tag => tag._id === userTag);
     })
   );
@@ -46,9 +44,17 @@ const Profile = ({ currentUser, tags }) => {
       {/*TODO Map all tags and highlight ones that are already selected  */}
 
       <Grid container>
-        {/* <Grid item>{userTags}</Grid> */}
-        <Typography>All Tags</Typography>
-        <Grid item>
+        <Grid item xs={6}>
+          <Typography>Your Tags</Typography>
+          {/* {currentUser.profile.tags.filter(userTag => {
+            console.log(userTag);
+            console.log(tags);
+            return tags.find(tag => tag === userTag);
+          })} */}
+        </Grid>
+
+        <Grid item xs={6}>
+          <Typography>All Tags</Typography>
           {tags.map(tag => {
             return (
               <Grid item xs={4}>

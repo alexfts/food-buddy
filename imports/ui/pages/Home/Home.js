@@ -47,7 +47,7 @@ class Home extends Component {
       </div>
       <div>
         <iframe width="600" height="450"
-        src="https://www.google.com/maps/embed/v1/search?q=indian%20or%20thai%20restaurants%20near%20me&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E">
+        src="https://www.google.com/maps/embed/v1/search?q=restaurants%20near%20me&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E">
         </iframe>
       </div>
       </Fragment>

@@ -7,22 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 
 const Profile = ({ currentUser, tags }) => {
-  console.log(
-    currentUser.profile.tags.filter(userTag => {
-      return tags.find(tag => tag._id === userTag);
-    })
-  );
-  // if (currentUser) {
-  //   const mappedTags = currentUser.profile.tags.map(userTags => {
-  //     tags.find(tag => tag._id);
-  //   });
-
-  //   console.log(mappedTags);
-  // }
-
-  // const userTags = Meteor.user().profile.tags.map(userTags =>
-  //   tags.find(tag => tag._id === userTag._id)
-  // );
+  console.log(tags);
 
   return (
     <Fragment>
@@ -42,17 +27,19 @@ const Profile = ({ currentUser, tags }) => {
       </Grid>
 
       {/*TODO Map all tags and highlight ones that are already selected  */}
-
+      <div>
+        <Typography>Your Tags</Typography>
+        <ul>
+          {currentUser.profile.tags.map(selectedTag => {
+            return tags.map(tag => {
+              if (tag._id === selectedTag) {
+                return <li>{tag.title}</li>;
+              }
+            });
+          })}
+        </ul>
+      </div>
       <Grid container>
-        <Grid item xs={6}>
-          <Typography>Your Tags</Typography>
-          {/* {currentUser.profile.tags.filter(userTag => {
-            console.log(userTag);
-            console.log(tags);
-            return tags.find(tag => tag === userTag);
-          })} */}
-        </Grid>
-
         <Grid item xs={6}>
           <Typography>All Tags</Typography>
           {tags.map(tag => {

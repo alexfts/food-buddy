@@ -60,7 +60,15 @@ const TopMatches = ({
           return (
             <Grid item xs={12} sm={6} key={tagid} className={classes.matches}>
               {tag.title}
-              <Button component={Link} to={`/results`}>
+              <Button
+                component={Link}
+                to={{
+                  pathname: '/results',
+                  state: {
+                    query: tag.title
+                  }
+                }}
+              >
                 Find restaurants!
               </Button>
             </Grid>

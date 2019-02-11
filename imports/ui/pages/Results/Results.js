@@ -3,7 +3,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Grid from '@material-ui/core/Grid';
 import ResultsCard from '../../components/ResultsCard/ResultsCard';
 
-const Results = () => {
+const Results = ({ location }) => {
+  const query = location.state ? location.state.query : '';
+  console.log('QUERY', query);
   return (
     <Fragment>
       <div>

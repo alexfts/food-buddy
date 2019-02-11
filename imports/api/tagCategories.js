@@ -1,6 +1,18 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import SimpleSchema from 'simpl-schema';
 export const TagCategories = new Mongo.Collection('tagCategories');
+
+/**
+ * Each document in TagCategories must have:
+ * _id,
+ * title (category title)
+ */
+export const TagCategoriesSchema = new SimpleSchema({
+  _id: { type: SimpleSchema.RegEx.Id },
+  title: { type: String }
+});
+TagCategories.attachSchema(TagCategoriesSchema);
 
 if (Meteor.isServer) {
   Meteor.publish('tagCategories', function tagCategoriesPublication() {

@@ -1,21 +1,34 @@
-import React, { Fragment } from 'react';
-import { Grid, Avatar, Typography } from '@material-ui/core';
+import React, { Fragment, Component } from 'react';
+import { Grid, Avatar, Typography, withStyles } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
-import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import TagInput from '../../components/TagInput';
 import { Meteor } from 'meteor/meteor';
-import './styles';
+import styles from './styles';
 
 const Profile = ({ currentUser, tags }) => {
-  const userTags = currentUser.profile.tags.map(userTags =>
-    tags.find(tag => tag._id === userTags._id)
+  console.log(
+    currentUser.profile.tags.filter(userTag => {
+      console.log(userTag);
+      console.log(tags);
+      return tags.find(tag => tag._id === userTag);
+    })
   );
+  // if (currentUser) {
+  //   const mappedTags = currentUser.profile.tags.map(userTags => {
+  //     tags.find(tag => tag._id);
+  //   });
+
+  //   console.log(mappedTags);
+  // }
+
+  // const userTags = Meteor.user().profile.tags.map(userTags =>
+  //   tags.find(tag => tag._id === userTag._id)
+  // );
 
   return (
     <Fragment>
-      <Grid container>
+      <Grid container className="profilecContainer">
         <Grid item>
           {currentUser ? (
             <Avatar>
@@ -33,7 +46,7 @@ const Profile = ({ currentUser, tags }) => {
       {/*TODO Map all tags and highlight ones that are already selected  */}
 
       <Grid container>
-        <Grid item>{userTags}</Grid>
+        {/* <Grid item>{userTags}</Grid> */}
         <Typography>All Tags</Typography>
         <Grid item>
           {tags.map(tag => {

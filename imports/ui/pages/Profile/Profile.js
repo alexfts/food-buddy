@@ -1,19 +1,26 @@
 import React, { Fragment, Component } from 'react';
-import { Grid, Avatar, Typography, withStyles } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  Avatar,
+  Typography,
+  Paper,
+  withStyles
+} from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 
-const Profile = ({ currentUser, tags }) => {
-  console.log(
-    currentUser.profile.tags.filter(userTag => {
-      console.log(userTag);
-      console.log(tags);
-      return tags.find(tag => tag._id === userTag);
-    })
-  );
+const Profile = ({ classes, currentUser, tags }) => {
+  // console.log(
+  //   currentUser.profile.tags.filter(userTag => {
+  //     console.log(userTag);
+  //     console.log(tags);
+  //     return tags.find(tag => tag._id === userTag);
+  //   })
+  // );
   // if (currentUser) {
   //   const mappedTags = currentUser.profile.tags.map(userTags => {
   //     tags.find(tag => tag._id);
@@ -28,36 +35,57 @@ const Profile = ({ currentUser, tags }) => {
 
   return (
     <Fragment>
-      <Grid container className="profilecContainer">
-        <Grid item>
-          {currentUser ? (
-            <Avatar>
-              <Gravatar email={currentUser.emails[0].address} />
-            </Avatar>
-          ) : (
-            <div>something</div>
-          )}
-          <div>
-            {currentUser ? currentUser.username : <div> something</div>}
+      <div className={classes.root}>
+        <Paper square elevation={0} className={classes.paper}>
+          <div className={classes.userCard}>
+            <div className={classes.profileAvatar}>
+              {currentUser ? (
+                <Avatar className={classes.gravatar}>
+                  <Gravatar email={currentUser.emails[0].address} />
+                </Avatar>
+              ) : (
+                <div>user@email.com</div>
+              )}
+            </div>
+
+            <div>
+              {currentUser ? (
+                <Typography className={classes.userStyle}>
+                  {currentUser.username}
+                </Typography>
+              ) : (
+                <div>username</div>
+              )}
+            </div>
           </div>
-        </Grid>
-      </Grid>
+        </Paper>
 
-      {/*TODO Map all tags and highlight ones that are already selected  */}
+        <div className={classes.divider} />
 
-      <Grid container>
+        {/* <Grid container> */}
         {/* <Grid item>{userTags}</Grid> */}
-        <Typography>All Tags</Typography>
-        <Grid item>
+        <Paper square elevation={0} className={classes.paper}>
+          <Typography variant="h6" className={classes.tagTitle}>
+            All Tags:
+          </Typography>
+          {/* <Grid container> */}
           {tags.map(tag => {
             return (
-              <Grid item xs={4}>
+              // <Grid item xs={4}>
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.tagButton}
+                key={tag._id}
+              >
                 {tag.title}
-              </Grid>
+              </Button>
+              // </Grid>
             );
           })}
-        </Grid>
-      </Grid>
+          {/* </Grid> */}
+        </Paper>
+      </div>
     </Fragment>
   );
 };
@@ -67,4 +95,4 @@ export default withTracker(() => {
     currentUser: Meteor.user(),
     tags: Tags.find({}).fetch()
   };
-})(Profile);
+})(withStyles(styles)(Profile));

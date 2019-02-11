@@ -16,16 +16,14 @@ const styles = theme => ({
     // marginRight: 20
   },
   menu: {
+    color: '#fff',
     height: '2.3rem',
     width: '2.3rem'
   },
   menuIcon: {
-    // color: '#f0792b',
-    color: theme.palette.primary.main,
+    // color: theme.palette.primary.main,
     paddingRight: 15,
     width: 40
-    // height: '1.5rem',
-    // width: '1.5rem'
   },
   menuItem: {
     width: 125

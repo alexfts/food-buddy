@@ -9,8 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 function MediaCard(props) {
-  const { classes } = props;
-
+  const { classes, places } = props;
+  console.log('CARD PLACES', places);
   return (
     <Card className={classes.card}>
       <CardActionArea>

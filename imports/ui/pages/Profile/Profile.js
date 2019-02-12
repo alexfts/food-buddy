@@ -18,7 +18,6 @@ import Bubbles from '../../components/Bubbles';
 const Profile = ({ currentUser, tags, classes }) => {
   // render() {
   //   const { classes, currentUser, tags } = this.props;
-
   return (
     <Fragment>
       <div className={classes.root}>
@@ -51,10 +50,11 @@ const Profile = ({ currentUser, tags, classes }) => {
 
         {/*TODO Map all tags and highlight ones that are already selected  */}
         <div className={classes.divider} />
-        <Paper square elevation={0} className={classes.paperTags}>
+        {/* <Paper square elevation={0} className={classes.paperTags}>
           <Typography variant="h6" className={classes.tagTitle}>
             Your Tags:
           </Typography>
+<<<<<<< HEAD
 
           {currentUser.profile.tags.map(selectedTag => {
             return tags.map(tag => {
@@ -73,6 +73,29 @@ const Profile = ({ currentUser, tags, classes }) => {
             });
           })}
         </Paper>
+=======
+          <ul>
+            {currentUser.profile.tags.map(selectedTag => {
+              return tags.map(tag => {
+                if (tag._id === selectedTag) {
+                  return (
+                    <li>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        className={classes.tagButton}
+                        key={tag._id}
+                      >
+                        {tag.title}
+                      </Button>
+                    </li>
+                  );
+                }
+              });
+            })}
+          </ul>
+        </Paper> */}
+>>>>>>> 2df0dde8bf7ed78f9197229521482927959e6725
 
         <div className={classes.divider} />
 
@@ -81,7 +104,11 @@ const Profile = ({ currentUser, tags, classes }) => {
             All Tags:
           </Typography>
 
+<<<<<<< HEAD
           {/* <Bubbles tag={tags} /> */}
+=======
+          <Bubbles tags={tags} />
+>>>>>>> 2df0dde8bf7ed78f9197229521482927959e6725
           {/* {tags.map(tag => {
             return (
               <Button

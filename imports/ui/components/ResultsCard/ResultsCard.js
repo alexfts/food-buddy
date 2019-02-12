@@ -9,58 +9,56 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 function MediaCard(props) {
-  const { classes } = props;
- 
-  return (
-    <Card className={classes.card}>
-   
-      <CardActionArea>
-{/* Link to website from api details */}
-        <a
+  const { classes, places } = props;
+  console.log('CARD PLACES', places);
+  console.log(
+    'RESTAURANT',
+    places.map(place => {
+      return place.price_level;
+    })
+  );
+
+  // places.map(restaurant => {
+  return places.map(place => {
+    return (
+      <Card className={classes.card}>
+        <CardActionArea>
+          {/* Link to website from api details */}
+          <a
             href="https://google.com"
             target="_blank"
             rel="noopener noreferrer"
             className={classes.hrefLink}
-        >
-        {/* image from photo details */}
-        <CardMedia
-          className={classes.media}
-          component='img'
-          src={'https://picsum.photos/200'}
-          title="Restaurant Image"
-        />
-        <CardContent>
-          <Typography component="h2">
-            Pull restaurant name
-          </Typography>
-          <Typography component="p">
-            Pull restaurant rating
-          </Typography>
-          <Typography component="p">
-            Pull restaurant price_level
-          </Typography>
-          <Typography component="p">
-            Pull restaurant distance
-          </Typography>
-          <Typography component="p">
-            Pull restaurant formatted_address from details
-          </Typography>
-        </CardContent>
-        </a>
-      </CardActionArea>
-    </Card>
-  );
+          >
+            {/* image from photo details */}
+            <CardMedia
+              className={classes.media}
+              component="img"
+              src={'https://picsum.photos/200'}
+              title="Restaurant Image"
+            />
+            <CardContent>
+              <Typography component="h2">{place.name}</Typography>
+              <Typography component="p">Rating: {place.rating}</Typography>
+              <Typography component="p">
+                Price Level: {place.price_level}
+              </Typography>
+              <Typography component="p">{place.vicinity}</Typography>
+            </CardContent>
+          </a>
+        </CardActionArea>
+      </Card>
+    );
+  });
+
+  // });
 }
 
 MediaCard.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(MediaCard);
-
-
-
-
 
 // React Native version with edits to convert to react
 
@@ -68,7 +66,7 @@ export default withStyles(styles)(MediaCard);
 // import {
 //   Text,
 //   View,
-//   List, 
+//   List,
 //   ListItem,
 //   FlatList,
 //   ActivityIndicator
@@ -179,9 +177,9 @@ export default withStyles(styles)(MediaCard);
 //     this.fetchData();
 //   };
 //   render() {
-  
+
 //     return (
-//       <View>    
+//       <View>
 //       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }} >
 //       <FlatList
 //         data={this.state.data}
@@ -189,7 +187,7 @@ export default withStyles(styles)(MediaCard);
 //         ListHeaderComponent={this.renderHeader}
 //         ListFooterComponent={this.renderFooter}
 //         renderItem={({ item }) =>{
-   
+
 //           const rating = item.rating ? item.rating : 'na'
 
 //           return (<View><ListItem
@@ -282,7 +280,7 @@ export default withStyles(styles)(MediaCard);
 //       });
 //     })
 //   };
-//  
+//
 //   handleRefresh = () => {
 //     this.setState(
 //       {
@@ -299,9 +297,9 @@ export default withStyles(styles)(MediaCard);
 //     this.fetchData();
 //   };
 //   render() {
-  
+
 //     return (
-//       <View>    
+//       <View>
 //       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }} >
 //       <FlatList
 //         data={this.state.data}
@@ -309,7 +307,7 @@ export default withStyles(styles)(MediaCard);
 //         ListHeaderComponent={this.renderHeader}
 //         ListFooterComponent={this.renderFooter}
 //         renderItem={({ item }) =>{
-   
+
 //           const rating = item.rating ? item.rating : 'na'
 
 //           return (<View><ListItem

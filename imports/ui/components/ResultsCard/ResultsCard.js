@@ -43,7 +43,7 @@ function MediaCard(props) {
             Pull restaurant distance
           </Typography>
           <Typography component="p">
-            Pull restaurant formatted_address from details
+            Pull restaurant vicinity
           </Typography>
         </CardContent>
         </a>
@@ -63,18 +63,6 @@ export default withStyles(styles)(MediaCard);
 
 
 // React Native version with edits to convert to react
-
-// import React, { Component } from 'react';
-// import {
-//   Text,
-//   View,
-//   List, 
-//   ListItem,
-//   FlatList,
-//   ActivityIndicator
-// } from 'react';
-
-// var _ = require('lodash');
 
 // export default class RestaurantList extends Component {
 //   constructor(props) {

@@ -3,6 +3,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Grid from '@material-ui/core/Grid';
 import ResultsCard from '../../components/ResultsCard/ResultsCard';
 import MapComponent from '../../components/Maps/Maps';
+import MyMapComponent from '../../components/Maps/Maps';
 
 const Results = ({ location }) => {
   const query = location.state ? location.state.query : '';
@@ -11,11 +12,12 @@ const Results = ({ location }) => {
     <Fragment>
       <Grid container>
         <Grid item>
-           <MapComponent />
+          {/* <MapComponent /> */}
+          <MyMapComponent />
         </Grid>
         <Grid>
-           {/* Only show cards with open_now: true */}
-           <ResultsCard />
+          {/* Only show cards with open_now: true */}
+          <ResultsCard />
         </Grid>
       </Grid>
     </Fragment>

@@ -51,7 +51,7 @@ const Profile = ({ currentUser, tags, classes }) => {
 
         {/*TODO Map all tags and highlight ones that are already selected  */}
         <div className={classes.divider} />
-        <Paper square elevation={0} className={classes.paperTags}>
+        {/* <Paper square elevation={0} className={classes.paperTags}>
           <Typography variant="h6" className={classes.tagTitle}>
             Your Tags:
           </Typography>
@@ -75,7 +75,7 @@ const Profile = ({ currentUser, tags, classes }) => {
               });
             })}
           </ul>
-        </Paper>
+        </Paper> */}
 
         <div className={classes.divider} />
 

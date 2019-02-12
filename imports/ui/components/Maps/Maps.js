@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import { compose, withProps, withState, withHandlers } from 'recompose';
+import { compose, withProps, withHandlers, withState } from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
@@ -9,58 +9,67 @@ import {
   Marker
 } from 'react-google-maps';
 
-const MapComponent = compose(
+const refs = {
+  map: undefined
+};
+
+const MapsComponent = compose(
   withProps({
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px`, width: `500px` }} />,
+    containerElement: <div style={{ height: `400px`, width: '500px' }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
-  withGoogleMap
-)(props => (
-  <GoogleMap
-    defaultZoom={15}
-    defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
-  >
-    {props.isMarkerShown && (
-      <Marker
-        position={{ lat: 49.2632597, lng: -123.138 }}
-        onClick={props.onMarkerClick}
-      />
-    )}
-  </GoogleMap>
-));
+  withGoogleMap,
+  withState('places', 'updatePlaces', ''),
+  withHandlers(() => {
+    return {
+      onMapMounted: () => ref => {
+        refs.map = ref;
+      },
+      fetchPlaces: ({ updatePlaces }) => () => {
+        const bounds = refs.map.getBounds();
+        const service = new google.maps.places.PlacesService(
+          refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+        );
+        const request = {
+          bounds: bounds,
+          keyword: '(thai) OR (indian)',
+          type: ['restaurant'],
+          openNow: true
+        };
+        service.nearbySearch(request, (results, status) => {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            console.log(results);
+            updatePlaces(results);
+          }
+        });
+      }
+    };
+  })
+)(props => {
+  return (
+    <GoogleMap
+      onTilesLoaded={props.fetchPlaces}
+      ref={props.onMapMounted}
+      onBoundsChanged={props.fetchPlaces}
+      defaultZoom={15}
+      defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
+    >
+      {props.places &&
+        props.places.map((place, i) => (
+          <Marker
+            key={i}
+            position={{
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng()
+            }}
+          />
+        ))}
+    </GoogleMap>
+  );
+});
 
-class Maps extends React.Component {
-  state = {
-    isMarkerShown: false
-  };
-
-  componentDidMount() {
-    this.delayedShowMarker();
-  }
-
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true });
-    }, 3000);
-  };
-
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false });
-    this.delayedShowMarker();
-  };
-
-  render() {
-    return (
-      <MapComponent
-        isMarkerShown={this.state.isMarkerShown}
-        onMarkerClick={this.handleMarkerClick}
-      />
-    );
-  }
-}
-
-export default withStyles(styles)(Maps);
+export default withStyles(styles)(MapsComponent);

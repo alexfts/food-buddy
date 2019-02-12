@@ -1,31 +1,3 @@
-// import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-// import styles from './styles';
-// import { Meteor } from 'meteor/meteor';
-// import { withStyles } from '@material-ui/core/styles';
-
-// class LoginForm extends Component {
-//   login() {
-//     Meteor.loginWithPassword('test@test.com', 'password', args => {
-//       console.log(args);
-//     });
-//   }
-
-//   logout() {
-//     Meteor.logout();
-//   }
-//   render() {
-//     return (
-//       <div>
-//         <button onClick={this.login}>login</button>
-//         <button onClick={this.logout}>logout</button>
-//       </div>
-//     ); // Render a placeholder
-//   }
-// }
-
-// export default withStyles(styles)(LoginForm);
-
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -43,53 +15,40 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true
+      formToggle: true,
+      submitError: null
     };
   }
 
-  // onSubmit = async values => {
-  //   const variables = {
-  //     user: values
-  //   };
-  //   try {
-  //     this.state.formToggle
-  //       ? await Meteor.loginWithPassword({})
-  //       : await this.props.signupMutation({ variables });
-  //   } catch (e) {
-  //     return {
-  //       [FORM_ERROR]: this.state.formToggle
-  //         ? 'Incorrect email and/or password'
-  //         : 'An account with this email already exists.'
-  //     };
-  //   }
-  // };
-
-  onSubmit = async values => {
-    console.log('hi');
-    try {
-      console.log('>>>>>>>', values);
-      if (this.state.formToggle) {
-        console.log('>>>>>>onsubmit');
-        Meteor.loginWithPassword(values.email, values.password, args => {
-          console.log(args);
-        });
-      } else {
-        console.log('>>>>>>onsingup');
-        Accounts.createUser(
-          {
-            username: values.username,
-            email: values.email,
-            password: values.password
-          },
-          args => {
-            console.log(args);
-          }
-        );
+  onSubmit = values => {
+    if (this.state.formToggle) {
+      try {
+        const res = Meteor.loginWithPassword(values.email, values.password);
+        if (!res) throw new Error('Incorrect email and/or password');
+      } catch (err) {
+        return {
+          [FORM_ERROR]: 'Incorrect email and/or password'
+        };
       }
-    } catch (e) {
-      console.log('sdafsdf');
-
-      // return e;
+      // err => {
+      //   if (err) {
+      //     console.log('LOGIN ERROR');
+      //     return {
+      //       [FORM_ERROR]: 'Incorrect email and/or password'
+      //     };
+      //   }
+      // });
+    } else {
+      Accounts.createUser(
+        {
+          username: values.username,
+          email: values.email,
+          password: values.password
+        },
+        args => {
+          console.log(args);
+        }
+      );
     }
   };
 
@@ -99,7 +58,7 @@ class LoginForm extends Component {
     return (
       <div className={classes.container}>
         <Form
-          onSubmit={this.onSubmit}
+          onSubmit={(v, e) => this.onSubmit(v, e)}
           validate={values => {
             return validate(values, this.state.formToggle);
           }}
@@ -112,11 +71,14 @@ class LoginForm extends Component {
             hasSubmitErrors,
             submitError
           }) => {
-            console.log('SUBMITTING', submitting);
-            console.log('PRISTINE', pristine);
-            console.log('VALID ERRORS', hasValidationErrors);
             return (
-              <form onSubmit={handleSubmit} className={classes.accountForm}>
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }}
+                className={classes.accountForm}
+              >
                 {!this.state.formToggle && (
                   <FormControl fullWidth className={classes.formControl}>
                     <Field
@@ -224,7 +186,6 @@ class LoginForm extends Component {
                       // }}
                       // variant="contained"
                       size="large"
-                      color="white"
                       disabled={submitting || pristine || hasValidationErrors}
                     >
                       {this.state.formToggle ? 'Login' : 'Create'}
@@ -234,6 +195,11 @@ class LoginForm extends Component {
                 {hasSubmitErrors && (
                   <Typography className={classes.errorMessage}>
                     {submitError}
+                  </Typography>
+                )}
+                {this.state.submitError && (
+                  <Typography className={classes.errorMessage}>
+                    {this.state.submitError}
                   </Typography>
                 )}
               </form>

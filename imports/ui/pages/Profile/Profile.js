@@ -18,7 +18,6 @@ import Bubbles from '../../components/Bubbles';
 const Profile = ({ currentUser, tags, classes }) => {
   // render() {
   //   const { classes, currentUser, tags } = this.props;
-
   return (
     <Fragment>
       <div className={classes.root}>

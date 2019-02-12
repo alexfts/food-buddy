@@ -10,62 +10,43 @@ const styles = theme => ({
     }
   },
   errorMessage: {
-    color: 'red'
+    color: '#5558f6',
+    letterSpace: 2
   },
 
   formControl: {
     marginBottom: theme.spacing.unit * 2,
     width: '100%'
   },
+  moveToggle: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
   formToggle: {
     border: 'none',
     background: 'none',
     fontSize: '0.8rem',
     textDecoration: 'underline',
+    paddingTop: '0.5rem',
+
     '&:hover': {
       cursor: 'pointer'
-    },
-    textAlign: 'right',
-    paddingTop: '0.5rem',
-    width: '100%'
+    }
   },
   textField: {
-    margin: 0,
-    padding: 0
-    // background: '#fff',
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit
+    // margin: 0
+    border: theme.palette.secondary.main
   },
   formButton: {
-    backgroundColor: 'transparent',
-    border: '1px solid #fff',
+    backgroundColor: theme.palette.secondary.main,
+    // border: '1px solid #fff',
     borderRadius: '2px',
     color: '#fff',
     marginTop: theme.spacing.unit * 2,
     width: 150,
-    '&:hover': {
-      background: 'rgba(0,0,0, 0.25)'
-    }
-  },
-  button: {
-    // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    background: 'transparent',
-    borderRadius: 2,
-    border: 0,
-    color: 'white',
-    height: 40,
-    padding: '0 30px',
-    boxShadow: 'none',
-    // backgroundColor: 'rgba(255,255,255, 0.2)',
-    border: '1px solid #fff',
-    marginTop: theme.spacing.unit * 3,
-    width: 150,
-    '&:hover': {
-      background: 'rgba(0,0,0, 0.25)'
-    }
-  },
-  label: {
-    textTransform: 'capitalize'
+
+    // fontWeight: 600,
+    letterSpace: 5
   }
 });
 

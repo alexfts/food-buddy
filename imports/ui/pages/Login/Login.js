@@ -31,7 +31,11 @@ const Login = ({ classes }) => {
         <LoginForm />
 
         <Typography className={classes.copyright}>
-          &copy; 2019 Digital Salami Inc. All Rights Reserved
+          {' '}
+          &copy; 2019 <a href="www.digitalsalami.com">
+            Digital Salami Inc.
+          </a>{' '}
+          All Rights Reserved
         </Typography>
       </div>
     </div>

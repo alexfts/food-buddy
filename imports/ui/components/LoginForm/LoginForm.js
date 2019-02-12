@@ -132,6 +132,7 @@ class LoginForm extends Component {
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
+                            color="secondary"
                           />
                           {meta.touched && meta.invalid && (
                             <Typography className={classes.errorMessage}>
@@ -158,6 +159,7 @@ class LoginForm extends Component {
                           autoComplete="email"
                           margin="normal"
                           variant="outlined"
+                          color="secondary"
                         />
                         {meta.touched && meta.invalid && (
                           <Typography className={classes.errorMessage}>
@@ -182,6 +184,7 @@ class LoginForm extends Component {
                           autoComplete="current-password"
                           margin="normal"
                           variant="outlined"
+                          color="secondary"
                         />
                         {meta.touched && meta.invalid && (
                           <Typography className={classes.errorMessage}>
@@ -191,7 +194,7 @@ class LoginForm extends Component {
                       </Fragment>
                     )}
                   />
-                  <Typography>
+                  <Typography className={classes.moveToggle}>
                     <button
                       className={classes.formToggle}
                       type="button"
@@ -218,13 +221,9 @@ class LoginForm extends Component {
                     <Button
                       type="submit"
                       className={classes.formButton}
-                      // classes={{
-                      //   root: classes.button, // class name, e.g. `classes-nesting-root-x`
-                      //   label: classes.label // class name, e.g. `classes-nesting-label-x`
-                      // }}
-                      // variant="contained"
+                      variant="contained"
                       size="large"
-                      color="white"
+                      color="secondary"
                       disabled={submitting || pristine || hasValidationErrors}
                     >
                       {this.state.formToggle ? 'Login' : 'Create'}

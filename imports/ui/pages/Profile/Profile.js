@@ -55,26 +55,23 @@ const Profile = ({ currentUser, tags, classes }) => {
           <Typography variant="h6" className={classes.tagTitle}>
             Your Tags:
           </Typography>
-          <ul>
-            {currentUser.profile.tags.map(selectedTag => {
-              return tags.map(tag => {
-                if (tag._id === selectedTag) {
-                  return (
-                    <li>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        className={classes.tagButton}
-                        key={tag._id}
-                      >
-                        {tag.title}
-                      </Button>
-                    </li>
-                  );
-                }
-              });
-            })}
-          </ul>
+
+          {currentUser.profile.tags.map(selectedTag => {
+            return tags.map(tag => {
+              if (tag._id === selectedTag) {
+                return (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className={classes.tagButton}
+                    key={tag._id}
+                  >
+                    {tag.title}
+                  </Button>
+                );
+              }
+            });
+          })}
         </Paper>
 
         <div className={classes.divider} />
@@ -84,7 +81,7 @@ const Profile = ({ currentUser, tags, classes }) => {
             All Tags:
           </Typography>
 
-          <Bubbles tag={tags} />
+          {/* <Bubbles tag={tags} /> */}
           {/* {tags.map(tag => {
             return (
               <Button

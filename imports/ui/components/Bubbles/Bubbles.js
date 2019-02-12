@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -8,15 +9,16 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import Chip from '@material-ui/core/Chip';
-import styles from './styles';
+// import { Chip } from '@material-ui/core';
+import { ChipSet, Chip } from '@material/react-chips';
+import '@material/react-chips/dist/chips.css';
 
 class Bubbles extends React.Component {
   state = {
     selectedTags: []
   };
 
-  handleSelect = tag => {
+  handleChange = tag => {
     this.state.selectedTags.some(t => t === tag._id)
       ? this.setState(
           {
@@ -36,22 +38,35 @@ class Bubbles extends React.Component {
         );
   };
 
+  handleSelect = () => {
+    console.log('selected');
+  };
+
   render() {
     const { classes } = this.props;
+    console.log(this.state);
+
     return (
-      <div>
+      <ChipSet
+        filter
+        selectedTags={this.state.selectedTags}
+        handleSelect={selectedTags => this.setState({ selectedTags })}
+      >
+        {/* // <div> */}
         {this.props.tags.map(tag => (
           <Chip
-            clickable
             variant="outlined"
             color="primary"
-            label={tag.title}
             key={tag._id}
+            label={tag.title}
             className={classes.chip}
-            onClick={() => this.handleSelect(tag)}
+            onClick={() => {
+              this.handleChange(tag);
+            }}
           />
         ))}
-      </div>
+        {/* </div> */}
+      </ChipSet>
     );
   }
 }

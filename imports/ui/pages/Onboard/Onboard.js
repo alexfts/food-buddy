@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -13,23 +14,7 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
-import Bubbles from '../../components/Bubbles/Bubbles';
-
-const styles = theme => ({
-  root: {
-    width: '90%'
-  },
-  button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
-  }
-});
+import Bubbles from '../../components/Bubbles';
 
 function getSteps() {
   return [
@@ -48,14 +33,9 @@ class Onboard extends React.Component {
     switch (step) {
       case 0:
         console.log(this.props.tags);
-        console.log(this.state.selectedTags);
 
         // return this.props.tags.map(tag => tag[tag]);
-        return (
-          <div>
-            <Bubbles tag={this.props.tags} />
-          </div>
-        );
+        return <Bubbles tag={this.props.tags} />;
       case 1:
         return 'An ad group contains one or more ads which target a shared set of keywords.';
       case 2:
@@ -96,18 +76,21 @@ class Onboard extends React.Component {
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel className={classes.label}>{label}</StepLabel>
               <StepContent>
-                <Typography>{this.getStepContent(index)}</Typography>
+                <Typography component="title">
+                  {this.getStepContent(index)}
+                </Typography>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
                       disabled={activeStep === 0}
                       onClick={this.handleBack}
-                      className={classes.button}
+                      className={classes.backButton}
                     >
                       Back
                     </Button>
+
                     <Button
                       variant="contained"
                       color="primary"
@@ -127,6 +110,7 @@ class Onboard extends React.Component {
             </Step>
           ))}
         </Stepper>
+
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
             <Typography>All steps completed - you&apos;re finished</Typography>

@@ -111,7 +111,7 @@ class Onboard extends React.Component {
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
               <StepContent>
-                <Typography>{this.getStepContent(index)}</Typography>
+                <div>{this.getStepContent(index)}</div>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button

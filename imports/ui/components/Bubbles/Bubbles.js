@@ -12,9 +12,16 @@ import Chip from '@material-ui/core/Chip';
 import styles from './styles';
 
 class Bubbles extends React.Component {
-  state = {
-    selectedTags: []
-  };
+  constructor(props) {
+    super(props);
+    let selectedTags = [];
+    if (this.props.currentUser.profile && this.props.currentUser.profile.tags) {
+      selectedTags = this.props.currentUser.profile.tags;
+    }
+    this.state = {
+      selectedTags
+    };
+  }
 
   handleSelect = tag => {
     this.state.selectedTags.some(t => t === tag._id)
@@ -61,6 +68,7 @@ export default withTracker(() => {
   Meteor.subscribe('tags');
   Meteor.subscribe('tagCategories');
   return {
+    currentUser: Meteor.user(),
     tagCategories: TagCategories.find({}).fetch()
   };
 })(withStyles(styles, { withTheme: true })(Bubbles));

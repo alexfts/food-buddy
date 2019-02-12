@@ -84,7 +84,7 @@ const Profile = ({ currentUser, tags, classes }) => {
             All Tags:
           </Typography>
 
-          <Bubbles tag={tags} />
+          <Bubbles tags={tags} />
           {/* {tags.map(tag => {
             return (
               <Button

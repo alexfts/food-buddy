@@ -14,6 +14,7 @@ import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
 import Bubbles from '../../components/Bubbles/Bubbles';
+
 const styles = theme => ({
   root: {
     width: '90%'

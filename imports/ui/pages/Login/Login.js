@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -16,7 +16,11 @@ const Login = ({ classes }) => {
           alignItems="center"
           justify="center"
         >
-          <img className={classes.logo} src="/cheers_logo.png" alt="Logo" />
+          <img
+            className={classes.logo}
+            src="/logo-thick.png"
+            alt="Drumsticks cheers"
+          />
           <img
             className={classes.textLogo}
             src="/Food_Buddy.png"
@@ -24,11 +28,12 @@ const Login = ({ classes }) => {
           />
         </Grid>
 
-        {/* <Grid container item xs={12} sm={12} md={6}> */}
-
         <LoginForm />
+
+        <Typography className={classes.copyright}>
+          &copy; 2019 Digital Salami Inc. All Rights Reserved
+        </Typography>
       </div>
-      {/* </Grid> */}
     </div>
   );
 };

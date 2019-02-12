@@ -3,15 +3,18 @@ import { Tags } from '../../api/tags';
 import { TagCategories } from '../../api/tagCategories';
 import { Accounts } from 'meteor/accounts-base';
 
-Meteor.startup(async () => {
+Meteor.startup(() => {
   if (TagCategories.find().count() === 0) {
-    try {
-      await TagCategories.insert({ title: 'Cuisine' });
-      await TagCategories.insert({ title: 'Food types' });
-      await TagCategories.insert({ title: 'Preferences' });
-      await TagCategories.insert({ title: 'Extra' });
-    } catch (error) {
-      console.log(error);
+    TagCategories.insert({ titl: 'Cuisine' });
+    TagCategories.insert({ title: 'Food types' });
+    TagCategories.insert({ title: 'Preferences' });
+    TagCategories.insert({ title: 'Extra' });
+
+    const errors = TagCategories.simpleSchema()
+      .namedContext()
+      .validationErrors();
+    if (errors) {
+      console.log(errors);
     }
   }
 

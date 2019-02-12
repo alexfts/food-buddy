@@ -32,10 +32,10 @@ class Onboard extends React.Component {
   getStepContent = step => {
     switch (step) {
       case 0:
-        console.log(this.props.tags);
-        console.log(
-          this.props.tags.filter(tag => tag.category.title === 'Cuisine')
-        );
+        // console.log(this.props.tags);
+        // console.log(
+        //   this.props.tags.filter(tag => tag.category.title === 'Cuisine')
+        // );
         return (
           <div>
             <Bubbles

@@ -15,11 +15,11 @@ const styles = theme => ({
   button: {
     color: 'white',
     fontWeight: 500,
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit
   },
   backButton: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit
   },
   label: {

@@ -9,16 +9,18 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-// import { Chip } from '@material-ui/core';
-import { ChipSet, Chip } from '@material/react-chips';
+import { Chip } from '@material-ui/core';
+// import { ChipSet, Chip } from '@material/react-chips';
 import '@material/react-chips/dist/chips.css';
+import theme from '../../theme';
 
 class Bubbles extends React.Component {
   state = {
-    selectedTags: []
+    selectedTags: [],
+    colorChange: null
   };
 
-  handleChange = tag => {
+  handleSelect = tag => {
     this.state.selectedTags.some(t => t === tag._id)
       ? this.setState(
           {
@@ -38,34 +40,47 @@ class Bubbles extends React.Component {
         );
   };
 
-  handleSelect = () => {
-    console.log('selected');
+  toggle = tag => {
+    if (this.state.colorChange == tag._id) {
+      this.setState({ colorChange: null });
+    } else {
+      this.setState({ colorChange: tag._id });
+    }
+  };
+
+  colorChange = tag => {
+    if (this.state.colorChange === tag._id) {
+      return 'primary';
+    }
+    return 'default';
   };
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.tags);
+    console.log('state:', this.state);
+
     return (
-      <ChipSet
-        filter
-        selectedTags={this.state.selectedTags}
-        handleSelect={selectedTags => this.setState({ selectedTags })}
-      >
-        {/* // <div> */}
+      // <ChipSet
+      //   filter
+      //   selectedTags={this.state.selectedTags}
+      //   handleSelect={selectedTags => this.setState({ selectedTags })}
+      // >
+      <div>
         {this.props.tags.map(tag => (
           <Chip
             variant="outlined"
-            color="primary"
+            color={this.colorChange(tag)}
             key={tag._id}
             label={tag.title}
             className={classes.chip}
             onClick={() => {
-              this.handleChange(tag);
+              this.handleSelect(tag);
+              this.toggle(tag);
             }}
           />
         ))}
-        {/* </div> */}
-      </ChipSet>
+      </div>
+      // </ChipSet>
     );
   }
 }

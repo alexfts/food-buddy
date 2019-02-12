@@ -44,8 +44,7 @@ class Bubbles extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state);
-
+    console.log(this.props.tags);
     return (
       <ChipSet
         filter
@@ -75,7 +74,6 @@ export default withTracker(() => {
   Meteor.subscribe('tags');
   Meteor.subscribe('tagCategories');
   return {
-    tags: Tags.find({}).fetch(),
     tagCategories: TagCategories.find({}).fetch()
   };
 })(withStyles(styles, { withTheme: true })(Bubbles));

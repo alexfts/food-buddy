@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import Grid from '@material-ui/core/Grid';
-import ResultsCard from '../../components/ResultsCard/ResultsCard';
+import PlacesComponent from '../../components/ResultsCard/ResultsCard';
 import MapComponent from '../../components/Maps/Maps';
 
 const Results = ({ location }) => {
@@ -15,7 +15,7 @@ const Results = ({ location }) => {
         </Grid>
         <Grid>
            {/* Only show cards with open_now: true */}
-           <ResultsCard />
+           <PlacesComponent />
         </Grid>
       </Grid>
     </Fragment>

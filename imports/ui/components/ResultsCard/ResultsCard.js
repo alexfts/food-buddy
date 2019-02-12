@@ -74,7 +74,7 @@ const PlacesComponent = compose(
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `400px`, width: `500px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
@@ -115,7 +115,7 @@ const PlacesComponent = compose(
       onTilesLoaded={props.fetchPlaces}
       ref={props.onMapMounted}
       onBoundsChanged={props.fetchPlaces}
-      defaultZoom={8}
+      defaultZoom={15}
       defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
     >
       {props.places &&

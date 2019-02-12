@@ -11,18 +11,10 @@ const Results = ({ location }) => {
   return (
     <Fragment>
       <Grid container>
-        <Grid item>
-          {/* <MapComponent /> */}
-          <MyMapComponent />
-        </Grid>
+        <Grid item>{/* <MapComponent /> */}</Grid>
         <Grid>
-<<<<<<< HEAD
           {/* Only show cards with open_now: true */}
-          <ResultsCard />
-=======
-           {/* Only show cards with open_now: true */}
-           <PlacesComponent />
->>>>>>> 68210329a49136a16f821d23570358b68bca01b0
+          <PlacesComponent />
         </Grid>
       </Grid>
     </Fragment>

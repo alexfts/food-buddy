@@ -1,3 +1,3 @@
-import Bubble from './Bubble';
+import Bubbles from './Bubbles';
 
-export default Bubble;
+export default Bubbles;

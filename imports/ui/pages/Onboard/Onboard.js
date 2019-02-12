@@ -48,21 +48,34 @@ class Onboard extends React.Component {
     switch (step) {
       case 0:
         console.log(this.props.tags);
-        console.log(this.state.selectedTags);
-
-        // return this.props.tags.map(tag => tag[tag]);
+        console.log(
+          this.props.tags.filter(tag => tag.category.title === 'Cuisine')
+        );
         return (
           <div>
-            <Bubbles tag={this.props.tags} />
+            <Bubbles
+              tags={this.props.tags.filter(
+                tag => tag.category.title === 'Cuisine'
+              )}
+            />
           </div>
         );
       case 1:
-        return 'An ad group contains one or more ads which target a shared set of keywords.';
+        return (
+          <Bubbles
+            tags={this.props.tags.filter(
+              tag => tag.category.title === 'Food Types'
+            )}
+          />
+        );
       case 2:
-        return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`;
+        return (
+          <Bubbles
+            tags={this.props.tags.filter(
+              tag => tag.category.title === 'Dietary Preferences'
+            )}
+          />
+        );
       default:
         return 'Unknown step';
     }

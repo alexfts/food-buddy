@@ -85,7 +85,10 @@ const Profile = ({ currentUser, tags, classes }) => {
           <Typography variant="h6" className={classes.tagTitle}>
             All Tags:
           </Typography>
-          <Bubbles tag={this.props.tags} />
+          <div>
+            <Bubbles tag={this.props.tags} />
+          </div>
+          console.log(tag)
           {/* {tags.map(tag => {
             return (
               <Button

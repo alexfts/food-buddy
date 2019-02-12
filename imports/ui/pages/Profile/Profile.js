@@ -16,8 +16,6 @@ import styles from './styles';
 import Bubbles from '../../components/Bubbles';
 
 const Profile = ({ currentUser, tags, classes }) => {
-  console.log(tags);
-
   // render() {
   //   const { classes, currentUser, tags } = this.props;
 
@@ -85,10 +83,8 @@ const Profile = ({ currentUser, tags, classes }) => {
           <Typography variant="h6" className={classes.tagTitle}>
             All Tags:
           </Typography>
-          <div>
-            <Bubbles tag={this.props.tags} />
-          </div>
-          console.log(tag)
+
+          <Bubbles tag={tags} />
           {/* {tags.map(tag => {
             return (
               <Button

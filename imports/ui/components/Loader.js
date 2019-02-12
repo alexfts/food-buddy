@@ -28,10 +28,8 @@ const styles = theme => ({
 const FullScreenLoader = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <div className={classes.container}>
-        <CircularProgress color="primary" size={80} thickness={2} />{' '}
-        <Typography className={classes.suck}>🤯🤓 You Suck 🤬🤮</Typography>
-      </div>
+      <CircularProgress color="primary" size={80} thickness={2} />{' '}
+      <Typography className={classes.suck}>🤯🤓 You Suck 🤬🤮</Typography>
     </div>
   );
 };

@@ -37,10 +37,19 @@ class Bubbles extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
         {this.props.tags.map(tag => (
-          <Chip label={tag.title} onClick={() => this.handleSelect(tag)} />
+          <Chip
+            clickable
+            variant="outlined"
+            color="primary"
+            label={tag.title}
+            key={tag._id}
+            className={classes.chip}
+            onClick={() => this.handleSelect(tag)}
+          />
         ))}
       </div>
     );

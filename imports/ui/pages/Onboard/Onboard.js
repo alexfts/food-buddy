@@ -111,6 +111,11 @@ class Onboard extends React.Component {
                     <Button
                       variant="contained"
                       color="primary"
+                      disabled={
+                        !Meteor.user().profile ||
+                        !Meteor.user().profile.tags ||
+                        Meteor.user().profile.tags.length === 0
+                      }
                       onClick={this.handleNext}
                       className={classes.button}
                     >
@@ -142,6 +147,7 @@ Onboard.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe('tags');
   Meteor.subscribe('tagCategories');
+
   return {
     tags: Tags.find({}).fetch(),
     tagCategories: TagCategories.find({}).fetch()

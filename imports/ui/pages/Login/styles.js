@@ -11,15 +11,10 @@ const styles = theme => ({
     backgroundPosition: 'top left, bottom right',
     backgroundRepeat: 'no-repeat, no-repeat',
     backgroundAttachment: 'fixed, fixed',
-    // backgroundSize: '20%, 15%',
     backgroundSize: '36%, 26%',
-
     height: '100vh',
     width: '100vw',
 
-    // [theme.breakpoints.down('xs')]: {
-    //   backgroundSize: '5%, 5%'
-    // },
     [theme.breakpoints.up('sm')]: {
       backgroundSize: '30%, 22%'
     },
@@ -49,8 +44,14 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
 
-    paddingTop: '1rem',
     height: '100%'
+  },
+  copyright: {
+    color: '#fff',
+    fontSize: '12px',
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: '15px'
   }
 });
 

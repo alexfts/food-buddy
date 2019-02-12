@@ -13,6 +13,8 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
+import Bubbles from '../../components/Bubbles/Bubbles';
+
 const styles = theme => ({
   root: {
     width: '90%'
@@ -37,38 +39,9 @@ function getSteps() {
   ];
 }
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return [`tags `, `tags `];
-//     case 1:
-//       return 'An ad group contains one or more ads which target a shared set of keywords.';
-//     case 2:
-//       return `Try out different ad text to see what brings in the most customers,
-//               and learn how to enhance your ads using features like ad extensions.
-//               If you run into any problems with your ads, find out how to tell if
-//               they're running and how to resolve approval issues.`;
-//     default:
-//       return 'Unknown step';
-//   }
-// }
-
-// 'users.updateUserTags'(tagids)
-
 class Onboard extends React.Component {
   state = {
-    activeStep: 0,
-    selectedTags: []
-  };
-
-  handleSelect = tag => {
-    this.state.selectedTags.some(t => t === tag._id)
-      ? this.setState({
-          selectedTags: this.state.selectedTags.filter(t => {
-            return t !== tag._id;
-          })
-        })
-      : this.setState({ selectedTags: [...this.state.selectedTags, tag._id] });
+    activeStep: 0
   };
 
   getStepContent = step => {
@@ -80,9 +53,7 @@ class Onboard extends React.Component {
         // return this.props.tags.map(tag => tag[tag]);
         return (
           <div>
-            {this.props.tags.map(tag => (
-              <Chip label={tag.title} onClick={() => this.handleSelect(tag)} />
-            ))}
+            <Bubbles tag={this.props.tags} />
           </div>
         );
       case 1:
@@ -140,6 +111,11 @@ class Onboard extends React.Component {
                     <Button
                       variant="contained"
                       color="primary"
+                      disabled={
+                        !Meteor.user().profile ||
+                        !Meteor.user().profile.tags ||
+                        Meteor.user().profile.tags.length === 0
+                      }
                       onClick={this.handleNext}
                       className={classes.button}
                     >
@@ -171,6 +147,7 @@ Onboard.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe('tags');
   Meteor.subscribe('tagCategories');
+
   return {
     tags: Tags.find({}).fetch(),
     tagCategories: TagCategories.find({}).fetch()

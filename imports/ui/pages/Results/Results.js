@@ -43,7 +43,7 @@ const Results = compose(
       };
       service.nearbySearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-          console.log(results);
+          // console.log(results);
           updatePlaces(results);
         }
       });
@@ -51,7 +51,7 @@ const Results = compose(
   })
 )(props => {
   const query = props.location.state ? props.location.state.query : '';
-  console.log('QUERY', query);
+  // console.log('QUERY', query);
   return (
     <Grid container>
       <Grid item>

@@ -14,7 +14,7 @@ function MediaCard(props) {
   console.log(
     'RESTAURANT',
     places.map(place => {
-      return place.name;
+      return place.price_level;
     })
   );
 
@@ -39,12 +39,11 @@ function MediaCard(props) {
             />
             <CardContent>
               <Typography component="h2">{place.name}</Typography>
-              <Typography component="p">Pull restaurant rating</Typography>
-              <Typography component="p">Pull restaurant price_level</Typography>
-              <Typography component="p">Pull restaurant distance</Typography>
+              <Typography component="p">Rating: {place.rating}</Typography>
               <Typography component="p">
-                Pull restaurant formatted_address from details
+                Price Level: {place.price_level}
               </Typography>
+              <Typography component="p">{place.vicinity}</Typography>
             </CardContent>
           </a>
         </CardActionArea>

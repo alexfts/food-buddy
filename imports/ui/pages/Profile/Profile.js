@@ -13,10 +13,9 @@ import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
+import Bubbles from '../../components/Bubbles';
 
 const Profile = ({ currentUser, tags, classes }) => {
-  console.log(tags);
-
   // render() {
   //   const { classes, currentUser, tags } = this.props;
 
@@ -53,7 +52,9 @@ const Profile = ({ currentUser, tags, classes }) => {
         {/*TODO Map all tags and highlight ones that are already selected  */}
         <div className={classes.divider} />
         <Paper square elevation={0} className={classes.paperTags}>
-          <Typography>Your Tags</Typography>
+          <Typography variant="h6" className={classes.tagTitle}>
+            Your Tags:
+          </Typography>
           <ul>
             {currentUser.profile.tags.map(selectedTag => {
               return tags.map(tag => {
@@ -83,7 +84,8 @@ const Profile = ({ currentUser, tags, classes }) => {
             All Tags:
           </Typography>
 
-          {tags.map(tag => {
+          <Bubbles tag={tags} />
+          {/* {tags.map(tag => {
             return (
               <Button
                 variant="outlined"
@@ -94,7 +96,7 @@ const Profile = ({ currentUser, tags, classes }) => {
                 {tag.title}
               </Button>
             );
-          })}
+          })} */}
         </Paper>
       </div>
     </Fragment>

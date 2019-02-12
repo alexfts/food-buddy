@@ -2,43 +2,37 @@ import { Meteor } from 'meteor/meteor';
 import { Tags } from '../../api/tags';
 import { TagCategories } from '../../api/tagCategories';
 import { Accounts } from 'meteor/accounts-base';
+import { CuisineTags, FoodtypeTags, DietaryPreferenceTags } from './tagsData';
 
-Meteor.startup(async () => {
+Meteor.startup(() => {
   if (TagCategories.find().count() === 0) {
-    try {
-      await TagCategories.insert({ title: 'Cuisine' });
-      await TagCategories.insert({ title: 'Food types' });
-      await TagCategories.insert({ title: 'Preferences' });
-      await TagCategories.insert({ title: 'Extra' });
-    } catch (error) {
-      console.log(error);
+    TagCategories.insert({ title: 'Cuisine' });
+    TagCategories.insert({ title: 'Food Types' });
+    TagCategories.insert({ title: 'Dietary Preferences' });
+    TagCategories.insert({ title: 'Extra' });
+
+    const errors = TagCategories.simpleSchema()
+      .namedContext()
+      .validationErrors();
+    if (errors && errors.length > 0) {
+      console.log(errors);
     }
   }
 
   if (Tags.find().count() === 0) {
-    Tags.insert(
-      {
-        title: 'Mediterranean',
-        category: TagCategories.findOne({ title: 'Cuisine' })
-      },
-      (error, result) => {
-        if (error) {
-          console.log(error.invalidKeys);
-        }
-      }
-    );
-    Tags.insert({
-      title: 'Vegetarian',
-      category: TagCategories.findOne({ title: 'Preferences' })
+    const tags = [...CuisineTags, ...FoodtypeTags, ...DietaryPreferenceTags];
+    tags.forEach(tag => {
+      Tags.insert({
+        title: tag.title,
+        category: TagCategories.findOne({ title: tag.category })
+      });
     });
-    Tags.insert({
-      title: 'Burgers',
-      category: TagCategories.findOne({ title: 'Food types' })
-    });
-    Tags.insert({
-      title: 'Gluten free',
-      category: TagCategories.findOne({ title: 'Preferences' })
-    });
+    const errors = Tags.simpleSchema()
+      .namedContext()
+      .validationErrors();
+    if (errors && errors.length > 0) {
+      console.log(errors);
+    }
   }
 
   if (Meteor.users.find().count() === 0) {
@@ -80,5 +74,12 @@ Meteor.startup(async () => {
       password: 'password',
       username: 'not_onboarded'
     });
+    const errors = Meteor.users
+      .simpleSchema()
+      .namedContext()
+      .validationErrors();
+    if (errors && errors.length > 0) {
+      console.log(errors);
+    }
   }
 });

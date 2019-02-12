@@ -1,11 +1,73 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { Tags } from './tags';
+import SimpleSchema from 'simpl-schema';
 
 /**
  * Once the user is onboarded, Users collection must contain profile object
  * with name (user's name) and tags (a list of _id's from Tags collection)
  */
+
+const UserProfileSchema = new SimpleSchema({
+  name: {
+    type: String,
+    optional: true
+  },
+  tags: {
+    type: Array,
+    optional: true
+  },
+  'tags.$': {
+    type: SimpleSchema.RegEx.Id
+  }
+});
+
+const UserSchema = new SimpleSchema({
+  username: {
+    type: String,
+    optional: true
+  },
+  emails: {
+    type: Array,
+    optional: true
+  },
+  'emails.$': {
+    type: Object
+  },
+  'emails.$.address': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email
+  },
+  'emails.$.verified': {
+    type: Boolean
+  },
+  createdAt: {
+    type: Date
+  },
+  profile: {
+    type: UserProfileSchema,
+    optional: true
+  },
+  services: {
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
+  roles: {
+    type: Array,
+    optional: true
+  },
+  'roles.$': {
+    type: String
+  },
+  // In order to avoid an 'Exception in setInterval callback' from Meteor
+  heartbeat: {
+    type: Date,
+    optional: true
+  }
+});
+
+Meteor.users.attachSchema(UserSchema);
 
 Meteor.methods({
   'users.updateUserTags'(tagids) {

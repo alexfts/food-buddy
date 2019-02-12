@@ -38,6 +38,7 @@ class Bubbles extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.tags);
     return (
       <div>
         {this.props.tags.map(tag => (
@@ -60,7 +61,6 @@ export default withTracker(() => {
   Meteor.subscribe('tags');
   Meteor.subscribe('tagCategories');
   return {
-    tags: Tags.find({}).fetch(),
     tagCategories: TagCategories.find({}).fetch()
   };
 })(withStyles(styles, { withTheme: true })(Bubbles));

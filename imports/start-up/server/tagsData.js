@@ -1,4 +1,4 @@
-const cuisineTags = [
+export const CuisineTags = [
   { title: 'Mediterranean', category: 'Cuisine' },
   { title: 'Greek', category: 'Cuisine' },
   { title: 'Thai', category: 'Cuisine' },
@@ -20,7 +20,7 @@ const cuisineTags = [
   { title: 'Filipino', category: 'Cuisine' }
 ];
 
-const foodtypeTags = [
+export const FoodtypeTags = [
   { title: 'Chicken Wings', category: 'Food Types' },
   { title: 'Noodles', category: 'Food Types' },
   { title: 'Rice', category: 'Food Types' },
@@ -61,16 +61,16 @@ const foodtypeTags = [
   { title: 'Dim Sum', category: 'Food Types' }
 ];
 
-const dietaryPreference = [
-  { title: 'Vegetarian', category: 'Dietary Preference' },
-  { title: 'Gluten-Free', category: 'Dietary Preference' },
-  { title: 'Vegan', category: 'Dietary Preference' },
-  { title: 'Lactose-Free', category: 'Dietary Preference' },
-  { title: 'Keto', category: 'Dietary Preference' },
-  { title: 'Low-Carb', category: 'Dietary Preference' },
-  { title: 'Paleo', category: 'Dietary Preference' },
-  { title: 'Pescetarian', category: 'Dietary Preference' },
-  { title: 'Nut-Free', category: 'Dietary Preference' },
-  { title: 'Diabetic', category: 'Dietary Preference' },
-  { title: 'Low/No Sodium', category: 'Dietary Preference' }
+export const DietaryPreferenceTags = [
+  { title: 'Vegetarian', category: 'Dietary Preferences' },
+  { title: 'Gluten-Free', category: 'Dietary Preferences' },
+  { title: 'Vegan', category: 'Dietary Preferences' },
+  { title: 'Lactose-Free', category: 'Dietary Preferences' },
+  { title: 'Keto', category: 'Dietary Preferences' },
+  { title: 'Low-Carb', category: 'Dietary Preferences' },
+  { title: 'Paleo', category: 'Dietary Preferences' },
+  { title: 'Pescetarian', category: 'Dietary Preferences' },
+  { title: 'Nut-Free', category: 'Dietary Preferences' },
+  { title: 'Diabetic', category: 'Dietary Preferences' },
+  { title: 'Low/No Sodium', category: 'Dietary Preferences' }
 ];

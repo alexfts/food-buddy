@@ -11,36 +11,47 @@ import Typography from '@material-ui/core/Typography';
 function MediaCard(props) {
   const { classes, places } = props;
   console.log('CARD PLACES', places);
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        {/* Link to website from api details */}
-        <a
-          href="https://google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={classes.hrefLink}
-        >
-          {/* image from photo details */}
-          <CardMedia
-            className={classes.media}
-            component="img"
-            src={'https://picsum.photos/200'}
-            title="Restaurant Image"
-          />
-          <CardContent>
-            <Typography component="h2">Pull restaurant name</Typography>
-            <Typography component="p">Pull restaurant rating</Typography>
-            <Typography component="p">Pull restaurant price_level</Typography>
-            <Typography component="p">Pull restaurant distance</Typography>
-            <Typography component="p">
-              Pull restaurant formatted_address from details
-            </Typography>
-          </CardContent>
-        </a>
-      </CardActionArea>
-    </Card>
+  console.log(
+    'RESTAURANT',
+    places.map(place => {
+      return place.price_level;
+    })
   );
+
+  // places.map(restaurant => {
+  return places.map(place => {
+    return (
+      <Card className={classes.card}>
+        <CardActionArea>
+          {/* Link to website from api details */}
+          <a
+            href="https://google.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={classes.hrefLink}
+          >
+            {/* image from photo details */}
+            <CardMedia
+              className={classes.media}
+              component="img"
+              src={'https://picsum.photos/200'}
+              title="Restaurant Image"
+            />
+            <CardContent>
+              <Typography component="h2">{place.name}</Typography>
+              <Typography component="p">Rating: {place.rating}</Typography>
+              <Typography component="p">
+                Price Level: {place.price_level}
+              </Typography>
+              <Typography component="p">{place.vicinity}</Typography>
+            </CardContent>
+          </a>
+        </CardActionArea>
+      </Card>
+    );
+  });
+
+  // });
 }
 
 MediaCard.propTypes = {

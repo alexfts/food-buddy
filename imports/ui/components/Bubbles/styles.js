@@ -1,7 +1,16 @@
 const styles = theme => ({
   chip: {
     textTransform: 'uppercase',
-    marginRight: 10
+    marginRight: 10,
+    marginTop: 10
+    // clickableColorPrimary: 'green'
+  },
+  chipSelected: {
+    textTransform: 'uppercase',
+    marginRight: 10,
+    marginTop: 10,
+    backgroundColor: 'green',
+    clickableColorPrimary: 'green'
   }
 });
 

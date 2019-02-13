@@ -101,6 +101,7 @@ function MultiValue(props) {
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
       color="primary"
+      variant="outlined"
     />
   );
 }

@@ -11,7 +11,14 @@ import Typography from '@material-ui/core/Typography';
 function MediaCard(props) {
   const { classes, places } = props;
   console.log('CARD PLACES', places);
+  console.log(
+    'RESTAURANT',
+    places.map(place => {
+      return place.price_level;
+    })
+  );
 
+  // places.map(restaurant => {
   return places.map(place => {
     return (
       <Card className={classes.card}>
@@ -32,9 +39,9 @@ function MediaCard(props) {
             />
             <CardContent>
               <Typography component="h2">{place.name}</Typography>
-              <Typography component="p">{place.website}</Typography>
-              <Typography component="p">Pull restaurant price_level</Typography>
-              <Typography component="p">Pull restaurant formatted_address from details</Typography>
+              <Typography component="p">Rating: {place.rating}</Typography>
+              <Typography component="p">Price Level: {place.price_level}</Typography>
+              <Typography component="p">{place.vicinity}</Typography>
             </CardContent>
           </a>
         </CardActionArea>

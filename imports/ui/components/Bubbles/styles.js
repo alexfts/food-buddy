@@ -3,7 +3,7 @@ const styles = theme => ({
     textTransform: 'uppercase',
     marginRight: 10,
     marginTop: 10
-    // clickableColorPrimary: 'green'
+    // color: 'grey'
   },
   chipSelected: {
     textTransform: 'uppercase',

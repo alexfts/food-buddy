@@ -32,6 +32,7 @@ const TopMatches = ({
             <Grid item xs={12} sm={6} key={tagid} className={classes.matches}>
               {tag.title}
               <Button
+                variant="outlined"
                 component={Link}
                 to={{
                   pathname: '/results',

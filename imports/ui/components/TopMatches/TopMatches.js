@@ -49,7 +49,9 @@ class TopMatches extends Component {
     console.log('MATCHES', matches, users);
     return matches ? (
       <div>
-        <Typography variant="h5">Your top matches:</Typography>
+        <Typography className={classes.title} variant="h5">
+          Your top matches:
+        </Typography>
         <Slider
           value={this.state.price}
           min={1}
@@ -67,7 +69,14 @@ class TopMatches extends Component {
           }
           label="Open now"
         />
-        <Grid container spacing={16}>
+        <Grid
+          container
+          spacing={16}
+          // direction="column"
+          justify="space-between"
+          alignItems="center"
+          spacing={16}
+        >
           {matches.map(({ tagids, users }) => {
             const tag = allTags.find(tag => tag._id === tagids[0]);
             const category = tagCategories.find(
@@ -81,10 +90,16 @@ class TopMatches extends Component {
                 key={tagids[0]}
                 className={classes.matches}
               >
-                {tag.title}
-                <div>
+                <Typography className={classes.tagTitle} color="primary">
+                  {tag.title}
+                </Typography>
+                <div className={classes.flexMatches}>
+                  <Typography className={classes.matchesLabel}>
+                    Match:
+                  </Typography>
                   {users.map(user => (
                     <Chip
+                      className={classes.user}
                       key={user._id}
                       avatar={
                         <Avatar>
@@ -92,12 +107,15 @@ class TopMatches extends Component {
                         </Avatar>
                       }
                       label={user.username}
-                      color="primary"
-                      variant="outlined"
+                      color="default"
+                      variant="contained"
                     />
                   ))}
                 </div>
                 <Button
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
                   component={Link}
                   to={{
                     pathname: '/results',
@@ -120,6 +138,10 @@ class TopMatches extends Component {
     );
   }
 }
+
+TopMatches.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withTracker(() => {
   Meteor.subscribe('tags');

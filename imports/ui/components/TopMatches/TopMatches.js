@@ -5,14 +5,35 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
-import { Grid, Typography, Button, Chip, Avatar } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Button,
+  Chip,
+  Avatar,
+  FormControlLabel,
+  Switch
+} from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
+import Slider from '@material-ui/lab/Slider';
 
 class TopMatches extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      price: 1,
+      openNow: true
+    };
   }
+
+  handlePriceChange = (event, price) => {
+    this.setState({ price });
+  };
+
+  handleOpenNowChange = event => {
+    this.setState({ openNow: event.target.checked });
+  };
 
   render() {
     const {
@@ -29,7 +50,23 @@ class TopMatches extends Component {
     return matches ? (
       <div>
         <Typography variant="h5">Your top matches:</Typography>
-
+        <Slider
+          value={this.state.price}
+          min={1}
+          max={4}
+          step={1}
+          onChange={this.handlePriceChange}
+        />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={this.state.openNow}
+              onChange={this.handleOpenNowChange}
+              value="openNow"
+            />
+          }
+          label="Open now"
+        />
         <Grid container spacing={16}>
           {matches.map(({ tagids, users }) => {
             const tag = allTags.find(tag => tag._id === tagids[0]);
@@ -65,7 +102,9 @@ class TopMatches extends Component {
                   to={{
                     pathname: '/results',
                     state: {
-                      query: tag.title
+                      query: tag.title,
+                      price: this.state.price,
+                      openNow: this.state.openNow
                     }
                   }}
                 >

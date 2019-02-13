@@ -65,9 +65,24 @@ class Bubbles extends React.Component {
     return 'default';
   };
 
+  sortTagsBySelected(tags) {
+    const sortedTags = [...tags];
+    sortedTags.sort((tag1, tag2) => {
+      const isTag1Selected = this.state.selectedTags.includes(tag1._id);
+      const isTag2Selected = this.state.selectedTags.includes(tag2._id);
+      if (isTag1Selected !== isTag2Selected) {
+        return isTag1Selected ? -1 : 1;
+      } else {
+        if (tag1.title < tag2.title) return -1;
+        else return 1;
+      }
+    });
+    return sortedTags;
+  }
+
   render() {
     const { classes } = this.props;
-    console.log('state:', this.state);
+    const tags = this.sortTagsBySelected(this.props.tags);
 
     return (
       // <ChipSet
@@ -76,17 +91,18 @@ class Bubbles extends React.Component {
       //   handleSelect={selectedTags => this.setState({ selectedTags })}
       // >
       <div>
-        {this.props.tags.map(tag => (
+        {tags.map(tag => (
           <Chip
             variant="outlined"
             color={this.colorChange(tag)}
             key={tag._id}
             label={tag.title}
-            className={classes.chip}
-            onClick={() => {
-              this.handleSelect(tag);
-              // this.toggle(tag);
-            }}
+            className={
+              this.state.selectedTags.includes(tag._id)
+                ? classes.chipSelected
+                : classes.chip
+            }
+            onClick={() => this.handleSelect(tag)}
           />
         ))}
       </div>

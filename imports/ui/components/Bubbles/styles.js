@@ -2,10 +2,14 @@ const styles = theme => ({
   chip: {
     textTransform: 'uppercase',
     marginRight: 10,
-    marginTop: 10
+    marginTop: 10,
+    clickableColorPrimary: 'green'
   },
-  'MuiChip-root-209': {
-    color: 'grey'
+  chipSelected: {
+    textTransform: 'uppercase',
+    marginRight: 10,
+    backgroundColor: 'green',
+    clickableColorPrimary: 'green'
   }
 });
 

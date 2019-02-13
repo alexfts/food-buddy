@@ -1,8 +1,23 @@
 const styles = {
+  root: {
+    display: 'flex'
+  },
   card: {
-    maxWidth: 345
+    height: 300,
+    width: 240
   },
   media: {
-    height: 140
+    height: 200
+  },
+  drawer: {
+    width: 200,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    top: 70,
+    width: 300,
+    height: '89%'
   }
 };
+
+export default styles;

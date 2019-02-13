@@ -8,42 +8,28 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Grid,
   Drawer,
-  Button
+  List,
+  ListItem
 } from '@material-ui/core/';
 
-class MediaCard extends React.Component {
-  state = {
-    right: false
-  };
+function MediaCard(props) {
+  const { classes, places } = props;
 
-  toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open
-    });
-  };
-
-  render() {
-    const { classes, places } = this.props;
-
-    return (
-      <div>
-        <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
-
-        <Drawer
-          anchor="right"
-          open={this.state.right}
-          onClose={this.toggleDrawer('right', false)}
-        >
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer('right', false)}
-            onKeyDown={this.toggleDrawer('right', false)}
-          >
-            {places.map(place => {
-              return (
+  return (
+    <div className={classes.root}>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        anchor="right"
+      >
+        <List>
+          {places.map(place => {
+            return (
+              <ListItem>
                 <Card className={classes.card}>
                   <CardActionArea>
                     {/* Link to website from api details */}
@@ -73,13 +59,13 @@ class MediaCard extends React.Component {
                     </a>
                   </CardActionArea>
                 </Card>
-              );
-            })}
-          </div>
-        </Drawer>
-      </div>
-    );
-  }
+              </ListItem>
+            );
+          })}
+        </List>
+      </Drawer>
+    </div>
+  );
 }
 
 MediaCard.propTypes = {

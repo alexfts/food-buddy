@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
-import { Grid, Typography, Button } from '@material-ui/core';
+import { Grid, Typography, Button, Chip, Avatar } from '@material-ui/core';
+import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
 
 const TopMatches = ({
@@ -18,6 +19,7 @@ const TopMatches = ({
   classes,
   matches
 }) => {
+  console.log('MATCHES', matches, users);
   return matches ? (
     <div>
       <Typography variant="h5">Your top matches:</Typography>
@@ -40,6 +42,22 @@ const TopMatches = ({
               className={classes.matches}
             >
               <Typography>{tag.title}</Typography>
+
+              <div>
+                {users.map(user => (
+                  <Chip
+                    key={user._id}
+                    avatar={
+                      <Avatar>
+                        <Gravatar email={user.emails[0].address} />
+                      </Avatar>
+                    }
+                    label={user.username}
+                    color="primary"
+                    variant="outlined"
+                  />
+                ))}
+              </div>
               <Button
                 variant="outlined"
                 color="primary"

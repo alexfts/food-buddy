@@ -4,7 +4,8 @@ const styles = theme => ({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: '5%'
   },
   input: {
     display: 'flex',

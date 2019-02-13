@@ -205,7 +205,9 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Typography variant="h4">Choose your group</Typography>
+        <Typography variant="h5" className={classes.title}>
+          Choose your group
+        </Typography>
         <NoSsr>
           <Select
             className={classes.select}

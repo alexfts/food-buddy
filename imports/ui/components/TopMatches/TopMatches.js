@@ -29,11 +29,22 @@ const TopMatches = ({
             categ => categ._id === tag.categoryid
           );
           return (
-            <Grid item xs={12} sm={6} key={tagid} className={classes.matches}>
-              {tag.title}
+            <Grid
+              item
+              direction="column"
+              justify="center"
+              alignItems="center"
+              // xs={12}
+              // sm={6}
+              // key={tagid}
+              className={classes.matches}
+            >
+              <Typography>{tag.title}</Typography>
               <Button
                 variant="outlined"
+                color="primary"
                 component={Link}
+                className={classes.button}
                 to={{
                   pathname: '/results',
                   state: {
@@ -41,7 +52,7 @@ const TopMatches = ({
                   }
                 }}
               >
-                Find restaurants!
+                Find restaurants
               </Button>
             </Grid>
           );

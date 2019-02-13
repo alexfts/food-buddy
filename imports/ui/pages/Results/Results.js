@@ -51,7 +51,7 @@ const Results = compose(
   })
 )(props => {
   const query = props.location.state ? props.location.state.query : '';
-  console.log('QUERY', query);
+  // console.log('QUERY', query);
   return (
     <Grid container>
       <Grid item>

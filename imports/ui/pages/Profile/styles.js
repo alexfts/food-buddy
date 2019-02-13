@@ -43,7 +43,7 @@ const styles = theme => ({
   },
 
   divider: {
-    margin: 15
+    margin: 12
   },
   tagTitle: {
     marginBottom: '1rem'

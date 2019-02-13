@@ -6,13 +6,13 @@ html {
 }
 
 #root {
-  background: radial-gradient(#f8ab4f, #f0792b);
+  /* background: radial-gradient(#f8ab4f, #f0792b); */
   width: 100%;
   height: 100%;
 }
 
 a {
-  /* color: #212121; */
+  color: #fff;
   text-decoration: none;
 }
 

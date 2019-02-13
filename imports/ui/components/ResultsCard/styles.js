@@ -3,7 +3,7 @@ const styles = {
     display: 'flex'
   },
   card: {
-    height: 300,
+    height: 350,
     width: 240
   },
   media: {

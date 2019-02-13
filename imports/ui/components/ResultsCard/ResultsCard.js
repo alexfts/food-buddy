@@ -15,6 +15,7 @@ import {
 
 function MediaCard(props) {
   const { classes, places } = props;
+  console.log(places);
 
   return (
     <div className={classes.root}>

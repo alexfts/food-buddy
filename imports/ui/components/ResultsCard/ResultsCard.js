@@ -10,16 +10,14 @@ import Typography from '@material-ui/core/Typography';
 
 function MediaCard(props) {
   const { classes, places } = props;
-  console.log('CARD PLACES', places);
-  console.log(
-    'RESTAURANT',
-    places.map(place => {
-      return place.price_level;
-    })
-  );
 
-  // places.map(restaurant => {
   return places.map(place => {
+    console.log('CARD', place);
+    console.log(
+      places.map(place => {
+        return place;
+      })
+    );
     return (
       <Card className={classes.card}>
         <CardActionArea>
@@ -50,8 +48,6 @@ function MediaCard(props) {
       </Card>
     );
   });
-
-  // });
 }
 
 MediaCard.propTypes = {

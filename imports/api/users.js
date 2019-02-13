@@ -168,7 +168,10 @@ Meteor.methods({
     }
 
     const users = userids.map(userid => {
-      const user = Meteor.users.findOne({ _id: userid });
+      const user = Meteor.users.findOne(
+        { _id: userid },
+        { fields: { username: 1, profile: 1, 'emails.address': 1 } }
+      );
       if (!user)
         throw new Meteor.Error(
           'users.findMatches.invalid-input',

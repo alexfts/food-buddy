@@ -14,6 +14,7 @@ import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
 import Bubbles from '../../components/Bubbles/Bubbles';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -47,10 +48,6 @@ class Onboard extends React.Component {
   getStepContent = step => {
     switch (step) {
       case 0:
-        console.log(this.props.tags);
-        console.log(
-          this.props.tags.filter(tag => tag.category.title === 'Cuisine')
-        );
         return (
           <div>
             <Bubbles
@@ -99,6 +96,24 @@ class Onboard extends React.Component {
     });
   };
 
+  areAnyTagsSelected(selectedTags, step) {
+    if (!selectedTags) return false;
+    const tags = this.props.tags.filter(tag => selectedTags.includes(tag._id));
+
+    const getTagsByCategory = category => {
+      return tags.filter(tag => tag.category.title === category);
+    };
+
+    switch (step) {
+      case 0:
+        return getTagsByCategory('Cuisine').length > 0;
+      case 1:
+        return getTagsByCategory('Food Types').length > 0;
+      default:
+        return true; // skipping case 2 since Dietary preferences are optional
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const steps = getSteps();
@@ -126,11 +141,17 @@ class Onboard extends React.Component {
                       color="primary"
                       disabled={
                         !Meteor.user().profile ||
-                        !Meteor.user().profile.tags ||
-                        Meteor.user().profile.tags.length === 0
+                        !this.areAnyTagsSelected(
+                          Meteor.user().profile.tags,
+                          activeStep
+                        )
                       }
                       onClick={this.handleNext}
                       className={classes.button}
+                      component={
+                        activeStep === steps.length - 1 ? Link : 'button'
+                      }
+                      to="/home"
                     >
                       {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>

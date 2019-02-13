@@ -75,12 +75,6 @@ class Onboard extends React.Component {
     }));
   };
 
-  handleReset = () => {
-    this.setState({
-      activeStep: 0
-    });
-  };
-
   areAnyTagsSelected(selectedTags, step) {
     if (!selectedTags) return false;
     const tags = this.props.tags.filter(tag => selectedTags.includes(tag._id));
@@ -147,15 +141,6 @@ class Onboard extends React.Component {
             </Step>
           ))}
         </Stepper>
-
-        {activeStep === steps.length && (
-          <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={this.handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </Paper>
-        )}
       </div>
     );
   }

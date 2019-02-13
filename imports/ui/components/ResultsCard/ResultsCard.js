@@ -40,9 +40,7 @@ function MediaCard(props) {
             <CardContent>
               <Typography component="h2">{place.name}</Typography>
               <Typography component="p">Rating: {place.rating}</Typography>
-              <Typography component="p">
-                Price Level: {place.price_level}
-              </Typography>
+              <Typography component="p">Price Level: {place.price_level}</Typography>
               <Typography component="p">{place.vicinity}</Typography>
             </CardContent>
           </a>
@@ -50,8 +48,6 @@ function MediaCard(props) {
       </Card>
     );
   });
-
-  // });
 }
 
 MediaCard.propTypes = {

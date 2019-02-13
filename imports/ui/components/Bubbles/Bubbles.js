@@ -43,19 +43,38 @@ class Bubbles extends React.Component {
         );
   };
 
+  sortTagsBySelected(tags) {
+    const sortedTags = [...tags];
+    sortedTags.sort((tag1, tag2) => {
+      const isTag1Selected = this.state.selectedTags.includes(tag1._id);
+      const isTag2Selected = this.state.selectedTags.includes(tag2._id);
+      if (isTag1Selected !== isTag2Selected) {
+        return isTag1Selected ? -1 : 1;
+      } else {
+        if (tag1.title < tag2.title) return -1;
+        else return 1;
+      }
+    });
+    return sortedTags;
+  }
+
   render() {
     const { classes } = this.props;
-    console.log(this.props.tags);
+    const tags = this.sortTagsBySelected(this.props.tags);
     return (
       <div>
-        {this.props.tags.map(tag => (
+        {tags.map(tag => (
           <Chip
             clickable
             variant="outlined"
             color="primary"
             label={tag.title}
             key={tag._id}
-            className={classes.chip}
+            className={
+              this.state.selectedTags.includes(tag._id)
+                ? classes.chipSelected
+                : classes.chip
+            }
             onClick={() => this.handleSelect(tag)}
           />
         ))}

@@ -80,10 +80,29 @@ const Profile = ({ currentUser, tags, classes }) => {
 
         <Paper square elevation={0} className={classes.paperTags}>
           <Typography variant="h6" className={classes.tagTitle}>
-            All Tags:
+            Change Tags:
           </Typography>
+          <Typography variant="h6" className={classes.tagTitle}>
+            Cuisines
+          </Typography>
+          <Bubbles
+            tags={tags.filter(tag => tag.category.title === 'Cuisine')}
+          />
+          <Typography variant="h6" className={classes.tagTitle}>
+            Food Types
+          </Typography>
+          <Bubbles
+            tags={tags.filter(tag => tag.category.title === 'Food Types')}
+          />
+          <Typography variant="h6" className={classes.tagTitle}>
+            Dietary Preferences
+          </Typography>
+          <Bubbles
+            tags={tags.filter(
+              tag => tag.category.title === 'Dietary Preferences'
+            )}
+          />
 
-          <Bubbles tags={tags} />
           {/* {tags.map(tag => {
             return (
               <Button

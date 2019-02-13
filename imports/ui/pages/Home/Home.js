@@ -15,6 +15,8 @@ import SelectGroupForm from '../../components/SelectGroupForm';
 
 class Home extends Component {
   state = {
+    multi: null,
+    matches: null,
     open: false,
     scroll: 'paper'
   };
@@ -39,7 +41,7 @@ class Home extends Component {
         <div className={classes.container}>
           <Fab
             aria-label="Add"
-            className={classes.fabButton}
+            className={classes.plate}
             onClick={this.handleClickOpen('paper')}
             // onClick={this.handleOpen}
           >
@@ -53,25 +55,21 @@ class Home extends Component {
             aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.handleClose}
-            className={classes.modal}
+            className={classes.flexbox}
+            width="100%"
           >
-            {/* <div className={classes.paper}> */}
             <Dialog
               className={classes.paper}
               open={this.state.open}
               onClose={this.handleClose}
               scroll={this.state.scroll}
               aria-labelledby="scroll-dialog-title"
+              // width="100%"
             >
+              {/* <div className={classes.paper}> */}
               <SelectGroupForm />
-
-              <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  Cancel
-                </Button>
-              </DialogActions>
+              {/* </div> */}
             </Dialog>
-            {/* </div> */}
           </Modal>
         </div>
 

@@ -171,7 +171,7 @@ class SelectGroupForm extends Component {
   state = {
     multi: null,
     matches: null,
-    open: false,
+    open: true,
     scroll: 'paper'
   };
 
@@ -191,9 +191,9 @@ class SelectGroupForm extends Component {
     );
   };
 
-  // handleClose = () => {
-  //   this.setState({ open: false });
-  // };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const { classes, users, currentUserId } = this.props;
@@ -217,10 +217,13 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <DialogTitle id="scroll-dialog-title" className={classes.dialog}>
-          <Typography className={classes.title}>Choose your group</Typography>
+        <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
+          <Typography className={classes.title}>
+            Select your food buddy
+          </Typography>
           <NoSsr>
             <Select
+              color="secondary"
               className={classes.select}
               classes={classes}
               styles={selectStyles}
@@ -258,6 +261,40 @@ class SelectGroupForm extends Component {
               )}
           </DialogContentText>
         </DialogContent>
+
+        <DialogActions className={classes.buttons}>
+          {this.state.multi &&
+          this.state.multi.length > 0 &&
+          this.state.matches ? (
+            <>
+              <Button
+                onClick={this.handleClose}
+                color="secondary"
+                variant="contained"
+                className={classes.cancelButton}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={this.handleClose}
+                color="secondary"
+                variant="contained"
+                className={classes.cancelButton}
+              >
+                Submit
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={this.handleClose}
+              color="secondary"
+              variant="outlined"
+              className={classes.cancelButton}
+            >
+              Cancel
+            </Button>
+          )}
+        </DialogActions>
       </div>
     );
   }

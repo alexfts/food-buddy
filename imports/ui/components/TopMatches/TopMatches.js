@@ -23,41 +23,33 @@ const TopMatches = ({
 
   return matches ? (
     <div>
-      {/* <Dialog
-        open={this.state.open}
-        onClose={this.handleClose}
-        scroll={this.state.scroll}
-        aria-labelledby="scroll-dialog-title"
-      > */}
-      {/* <DialogTitle id="scroll-dialog-title"> */}
-      <Typography className={classes.title} variant="h6">
+      <Typography className={classes.title} variant="h5">
         Your top matches:
       </Typography>
-      {/* </DialogTitle> */}
 
-      <Grid container spacing={16}>
+      <Grid
+        container
+        // direction="column"
+        justify="space-between"
+        alignItems="center"
+        spacing={16}
+      >
         {matches.map(({ tagid, users }) => {
           const tag = tags.find(tag => tag._id === tagid);
           const category = tagCategories.find(
             categ => categ._id === tag.categoryid
           );
           return (
-            <Grid
-              item
-              className={classes.matches}
-              direction="column"
-              justify="space-between"
-              alignItems="center"
-              // xs={12}
-              // sm={6}
-              key={tagid}
-            >
-              <Typography variant="h6">{tag.title}</Typography>
+            <Grid item className={classes.matches} xs={8} sm={6} key={tagid}>
+              <Typography className={classes.tagTitle} color="primary">
+                {tag.title}
+              </Typography>
 
-              <div>
-                <Typography className={classes.fbMatches}>Matches:</Typography>
+              <div className={classes.flexMatches}>
+                <Typography className={classes.matchesLabel}>Match:</Typography>
                 {users.map(user => (
                   <Chip
+                    className={classes.user}
                     key={user._id}
                     avatar={
                       <Avatar>
@@ -66,12 +58,12 @@ const TopMatches = ({
                     }
                     label={user.username}
                     color="default"
-                    variant="outlined"
+                    variant="contained"
                   />
                 ))}
               </div>
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 component={Link}
                 className={classes.button}
@@ -82,17 +74,20 @@ const TopMatches = ({
                   }
                 }}
               >
-                Find restaurants
+                enter
               </Button>
             </Grid>
           );
         })}
       </Grid>
-      {/* </Dialog> */}
     </div>
   ) : (
     <div>U suck</div>
   );
+};
+
+TopMatches.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default withTracker(() => {

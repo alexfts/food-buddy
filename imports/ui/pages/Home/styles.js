@@ -1,19 +1,23 @@
 const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: '70%',
-    height: '80%',
-    margin: 'auto',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    outline: 'none'
+  container: {
+    width: '100%'
   },
-  modal: {
+  paper: {
+    // position: 'absolute',
+    // height: '80%',
+    margin: 'auto',
+    // backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    outline: 'none',
+    width: '100%'
+  },
+  flexbox: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%'
   },
-  fabButton: {
+  plate: {
     position: 'absolute',
     zIndex: 1,
     bottom: 30,
@@ -23,9 +27,6 @@ const styles = theme => ({
     // color: 'primary'
   },
 
-  container: {
-    // margin: '5%'
-  },
   map: {
     // maxHeight: '80%'
   },

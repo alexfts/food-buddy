@@ -2,6 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { Tags } from './tags';
 import SimpleSchema from 'simpl-schema';
+import { TagCategories } from './tagCategories';
 
 /**
  * Once the user is onboarded, Users collection must contain profile object
@@ -98,6 +99,42 @@ Meteor.methods({
       $set: { 'profile.tags': tagids }
     });
   },
+
+  // 'users.updateUserTagsByCategory'(tagids, categoryid) {
+  //   if (!this.userId) {
+  //     throw new Meteor.Error(
+  //       'users.updateUserTagsByCategory.not-authorized',
+  //       'You are not logged in.'
+  //     );
+  //   }
+  //   if (!tagids || !(tagids instanceof Array)) {
+  //     throw new Meteor.Error(
+  //       'users.updateUserTagsByCategory.invalid-input',
+  //       'Invalid input'
+  //     );
+  //   }
+  //   const category = TagCategories.findOne(categoryid);
+  //   if (!category) throw new Meteor.Error(
+  //     'users.updateUserTagsByCategory.invalid-category',
+  //     'Invalid category.'
+  //   );
+
+  //   // throw error if any of tagids are not in DB
+  //   tagids.map(tagid => {
+  //     const tag = Tags.findOne({ _id: tagid });
+  //     if (!tag || tag.category._id !== categoryid)
+  //       throw new Meteor.Error(
+  //         'users.updateUserTagsByCategory.invalid-input',
+  //         'Invalid input.'
+  //       );
+  //   });
+  //   const userTags = (Meteor.user().profile && Meteor.user().profile.tags) ?
+  //     Meteor.user().profile.tags : [];
+
+  //   Meteor.users.update(this.userId, {
+  //     $set: { 'profile.tags': tagids }
+  //   });
+  // },
 
   'users.updateName'(name) {
     if (!this.userId) {

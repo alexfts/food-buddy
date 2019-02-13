@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography, Fab, Modal } from '@material-ui/core';
+import {
+  Fab,
+  Dialog,
+  DialogActions,
+  Modal,
+  Typography
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import styles from './styles';
@@ -9,7 +15,12 @@ import SelectGroupForm from '../../components/SelectGroupForm';
 
 class Home extends Component {
   state = {
-    open: false
+    open: false,
+    scroll: 'paper'
+  };
+
+  handleClickOpen = scroll => () => {
+    this.setState({ open: true, scroll });
   };
 
   handleOpen = () => {
@@ -29,13 +40,14 @@ class Home extends Component {
           <Fab
             aria-label="Add"
             className={classes.fabButton}
-            onClick={this.handleOpen}
+            onClick={this.handleClickOpen('paper')}
+            // onClick={this.handleOpen}
           >
             <AddIcon />
           </Fab>
-          {/* <div className={classes.overlay}> */}
+
           <img src="/fork-and-knife.svg" className={classes.plateImg} />
-          {/* </div> */}
+
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
@@ -43,11 +55,26 @@ class Home extends Component {
             onClose={this.handleClose}
             className={classes.modal}
           >
-            <div className={classes.paper}>
+            {/* <div className={classes.paper}> */}
+            <Dialog
+              className={classes.paper}
+              open={this.state.open}
+              onClose={this.handleClose}
+              scroll={this.state.scroll}
+              aria-labelledby="scroll-dialog-title"
+            >
               <SelectGroupForm />
-            </div>
+
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  Cancel
+                </Button>
+              </DialogActions>
+            </Dialog>
+            {/* </div> */}
           </Modal>
         </div>
+
         <div>
           <iframe
             className={classes.map}

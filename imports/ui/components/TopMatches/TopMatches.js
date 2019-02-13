@@ -20,9 +20,20 @@ const TopMatches = ({
   matches
 }) => {
   console.log('MATCHES', matches, users);
+
   return matches ? (
     <div>
-      <Typography variant="h5">Your top matches:</Typography>
+      {/* <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        scroll={this.state.scroll}
+        aria-labelledby="scroll-dialog-title"
+      > */}
+      {/* <DialogTitle id="scroll-dialog-title"> */}
+      <Typography className={classes.title} variant="h6">
+        Your top matches:
+      </Typography>
+      {/* </DialogTitle> */}
 
       <Grid container spacing={16}>
         {matches.map(({ tagid, users }) => {
@@ -33,17 +44,18 @@ const TopMatches = ({
           return (
             <Grid
               item
+              className={classes.matches}
               direction="column"
-              justify="center"
+              justify="space-between"
               alignItems="center"
               // xs={12}
               // sm={6}
-              // key={tagid}
-              className={classes.matches}
+              key={tagid}
             >
-              <Typography>{tag.title}</Typography>
+              <Typography variant="h6">{tag.title}</Typography>
 
               <div>
+                <Typography className={classes.fbMatches}>Matches:</Typography>
                 {users.map(user => (
                   <Chip
                     key={user._id}
@@ -53,13 +65,13 @@ const TopMatches = ({
                       </Avatar>
                     }
                     label={user.username}
-                    color="primary"
+                    color="default"
                     variant="outlined"
                   />
                 ))}
               </div>
               <Button
-                variant="outlined"
+                variant="contained"
                 color="primary"
                 component={Link}
                 className={classes.button}
@@ -76,6 +88,7 @@ const TopMatches = ({
           );
         })}
       </Grid>
+      {/* </Dialog> */}
     </div>
   ) : (
     <div>U suck</div>

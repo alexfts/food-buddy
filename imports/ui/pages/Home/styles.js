@@ -2,7 +2,8 @@ const styles = theme => ({
   paper: {
     position: 'absolute',
     width: '70%',
-    height: '70%',
+    height: '80%',
+    margin: 'auto',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: 'none'
@@ -18,8 +19,8 @@ const styles = theme => ({
     bottom: 30,
     left: 0,
     right: 0,
-    margin: '0 auto',
-    color: 'primary'
+    margin: '0 auto'
+    // color: 'primary'
   },
 
   container: {
@@ -34,11 +35,7 @@ const styles = theme => ({
     left: 0,
     right: 3,
     margin: '0 auto',
-    color: 'primary',
     height: 100
-  },
-  overlay: {
-    filter: 'hue-rotate(180deg)'
   }
 });
 

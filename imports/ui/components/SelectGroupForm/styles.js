@@ -7,6 +7,12 @@ const styles = theme => ({
     alignItems: 'center',
     margin: '5%'
   },
+  title: {
+    marginBottom: '1rem'
+  },
+  dialog: {
+    width: '100%'
+  },
   input: {
     display: 'flex',
     padding: 0

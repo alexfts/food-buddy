@@ -26,9 +26,7 @@ export const FoodtypeTags = [
   { title: 'Rice', category: 'Food Types' },
   { title: 'Curry', category: 'Food Types' },
   { title: 'Pizza', category: 'Food Types' },
-  ,
   { title: 'Burgers', category: 'Food Types' },
-
   { title: 'Sandwiches', category: 'Food Types' },
   { title: 'Pasta', category: 'Food Types' },
   { title: 'Meat', category: 'Food Types' },
@@ -41,7 +39,7 @@ export const FoodtypeTags = [
   { title: 'Dumplings', category: 'Food Types' },
   { title: 'Falafel', category: 'Food Types' },
   { title: 'Taco', category: 'Food Types' },
-  { title: 'Poke', category: 'Food Types' },
+  { title: 'Poké', category: 'Food Types' },
   { title: 'Soup', category: 'Food Types' },
   { title: 'Pancakes', category: 'Food Types' },
   { title: 'Crépes', category: 'Food Types' },

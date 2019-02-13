@@ -38,13 +38,11 @@ const styles = theme => ({
     border: theme.palette.secondary.main
   },
   formButton: {
-    backgroundColor: theme.palette.secondary.main,
     // border: '1px solid #fff',
     borderRadius: '2px',
     color: '#fff',
     marginTop: theme.spacing.unit * 2,
-    width: 150,
-
+    width: 130,
     // fontWeight: 600,
     letterSpace: 5
   }

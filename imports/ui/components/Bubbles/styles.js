@@ -3,6 +3,9 @@ const styles = theme => ({
     textTransform: 'uppercase',
     marginRight: 10,
     marginTop: 10
+  },
+  'MuiChip-root-209': {
+    color: 'grey'
   }
 });
 

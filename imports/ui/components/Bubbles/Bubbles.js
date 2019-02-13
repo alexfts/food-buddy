@@ -49,15 +49,17 @@ class Bubbles extends React.Component {
   };
 
   toggle = tag => {
-    if (this.state.colorChange == tag._id) {
-      this.setState({ colorChange: null });
+    if (this.state.selectedTags == tag._id) {
+      this.setState({ selectedTags: null });
     } else {
-      this.setState({ colorChange: tag._id });
+      this.setState({ selectedTags: tag._id });
     }
   };
-
+  /**
+   * TODO: Items that enter an array changes color
+   */
   colorChange = tag => {
-    if (this.state.colorChange === tag._id) {
+    if (this.state.selectedTags === tag._id) {
       return 'primary';
     }
     return 'default';
@@ -83,7 +85,7 @@ class Bubbles extends React.Component {
             className={classes.chip}
             onClick={() => {
               this.handleSelect(tag);
-              this.toggle(tag);
+              // this.toggle(tag);
             }}
           />
         ))}

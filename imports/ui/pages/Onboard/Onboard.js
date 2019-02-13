@@ -14,28 +14,8 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
-<<<<<<< HEAD
 import Bubbles from '../../components/Bubbles';
-=======
-import Bubbles from '../../components/Bubbles/Bubbles';
 import { Link } from 'react-router-dom';
-
-const styles = theme => ({
-  root: {
-    width: '90%'
-  },
-  button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
-  }
-});
->>>>>>> c3eeb6027e502eae01d6a4eb363acb2ea54ff1ba
 
 function getSteps() {
   return [
@@ -53,13 +33,6 @@ class Onboard extends React.Component {
   getStepContent = step => {
     switch (step) {
       case 0:
-<<<<<<< HEAD
-        // console.log(this.props.tags);
-        // console.log(
-        //   this.props.tags.filter(tag => tag.category.title === 'Cuisine')
-        // );
-=======
->>>>>>> c3eeb6027e502eae01d6a4eb363acb2ea54ff1ba
         return (
           <div>
             <Bubbles

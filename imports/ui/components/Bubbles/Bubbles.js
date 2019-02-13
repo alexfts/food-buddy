@@ -2,29 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import { Chip } from '@material-ui/core';
-// import { ChipSet, Chip } from '@material/react-chips';
-import '@material/react-chips/dist/chips.css';
-import theme from '../../theme';
 
 class Bubbles extends React.Component {
   constructor(props) {
     super(props);
     let selectedTags = [];
-    // let colorChange = [];
     if (this.props.currentUser.profile && this.props.currentUser.profile.tags) {
       selectedTags = this.props.currentUser.profile.tags;
     }
     this.state = {
       selectedTags
-      // colorChange
     };
   }
 
@@ -48,22 +41,12 @@ class Bubbles extends React.Component {
         );
   };
 
-  toggle = tag => {
-    if (this.state.selectedTags == tag._id) {
-      this.setState({ selectedTags: null });
-    } else {
-      this.setState({ selectedTags: tag._id });
-    }
-  };
-  /**
-   * TODO: Items that enter an array changes color
-   */
-  colorChange = tag => {
-    if (this.state.selectedTags === tag._id) {
-      return 'primary';
-    }
-    return 'default';
-  };
+  // colorChange = tag => {
+  //   if (this.state.selectedTags === tag._id) {
+  //     return 'primary';
+  //   }
+  //   return 'default';
+  // };
 
   sortTagsBySelected(tags) {
     const sortedTags = [...tags];
@@ -85,28 +68,25 @@ class Bubbles extends React.Component {
     const tags = this.sortTagsBySelected(this.props.tags);
 
     return (
-      // <ChipSet
-      //   filter
-      //   selectedTags={this.state.selectedTags}
-      //   handleSelect={selectedTags => this.setState({ selectedTags })}
-      // >
       <div>
         {tags.map(tag => (
           <Chip
             variant="outlined"
-            color={this.colorChange(tag)}
+            color={
+              this.state.selectedTags.includes(tag._id) ? 'primary' : 'default'
+            }
             key={tag._id}
             label={tag.title}
-            className={
-              this.state.selectedTags.includes(tag._id)
-                ? classes.chipSelected
-                : classes.chip
-            }
+            // className={
+            //   this.state.selectedTags.includes(tag._id)
+            //     ? classes.chipSelected
+            //     : classes.chip
+            // }
+            className={classes.chip}
             onClick={() => this.handleSelect(tag)}
           />
         ))}
       </div>
-      // </ChipSet>
     );
   }
 }

@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Tags } from './tags';
 import SimpleSchema from 'simpl-schema';
 import { TagCategories } from './tagCategories';
+import { common } from '@material-ui/core/colors';
 
 /**
  * Once the user is onboarded, Users collection must contain profile object
@@ -69,6 +70,99 @@ const UserSchema = new SimpleSchema({
 });
 
 Meteor.users.attachSchema(UserSchema);
+
+const getTopIndividualTags = allUserTagPairs => {
+  allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
+    if (acc.hasOwnProperty(tagid)) {
+      acc[tagid].push(user);
+    } else {
+      acc[tagid] = [user];
+    }
+    return acc;
+  }, {});
+
+  allUserTagPairs = Object.keys(allUserTagPairs).map(tagid => ({
+    tagids: [tagid],
+    users: allUserTagPairs[tagid]
+  }));
+
+  allUserTagPairs.sort((a, b) => {
+    return b.users.length - a.users.length;
+  });
+
+  console.log('TOP INDIVIDUAL TAGS', allUserTagPairs);
+  return allUserTagPairs;
+};
+
+const areSameUsers = (users1, users2) => {
+  if (users1.length !== users2.length) return false;
+  users1.forEach(user1 => {
+    if (!users2.find(user2 => user2._id === user1._id)) return false;
+  });
+  return true;
+};
+
+const findCommonTags = (cuisineTagUserPairs, foodTypeTagUserPairs) => {
+  const cuisineTags = Object.keys(cuisineTagUserPairs);
+  const foodTypeTags = Object.keys(foodTypeTagUserPairs);
+  const results = [];
+  cuisineTags.forEach(cuisineTagId => {
+    foodTypeTags.forEach(foodTypeTagId => {
+      if (
+        areSameUsers(
+          cuisineTagUserPairs[cuisineTagId],
+          foodTypeTagUserPairs[foodTypeTagId]
+        )
+      ) {
+        results.push({
+          tagids: [cuisineTagId, foodTypeTagId],
+          users: cuisineTagUserPairs[cuisineTagId]
+        });
+      }
+    });
+  });
+  return results;
+};
+
+const getTopIntersectingTags = allUserTagPairs => {
+  allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
+    if (acc.hasOwnProperty(tagid)) {
+      acc[tagid].push(user);
+    } else {
+      acc[tagid] = [user];
+    }
+    return acc;
+  }, {});
+
+  const cuisineTagIds = Object.keys(allUserTagPairs).filter(tagid => {
+    const tag = Tags.findOne(tagid);
+    return tag.category.title === 'Cuisine';
+  });
+  const foodTypeTagIds = Object.keys(allUserTagPairs).filter(tagid => {
+    const tag = Tags.findOne(tagid);
+    return tag.category.title === 'Food Types';
+  });
+
+  const cuisineTagUserPairs = cuisineTagIds.reduce((acc, tagid) => {
+    if (allUserTagPairs[tagid].length > 1) {
+      acc[tagid] = allUserTagPairs[tagid];
+    }
+    return acc;
+  }, {});
+  const foodTypeTagUserPairs = foodTypeTagIds.reduce((acc, tagid) => {
+    if (allUserTagPairs[tagid].length > 1) {
+      acc[tagid] = allUserTagPairs[tagid];
+    }
+    return acc;
+  }, {});
+
+  let commonTags = findCommonTags(cuisineTagUserPairs, foodTypeTagUserPairs);
+  commonTags.sort((a, b) => {
+    return b.users.length - a.users.length;
+  });
+  console.log('TOP INTERSECTING TAGS', commonTags);
+  return commonTags;
+};
 
 Meteor.methods({
   'users.updateUserTags'(tagids) {
@@ -167,6 +261,7 @@ Meteor.methods({
       );
     }
 
+    // get all users by userids
     const users = userids.map(userid => {
       const user = Meteor.users.findOne(
         { _id: userid },
@@ -180,32 +275,17 @@ Meteor.methods({
       return user;
     });
 
-    const getUserTags = user => {
+    const getUserTagPairs = user => {
       return user.profile.tags.map(tagid => ({ tagid, user }));
     };
 
-    let allUserTags = users
-      .map(getUserTags)
-      .reduce((a, b) => a.concat(b), [])
-      .reduce((acc, { tagid, user }) => {
-        if (acc.hasOwnProperty(tagid)) {
-          acc[tagid].push(user);
-        } else {
-          acc[tagid] = [user];
-        }
-        return acc;
-      }, {});
+    let allUserTagPairs = users
+      .map(getUserTagPairs)
+      .reduce((a, b) => a.concat(b), []); // flatten all tag-user pairs
 
-    allUserTags = Object.keys(allUserTags).map(tagid => ({
-      tagid, // @TODO intersect tags from different categories
-      users: allUserTags[tagid]
-    }));
-
-    allUserTags.sort((a, b) => {
-      return b.users.length - a.users.length;
-    });
-
-    return allUserTags;
+    const topIntersectingTags = getTopIntersectingTags(allUserTagPairs);
+    const topIndividualTags = getTopIndividualTags(allUserTagPairs);
+    return [...topIntersectingTags, ...topIndividualTags];
   }
 });
 

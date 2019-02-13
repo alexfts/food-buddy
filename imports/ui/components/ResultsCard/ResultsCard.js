@@ -11,36 +11,36 @@ import Typography from '@material-ui/core/Typography';
 function MediaCard(props) {
   const { classes, places } = props;
   console.log('CARD PLACES', places);
- 
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        {/* Link to website from api details */}
-        <a
-          href="https://google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={classes.hrefLink}
-        >
-          {/* image from photo details */}
-          <CardMedia
-            className={classes.media}
-            component="img"
-            src={'https://picsum.photos/200'}
-            title="Restaurant Image"
-          />
-          <CardContent>
-            <Typography component="h2"> {places.map(place =>{ 
-    return place.name
- })}</Typography>
-            <Typography component="p">Pull restaurant rating</Typography>
-            <Typography component="p">Pull restaurant price_level</Typography>
-            <Typography component="p">Pull restaurant vicinity</Typography>
-          </CardContent>
-        </a>
-      </CardActionArea>
-    </Card>
-  );
+
+  return places.map(place => {
+    return (
+      <Card className={classes.card}>
+        <CardActionArea>
+          {/* Link to website from api details */}
+          <a
+            href="https://google.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={classes.hrefLink}
+          >
+            {/* image from photo details */}
+            <CardMedia
+              className={classes.media}
+              component="img"
+              src={'https://picsum.photos/200'}
+              title="Restaurant Image"
+            />
+            <CardContent>
+              <Typography component="h2">{place.name}</Typography>
+              <Typography component="p">{place.website}</Typography>
+              <Typography component="p">Pull restaurant price_level</Typography>
+              <Typography component="p">Pull restaurant formatted_address from details</Typography>
+            </CardContent>
+          </a>
+        </CardActionArea>
+      </Card>
+    );
+  });
 }
 
 MediaCard.propTypes = {

@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import styles from './styles';
 import Typography from '@material-ui/core/Typography';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import Chip from '@material-ui/core/Chip';
-import styles from './styles';
+import { Chip } from '@material-ui/core';
 
 class Bubbles extends React.Component {
   constructor(props) {
@@ -43,6 +41,13 @@ class Bubbles extends React.Component {
         );
   };
 
+  // colorChange = tag => {
+  //   if (this.state.selectedTags === tag._id) {
+  //     return 'primary';
+  //   }
+  //   return 'default';
+  // };
+
   sortTagsBySelected(tags) {
     const sortedTags = [...tags];
     sortedTags.sort((tag1, tag2) => {
@@ -61,20 +66,23 @@ class Bubbles extends React.Component {
   render() {
     const { classes } = this.props;
     const tags = this.sortTagsBySelected(this.props.tags);
+
     return (
       <div>
         {tags.map(tag => (
           <Chip
-            clickable
             variant="outlined"
-            color="primary"
-            label={tag.title}
-            key={tag._id}
-            className={
-              this.state.selectedTags.includes(tag._id)
-                ? classes.chipSelected
-                : classes.chip
+            color={
+              this.state.selectedTags.includes(tag._id) ? 'primary' : 'default'
             }
+            key={tag._id}
+            label={tag.title}
+            // className={
+            //   this.state.selectedTags.includes(tag._id)
+            //     ? classes.chipSelected
+            //     : classes.chip
+            // }
+            className={classes.chip}
             onClick={() => this.handleSelect(tag)}
           />
         ))}

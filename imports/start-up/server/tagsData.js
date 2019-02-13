@@ -26,10 +26,11 @@ export const FoodtypeTags = [
   { title: 'Rice', category: 'Food Types' },
   { title: 'Curry', category: 'Food Types' },
   { title: 'Pizza', category: 'Food Types' },
-  { title: 'Breakfast', category: 'Food Types' },
-  { title: 'Brunch', category: 'Food Types' },
+  { title: 'Burgers', category: 'Food Types' },
   { title: 'Sandwiches', category: 'Food Types' },
   { title: 'Pasta', category: 'Food Types' },
+  { title: 'Meat', category: 'Food Types' },
+  { title: 'Dim Sum', category: 'Food Types' },
   { title: 'Fried Chicken', category: 'Food Types' },
   { title: 'BBQ', category: 'Food Types' },
   { title: 'Bagel', category: 'Food Types' },
@@ -38,7 +39,7 @@ export const FoodtypeTags = [
   { title: 'Dumplings', category: 'Food Types' },
   { title: 'Falafel', category: 'Food Types' },
   { title: 'Taco', category: 'Food Types' },
-  { title: 'Poke', category: 'Food Types' },
+  { title: 'Poké', category: 'Food Types' },
   { title: 'Soup', category: 'Food Types' },
   { title: 'Pancakes', category: 'Food Types' },
   { title: 'Crépes', category: 'Food Types' },
@@ -50,15 +51,14 @@ export const FoodtypeTags = [
   { title: 'Fingerfood', category: 'Food Types' },
   { title: 'Spicy', category: 'Food Types' },
   { title: 'Halal', category: 'Food Types' },
+  { title: 'Breakfast', category: 'Food Types' },
   { title: 'Salad', category: 'Food Types' },
   { title: 'Soup', category: 'Food Types' },
   { title: 'Juice', category: 'Food Types' },
   { title: 'Smoothie', category: 'Food Types' },
+  { title: 'Brunch', category: 'Food Types' },
   { title: 'Bakery', category: 'Food Types' },
-  { title: 'Cafe', category: 'Food Types' },
-  { title: 'Burgers', category: 'Food Types' },
-  { title: 'Meat', category: 'Food Types' },
-  { title: 'Dim Sum', category: 'Food Types' }
+  { title: 'Cafe', category: 'Food Types' }
 ];
 
 export const DietaryPreferenceTags = [

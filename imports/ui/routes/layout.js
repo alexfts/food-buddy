@@ -5,7 +5,7 @@ import Profile from '../pages/Profile';
 import Onboard from '../pages/Onboard';
 import Login from '../pages/Login';
 import Results from '../pages/Results';
-import FullScreenLoader from '../components/Loader';
+import Loader from '../components/Loader';
 import { withTracker } from 'meteor/react-meteor-data';
 import Header from '../components/Header/Header';
 import { TagCategories } from '../../api/tagCategories';
@@ -21,7 +21,7 @@ const isOnboarded = user => {
 const Layout = ({ loggedOut, currentUser, currentUserId }) => {
   if (!loggedOut) {
     if (!currentUser) {
-      return <FullScreenLoader inverted />;
+      return <Loader inverted />;
     }
     return (
       <Fragment>

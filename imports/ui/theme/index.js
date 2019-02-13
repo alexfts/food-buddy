@@ -7,10 +7,13 @@ export default createMuiTheme({
       // main: '#30cfd0'
     },
     secondary: {
-      main: '#f8ab4f'
+      main: '#5558f6'
     },
     bg: {
       main: '#212121'
     }
+  },
+  typography: {
+    useNextVariants: true
   }
 });

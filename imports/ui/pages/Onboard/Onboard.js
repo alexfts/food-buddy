@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -13,24 +14,8 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
-import Bubbles from '../../components/Bubbles/Bubbles';
+import Bubbles from '../../components/Bubbles';
 import { Link } from 'react-router-dom';
-
-const styles = theme => ({
-  root: {
-    width: '90%'
-  },
-  button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
-  }
-});
 
 function getSteps() {
   return [
@@ -118,7 +103,7 @@ class Onboard extends React.Component {
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel className={classes.label}>{label}</StepLabel>
               <StepContent>
                 <div>{this.getStepContent(index)}</div>
                 <div className={classes.actionsContainer}>
@@ -126,10 +111,11 @@ class Onboard extends React.Component {
                     <Button
                       disabled={activeStep === 0}
                       onClick={this.handleBack}
-                      className={classes.button}
+                      className={classes.backButton}
                     >
                       Back
                     </Button>
+
                     <Button
                       variant="contained"
                       color="primary"

@@ -1,14 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import {
-  compose,
-  withProps,
-  withHandlers,
-  withState,
-  withStateHandlers
-} from 'recompose';
-
+import { compose, withProps, withHandlers, withState } from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
@@ -19,7 +12,6 @@ import {
 const refs = {
   map: undefined
 };
-const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox');
 
 const MapsComponent = compose(
   withProps({
@@ -29,6 +21,8 @@ const MapsComponent = compose(
     containerElement: <div style={{ height: `400px`, width: '500px' }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
+  withScriptjs,
+  withGoogleMap,
   withState('places', 'updatePlaces', ''),
   withHandlers(() => {
     return {
@@ -43,7 +37,8 @@ const MapsComponent = compose(
         const request = {
           bounds: bounds,
           keyword: '(thai) OR (indian)',
-          type: ['restaurant']
+          type: ['restaurant'],
+          openNow: true
         };
         service.nearbySearch(request, (results, status) => {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -53,59 +48,28 @@ const MapsComponent = compose(
         });
       }
     };
-  }),
-  withStateHandlers(
-    () => ({
-      isOpen: false
-    }),
-    {
-      onToggleOpen: ({ isOpen }) => () => ({
-        isOpen: !isOpen
-      })
-    }
-  ),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-  <GoogleMap
-    onTilesLoaded={props.fetchPlaces}
-    ref={props.onMapMounted}
-    onBoundsChanged={props.fetchPlaces}
-    defaultZoom={15}
-    defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
-  >
-    {props.places &&
-      props.places.map((place, i) => (
-        // <Marker key={i} position={{ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }} />
-        <Marker
-          key={i}
-          position={{
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-          }}
-          onClick={props.onToggleOpen}
-        >
-          {props.isOpen && (
-            <InfoBox
-              onCloseClick={props.onToggleOpen}
-              options={{ closeBoxURL: ``, enableEventPropagation: true }}
-            >
-              <div
-                style={{
-                  backgroundColor: `yellow`,
-                  opacity: 0.75,
-                  padding: `12px`
-                }}
-              >
-                <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-                  Hello, Kaohsiung!
-                </div>
-              </div>
-            </InfoBox>
-          )}
-        </Marker>
-      ))}
-  </GoogleMap>
-));
+  })
+)(props => {
+  return (
+    <GoogleMap
+      onTilesLoaded={props.fetchPlaces}
+      ref={props.onMapMounted}
+      onBoundsChanged={props.fetchPlaces}
+      defaultZoom={15}
+      defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
+    >
+      {props.places &&
+        props.places.map((place, i) => (
+          <Marker
+            key={i}
+            position={{
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng()
+            }}
+          />
+        ))}
+    </GoogleMap>
+  );
+});
 
 export default withStyles(styles)(MapsComponent);

@@ -1,38 +1,29 @@
 const styles = theme => ({
-  container: {
-    // background: theme.palette.primary.main,
-    width: '80%'
-  },
-  stepper: {
+  root: {
+    // maxWidth: 400,
     flexGrow: 1,
-    width: 250,
-    maxWidth: 400
+    margin: 'auto',
+    marginTop: '4%',
+    width: '90%'
   },
-  backButton: {
+  actionsContainer: {
+    marginBottom: theme.spacing.unit * 2
+  },
+  resetContainer: {
+    padding: theme.spacing.unit * 3
+  },
+  button: {
+    color: 'white',
+    fontWeight: 500,
+    marginTop: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit
   },
-  instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+  backButton: {
+    marginTop: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit
   },
-
-  root: {
-    maxWidth: 400,
-    flexGrow: 1
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 50,
-    paddingLeft: theme.spacing.unit * 4,
-    backgroundColor: theme.palette.background.default
-  },
-  img: {
-    height: 255,
-    display: 'block',
-    maxWidth: 400,
-    overflow: 'hidden',
-    width: '100%'
+  label: {
+    color: 'white'
   }
 });
 

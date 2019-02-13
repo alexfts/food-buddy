@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -13,23 +14,8 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
 import Chip from '@material-ui/core/Chip';
-import Bubbles from '../../components/Bubbles/Bubbles';
-
-const styles = theme => ({
-  root: {
-    width: '90%'
-  },
-  button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
-  }
-});
+import Bubbles from '../../components/Bubbles';
+import { Link } from 'react-router-dom';
 
 function getSteps() {
   return [
@@ -47,10 +33,6 @@ class Onboard extends React.Component {
   getStepContent = step => {
     switch (step) {
       case 0:
-        console.log(this.props.tags);
-        console.log(
-          this.props.tags.filter(tag => tag.category.title === 'Cuisine')
-        );
         return (
           <div>
             <Bubbles
@@ -99,6 +81,24 @@ class Onboard extends React.Component {
     });
   };
 
+  areAnyTagsSelected(selectedTags, step) {
+    if (!selectedTags) return false;
+    const tags = this.props.tags.filter(tag => selectedTags.includes(tag._id));
+
+    const getTagsByCategory = category => {
+      return tags.filter(tag => tag.category.title === category);
+    };
+
+    switch (step) {
+      case 0:
+        return getTagsByCategory('Cuisine').length > 0;
+      case 1:
+        return getTagsByCategory('Food Types').length > 0;
+      default:
+        return true; // skipping case 2 since Dietary preferences are optional
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const steps = getSteps();
@@ -109,28 +109,35 @@ class Onboard extends React.Component {
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel className={classes.label}>{label}</StepLabel>
               <StepContent>
-                <Typography>{this.getStepContent(index)}</Typography>
+                <div>{this.getStepContent(index)}</div>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
                       disabled={activeStep === 0}
                       onClick={this.handleBack}
-                      className={classes.button}
+                      className={classes.backButton}
                     >
                       Back
                     </Button>
+
                     <Button
                       variant="contained"
                       color="primary"
                       disabled={
                         !Meteor.user().profile ||
-                        !Meteor.user().profile.tags ||
-                        Meteor.user().profile.tags.length === 0
+                        !this.areAnyTagsSelected(
+                          Meteor.user().profile.tags,
+                          activeStep
+                        )
                       }
                       onClick={this.handleNext}
                       className={classes.button}
+                      component={
+                        activeStep === steps.length - 1 ? Link : 'button'
+                      }
+                      to="/home"
                     >
                       {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
@@ -140,6 +147,7 @@ class Onboard extends React.Component {
             </Step>
           ))}
         </Stepper>
+
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
             <Typography>All steps completed - you&apos;re finished</Typography>

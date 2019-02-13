@@ -22,6 +22,7 @@ class Bubbles extends React.Component {
   }
 
   handleSelect = tag => {
+    console.log(this.state.selectedTags);
     this.state.selectedTags.some(t => t === tag._id)
       ? this.setState(
           {
@@ -30,12 +31,14 @@ class Bubbles extends React.Component {
             })
           },
           () => {
+            console.log('removing tag', this.state.selectedTags);
             Meteor.call('users.updateUserTags', this.state.selectedTags);
           }
         )
       : this.setState(
           { selectedTags: [...this.state.selectedTags, tag._id] },
           () => {
+            console.log('adding tag', this.state.selectedTags);
             Meteor.call('users.updateUserTags', this.state.selectedTags);
           }
         );

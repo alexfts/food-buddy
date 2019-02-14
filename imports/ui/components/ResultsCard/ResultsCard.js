@@ -54,20 +54,20 @@ function MediaCard(props) {
       </Card>
     );
   });
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-  Drawer,
-  List,
-  ListItem
-} from '@material-ui/core/';
+  import {
+    Card,
+    CardActionArea,
+    CardContent,
+    CardMedia,
+    Typography,
+    Drawer,
+    List,
+    ListItem
+  } from '@material-ui/core/';
 
-function MediaCard(props) {
-  const { classes, places } = props;
-  console.log(places);
+  // function MediaCard(props) {
+  //   const { classes, places } = props;
+  //   console.log(places);
 
   return (
     <div className={classes.root}>

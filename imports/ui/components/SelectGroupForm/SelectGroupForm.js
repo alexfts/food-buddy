@@ -218,7 +218,7 @@ class SelectGroupForm extends Component {
     return (
       <div className={classes.form}>
         <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
-          <Typography className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             Select your food buddy
           </Typography>
           <NoSsr>
@@ -249,6 +249,7 @@ class SelectGroupForm extends Component {
             />
           </NoSsr>
         </DialogTitle>
+
         <DialogContent>
           <DialogContentText>
             {this.state.multi &&

@@ -10,6 +10,18 @@ import { common } from '@material-ui/core/colors';
  * with name (user's name) and tags (a list of _id's from Tags collection)
  */
 
+// Deny all client-side updates to user documents
+Meteor.users.deny({
+  update() {
+    return true;
+  }
+});
+
+Accounts.onCreateUser((_, user) => {
+  user.favourites = [];
+  return user;
+});
+
 const UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
@@ -172,6 +184,28 @@ Meteor.methods({
     }
 
     // throw error if any of tagids are not in DB
+    tagids.map(tagid => {
+      const tag = Tags.findOne({ _id: tagid });
+      if (!tag)
+        throw new Meteor.Error(
+          'users.updateUserTags.invalid-input',
+          'Invalid input.'
+        );
+    });
+
+    Meteor.users.update(this.userId, {
+      $set: { 'profile.tags': tagids }
+    });
+  },
+
+  'users.changeFavourites'(place, shouldAdd = true) {
+    if (!this.userId) {
+      throw new Meteor.Error(
+        'users.updateUserTags.not-authorized',
+        'You are not logged in.'
+      );
+    }
+
     tagids.map(tagid => {
       const tag = Tags.findOne({ _id: tagid });
       if (!tag)

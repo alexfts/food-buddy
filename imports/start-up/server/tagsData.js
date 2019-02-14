@@ -58,7 +58,7 @@ export const FoodtypeTags = [
   { title: 'Smoothie', category: 'Food Types' },
   { title: 'Brunch', category: 'Food Types' },
   { title: 'Bakery', category: 'Food Types' },
-  { title: 'Cafe', category: 'Food Types' }
+  { title: 'Café', category: 'Food Types' }
 ];
 
 export const DietaryPreferenceTags = [

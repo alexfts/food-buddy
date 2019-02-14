@@ -1,5 +1,6 @@
 const styles = theme => ({
   container: {
+    background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

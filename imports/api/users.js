@@ -188,41 +188,48 @@ Meteor.methods({
     });
   },
 
-  // 'users.updateUserTagsByCategory'(tagids, categoryid) {
-  //   if (!this.userId) {
-  //     throw new Meteor.Error(
-  //       'users.updateUserTagsByCategory.not-authorized',
-  //       'You are not logged in.'
-  //     );
-  //   }
-  //   if (!tagids || !(tagids instanceof Array)) {
-  //     throw new Meteor.Error(
-  //       'users.updateUserTagsByCategory.invalid-input',
-  //       'Invalid input'
-  //     );
-  //   }
-  //   const category = TagCategories.findOne(categoryid);
-  //   if (!category) throw new Meteor.Error(
-  //     'users.updateUserTagsByCategory.invalid-category',
-  //     'Invalid category.'
-  //   );
+  'users.updateUserTagsByCategory'(tagids, categoryid) {
+    if (!this.userId) {
+      throw new Meteor.Error(
+        'users.updateUserTagsByCategory.not-authorized',
+        'You are not logged in.'
+      );
+    }
+    if (!tagids || !(tagids instanceof Array)) {
+      throw new Meteor.Error(
+        'users.updateUserTagsByCategory.invalid-input',
+        'Invalid input'
+      );
+    }
+    const category = TagCategories.findOne(categoryid);
+    if (!category)
+      throw new Meteor.Error(
+        'users.updateUserTagsByCategory.invalid-category',
+        'Invalid category.'
+      );
 
-  //   // throw error if any of tagids are not in DB
-  //   tagids.map(tagid => {
-  //     const tag = Tags.findOne({ _id: tagid });
-  //     if (!tag || tag.category._id !== categoryid)
-  //       throw new Meteor.Error(
-  //         'users.updateUserTagsByCategory.invalid-input',
-  //         'Invalid input.'
-  //       );
-  //   });
-  //   const userTags = (Meteor.user().profile && Meteor.user().profile.tags) ?
-  //     Meteor.user().profile.tags : [];
+    // throw error if any of tagids are not in DB
+    tagids.map(tagid => {
+      const tag = Tags.findOne({ _id: tagid });
+      if (!tag || tag.category._id !== categoryid)
+        throw new Meteor.Error(
+          'users.updateUserTagsByCategory.invalid-input',
+          'Invalid input.'
+        );
+    });
+    let userTags =
+      Meteor.user().profile && Meteor.user().profile.tags
+        ? Meteor.user().profile.tags
+        : [];
+    userTags = userTags.filter(tagid => {
+      const tag = Tags.findOne(tagid);
+      return tag.category._id !== categoryid;
+    });
 
-  //   Meteor.users.update(this.userId, {
-  //     $set: { 'profile.tags': tagids }
-  //   });
-  // },
+    Meteor.users.update(this.userId, {
+      $set: { 'profile.tags': [...userTags, ...tagids] }
+    });
+  },
 
   'users.updateName'(name) {
     if (!this.userId) {

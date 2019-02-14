@@ -12,10 +12,9 @@ import {
   List,
   ListItem
 } from '@material-ui/core/';
-
 function MediaCard(props) {
   const { classes, places } = props;
-
+  console.log(places);
   return (
     <div className={classes.root}>
       <Drawer
@@ -71,9 +70,7 @@ function MediaCard(props) {
     </div>
   );
 }
-
 MediaCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
 export default withStyles(styles)(MediaCard);

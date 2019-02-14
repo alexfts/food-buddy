@@ -9,14 +9,14 @@ export default createMuiTheme({
       // main: '#30cfd0'
     },
     secondary: {
-      main: '#5558f6',
+      main: '#4055f5',
       light: '#7779f7',
       dark: '#3b3dac',
       contrastText: '#fff'
     },
 
-    default: {
-      main: '#c2c2cc'
+    error: {
+      main: '#f56840'
     },
 
     bg: {

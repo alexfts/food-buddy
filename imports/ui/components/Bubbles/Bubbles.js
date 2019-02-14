@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import { Chip } from '@material-ui/core';
+import { Chip, Button } from '@material-ui/core';
 
 class Bubbles extends React.Component {
   constructor(props) {
@@ -32,6 +32,7 @@ class Bubbles extends React.Component {
           },
           () => {
             console.log('removing tag', this.state.selectedTags);
+            //'users.updateUserTagsByCategory'(tagids, categoryid)
             Meteor.call('users.updateUserTags', this.state.selectedTags);
           }
         )
@@ -43,13 +44,6 @@ class Bubbles extends React.Component {
           }
         );
   };
-
-  // colorChange = tag => {
-  //   if (this.state.selectedTags === tag._id) {
-  //     return 'primary';
-  //   }
-  //   return 'default';
-  // };
 
   sortTagsBySelected(tags) {
     const sortedTags = [...tags];
@@ -66,29 +60,53 @@ class Bubbles extends React.Component {
     return sortedTags;
   }
 
+  sortTagsAlphabet(tags) {
+    const sortTags = [...tags];
+    sortTags.sort((tag1, tag2) => {
+      if (tag1.title < tag2.title) return -1;
+      else return 1;
+    });
+    return sortTags;
+  }
+
   render() {
-    const { classes } = this.props;
-    const tags = this.sortTagsBySelected(this.props.tags);
+    const { classes, categoryid } = this.props;
+    console.log('CATEGORY ID IS', categoryid);
+    // const tags = this.sortTagsBySelected(this.props.tags);
+    const tags = this.sortTagsAlphabet(this.props.tags);
 
     return (
-      <div>
+      <div className={classes.bubbleWrap}>
         {tags.map(tag => (
           <Chip
-            variant="outlined"
+            variant={
+              this.state.selectedTags.includes(tag._id) ? 'default' : 'outlined'
+            }
             color={
               this.state.selectedTags.includes(tag._id) ? 'primary' : 'default'
             }
             key={tag._id}
             label={tag.title}
-            // className={
-            //   this.state.selectedTags.includes(tag._id)
-            //     ? classes.chipSelected
-            //     : classes.chip
-            // }
-            className={classes.chip}
+            className={
+              this.state.selectedTags.includes(tag._id)
+                ? classes.chipSelected
+                : classes.chip
+            }
+            // className={classes.chip}
             onClick={() => this.handleSelect(tag)}
           />
         ))}
+        {/* <Button
+          onClick={() => {
+            Meteor.call(
+              'users.updateUserTagsByCategory',
+              ['jBNakiDmZ3WRffLcP', 'QteTDKetbHLAbAifq'],
+              'vjf8fR5EfP8Tejbj9'
+            );
+          }}
+        >
+          Clickme
+        </Button> */}
       </div>
     );
   }

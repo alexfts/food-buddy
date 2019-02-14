@@ -85,7 +85,6 @@ const getTopIndividualTags = allUserTagPairs => {
     tagids: [tagid],
     users: allUserTagPairs[tagid]
   }));
-  console.log('TOP INDIVIDUAL TAGS', allUserTagPairs);
   return allUserTagPairs;
 };
 
@@ -154,7 +153,6 @@ const getTopIntersectingTags = allUserTagPairs => {
   }, {});
 
   let commonTags = findCommonTags(cuisineTagUserPairs, foodTypeTagUserPairs);
-  console.log('TOP INTERSECTING TAGS', commonTags);
   return commonTags;
 };
 

@@ -69,6 +69,7 @@ const Results = compose(
             props.places.map((place, i) => (
               <Marker
                 key={i}
+                label={(i + 1).toString()}
                 position={{
                   lat: place.geometry.location.lat(),
                   lng: place.geometry.location.lng()

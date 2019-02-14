@@ -56,6 +56,9 @@ class TopMatches extends Component {
         <Typography className={classes.title} variant="h5">
           Your top matches:
         </Typography>
+
+        <div className={classes.pricePoint}>{pricePoint.dollars}</div>
+
         <Slider
           value={this.state.price}
           min={1}
@@ -63,7 +66,6 @@ class TopMatches extends Component {
           step={1}
           onChange={this.handlePriceChange}
         />
-        <div className={classes.pricePoint}>{pricePoint.dollars}</div>
         <FormControlLabel
           control={
             <Switch

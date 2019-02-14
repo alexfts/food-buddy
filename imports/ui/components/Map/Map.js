@@ -151,7 +151,7 @@ class MapComponent extends React.Component {
                     lng: place.geometry.location.lng()
                   }}
                 >
-                  <InfoWindow
+                  {/* <InfoWindow
                     visible={this.showInfoWindow}
                     marker={this.state.activeMarker}
 
@@ -160,7 +160,7 @@ class MapComponent extends React.Component {
                     <div>
                       <p>{`address:${place.vicinity}`}</p>
                     </div>
-                  </InfoWindow>
+                  </InfoWindow> */}
                 </Marker>
               ))}
           </GoogleMap>

@@ -9,7 +9,6 @@ import {
   Typography
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
 
@@ -43,7 +42,6 @@ class Home extends Component {
             aria-label="Add"
             className={classes.plate}
             onClick={this.handleClickOpen('paper')}
-            // onClick={this.handleOpen}
           >
             <AddIcon />
           </Fab>
@@ -64,11 +62,8 @@ class Home extends Component {
               onClose={this.handleClose}
               scroll={this.state.scroll}
               aria-labelledby="scroll-dialog-title"
-              // width="100%"
             >
-              {/* <div className={classes.paper}> */}
               <SelectGroupForm />
-              {/* </div> */}
             </Dialog>
           </Modal>
         </div>

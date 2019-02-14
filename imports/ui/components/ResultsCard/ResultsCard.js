@@ -15,7 +15,6 @@ import {
 
 function MediaCard(props) {
   const { classes, places } = props;
-  console.log(places);
 
   return (
     <div className={classes.root}>
@@ -32,7 +31,7 @@ function MediaCard(props) {
             const placeid = place.place_id;
             Meteor.call('googleMapsWebsite.geocode', placeid);
             return (
-              <ListItem>
+              <ListItem key={place.id}>
                 <Card className={classes.card}>
                   <CardActionArea>
                     {/* Link to website from api details */}

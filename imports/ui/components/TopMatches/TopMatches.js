@@ -22,13 +22,16 @@ class TopMatches extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      price: 1,
       openNow: true
     };
   }
 
   handlePriceChange = (event, price) => {
-    this.setState({ price });
+    let dollars = '';
+    for (let i = 0; i < price; i++) {
+      dollars += '$';
+    }
+    this.setState({ price, dollars });
   };
 
   handleOpenNowChange = event => {
@@ -46,6 +49,8 @@ class TopMatches extends Component {
       classes,
       matches
     } = this.props;
+    let pricePoint = this.state;
+
     return matches ? (
       <div>
         <Typography className={classes.title} variant="h5">
@@ -58,6 +63,7 @@ class TopMatches extends Component {
           step={1}
           onChange={this.handlePriceChange}
         />
+        <div className={classes.pricePoint}>{pricePoint.dollars}</div>
         <FormControlLabel
           control={
             <Switch

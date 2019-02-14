@@ -17,8 +17,6 @@ import styles from './styles';
 import Bubbles from '../../components/Bubbles';
 
 const Profile = ({ currentUser, tags, tagCategories, classes }) => {
-  // render() {
-  //   const { classes, currentUser, tags } = this.props;
   tagCategories = tagCategories.filter(category => category.title !== 'Extra');
   return (
     <Fragment>
@@ -50,7 +48,6 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
           </div>
         </Paper>
 
-        {/*TODO Map all tags and highlight ones that are already selected  */}
         <div className={classes.divider} />
         {/* <Paper square elevation={0} className={classes.paperTags}>
           <Typography variant="h6" className={classes.tagTitle}>
@@ -97,42 +94,6 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
               />
             </Fragment>
           ))}
-          {/* <Typography variant="h6" className={classes.tagTitle}>
-            Cuisines
-          </Typography>
-          <Bubbles
-            tags={tags.filter(tag => tag.category.title === 'Cuisine')}
-            categoryName="Cuisine"
-          />
-          <Typography variant="h6" className={classes.tagTitle}>
-            Food Types
-          </Typography>
-          <Bubbles
-            tags={tags.filter(tag => tag.category.title === 'Food Types')}
-            categoryName="Food Types"
-          />
-          <Typography variant="h6" className={classes.tagTitle}>
-            Dietary Preferences
-          </Typography>
-          <Bubbles
-            tags={tags.filter(
-              tag => tag.category.title === 'Dietary Preferences'
-            )}
-            categoryName="Dietary Preferences"
-          /> */}
-
-          {/* {tags.map(tag => {
-            return (
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.tagButton}
-                key={tag._id}
-              >
-                {tag.title}
-              </Button>
-            );
-          })} */}
         </Paper>
       </div>
     </Fragment>

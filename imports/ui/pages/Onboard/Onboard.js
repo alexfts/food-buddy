@@ -40,6 +40,8 @@ class Onboard extends React.Component {
               tag => tag.category.title === 'Cuisine'
             )}
             categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
               tagCategories.find(category => category.title === 'Cuisine')._id
             }
           />
@@ -51,6 +53,8 @@ class Onboard extends React.Component {
               tag => tag.category.title === 'Food Types'
             )}
             categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
               tagCategories.find(category => category.title === 'Food Types')
                 ._id
             }
@@ -63,6 +67,8 @@ class Onboard extends React.Component {
               tag => tag.category.title === 'Dietary Preferences'
             )}
             categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
               tagCategories.find(
                 category => category.title === 'Dietary Preferences'
               )._id

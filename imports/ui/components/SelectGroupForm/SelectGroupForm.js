@@ -20,6 +20,12 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
 import TopMatches from '../TopMatches';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 /** Components to customize the style and behaviour of Select
  *  See https://react-select.com/components#replacing-components
  *  For full reference
@@ -164,7 +170,9 @@ function ValueContainer(props) {
 class SelectGroupForm extends Component {
   state = {
     multi: null,
-    matches: null
+    matches: null,
+    open: true,
+    scroll: 'paper'
   };
 
   handleChange = value => {
@@ -181,6 +189,10 @@ class SelectGroupForm extends Component {
         );
       }
     );
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -205,41 +217,84 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Typography variant="h4">Choose your group</Typography>
-        <NoSsr>
-          <Select
-            className={classes.select}
-            classes={classes}
-            styles={selectStyles}
-            textFieldProps={{
-              label: `You have picked ${
-                this.state.multi ? this.state.multi.length : 0
-              } ${
-                this.state.multi && this.state.multi.length === 1
-                  ? 'buddy'
-                  : 'buddies'
-              }`,
-              InputLabelProps: {
-                shrink: true
-              }
-            }}
-            options={suggestions}
-            components={selectComponents}
-            value={this.state.multi}
-            onChange={this.handleChange}
-            placeholder="Search a buddy"
-            isMulti
-            fullwidth
-          />
-        </NoSsr>
-        {this.state.multi &&
-          this.state.multi.length > 0 &&
-          this.state.matches && (
-            <TopMatches
-              userids={this.state.multi.map(({ value }) => value)}
-              matches={this.state.matches}
+        <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
+          <Typography className={classes.title}>
+            Select your food buddy
+          </Typography>
+          <NoSsr>
+            <Select
+              color="secondary"
+              className={classes.select}
+              classes={classes}
+              styles={selectStyles}
+              textFieldProps={{
+                label: `You have picked ${
+                  this.state.multi ? this.state.multi.length : 0
+                } ${
+                  this.state.multi && this.state.multi.length === 1
+                    ? 'buddy'
+                    : 'buddies'
+                }`,
+                InputLabelProps: {
+                  shrink: true
+                }
+              }}
+              options={suggestions}
+              components={selectComponents}
+              value={this.state.multi}
+              onChange={this.handleChange}
+              placeholder="Search a buddy"
+              isMulti
+              fullwidth
             />
+          </NoSsr>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {this.state.multi &&
+              this.state.multi.length > 0 &&
+              this.state.matches && (
+                <TopMatches
+                  userids={this.state.multi.map(({ value }) => value)}
+                  matches={this.state.matches}
+                />
+              )}
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions className={classes.buttons}>
+          {this.state.multi &&
+          this.state.multi.length > 0 &&
+          this.state.matches ? (
+            <>
+              <Button
+                onClick={this.handleClose}
+                color="secondary"
+                variant="contained"
+                className={classes.cancelButton}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={this.handleClose}
+                color="secondary"
+                variant="contained"
+                className={classes.cancelButton}
+              >
+                Submit
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={this.handleClose}
+              color="secondary"
+              variant="outlined"
+              className={classes.cancelButton}
+            >
+              Cancel
+            </Button>
           )}
+        </DialogActions>
       </div>
     );
   }

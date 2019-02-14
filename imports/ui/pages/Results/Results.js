@@ -11,7 +11,11 @@ import {
   GoogleMap,
   Marker
 } from 'react-google-maps';
+<<<<<<< HEAD
 import { Meteor } from 'meteor/meteor';
+=======
+import { MAP } from 'react-google-maps/lib/constants';
+>>>>>>> 288dd36ba01046087129ab55e881f6410ad43be8
 
 const refs = {
   map: undefined
@@ -35,12 +39,13 @@ const Results = compose(
     fetchPlaces: ({ updatePlaces }) => () => {
       const bounds = refs.map.getBounds();
       const service = new google.maps.places.PlacesService(
-        refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+        refs.map.context[MAP]
       );
       const request = {
         bounds: bounds,
         keyword: '(thai) OR (indian)',
         type: ['restaurant']
+        // openNow: true
       };
       service.nearbySearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -52,7 +57,9 @@ const Results = compose(
   })
 )(props => {
   const query = props.location.state ? props.location.state.query : '';
-  // console.log('QUERY', query);
+  const openNow = props.location.state ? props.location.state.openNow : true;
+  const price = props.location.state ? props.location.state.price : 0;
+  console.log('QUERY, OPENNOW, PRICE', query, openNow, price);
   return (
     <Grid container>
       <Grid item>

@@ -1,4 +1,4 @@
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex'
   },
@@ -18,6 +18,6 @@ const styles = {
     width: 300,
     height: '89%'
   }
-};
+});
 
 export default styles;

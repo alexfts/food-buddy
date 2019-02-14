@@ -11,6 +11,7 @@ import {
   GoogleMap,
   Marker
 } from 'react-google-maps';
+import { MAP } from 'react-google-maps/lib/constants';
 
 const refs = {
   map: undefined
@@ -34,7 +35,7 @@ const Results = compose(
     fetchPlaces: ({ updatePlaces }) => () => {
       const bounds = refs.map.getBounds();
       const service = new google.maps.places.PlacesService(
-        refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+        refs.map.context[MAP]
       );
       const request = {
         bounds: bounds,

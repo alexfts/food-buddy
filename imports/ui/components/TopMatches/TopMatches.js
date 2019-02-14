@@ -46,7 +46,6 @@ class TopMatches extends Component {
       classes,
       matches
     } = this.props;
-    console.log('MATCHES', matches, users);
     return matches ? (
       <div>
         <Typography className={classes.title} variant="h5">
@@ -78,20 +77,18 @@ class TopMatches extends Component {
           spacing={16}
         >
           {matches.map(({ tagids, users }) => {
-            const tag = allTags.find(tag => tag._id === tagids[0]);
-            const category = tagCategories.find(
-              categ => categ._id === tag.categoryid
-            );
+            const userTags = allTags.filter(tag => tagids.includes(tag._id));
+            const userTagTitles = userTags.map(tag => tag.title);
             return (
               <Grid
                 item
                 xs={12}
                 sm={6}
-                key={tagids[0]}
+                key={userTagTitles.join(', ')}
                 className={classes.matches}
               >
                 <Typography className={classes.tagTitle} color="primary">
-                  {tag.title}
+                  {userTagTitles.join(', ')}
                 </Typography>
                 <div className={classes.flexMatches}>
                   <Typography className={classes.matchesLabel}>
@@ -120,7 +117,7 @@ class TopMatches extends Component {
                   to={{
                     pathname: '/results',
                     state: {
-                      query: tag.title,
+                      query: userTagTitles.join(', '),
                       price: this.state.price,
                       openNow: this.state.openNow
                     }

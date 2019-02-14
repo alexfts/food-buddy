@@ -85,21 +85,18 @@ const getTopIndividualTags = allUserTagPairs => {
     tagids: [tagid],
     users: allUserTagPairs[tagid]
   }));
-
-  allUserTagPairs.sort((a, b) => {
-    return b.users.length - a.users.length;
-  });
-
   console.log('TOP INDIVIDUAL TAGS', allUserTagPairs);
   return allUserTagPairs;
 };
 
-const areSameUsers = (users1, users2) => {
-  if (users1.length !== users2.length) return false;
-  users1.forEach(user1 => {
-    if (!users2.find(user2 => user2._id === user1._id)) return false;
-  });
-  return true;
+const getUserIntersection = (users1, users2) => {
+  let results = [];
+  for (let user1 of users1) {
+    if (users2.find(user2 => user2._id === user1._id)) {
+      results.push(user1);
+    }
+  }
+  return results;
 };
 
 const findCommonTags = (cuisineTagUserPairs, foodTypeTagUserPairs) => {
@@ -108,15 +105,15 @@ const findCommonTags = (cuisineTagUserPairs, foodTypeTagUserPairs) => {
   const results = [];
   cuisineTags.forEach(cuisineTagId => {
     foodTypeTags.forEach(foodTypeTagId => {
-      if (
-        areSameUsers(
-          cuisineTagUserPairs[cuisineTagId],
-          foodTypeTagUserPairs[foodTypeTagId]
-        )
-      ) {
+      const users = getUserIntersection(
+        cuisineTagUserPairs[cuisineTagId],
+        foodTypeTagUserPairs[foodTypeTagId]
+      );
+
+      if (users.length > 1) {
         results.push({
           tagids: [cuisineTagId, foodTypeTagId],
-          users: cuisineTagUserPairs[cuisineTagId]
+          users
         });
       }
     });
@@ -157,9 +154,6 @@ const getTopIntersectingTags = allUserTagPairs => {
   }, {});
 
   let commonTags = findCommonTags(cuisineTagUserPairs, foodTypeTagUserPairs);
-  commonTags.sort((a, b) => {
-    return b.users.length - a.users.length;
-  });
   console.log('TOP INTERSECTING TAGS', commonTags);
   return commonTags;
 };
@@ -285,7 +279,11 @@ Meteor.methods({
 
     const topIntersectingTags = getTopIntersectingTags(allUserTagPairs);
     const topIndividualTags = getTopIndividualTags(allUserTagPairs);
-    return [...topIntersectingTags, ...topIndividualTags];
+    const results = [...topIntersectingTags, ...topIndividualTags];
+    results.sort((a, b) => {
+      return b.users.length - a.users.length;
+    });
+    return results;
   }
 });
 

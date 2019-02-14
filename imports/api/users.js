@@ -217,13 +217,17 @@ Meteor.methods({
           'Invalid input.'
         );
     });
-    const userTags =
+    let userTags =
       Meteor.user().profile && Meteor.user().profile.tags
         ? Meteor.user().profile.tags
         : [];
+    userTags = userTags.filter(tagid => {
+      const tag = Tags.findOne(tagid);
+      return tag.category._id !== categoryid;
+    });
 
     Meteor.users.update(this.userId, {
-      $set: { 'profile.tags': tagids }
+      $set: { 'profile.tags': [...userTags, ...tagids] }
     });
   },
 

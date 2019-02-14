@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import { Chip } from '@material-ui/core';
+import { Chip, Button } from '@material-ui/core';
 
 class Bubbles extends React.Component {
   constructor(props) {
@@ -32,6 +32,7 @@ class Bubbles extends React.Component {
           },
           () => {
             console.log('removing tag', this.state.selectedTags);
+            //'users.updateUserTagsByCategory'(tagids, categoryid)
             Meteor.call('users.updateUserTags', this.state.selectedTags);
           }
         )
@@ -67,9 +68,9 @@ class Bubbles extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, categoryid } = this.props;
     const tags = this.sortTagsBySelected(this.props.tags);
-
+    console.log('CATEGORY ID IS', categoryid);
     return (
       <div>
         {tags.map(tag => (
@@ -89,6 +90,17 @@ class Bubbles extends React.Component {
             onClick={() => this.handleSelect(tag)}
           />
         ))}
+        {/* <Button
+          onClick={() => {
+            Meteor.call(
+              'users.updateUserTagsByCategory',
+              ['jBNakiDmZ3WRffLcP', 'QteTDKetbHLAbAifq'],
+              'vjf8fR5EfP8Tejbj9'
+            );
+          }}
+        >
+          Clickme
+        </Button> */}
       </div>
     );
   }

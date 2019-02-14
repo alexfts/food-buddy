@@ -58,7 +58,7 @@ class TopMatches extends Component {
         </Typography>
 
         <div className={classes.pricePoint}>{pricePoint.dollars}</div>
-
+        <div>Select Your Budget</div>
         <Slider
           value={this.state.price}
           min={1}

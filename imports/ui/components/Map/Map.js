@@ -126,7 +126,7 @@ class MapComponent extends React.Component {
 
   render() {
     const props = this.props;
-    console.log(props);
+    console.log('MAP', props);
     return (
       <Grid container>
         <Grid item>

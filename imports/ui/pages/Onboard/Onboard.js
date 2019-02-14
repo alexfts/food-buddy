@@ -31,16 +31,20 @@ class Onboard extends React.Component {
   };
 
   getStepContent = step => {
+    const { tagCategories } = this.props;
     switch (step) {
       case 0:
         return (
-          <div>
-            <Bubbles
-              tags={this.props.tags.filter(
-                tag => tag.category.title === 'Cuisine'
-              )}
-            />
-          </div>
+          <Bubbles
+            tags={this.props.tags.filter(
+              tag => tag.category.title === 'Cuisine'
+            )}
+            categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
+              tagCategories.find(category => category.title === 'Cuisine')._id
+            }
+          />
         );
       case 1:
         return (
@@ -48,6 +52,12 @@ class Onboard extends React.Component {
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Food Types'
             )}
+            categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
+              tagCategories.find(category => category.title === 'Food Types')
+                ._id
+            }
           />
         );
       case 2:
@@ -56,6 +66,13 @@ class Onboard extends React.Component {
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Dietary Preferences'
             )}
+            categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
+              tagCategories.find(
+                category => category.title === 'Dietary Preferences'
+              )._id
+            }
           />
         );
       default:
@@ -100,7 +117,11 @@ class Onboard extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical">
+        <Stepper
+          activeStep={activeStep}
+          orientation="vertical"
+          className={classes.stepper}
+        >
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel className={classes.label}>{label}</StepLabel>
@@ -117,7 +138,8 @@ class Onboard extends React.Component {
                     </Button>
 
                     <Button
-                      variant="contained"
+                      className={classes.button}
+                      variant="outlined"
                       color="primary"
                       disabled={
                         !Meteor.user().profile ||
@@ -127,7 +149,6 @@ class Onboard extends React.Component {
                         )
                       }
                       onClick={this.handleNext}
-                      className={classes.button}
                       component={
                         activeStep === steps.length - 1 ? Link : 'button'
                       }

@@ -11,6 +11,7 @@ import {
   GoogleMap,
   Marker
 } from 'react-google-maps';
+import { Meteor } from 'meteor/meteor';
 
 const refs = {
   map: undefined

@@ -79,7 +79,6 @@ class TopMatches extends Component {
         <Grid
           container
           spacing={16}
-          // direction="column"
           justify="space-between"
           alignItems="center"
           spacing={16}

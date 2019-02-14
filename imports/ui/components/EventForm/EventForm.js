@@ -1,15 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
-import {
-  Stepper,
-  Step,
-  Steplabel,
-  Button,
-  Typography
-} from '@material-ui/core';
+import { Stepper, Step, Button, Typography } from '@material-ui/core';
 
 import styles from './styles';
 

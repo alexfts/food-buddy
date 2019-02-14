@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
-import { LinearProgress, Typography } from '@material-ui/core';
 import Loader from 'react-loader-spinner';
 
 class Loading extends React.Component {

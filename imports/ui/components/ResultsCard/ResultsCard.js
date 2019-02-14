@@ -28,7 +28,6 @@ class MediaCard extends React.Component {
       const placeid = place.place_id;
       const data = new Promise((resolve, reject) => {
         Meteor.call('googleMapsWebsite.geocode', placeid, (err, result) => {
-          // console.log(err, result);
           if (!err) return resolve(result);
         });
       });
@@ -40,7 +39,6 @@ class MediaCard extends React.Component {
   };
   render() {
     if (this.state.result) {
-      // console.log(this.state.result);
     }
     const { classes, places } = this.props;
     const details = this.state.result;

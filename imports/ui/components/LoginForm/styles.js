@@ -10,7 +10,7 @@ const styles = theme => ({
     }
   },
   errorMessage: {
-    color: '#5558f6',
+    color: theme.palette.error.main,
     letterSpace: 2
   },
 

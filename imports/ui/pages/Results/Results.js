@@ -40,8 +40,8 @@ const Results = compose(
       const request = {
         bounds: bounds,
         keyword: '(thai) OR (indian)',
-        type: ['restaurant']
-        // openNow: true
+        type: ['restaurant'],
+        openNow: true
       };
       service.nearbySearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {

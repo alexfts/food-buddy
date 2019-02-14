@@ -11,7 +11,11 @@ import {
   GoogleMap,
   Marker
 } from 'react-google-maps';
+<<<<<<< HEAD
+import { Meteor } from 'meteor/meteor';
+=======
 import { MAP } from 'react-google-maps/lib/constants';
+>>>>>>> 288dd36ba01046087129ab55e881f6410ad43be8
 
 const refs = {
   map: undefined

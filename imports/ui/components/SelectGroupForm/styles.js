@@ -7,6 +7,7 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     margin: '5%',
+    width: 600,
     maxWidth: '100%'
   },
   title: {

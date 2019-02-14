@@ -224,7 +224,11 @@ class SelectGroupForm extends Component {
           aria-labelledby="scroll-dialog-title"
         >
           <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
-            <Typography variant="h6" className={classes.title}>
+            <Typography
+              variant="h5"
+              className={classes.title}
+              // color="secondary"
+            >
               Select your food buddy
             </Typography>
             <NoSsr>
@@ -269,7 +273,7 @@ class SelectGroupForm extends Component {
             </DialogContentText>
           </DialogContent>
 
-          <DialogActions className={classes.buttons}>
+          {/* <DialogActions className={classes.buttons}>
             {this.state.multi &&
             this.state.multi.length > 0 &&
             this.state.matches ? (
@@ -301,7 +305,7 @@ class SelectGroupForm extends Component {
                 Cancel
               </Button>
             )}
-          </DialogActions>
+          </DialogActions> */}
         </Dialog>
       </div>
     );

@@ -58,9 +58,16 @@ class Home extends Component {
             className={classes.flexbox}
             width="100%"
           >
-            {/* <div className={classes.paper}> */}
-            <SelectGroupForm />
-            {/* </div> */}
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              scroll={this.state.scroll}
+              aria-labelledby="scroll-dialog-title"
+            >
+              <div className={classes.paper}>
+                <SelectGroupForm />
+              </div>
+            </Dialog>
           </Modal>
         </div>
 

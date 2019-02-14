@@ -35,7 +35,11 @@ const styles = theme => ({
     marginRight: 5
   },
   pricePoint: {
+    color: 'green',
     textAlign: 'center'
+  },
+  flexSlider: {
+    display: 'flex'
   }
 });
 

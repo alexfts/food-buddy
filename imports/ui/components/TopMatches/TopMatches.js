@@ -56,26 +56,34 @@ class TopMatches extends Component {
         <Typography className={classes.title} variant="h5">
           Your top matches:
         </Typography>
-
-        <div className={classes.pricePoint}>{pricePoint.dollars}</div>
-
-        <Slider
-          value={this.state.price}
-          min={1}
-          max={4}
-          step={1}
-          onChange={this.handlePriceChange}
-        />
-        <FormControlLabel
-          control={
-            <Switch
-              checked={this.state.openNow}
-              onChange={this.handleOpenNowChange}
-              value="openNow"
+        <Grid
+          container
+          spacing={16}
+          alignItems="center"
+          className={classes.flexSlider}
+        >
+          <div className={classes.pricePoint}>
+            {pricePoint.dollars}
+            <Slider
+              value={this.state.price}
+              min={1}
+              max={4}
+              step={1}
+              onChange={this.handlePriceChange}
             />
-          }
-          label="Open now"
-        />
+          </div>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={this.state.openNow}
+                onChange={this.handleOpenNowChange}
+                value="openNow"
+              />
+            }
+            label="Open now"
+          />
+        </Grid>
+
         <Grid
           container
           spacing={16}
@@ -122,6 +130,7 @@ class TopMatches extends Component {
                   color="primary"
                   className={classes.button}
                   component={Link}
+                  size="small"
                   to={{
                     pathname: '/results',
                     state: {
@@ -131,7 +140,7 @@ class TopMatches extends Component {
                     }
                   }}
                 >
-                  Enter
+                  Select
                 </Button>
               </Grid>
             );

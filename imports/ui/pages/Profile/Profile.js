@@ -79,9 +79,7 @@ const Profile = ({ currentUser, tags, classes }) => {
         <div className={classes.divider} />
 
         <Paper square elevation={0} className={classes.paperTags}>
-          <Typography variant="h6" className={classes.tagTitle}>
-            Change Tags:
-          </Typography>
+          <Typography variant="h5">Change Tags:</Typography>
           <Typography variant="h6" className={classes.tagTitle}>
             Cuisines
           </Typography>

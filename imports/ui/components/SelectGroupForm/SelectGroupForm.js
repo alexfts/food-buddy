@@ -277,7 +277,7 @@ class SelectGroupForm extends Component {
                 Cancel
               </Button>
               <Button
-                onClick={this.handleClose}
+                // onClick={this.handleClose}
                 color="secondary"
                 variant="contained"
                 className={classes.cancelButton}

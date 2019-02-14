@@ -7,19 +7,21 @@ const styles = theme => ({
     background: 'blue'
   },
   root: {
-    padding: '5%'
+    padding: '5% 8%'
   },
   paperUser: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 2,
-    borderRadius: 3
+    // borderRadius: 3,
+    border: '1.5px solid #d3d3d3'
   },
   paperTags: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 3,
-    borderRadius: 3
+    borderRadius: 3,
+    border: '1.5px solid #d3d3d3'
   },
 
   userCard: {
@@ -38,7 +40,7 @@ const styles = theme => ({
     transform: 'scale(1.7)'
   },
   userStyle: {
-    fontWeight: 500,
+    fontWeight: 550,
     fontSize: '1.5rem'
   },
 
@@ -46,7 +48,8 @@ const styles = theme => ({
     margin: 12
   },
   tagTitle: {
-    marginBottom: '1rem',
+    margin: '1rem auto',
+    paddingTop: theme.spacing.unit * 2,
     textAlign: 'center'
   },
   tagButton: {

@@ -16,7 +16,6 @@ const styles = theme => ({
     marginRight: 10,
     marginTop: 10,
     padding: 1
-    // backgroundColor: 'green',
   }
 });
 

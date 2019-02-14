@@ -10,14 +10,14 @@ const styles = theme => ({
     maxWidth: '100%'
   },
   title: {
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     fontWeight: 550,
     marginBottom: '1rem',
     textAlign: 'center'
     // width: '100%'
   },
   dialogTitle: {
-    padding: 10,
+    padding: 15,
     width: '100%'
   },
   input: {

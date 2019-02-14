@@ -1,6 +1,6 @@
 const styles = theme => ({
   container: {
-    paddingTop: '2rem'
+    paddingTop: '1rem'
   },
   accountForm: {
     lineHeight: 5,

@@ -59,16 +59,14 @@ class Home extends Component {
             width="100%"
           >
             <Dialog
-              className={classes.paper}
               open={this.state.open}
               onClose={this.handleClose}
               scroll={this.state.scroll}
               aria-labelledby="scroll-dialog-title"
-              // width="100%"
             >
-              {/* <div className={classes.paper}> */}
-              <SelectGroupForm />
-              {/* </div> */}
+              <div className={classes.paper}>
+                <SelectGroupForm />
+              </div>
             </Dialog>
           </Modal>
         </div>

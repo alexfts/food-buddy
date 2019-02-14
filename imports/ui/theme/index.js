@@ -16,7 +16,7 @@ export default createMuiTheme({
     },
 
     error: {
-      main: '#f56840'
+      main: '#f5ef40'
     },
 
     bg: {

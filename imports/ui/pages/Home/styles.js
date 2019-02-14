@@ -9,7 +9,7 @@ const styles = theme => ({
     // backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: 'none',
-    width: '100%'
+    width: '600px'
   },
   flexbox: {
     display: 'flex',

@@ -98,11 +98,11 @@ class TopMatches extends Component {
                     <Chip
                       className={classes.user}
                       key={user._id}
-                      avatar={
-                        <Avatar>
-                          <Gravatar email={user.emails[0].address} />
-                        </Avatar>
-                      }
+                      // avatar={
+                      //   <Avatar>
+                      //     <Gravatar email={user.emails[0].address} />
+                      //   </Avatar>
+                      // }
                       label={user.username}
                       color="default"
                       variant="contained"
@@ -123,7 +123,7 @@ class TopMatches extends Component {
                     }
                   }}
                 >
-                  Find restaurants!
+                  Enter
                 </Button>
               </Grid>
             );

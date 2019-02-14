@@ -31,6 +31,7 @@ class Onboard extends React.Component {
   };
 
   getStepContent = step => {
+    const { tagCategories } = this.props;
     switch (step) {
       case 0:
         return (
@@ -38,6 +39,11 @@ class Onboard extends React.Component {
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Cuisine'
             )}
+            categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
+              tagCategories.find(category => category.title === 'Cuisine')._id
+            }
           />
         );
       case 1:
@@ -46,6 +52,12 @@ class Onboard extends React.Component {
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Food Types'
             )}
+            categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
+              tagCategories.find(category => category.title === 'Food Types')
+                ._id
+            }
           />
         );
       case 2:
@@ -54,6 +66,13 @@ class Onboard extends React.Component {
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Dietary Preferences'
             )}
+            categoryid={
+              tagCategories &&
+              tagCategories.length > 0 &&
+              tagCategories.find(
+                category => category.title === 'Dietary Preferences'
+              )._id
+            }
           />
         );
       default:

@@ -33,6 +33,9 @@ const styles = theme => ({
   user: {
     marginTop: 3,
     marginRight: 5
+  },
+  pricePoint: {
+    textAlign: 'center'
   }
 });
 

@@ -11,13 +11,13 @@ import {
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
+import { TagCategories } from '../../../api/tagCategories';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 import Bubbles from '../../components/Bubbles';
 
-const Profile = ({ currentUser, tags, classes }) => {
-  // render() {
-  //   const { classes, currentUser, tags } = this.props;
+const Profile = ({ currentUser, tags, tagCategories, classes }) => {
+  tagCategories = tagCategories.filter(category => category.title !== 'Extra');
   return (
     <Fragment>
       <div className={classes.root}>
@@ -48,7 +48,6 @@ const Profile = ({ currentUser, tags, classes }) => {
           </div>
         </Paper>
 
-        {/*TODO Map all tags and highlight ones that are already selected  */}
         <div className={classes.divider} />
         {/* <Paper square elevation={0} className={classes.paperTags}>
           <Typography variant="h6" className={classes.tagTitle}>
@@ -82,39 +81,17 @@ const Profile = ({ currentUser, tags, classes }) => {
           <Typography variant="h6" className={classes.tagTitle}>
             Change Tags:
           </Typography>
-          <Typography variant="h6" className={classes.tagTitle}>
-            Cuisines
-          </Typography>
-          <Bubbles
-            tags={tags.filter(tag => tag.category.title === 'Cuisine')}
-          />
-          <Typography variant="h6" className={classes.tagTitle}>
-            Food Types
-          </Typography>
-          <Bubbles
-            tags={tags.filter(tag => tag.category.title === 'Food Types')}
-          />
-          <Typography variant="h6" className={classes.tagTitle}>
-            Dietary Preferences
-          </Typography>
-          <Bubbles
-            tags={tags.filter(
-              tag => tag.category.title === 'Dietary Preferences'
-            )}
-          />
-
-          {/* {tags.map(tag => {
-            return (
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.tagButton}
-                key={tag._id}
-              >
-                {tag.title}
-              </Button>
-            );
-          })} */}
+          {tagCategories.map(({ _id, title }) => (
+            <Fragment key={_id}>
+              <Typography variant="h6" className={classes.tagTitle}>
+                {title}
+              </Typography>
+              <Bubbles
+                tags={tags.filter(tag => tag.category._id === _id)}
+                categoryid={_id}
+              />
+            </Fragment>
+          ))}
         </Paper>
       </div>
     </Fragment>
@@ -127,8 +104,11 @@ Profile.propTypes = {
 };
 
 export default withTracker(() => {
+  Meteor.subscribe('tags');
+  Meteor.subscribe('tagCategories');
   return {
     currentUser: Meteor.user(),
-    tags: Tags.find({}).fetch()
+    tags: Tags.find({}).fetch(),
+    tagCategories: TagCategories.find({}).fetch()
   };
 })(withStyles(styles)(Profile));

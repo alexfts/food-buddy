@@ -12,7 +12,7 @@ class Loading extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.container}>
-          <Loader type="Ball-Triangle" color="#ffffff" height={80} width={80} />
+          <Loader type="Ball-Triangle" color="primary" height={80} width={80} />
         </div>
       </div>
     );

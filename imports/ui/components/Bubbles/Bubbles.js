@@ -22,6 +22,7 @@ class Bubbles extends React.Component {
   }
 
   handleSelect = tag => {
+    console.log(this.state.selectedTags);
     this.state.selectedTags.some(t => t === tag._id)
       ? this.setState(
           {
@@ -30,23 +31,18 @@ class Bubbles extends React.Component {
             })
           },
           () => {
+            console.log('removing tag', this.state.selectedTags);
             Meteor.call('users.updateUserTags', this.state.selectedTags);
           }
         )
       : this.setState(
           { selectedTags: [...this.state.selectedTags, tag._id] },
           () => {
+            console.log('adding tag', this.state.selectedTags);
             Meteor.call('users.updateUserTags', this.state.selectedTags);
           }
         );
   };
-
-  // colorChange = tag => {
-  //   if (this.state.selectedTags === tag._id) {
-  //     return 'primary';
-  //   }
-  //   return 'default';
-  // };
 
   sortTagsBySelected(tags) {
     const sortedTags = [...tags];
@@ -63,26 +59,38 @@ class Bubbles extends React.Component {
     return sortedTags;
   }
 
+  sortTagsAlphabet(tags) {
+    const sortTags = [...tags];
+    sortTags.sort((tag1, tag2) => {
+      if (tag1.title < tag2.title) return -1;
+      else return 1;
+    });
+    return sortTags;
+  }
+
   render() {
     const { classes } = this.props;
-    const tags = this.sortTagsBySelected(this.props.tags);
+    // const tags = this.sortTagsBySelected(this.props.tags);
+    const tags = this.sortTagsAlphabet(this.props.tags);
 
     return (
-      <div>
+      <div className={classes.bubbleWrap}>
         {tags.map(tag => (
           <Chip
-            variant="outlined"
+            variant={
+              this.state.selectedTags.includes(tag._id) ? 'default' : 'outlined'
+            }
             color={
               this.state.selectedTags.includes(tag._id) ? 'primary' : 'default'
             }
             key={tag._id}
             label={tag.title}
-            // className={
-            //   this.state.selectedTags.includes(tag._id)
-            //     ? classes.chipSelected
-            //     : classes.chip
-            // }
-            className={classes.chip}
+            className={
+              this.state.selectedTags.includes(tag._id)
+                ? classes.chipSelected
+                : classes.chip
+            }
+            // className={classes.chip}
             onClick={() => this.handleSelect(tag)}
           />
         ))}

@@ -1,16 +1,22 @@
 const styles = theme => ({
+  bubbleWrap: {
+    margin: '12px auto',
+    textAlign: 'center'
+  },
   chip: {
+    color: '#7e7e7e',
     textTransform: 'uppercase',
-    marginRight: 10,
-    marginTop: 10
-    // clickableColorPrimary: 'green'
+    marginRight: 7,
+    marginTop: 10,
+    clickableColorPrimary: '#353535'
   },
   chipSelected: {
+    color: '#fff',
     textTransform: 'uppercase',
     marginRight: 10,
     marginTop: 10,
-    backgroundColor: 'green',
-    clickableColorPrimary: 'green'
+    padding: 1
+    // backgroundColor: 'green',
   }
 });
 

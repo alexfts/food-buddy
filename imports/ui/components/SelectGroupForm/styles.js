@@ -2,9 +2,23 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   form: {
+    borderRadius: 0,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: '5%',
+    maxWidth: '100%'
+  },
+  title: {
+    fontSize: '2rem',
+    fontWeight: 550,
+    marginBottom: '1rem',
+    textAlign: 'center'
+    // width: '100%'
+  },
+  dialogTitle: {
+    padding: 10,
+    width: '100%'
   },
   input: {
     display: 'flex',
@@ -55,6 +69,16 @@ const styles = theme => ({
   },
   select: {
     width: '100%'
+  },
+  cancelButton: {
+    // color: 'white',
+    marginLeft: 10,
+    marginTop: 0
+  },
+  buttons: {
+    height: '100%',
+    width: '100%'
+    // borderTop: '1px solid #888888'
   }
 });
 

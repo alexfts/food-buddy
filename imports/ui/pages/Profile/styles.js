@@ -46,7 +46,8 @@ const styles = theme => ({
     margin: 12
   },
   tagTitle: {
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    textAlign: 'center'
   },
   tagButton: {
     borderRadius: 25,

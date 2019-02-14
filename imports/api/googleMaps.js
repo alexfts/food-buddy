@@ -2,23 +2,24 @@ import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isServer) {
   const googleMaps = require('@google/maps').createClient({
-    key: 'AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E',
-    Promise: Promise
+    key: 'AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E'
   });
 
   Meteor.methods({
-    'googleMapsWebsite.geocode'(placeid) {
-          googleMaps
-            .place({
-              placeid: placeid,
-              language: 'en'
-            }, (args) => {
-              console.log(args);
-            })
-            .asPromise()
-            .then(function(response) {
-              console.log(response.json.result);
-            });
+    async 'googleMapsWebsite.geocode'(placeid) {
+      const data = new Promise((resolve, reject) => {
+        googleMaps.place(
+          {
+            placeid: placeid,
+            language: 'en'
+          },
+          (err, res) => {
+            if (!err) return resolve(res.json);
+            reject(err);
+          }
+        );
+      });
+      return await data;
     }
   });
 }

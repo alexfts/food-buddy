@@ -89,7 +89,7 @@ import {
   Marker,
   InfoWindow
 } from 'react-google-maps';
-
+import { MAP } from 'react-google-maps/lib/constants';
 const refs = {
   map: undefined
 };
@@ -97,31 +97,14 @@ const refs = {
 class MapComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {}
-    };
-    console.log(this.state);
+    this.mediaCardRef = React.createRef();
+    this.state = {};
   }
-  onMarkerClick = (props, marker, e) => {
-    console.log('hihihimarker', props, marker);
-    return this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-  };
 
-  onMapClicked = props => {
-    if (this.state.showingInfoWindow) {
-      console.log(this.state.showingInfoWindow);
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
+  handleMarkerClicked = markerIndex => {
+    console.log(markerIndex);
+    console.log(this.mediaCardRef.current.offsetTop);
+    window.scrollTo(0, this.mediaCardRef.current.offsetTop + markerIndex * 100);
   };
 
   render() {
@@ -131,7 +114,6 @@ class MapComponent extends React.Component {
       <Grid container>
         <Grid item>
           <GoogleMap
-            onClick={this.onMapClicked}
             onTilesLoaded={props.fetchPlaces}
             ref={props.onMapMounted}
             // onBoundsChanged={props.fetchPlaces}
@@ -142,30 +124,24 @@ class MapComponent extends React.Component {
               props.places.map((place, i) => (
                 <Marker
                   animation={google.maps.Animation.DROP}
-                  onClick={this.onMarkerClick}
-                  label={(i + 1).toString()}
+                  onClick={() => this.handleMarkerClicked(i)}
+                  // label={(i + 1).toString()}
+                  label={place.name.split(' ')[0]}
                   key={i}
                   //   label={props.places.id}
                   position={{
                     lat: place.geometry.location.lat(),
                     lng: place.geometry.location.lng()
                   }}
-                >
-                  {/* <InfoWindow
-                    visible={this.showInfoWindow}
-                    marker={this.state.activeMarker}
-
-                    // style={styles.infoWindow}
-                  >
-                    <div>
-                      <p>{`address:${place.vicinity}`}</p>
-                    </div>
-                  </InfoWindow> */}
-                </Marker>
+                />
               ))}
           </GoogleMap>
         </Grid>
-        <Grid>{props.places && <MediaCard places={props.places} />}</Grid>
+        <Grid>
+          {props.places && (
+            <MediaCard places={props.places} mediaCardRef={this.mediaCardRef} />
+          )}
+        </Grid>
       </Grid>
     );
   }
@@ -189,7 +165,7 @@ const Results = compose(
     fetchPlaces: ({ updatePlaces }) => () => {
       const bounds = refs.map.getBounds();
       const service = new google.maps.places.PlacesService(
-        refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+        refs.map.context[MAP]
       );
       const request = {
         bounds: bounds,

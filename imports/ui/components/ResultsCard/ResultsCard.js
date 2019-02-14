@@ -13,10 +13,10 @@ import {
   ListItem
 } from '@material-ui/core/';
 function MediaCard(props) {
-  const { classes, places } = props;
+  const { classes, places, mediaCardRef } = props;
   console.log(places);
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={mediaCardRef}>
       <Drawer
         className={classes.drawer}
         variant="permanent"

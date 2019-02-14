@@ -17,7 +17,7 @@ const styles = theme => ({
     // width: '100%'
   },
   dialogTitle: {
-    padding: 15,
+    // padding: 15,
     width: '100%'
   },
   input: {
@@ -76,8 +76,8 @@ const styles = theme => ({
     marginTop: 0
   },
   buttons: {
-    height: '100%',
-    width: '100%'
+    // height: '100%',
+    // width: '100%'
     // borderTop: '1px solid #888888'
   }
 });

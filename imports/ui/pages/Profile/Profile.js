@@ -11,13 +11,15 @@ import {
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
+import { TagCategories } from '../../../api/tagCategories';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 import Bubbles from '../../components/Bubbles';
 
-const Profile = ({ currentUser, tags, classes }) => {
+const Profile = ({ currentUser, tags, tagCategories, classes }) => {
   // render() {
   //   const { classes, currentUser, tags } = this.props;
+  tagCategories = tagCategories.filter(category => category.title !== 'Extra');
   return (
     <Fragment>
       <div className={classes.root}>
@@ -78,19 +80,36 @@ const Profile = ({ currentUser, tags, classes }) => {
 
         <div className={classes.divider} />
 
+        {/*  */}
+        <Paper square elevation={0} className={classes.paperTags} />
+        {/*  */}
+
         <Paper square elevation={0} className={classes.paperTags}>
-          <Typography variant="h5">Change Tags:</Typography>
-          <Typography variant="h6" className={classes.tagTitle}>
+          <Typography variant="h6">Change Tags:</Typography>
+          {tagCategories.map(({ _id, title }) => (
+            <Fragment key={_id}>
+              <Typography variant="h6" className={classes.tagTitle}>
+                {title}
+              </Typography>
+              <Bubbles
+                tags={tags.filter(tag => tag.category._id === _id)}
+                categoryid={_id}
+              />
+            </Fragment>
+          ))}
+          {/* <Typography variant="h6" className={classes.tagTitle}>
             Cuisines
           </Typography>
           <Bubbles
             tags={tags.filter(tag => tag.category.title === 'Cuisine')}
+            categoryName="Cuisine"
           />
           <Typography variant="h6" className={classes.tagTitle}>
             Food Types
           </Typography>
           <Bubbles
             tags={tags.filter(tag => tag.category.title === 'Food Types')}
+            categoryName="Food Types"
           />
           <Typography variant="h6" className={classes.tagTitle}>
             Dietary Preferences
@@ -99,7 +118,8 @@ const Profile = ({ currentUser, tags, classes }) => {
             tags={tags.filter(
               tag => tag.category.title === 'Dietary Preferences'
             )}
-          />
+            categoryName="Dietary Preferences"
+          /> */}
 
           {/* {tags.map(tag => {
             return (
@@ -125,8 +145,11 @@ Profile.propTypes = {
 };
 
 export default withTracker(() => {
+  Meteor.subscribe('tags');
+  Meteor.subscribe('tagCategories');
   return {
     currentUser: Meteor.user(),
-    tags: Tags.find({}).fetch()
+    tags: Tags.find({}).fetch(),
+    tagCategories: TagCategories.find({}).fetch()
   };
 })(withStyles(styles)(Profile));

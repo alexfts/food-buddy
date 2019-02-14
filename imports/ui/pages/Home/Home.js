@@ -58,16 +58,9 @@ class Home extends Component {
             className={classes.flexbox}
             width="100%"
           >
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              scroll={this.state.scroll}
-              aria-labelledby="scroll-dialog-title"
-            >
-              <div className={classes.paper}>
-                <SelectGroupForm />
-              </div>
-            </Dialog>
+            {/* <div className={classes.paper}> */}
+            <SelectGroupForm />
+            {/* </div> */}
           </Modal>
         </div>
 
@@ -75,7 +68,7 @@ class Home extends Component {
           <iframe
             className={classes.map}
             width="100%"
-            height="600"
+            height="650"
             src="https://www.google.com/maps/embed/v1/search?q=restaurants%20near%20me&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E"
           />
         </div>

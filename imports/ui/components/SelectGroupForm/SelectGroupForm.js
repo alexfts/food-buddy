@@ -217,85 +217,92 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
-          <Typography variant="h6" className={classes.title}>
-            Select your food buddy
-          </Typography>
-          <NoSsr>
-            <Select
-              color="secondary"
-              className={classes.select}
-              classes={classes}
-              styles={selectStyles}
-              textFieldProps={{
-                label: `You have picked ${
-                  this.state.multi ? this.state.multi.length : 0
-                } ${
-                  this.state.multi && this.state.multi.length === 1
-                    ? 'buddy'
-                    : 'buddies'
-                }`,
-                InputLabelProps: {
-                  shrink: true
-                }
-              }}
-              options={suggestions}
-              components={selectComponents}
-              value={this.state.multi}
-              onChange={this.handleChange}
-              placeholder="Search a buddy"
-              isMulti
-              fullwidth
-            />
-          </NoSsr>
-        </DialogTitle>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          scroll={this.state.scroll}
+          aria-labelledby="scroll-dialog-title"
+        >
+          <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
+            <Typography variant="h6" className={classes.title}>
+              Select your food buddy
+            </Typography>
+            <NoSsr>
+              <Select
+                color="secondary"
+                className={classes.select}
+                classes={classes}
+                styles={selectStyles}
+                textFieldProps={{
+                  label: `You have picked ${
+                    this.state.multi ? this.state.multi.length : 0
+                  } ${
+                    this.state.multi && this.state.multi.length === 1
+                      ? 'buddy'
+                      : 'buddies'
+                  }`,
+                  InputLabelProps: {
+                    shrink: true
+                  }
+                }}
+                options={suggestions}
+                components={selectComponents}
+                value={this.state.multi}
+                onChange={this.handleChange}
+                placeholder="Search a buddy"
+                isMulti
+                fullwidth
+              />
+            </NoSsr>
+          </DialogTitle>
 
-        <DialogContent>
-          <DialogContentText>
+          <DialogContent>
+            <DialogContentText>
+              {this.state.multi &&
+                this.state.multi.length > 0 &&
+                this.state.matches && (
+                  <TopMatches
+                    userids={this.state.multi.map(({ value }) => value)}
+                    matches={this.state.matches}
+                  />
+                )}
+            </DialogContentText>
+          </DialogContent>
+
+          <DialogActions className={classes.buttons}>
             {this.state.multi &&
-              this.state.multi.length > 0 &&
-              this.state.matches && (
-                <TopMatches
-                  userids={this.state.multi.map(({ value }) => value)}
-                  matches={this.state.matches}
-                />
-              )}
-          </DialogContentText>
-        </DialogContent>
-
-        <DialogActions className={classes.buttons}>
-          {this.state.multi &&
-          this.state.multi.length > 0 &&
-          this.state.matches ? (
-            <>
+            this.state.multi.length > 0 &&
+            this.state.matches ? (
+              <>
+                <Button
+                  onClick={this.handleClose}
+                  color="secondary"
+                  variant="contained"
+                  className={classes.cancelButton}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
+                  className={classes.cancelButton}
+                >
+                  Submit
+                </Button>
+              </>
+            ) : (
               <Button
                 onClick={this.handleClose}
                 color="secondary"
-                variant="contained"
+                variant="outlined"
                 className={classes.cancelButton}
               >
                 Cancel
               </Button>
-              <Button
-                // onClick={this.handleClose}
-                color="secondary"
-                variant="contained"
-                className={classes.cancelButton}
-              >
-                Submit
-              </Button>
-            </>
-          ) : (
-            <Button
-              onClick={this.handleClose}
-              color="secondary"
-              variant="outlined"
-              className={classes.cancelButton}
-            >
-              Cancel
-            </Button>
-          )}
-        </DialogActions>
+            )}
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

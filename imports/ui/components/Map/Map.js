@@ -81,15 +81,17 @@ const Results = compose(
     onMapMounted: () => ref => {
       refs.map = ref;
     },
-    fetchPlaces: ({ updatePlaces }) => () => {
+    fetchPlaces: ({ updatePlaces, openNow, price, query }) => () => {
       const bounds = refs.map.getBounds();
       const service = new google.maps.places.PlacesService(
         refs.map.context[MAP]
       );
       const request = {
         bounds: bounds,
-        keyword: '(thai) OR (indian)',
-        type: ['restaurant']
+        keyword: query,
+        type: ['restaurant'],
+        openNow: openNow,
+        price: price
       };
       service.nearbySearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {

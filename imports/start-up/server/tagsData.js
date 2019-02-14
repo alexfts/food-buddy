@@ -53,7 +53,6 @@ export const FoodtypeTags = [
   { title: 'Halal', category: 'Food Types' },
   { title: 'Breakfast', category: 'Food Types' },
   { title: 'Salad', category: 'Food Types' },
-  { title: 'Soup', category: 'Food Types' },
   { title: 'Juice', category: 'Food Types' },
   { title: 'Smoothie', category: 'Food Types' },
   { title: 'Brunch', category: 'Food Types' },

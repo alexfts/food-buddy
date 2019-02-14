@@ -93,7 +93,7 @@ class Header extends React.Component {
                     </MenuItem>
                     <MenuItem
                       className={classes.menuItem}
-                      onClick={Meteor.logout}
+                      onClick={() => Meteor.logout()}
                       component={Link}
                       to={`/welcome`}
                     >

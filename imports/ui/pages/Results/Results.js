@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import MediaCard from '../../components/ResultsCard/ResultsCard';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,7 +10,6 @@ import {
   GoogleMap,
   Marker
 } from 'react-google-maps';
-import { Meteor } from 'meteor/meteor';
 import { MAP } from 'react-google-maps/lib/constants';
 
 const refs = {

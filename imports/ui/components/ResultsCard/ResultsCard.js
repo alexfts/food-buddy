@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
+<<<<<<< HEAD
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -64,6 +65,18 @@ function MediaCard(props) {
     List,
     ListItem
   } from '@material-ui/core/';
+=======
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  Drawer,
+  List,
+  ListItem
+} from '@material-ui/core/';
+>>>>>>> 49f74d3e16c260f75a2b92095adbacebfbcd66f5
 
   // function MediaCard(props) {
   //   const { classes, places } = props;
@@ -81,6 +94,8 @@ function MediaCard(props) {
       >
         <List>
           {places.map(place => {
+              const placeid = place.place_id;
+              Meteor.call('googleMapsWebsite.geocode', placeid);
             return (
               <ListItem>
                 <Card className={classes.card}>

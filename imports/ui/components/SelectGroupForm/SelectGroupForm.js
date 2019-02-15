@@ -19,6 +19,7 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
 import TopMatches from '../TopMatches';
+import RestrictionsWarning from '../RestrictionsWarning';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -170,6 +171,7 @@ class SelectGroupForm extends Component {
   state = {
     multi: null,
     matches: null,
+    restrictions: null,
     open: true,
     scroll: 'paper'
   };
@@ -184,7 +186,8 @@ class SelectGroupForm extends Component {
         Meteor.call(
           'users.findMatches',
           [...userids, this.props.currentUserId],
-          (err, matches) => this.setState({ matches })
+          (err, { matches, restrictions }) =>
+            this.setState({ matches, restrictions })
         );
       }
     );
@@ -264,16 +267,21 @@ class SelectGroupForm extends Component {
         </DialogTitle>
 
         <DialogContent>
-          <DialogContentText>
-            {this.state.multi &&
-              this.state.multi.length > 0 &&
-              this.state.matches && (
-                <TopMatches
-                  userids={this.state.multi.map(({ value }) => value)}
-                  matches={this.state.matches}
-                />
-              )}
-          </DialogContentText>
+          {this.state.multi &&
+            this.state.multi.length > 0 &&
+            (this.state.matches && this.state.matches.length > 0 ? (
+              <TopMatches
+                userids={this.state.multi.map(({ value }) => value)}
+                matches={this.state.matches}
+              />
+            ) : (
+              <div>No results</div>
+            ))}
+          {this.state.multi &&
+            this.state.multi.length > 0 &&
+            this.state.restrictions && (
+              <RestrictionsWarning restrictions={this.state.restrictions} />
+            )}
         </DialogContent>
         {/* </Dialog> */}
       </div>

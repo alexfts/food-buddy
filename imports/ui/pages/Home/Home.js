@@ -5,6 +5,10 @@ import { Fab, Dialog, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
+import MapComponent from '../../components/Map/Map';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Tags } from '../../../api/tags';
 
 class Home extends Component {
   state = {
@@ -33,8 +37,17 @@ class Home extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, tags } = this.props;
+    //if there are tags, pick a random tag
+    let query = Meteor.user().profile.tags.map(tagId =>
+      tags.find(t => t._id === tagId)
+    );
+    if (query && query[1]) {
+      query = query[1].title; // TODO randomize query
+    }
+    // ? meteor.user().profile.tags
+    // : 'restaurants';
+    console.log(this.props.tags);
     return (
       <div className={classes.container}>
         <Fab
@@ -78,11 +91,7 @@ class Home extends Component {
         </Modal>
 
         <div>
-          <iframe
-            className={classes.map}
-            width="100%"
-            src="https://www.google.com/maps/embed/v1/search?q=restaurants%20near%20me&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E"
-          />
+          <MapComponent query={query} />
         </div>
       </div>
     );
@@ -93,4 +102,10 @@ Home.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Home);
+export default withTracker(() => {
+  Meteor.subscribe('tags');
+
+  return {
+    tags: Tags.find({}).fetch()
+  };
+})(withStyles(styles)(Home));

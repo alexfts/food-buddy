@@ -10,11 +10,9 @@ import {
   Typography,
   Button,
   Chip,
-  Avatar,
   FormControlLabel,
   Switch
 } from '@material-ui/core';
-import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
 import Slider from '@material-ui/lab/Slider';
 
@@ -23,7 +21,8 @@ class TopMatches extends Component {
     super(props);
     this.state = {
       openNow: true,
-      priceRange: 1
+      priceRange: 1,
+      price: 1
     };
   }
 
@@ -53,7 +52,7 @@ class TopMatches extends Component {
       classes,
       matches
     } = this.props;
-    const { pricePoint, priceRange } = this.state;
+    const { price, priceRange } = this.state;
     const priceLabels = {
       1: '$',
       2: '$$',
@@ -104,7 +103,7 @@ class TopMatches extends Component {
             // onChange={this.handlePriceChange}
             onChange={this.handleChangeSlider}
           />
-          {/* {pricePoint.dollars} */}
+          {/* {price.dollars} */}
           {/* <div className={classes.dollars}> */}
           {/* <ul className={classes.dollars}>
             <li className={classes.dollar}>$</li>
@@ -134,7 +133,7 @@ class TopMatches extends Component {
                 className={classes.matches}
               >
                 <Typography className={classes.tagTitle} color="primary">
-                  {userTagTitles.join(', ')}
+                  {userTagTitles.join(' or ')}
                 </Typography>
                 <div className={classes.flexMatches}>
                   <Typography className={classes.matchesLabel}>
@@ -144,14 +143,9 @@ class TopMatches extends Component {
                     <Chip
                       className={classes.user}
                       key={user._id}
-                      // avatar={
-                      //   <Avatar>
-                      //     <Gravatar email={user.emails[0].address} />
-                      //   </Avatar>
-                      // }
                       label={user.username}
                       color="default"
-                      variant="contained"
+                      variant="default"
                     />
                   ))}
                 </div>
@@ -164,7 +158,9 @@ class TopMatches extends Component {
                   to={{
                     pathname: '/results',
                     state: {
-                      query: userTagTitles.join(', '),
+                      query: userTagTitles
+                        .map(title => `(${title})`)
+                        .join(' OR '),
                       price: this.state.price,
                       openNow: this.state.openNow
                     }

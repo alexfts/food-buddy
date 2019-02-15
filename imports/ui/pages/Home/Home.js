@@ -10,6 +10,10 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 
+const generateRandomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 class Home extends Component {
   state = {
     multi: null,
@@ -39,15 +43,20 @@ class Home extends Component {
   render() {
     const { classes, tags } = this.props;
     //if there are tags, pick a random tag
-    let query = Meteor.user().profile.tags.map(tagId =>
-      tags.find(t => t._id === tagId)
-    );
-    if (query && query[1]) {
-      query = query[1].title; // TODO randomize query
+    const userTags = Meteor.user()
+      .profile.tags.map(tagId => tags.find(t => t._id === tagId))
+      .filter(tag => {
+        if (tag && tag.category) {
+          return tag.category.title !== 'Dietary Preferences';
+        }
+      });
+    let query;
+    if (userTags) {
+      const randomIndex = generateRandomInt(0, userTags.length - 1);
+      if (userTags[randomIndex]) {
+        query = userTags[randomIndex].title;
+      }
     }
-    // ? meteor.user().profile.tags
-    // : 'restaurants';
-    console.log(this.props.tags);
     return (
       <div className={classes.container}>
         <Fab
@@ -89,7 +98,10 @@ class Home extends Component {
         </Modal>
 
         <div>
-          <MapComponent query={query} />
+          {query && (
+            <div>{`You like ${query} restaurants. Check them out!`}</div>
+          )}
+          {query && <MapComponent query={query} />}
         </div>
       </div>
     );

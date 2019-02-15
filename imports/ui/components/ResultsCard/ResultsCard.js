@@ -48,8 +48,6 @@ class MediaCard extends React.Component {
   };
 
   render() {
-    if (this.state.result) {
-    }
     const { classes, places } = this.props;
     const details = this.state.result;
     return (
@@ -65,9 +63,12 @@ class MediaCard extends React.Component {
           <List>
             {places.map((place, i) => {
               const photo_reference =
-                details && details[i].result.photos[0].photo_reference;
+                details &&
+                details[i] &&
+                details[i].result.photos &&
+                details[i].result.photos[0].photo_reference;
               return (
-                <ListItem>
+                <ListItem key={place.id}>
                   <Card className={classes.card}>
                     <CardActionArea>
                       <a

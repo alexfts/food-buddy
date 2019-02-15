@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core';
+import { Favorite } from '@material-ui/icons';
 import styles from './styles';
 import {
   Card,
@@ -20,9 +22,11 @@ class MediaCard extends React.Component {
       result: null
     };
   }
+
   componentDidMount() {
     this.getPlaceDetails(this.props.places);
   }
+
   getPlaceDetails = async places => {
     const placeDetails = places.map(async place => {
       const placeid = place.place_id;
@@ -37,9 +41,13 @@ class MediaCard extends React.Component {
       result: await Promise.all(placeDetails)
     });
   };
+
+  toggleFavourite = (place, details) => {
+    console.log('TOGGLEFAVOURITE', place, details);
+    Meteor.call('users.changeFavourites', place, details);
+  };
+
   render() {
-    if (this.state.result) {
-    }
     const { classes, places } = this.props;
     const details = this.state.result;
     return (
@@ -60,7 +68,7 @@ class MediaCard extends React.Component {
                 details[i].result.photos &&
                 details[i].result.photos[0].photo_reference;
               return (
-                <ListItem>
+                <ListItem key={place.id}>
                   <Card className={classes.card}>
                     <CardActionArea>
                       <a
@@ -91,6 +99,17 @@ class MediaCard extends React.Component {
                         </CardContent>
                       </a>
                     </CardActionArea>
+                    <IconButton
+                      onClick={() => {
+                        if (details && details[i].result) {
+                          this.toggleFavourite(place, details[i].result);
+                        }
+                      }}
+                      aria-label="Add to favourites"
+                      className={classes.favouriteButton}
+                    >
+                      <Favorite />
+                    </IconButton>
                   </Card>
                 </ListItem>
               );

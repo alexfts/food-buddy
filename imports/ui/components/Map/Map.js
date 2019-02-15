@@ -32,7 +32,6 @@ class MapComponent extends React.Component {
   render() {
     const props = this.props;
     const { classes } = this.props;
-    console.log('MAP', props);
     return (
       <Grid container>
         <Grid item>
@@ -101,7 +100,8 @@ const Results = compose(
         keyword: query,
         type: ['restaurant'],
         openNow: openNow,
-        price: price
+        minPriceLevel: 1,
+        maxPriceLevel: price
       };
       service.nearbySearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {

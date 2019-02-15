@@ -7,21 +7,25 @@ const styles = theme => ({
     background: 'blue'
   },
   root: {
-    padding: '4% 8%'
+    padding: '2% 8%'
   },
   paperUser: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 2,
     // borderRadius: 3,
-    border: '1px solid #D3D3D3'
+    border: '1px solid #D3D3D3',
+    width: 900,
+    margin: 'auto'
   },
   paperTags: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 3,
     // borderRadius: 3,
-    border: '1px solid #D3D3D3'
+    border: '1px solid #D3D3D3',
+    width: 900,
+    margin: 'auto'
   },
 
   userCard: {

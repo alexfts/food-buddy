@@ -39,9 +39,9 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'test@test.com',
       password: 'password',
-      username: 'test',
+      username: 'BobJr',
       profile: {
-        name: 'bob',
+        name: 'Bob Jr.',
         tags: Tags.find({
           title: { $in: ['Mediterranean', 'Gluten free', 'Burgers'] }
         }).map(tag => tag._id)
@@ -50,9 +50,9 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'hobs@hobs.com',
       password: 'hobs',
-      username: 'username',
+      username: 'Hobbs',
       profile: {
-        name: 'hobs',
+        name: 'Hobbs',
         tags: Tags.find({ title: { $in: ['Vegetarian', 'Burgers'] } }).map(
           tag => tag._id
         )
@@ -72,8 +72,9 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'not@onboarded.com',
       password: 'password',
-      username: 'not_onboarded'
+      username: 'HumanBeing'
     });
+
     const errors = Meteor.users
       .simpleSchema()
       .namedContext()

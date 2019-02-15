@@ -88,7 +88,10 @@ class Header extends React.Component {
                       component={Link}
                       to={`/profile`}
                     >
-                      <Restaurant className={classes.menuIcon} />
+                      <Restaurant
+                        className={classes.menuIcon}
+                        color="primary"
+                      />
                       Profile
                     </MenuItem>
                     <MenuItem
@@ -97,7 +100,10 @@ class Header extends React.Component {
                       component={Link}
                       to={`/welcome`}
                     >
-                      <PowerSettingsNew className={classes.menuIcon} />
+                      <PowerSettingsNew
+                        className={classes.menuIcon}
+                        color="primary"
+                      />
                       Logout
                     </MenuItem>
                   </Menu>

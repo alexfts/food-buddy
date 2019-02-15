@@ -11,19 +11,25 @@ class Home extends Component {
     multi: null,
     matches: null,
     open: false,
-    scroll: 'paper'
+    scroll: 'paper',
+    hover: false
   };
 
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
-
   handleOpen = () => {
     this.setState({ open: true });
   };
-
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  mouseOver = () => {
+    this.setState({ hover: true });
+  };
+  mouseOut = () => {
+    this.setState({ hover: false });
   };
 
   render() {
@@ -33,13 +39,22 @@ class Home extends Component {
       <div className={classes.container}>
         <Fab
           aria-label="Add"
-          className={classes.plate}
+          className={classes.fab}
+          color="primary"
           onClick={this.handleClickOpen('paper')}
+          onMouseOver={this.mouseOver}
+          onMouseOut={this.mouseOut}
         >
-          <AddIcon />
+          <AddIcon className={classes.plate} />
         </Fab>
+        {this.state.hover ? (
+          <img
+            src="/fork-and-knife.svg"
+            alt="plate set"
+            className={classes.plateImg}
+          />
+        ) : null}
 
-        <img src="/fork-and-knife.svg" className={classes.plateImg} />
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -59,6 +74,7 @@ class Home extends Component {
             </div>
           </Dialog>
         </Modal>
+
         <div>
           <iframe
             className={classes.map}

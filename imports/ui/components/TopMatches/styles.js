@@ -1,6 +1,10 @@
 const styles = theme => ({
+  topMatchesHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingBottom: '1rem'
+  },
   title: {
-    marginTop: '1rem',
     marginRight: 10
     // textAlign: 'center'
   },
@@ -35,12 +39,8 @@ const styles = theme => ({
     marginRight: 5
   },
   pricePoint: {
-    color: 'green',
-    textAlign: 'center'
-  },
-  flexSlider: {
-    display: 'flex',
-    alignItems: 'center'
+    color: 'green'
+    // textAlign: 'center'
   }
 });
 

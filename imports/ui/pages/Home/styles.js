@@ -1,6 +1,6 @@
 const styles = theme => ({
   container: {
-    background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)',
+    // background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)',
     height: '100%',
     width: '100%'
   },
@@ -19,35 +19,42 @@ const styles = theme => ({
     alignItems: 'center',
     width: '100%'
   },
-  plate: {
-    position: 'absolute',
-    zIndex: 1,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    margin: '0 auto'
-    // color: 'primary'
-  },
-
   map: {
     height: 700,
     maxHeight: '100%'
   },
 
-  plateImg: {
-    height: 40,
+  fab: {
     position: 'absolute',
-    bottom: 40,
+    zIndex: 1,
+    bottom: 30,
     left: 0,
     right: 0,
     margin: '0 auto',
-    width: 'auto',
+    color: '#fff',
 
     '&:hover': {
-      // display: 'block',
-      bottom: 8,
-      height: 100
+      background: '#fff',
+      color: '#353535'
     }
+  },
+  plate: {
+    // color: '#fff',
+  },
+  plateImg: {
+    position: 'absolute',
+    bottom: 6,
+    left: 0,
+    right: 2,
+    margin: '0 auto',
+    width: 'auto',
+    height: 105
+
+    // '&:hover': {
+    //   background: '#fff',
+    //   color: '#353535',
+    //   transform: 'scale(2)'
+    // }
   }
 });
 

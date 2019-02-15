@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Typography, Paper, withStyles } from '@material-ui/core';
+import { Edit } from '@material-ui/icons';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
@@ -43,23 +44,21 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
 
         <div className={classes.divider} />
 
-        <div className={classes.divider} />
-
-        {/*  */}
-        <Paper square elevation={0} className={classes.paperTags} />
-        {/*  */}
-
         <Paper square elevation={0} className={classes.paperTags}>
-          <Typography variant="h6">Change Tags:</Typography>
+          <Typography variant="h6" className={classes.editTitle}>
+            Edit your preferences below <Edit />
+          </Typography>
           {tagCategories.map(({ _id, title }) => (
             <Fragment key={_id}>
-              <Typography variant="h6" className={classes.tagTitle}>
-                {title}
-              </Typography>
-              <Bubbles
-                tags={tags.filter(tag => tag.category._id === _id)}
-                categoryid={_id}
-              />
+              <div className={classes.tagsContainer}>
+                <Typography variant="h6" className={classes.tagTitle}>
+                  {title}:
+                </Typography>
+                <Bubbles
+                  tags={tags.filter(tag => tag.category._id === _id)}
+                  categoryid={_id}
+                />
+              </div>
             </Fragment>
           ))}
         </Paper>

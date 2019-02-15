@@ -7,7 +7,7 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     margin: '5%',
-    width: 600,
+    // width: 600,
     maxWidth: '100%'
   },
   title: {
@@ -18,7 +18,7 @@ const styles = theme => ({
     // width: '100%'
   },
   dialogTitle: {
-    // padding: 15,
+    padding: 20,
     width: '100%'
   },
   input: {

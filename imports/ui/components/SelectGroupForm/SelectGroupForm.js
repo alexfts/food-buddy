@@ -264,40 +264,6 @@ class SelectGroupForm extends Component {
               )}
           </DialogContentText>
         </DialogContent>
-
-        {/* <DialogActions className={classes.buttons}>
-            {this.state.multi &&
-            this.state.multi.length > 0 &&
-            this.state.matches ? (
-              <>
-                <Button
-                  onClick={this.handleClose}
-                  color="secondary"
-                  variant="contained"
-                  className={classes.cancelButton}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  color="secondary"
-                  variant="contained"
-                  className={classes.cancelButton}
-                >
-                  Submit
-                </Button>
-              </>
-            ) : (
-              <Button
-                onClick={this.handleClose}
-                color="secondary"
-                variant="outlined"
-                className={classes.cancelButton}
-              >
-                Cancel
-              </Button>
-            )}
-          </DialogActions> */}
       </div>
     );
   }

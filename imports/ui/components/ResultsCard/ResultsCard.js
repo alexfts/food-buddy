@@ -65,7 +65,7 @@ class MediaCard extends React.Component {
               const photo_reference =
                 details && details[i].result.photos[0].photo_reference;
               return (
-                <ListItem>
+                <ListItem key={place.id}>
                   <Card className={classes.card}>
                     <CardActionArea>
                       <a

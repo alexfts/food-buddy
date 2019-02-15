@@ -26,8 +26,8 @@ const styles = theme => ({
     padding: 0
   },
   chipAvatar: {
-    width: '30px',
-    height: '30px'
+    width: '32px',
+    height: '32px'
   },
   avatar: {
     marginRight: '10px'

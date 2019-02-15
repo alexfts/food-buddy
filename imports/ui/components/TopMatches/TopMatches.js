@@ -53,25 +53,10 @@ class TopMatches extends Component {
 
     return matches ? (
       <div>
-        <Typography className={classes.title} variant="h5">
-          Your top matches:
-        </Typography>
-        <div
-          // container
-          // spacing={16}
-          // alignItems="center"
-          className={classes.flexSlider}
-        >
-          <div className={classes.pricePoint}>
-            {pricePoint.dollars}
-            <Slider
-              value={this.state.price}
-              min={1}
-              max={4}
-              step={1}
-              onChange={this.handlePriceChange}
-            />
-          </div>
+        <Grid container justify="space-between" align="flex-start">
+          <Typography className={classes.title} variant="h5">
+            Your top matches:
+          </Typography>
           <FormControlLabel
             control={
               <Switch
@@ -82,6 +67,30 @@ class TopMatches extends Component {
             }
             label="Open now"
           />
+        </Grid>
+        <div
+          // container
+          // spacing={16}
+          // alignItems="center"
+          className={classes.flexSlider}
+        >
+          <Grid
+            container
+            spacing={16}
+            direction="column"
+            justify="space-evenly"
+            alignItems="center"
+            className={classes.pricePoint}
+          >
+            {pricePoint.dollars}
+            <Slider
+              value={this.state.price}
+              min={1}
+              max={4}
+              step={1}
+              onChange={this.handlePriceChange}
+            />
+          </Grid>
         </div>
 
         <Grid
@@ -89,7 +98,6 @@ class TopMatches extends Component {
           spacing={16}
           justify="space-between"
           alignItems="center"
-          spacing={16}
         >
           {matches.map(({ tagids, users }) => {
             const userTags = allTags.filter(tag => tagids.includes(tag._id));

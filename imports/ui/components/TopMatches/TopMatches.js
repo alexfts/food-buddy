@@ -111,7 +111,7 @@ class TopMatches extends Component {
                 className={classes.matches}
               >
                 <Typography className={classes.tagTitle} color="primary">
-                  {userTagTitles.join(', ')}
+                  {userTagTitles.join(' or ')}
                 </Typography>
                 <div className={classes.flexMatches}>
                   <Typography className={classes.matchesLabel}>
@@ -141,7 +141,9 @@ class TopMatches extends Component {
                   to={{
                     pathname: '/results',
                     state: {
-                      query: userTagTitles.join(', '),
+                      query: userTagTitles
+                        .map(title => `(${title})`)
+                        .join(' OR '),
                       price: this.state.price,
                       openNow: this.state.openNow
                     }

@@ -169,6 +169,7 @@ class SelectGroupForm extends Component {
   state = {
     multi: null,
     matches: null,
+    restrictions: null,
     open: true,
     scroll: 'paper'
   };
@@ -183,7 +184,8 @@ class SelectGroupForm extends Component {
         Meteor.call(
           'users.findMatches',
           [...userids, this.props.currentUserId],
-          (err, matches) => this.setState({ matches })
+          (err, { matches, restrictions }) =>
+            this.setState({ matches, restrictions })
         );
       }
     );
@@ -213,56 +215,61 @@ class SelectGroupForm extends Component {
       })
     };
 
+    console.log('RESTRICTIONS', this.state.restrictions);
     return (
       <div className={classes.form}>
-        <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
-          <Typography
-            variant="h5"
-            className={classes.title}
-            // color="secondary"
-          >
-            Select your food buddy
-          </Typography>
-          <NoSsr>
-            <Select
-              color="secondary"
-              className={classes.select}
-              classes={classes}
-              styles={selectStyles}
-              textFieldProps={{
-                label: `You have picked ${
-                  this.state.multi ? this.state.multi.length : 0
-                } ${
-                  this.state.multi && this.state.multi.length === 1
-                    ? 'buddy'
-                    : 'buddies'
-                }`,
-                InputLabelProps: {
-                  shrink: true
-                }
-              }}
-              options={suggestions}
-              components={selectComponents}
-              value={this.state.multi}
-              onChange={this.handleChange}
-              placeholder="Search a buddy"
-              isMulti
-              fullwidth
-            />
-          </NoSsr>
-        </DialogTitle>
+        <Typography
+          variant="h5"
+          className={classes.title}
+          // color="secondary"
+        >
+          Select your food buddy
+        </Typography>
+        <NoSsr>
+          <Select
+            color="secondary"
+            className={classes.select}
+            classes={classes}
+            styles={selectStyles}
+            textFieldProps={{
+              label: `You have picked ${
+                this.state.multi ? this.state.multi.length : 0
+              } ${
+                this.state.multi && this.state.multi.length === 1
+                  ? 'buddy'
+                  : 'buddies'
+              }`,
+              InputLabelProps: {
+                shrink: true
+              }
+            }}
+            options={suggestions}
+            components={selectComponents}
+            value={this.state.multi}
+            onChange={this.handleChange}
+            placeholder="Search a buddy"
+            isMulti
+            fullwidth
+          />
+        </NoSsr>
 
         <DialogContent>
-          <DialogContentText>
-            {this.state.multi &&
-              this.state.multi.length > 0 &&
-              this.state.matches && (
-                <TopMatches
-                  userids={this.state.multi.map(({ value }) => value)}
-                  matches={this.state.matches}
-                />
-              )}
-          </DialogContentText>
+          {this.state.multi &&
+            this.state.multi.length > 0 &&
+            this.state.matches && (
+              <TopMatches
+                userids={this.state.multi.map(({ value }) => value)}
+                matches={this.state.matches}
+              />
+            )}
+          {/* && this.state.restrictions && (
+               <Paper>
+                 Restrictions:
+                 {this.state.restrictions.map(({ tagids, users }) => (
+                   <div>Restriction</div>
+                 ))}
+               </Paper>
+             )} */}
         </DialogContent>
       </div>
     );

@@ -3,7 +3,7 @@ const styles = theme => ({
     display: 'flex'
   },
   card: {
-    height: 350,
+    height: 370,
     width: 240
   },
   media: {
@@ -17,6 +17,9 @@ const styles = theme => ({
     top: 70,
     width: 300,
     height: '89%'
+  },
+  favouriteButton: {
+    color: '#e91e63'
   }
 });
 

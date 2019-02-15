@@ -200,7 +200,7 @@ Meteor.methods({
     });
   },
 
-  'users.changeFavourites'(place, shouldAdd = true) {
+  'users.changeFavourites'(place, details) {
     if (!this.userId) {
       throw new Meteor.Error(
         'users.updateUserTags.not-authorized',
@@ -208,18 +208,19 @@ Meteor.methods({
       );
     }
 
-    tagids.map(tagid => {
-      const tag = Tags.findOne({ _id: tagid });
-      if (!tag)
-        throw new Meteor.Error(
-          'users.updateUserTags.invalid-input',
-          'Invalid input.'
-        );
-    });
-
-    Meteor.users.update(this.userId, {
-      $set: { 'profile.tags': tagids }
-    });
+    const profile = this.user().profile;
+    if (profile && profile.favourites) {
+      // remove from favourites if place_id already in favourites
+      const placeInFavourites = profile.favourites.findIndex(
+        favourite => favourite.place_id === place.place_id
+      );
+      if (placeInFavourites) {
+      }
+    } else {
+      Meteor.users.update(this.userId, {
+        $set: { 'profile.favourites': [{ ...place, details }] }
+      });
+    }
   },
 
   'users.updateUserTagsByCategory'(tagids, categoryid) {

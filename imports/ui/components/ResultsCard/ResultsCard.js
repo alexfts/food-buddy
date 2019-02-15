@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core';
+import { Favorite } from '@material-ui/icons';
 import styles from './styles';
 import {
   Card,
@@ -20,9 +22,11 @@ class MediaCard extends React.Component {
       result: null
     };
   }
+
   componentDidMount() {
     this.getPlaceDetails(this.props.places);
   }
+
   getPlaceDetails = async places => {
     const placeDetails = places.map(async place => {
       const placeid = place.place_id;
@@ -37,6 +41,12 @@ class MediaCard extends React.Component {
       result: await Promise.all(placeDetails)
     });
   };
+
+  toggleFavourite = (place, details) => {
+    console.log('TOGGLEFAVOURITE', place, details);
+    Meteor.call('users.changeFavourites', place, details);
+  };
+
   render() {
     if (this.state.result) {
     }
@@ -54,7 +64,8 @@ class MediaCard extends React.Component {
         >
           <List>
             {places.map((place, i) => {
-              const photo_reference = details && details[i].result.photos[0].photo_reference
+              const photo_reference =
+                details && details[i].result.photos[0].photo_reference;
               return (
                 <ListItem>
                   <Card className={classes.card}>
@@ -68,7 +79,7 @@ class MediaCard extends React.Component {
                         <CardMedia
                           className={classes.media}
                           component="img"
-                          src= {`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E`}
+                          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E`}
                           title="Restaurant Image"
                         />
                         <CardContent>
@@ -87,6 +98,17 @@ class MediaCard extends React.Component {
                         </CardContent>
                       </a>
                     </CardActionArea>
+                    <IconButton
+                      onClick={() => {
+                        if (details && details[i].result) {
+                          this.toggleFavourite(place, details[i].result);
+                        }
+                      }}
+                      aria-label="Add to favourites"
+                      className={classes.favouriteButton}
+                    >
+                      <Favorite />
+                    </IconButton>
                   </Card>
                 </ListItem>
               );

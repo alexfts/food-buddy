@@ -18,7 +18,7 @@ const styles = theme => ({
     // width: '100%'
   },
   dialogTitle: {
-    // padding: 15,
+    padding: 20,
     width: '100%'
   },
   input: {

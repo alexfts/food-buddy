@@ -53,7 +53,12 @@ class TopMatches extends Component {
 
     return matches ? (
       <div>
-        <Grid container justify="space-between" align="flex-start">
+        <Grid
+          container
+          justify="space-between"
+          align="center"
+          className={classes.topMatchesHeader}
+        >
           <Typography className={classes.title} variant="h5">
             Your top matches:
           </Typography>
@@ -68,12 +73,7 @@ class TopMatches extends Component {
             label="Open now"
           />
         </Grid>
-        <div
-          // container
-          // spacing={16}
-          // alignItems="center"
-          className={classes.flexSlider}
-        >
+        <div>
           <Grid
             container
             spacing={16}
@@ -82,7 +82,6 @@ class TopMatches extends Component {
             alignItems="center"
             className={classes.pricePoint}
           >
-            {pricePoint.dollars}
             <Slider
               value={this.state.price}
               min={1}
@@ -90,6 +89,7 @@ class TopMatches extends Component {
               step={1}
               onChange={this.handlePriceChange}
             />
+            {pricePoint.dollars}
           </Grid>
         </div>
 

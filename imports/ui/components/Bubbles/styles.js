@@ -1,7 +1,10 @@
 const styles = theme => ({
   bubbleWrap: {
-    margin: '12px auto',
-    textAlign: 'center'
+    margin: 'auto',
+    marginTop: '5px',
+    marginBottom: '20px',
+    paddingLeft: 12,
+    maxWidth: 710
   },
   chip: {
     color: '#7e7e7e',

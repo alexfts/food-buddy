@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import MediaCard from '../../components/ResultsCard/ResultsCard';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-
 import { compose, withProps, withHandlers, withState } from 'recompose';
 import {
   withScriptjs,
@@ -32,6 +31,7 @@ class MapComponent extends React.Component {
 
   render() {
     const props = this.props;
+    const { classes } = this.props;
     console.log('MAP', props);
     return (
       <Grid container>
@@ -81,7 +81,7 @@ const Results = compose(
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px`, width: '500px' }} />,
+    containerElement: <div style={{ height: 700, width: `100%` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,

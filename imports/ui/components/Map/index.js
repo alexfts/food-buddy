@@ -1,3 +1,3 @@
-import MapContainer from './MapContainer';
+import MapComponent from './MapComponent';
 
-export default MapContainer;
+export default MapComponent;

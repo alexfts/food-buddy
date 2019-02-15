@@ -7,21 +7,21 @@ const styles = theme => ({
     background: 'blue'
   },
   root: {
-    padding: '5% 8%'
+    padding: '4% 8%'
   },
   paperUser: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 2,
     // borderRadius: 3,
-    border: '1.5px solid #d3d3d3'
+    border: '1px solid #D3D3D3'
   },
   paperTags: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 3,
-    borderRadius: 3,
-    border: '1.5px solid #d3d3d3'
+    // borderRadius: 3,
+    border: '1px solid #D3D3D3'
   },
 
   userCard: {
@@ -33,24 +33,36 @@ const styles = theme => ({
   // profileAvatar: {},
   avatarStyle: {
     marginBottom: '0.8rem',
-    height: 80,
-    width: 80
+    height: 85,
+    width: 85
   },
   gravatar: {
     transform: 'scale(1.7)'
   },
   userStyle: {
-    fontWeight: 550,
+    fontWeight: 500,
     fontSize: '1.5rem'
   },
 
   divider: {
     margin: 12
   },
+  editTitle: {
+    color: '#696969',
+    fontSize: '1.2rem',
+    textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 30
+  },
+  tagsContainer: {
+    display: 'flex',
+    paddingBottom: 20
+  },
   tagTitle: {
-    margin: '1rem auto',
-    paddingTop: theme.spacing.unit * 2,
-    textAlign: 'center'
+    paddingTop: '1rem',
+    paddingRight: '1rem',
+    textAlign: 'center',
+    width: 150
   },
   tagButton: {
     borderRadius: 25,

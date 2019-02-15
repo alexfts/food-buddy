@@ -1,7 +1,6 @@
 const styles = theme => ({
   root: {
     flexGrow: 1,
-
     margin: 0
   },
   container: {
@@ -21,11 +20,6 @@ const styles = theme => ({
     textAlign: 'center',
     paddingLeft: 15,
     paddingTop: 50
-  },
-  linear: {
-    color: 'white',
-    position: 'absolute',
-    bottom: 50
   }
 });
 

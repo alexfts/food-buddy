@@ -4,7 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 const Results = props => {
-  return <MapComponent />;
+  const query = props.location.state
+    ? props.location.state.query
+    : 'restaurants';
+  const openNow = props.location.state ? props.location.state.openNow : true;
+  const price = props.location.state ? props.location.state.price : 1;
+  return <MapComponent query={query} openNow={openNow} price={price} />;
 };
 
 export default withStyles(styles)(Results);

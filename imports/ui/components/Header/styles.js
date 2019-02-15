@@ -13,7 +13,6 @@ const styles = theme => ({
   },
   logo: {
     marginTop: -6
-    // marginRight: 20
   },
   menu: {
     color: '#fff',
@@ -21,7 +20,6 @@ const styles = theme => ({
     width: '2.3rem'
   },
   menuIcon: {
-    // color: theme.palette.primary.main,
     paddingRight: 15,
     width: 40
   },

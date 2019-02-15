@@ -18,6 +18,7 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
 import TopMatches from '../TopMatches';
+import RestrictionsWarning from '../RestrictionsWarning';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -215,7 +216,6 @@ class SelectGroupForm extends Component {
       })
     };
 
-    console.log('RESTRICTIONS', this.state.restrictions);
     return (
       <div className={classes.form}>
         <Typography
@@ -264,14 +264,11 @@ class SelectGroupForm extends Component {
             ) : (
               <div>No results</div>
             ))}
-          {/* && this.state.restrictions && (
-               <Paper>
-                 Restrictions:
-                 {this.state.restrictions.map(({ tagids, users }) => (
-                   <div>Restriction</div>
-                 ))}
-               </Paper>
-             )} */}
+          {this.state.multi &&
+            this.state.multi.length > 0 &&
+            this.state.restrictions && (
+              <RestrictionsWarning restrictions={this.state.restrictions} />
+            )}
         </DialogContent>
       </div>
     );

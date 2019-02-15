@@ -28,7 +28,6 @@ class MediaCard extends React.Component {
       const placeid = place.place_id;
       const data = new Promise((resolve, reject) => {
         Meteor.call('googleMapsWebsite.geocode', placeid, (err, result) => {
-          // console.log(err, result);
           if (!err) return resolve(result);
         });
       });
@@ -56,7 +55,7 @@ class MediaCard extends React.Component {
         >
           <List>
             {places.map((place, i) => {
-              console.log(details ? details[i].result.website : '');
+              const photo_reference = details && details[i].result.photos[0].photo_reference
               return (
                 <ListItem>
                   <Card className={classes.card}>
@@ -67,11 +66,10 @@ class MediaCard extends React.Component {
                         rel="noopener noreferrer"
                         className={classes.hrefLink}
                       >
-                        {/* image from photo details */}
                         <CardMedia
                           className={classes.media}
                           component="img"
-                          src={'https://picsum.photos/200'}
+                          src= {`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E`}
                           title="Restaurant Image"
                         />
                         <CardContent>

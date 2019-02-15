@@ -8,6 +8,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import {
   NoSsr,
   Chip,
+  Dialog,
   MenuItem,
   TextField,
   Typography,
@@ -104,7 +105,7 @@ function MultiValue(props) {
       label={props.children}
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
-      color="primary"
+      color="secondary"
       variant="outlined"
     />
   );
@@ -189,6 +190,9 @@ class SelectGroupForm extends Component {
     );
   };
 
+  handleClickOpen = scroll => () => {
+    this.setState({ open: true, scroll });
+  };
   handleClose = () => {
     this.setState({ open: false });
   };
@@ -215,6 +219,13 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
+        {/* <Dialog
+        className={classes.form}
+        open={this.state.open}
+        onClose={this.handleClose}
+        scroll={this.state.scroll}
+        aria-labelledby="scroll-dialog-title"
+      > */}
         <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
           <Typography
             variant="h5"
@@ -264,6 +275,7 @@ class SelectGroupForm extends Component {
               )}
           </DialogContentText>
         </DialogContent>
+        {/* </Dialog> */}
       </div>
     );
   }

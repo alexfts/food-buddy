@@ -19,7 +19,8 @@ const styles = theme => ({
   },
   dialogTitle: {
     padding: 20,
-    width: '100%'
+    width: '100%',
+    overflowY: 'inherit'
   },
   input: {
     display: 'flex',

@@ -64,10 +64,12 @@ class Home extends Component {
           width="100%"
         >
           <Dialog
+            className={classes.dialog}
             open={this.state.open}
             onClose={this.handleClose}
             scroll={this.state.scroll}
             aria-labelledby="scroll-dialog-title"
+            height="100%"
           >
             <div className={classes.paper}>
               <SelectGroupForm />

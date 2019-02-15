@@ -31,7 +31,7 @@ class MapComponent extends React.Component {
 
   render() {
     const props = this.props;
-    const { classes } = this.props;
+
     console.log('MAP', props);
     return (
       <Grid container>

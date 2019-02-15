@@ -22,16 +22,20 @@ class TopMatches extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openNow: true
+      openNow: true,
+      priceRange: 1
     };
   }
 
-  handlePriceChange = (event, price) => {
-    let dollars = '';
-    for (let i = 0; i < price; i++) {
-      dollars += '$';
-    }
-    this.setState({ price, dollars });
+  // handlePriceChange = (event, price) => {
+  //   let dollars = '';
+  //   for (let i = 0; i < price; i++) {
+  //     dollars += '$';
+  //   }
+  //   this.setState({ price, dollars });
+  // };
+  handleChangeSlider = value => {
+    this.setState({ priceRange: value });
   };
 
   handleOpenNowChange = event => {
@@ -49,7 +53,13 @@ class TopMatches extends Component {
       classes,
       matches
     } = this.props;
-    let pricePoint = this.state;
+    const { pricePoint, priceRange } = this.state;
+    const priceLabels = {
+      1: '$',
+      2: '$$',
+      3: '$$$',
+      4: '$$$$'
+    };
 
     return matches ? (
       <div>
@@ -73,24 +83,37 @@ class TopMatches extends Component {
             label="Open now"
           />
         </Grid>
-        <div>
-          <Grid
+        <div className={classes.pricePoint}>
+          {/* <Grid
             container
             spacing={16}
             direction="column"
             justify="space-evenly"
             alignItems="center"
             className={classes.pricePoint}
-          >
-            <Slider
-              value={this.state.price}
-              min={1}
-              max={4}
-              step={1}
-              onChange={this.handlePriceChange}
-            />
-            {pricePoint.dollars}
-          </Grid>
+          > */}
+          <Slider
+            className={classes.slider}
+            // value={this.state.price}
+            value={priceRange}
+            min={1}
+            max={4}
+            step={1}
+            labels={priceLabels}
+            handleLabel={priceRange}
+            // onChange={this.handlePriceChange}
+            onChange={this.handleChangeSlider}
+          />
+          {/* {pricePoint.dollars} */}
+          {/* <div className={classes.dollars}> */}
+          {/* <ul className={classes.dollars}>
+            <li className={classes.dollar}>$</li>
+            <li className={classes.dollar}>$$</li>
+            <li className={classes.dollar}>$$$</li>
+            <li className={classes.dollar}>$$$$</li>
+          </ul> */}
+          {/* </div> */}
+          {/* </Grid> */}
         </div>
 
         <Grid
@@ -133,7 +156,7 @@ class TopMatches extends Component {
                   ))}
                 </div>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   color="primary"
                   className={classes.button}
                   component={Link}

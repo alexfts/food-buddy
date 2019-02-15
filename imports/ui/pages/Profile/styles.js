@@ -15,7 +15,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     // borderRadius: 3,
     border: '1px solid #D3D3D3',
-    width: 900,
+    maxWidth: 900,
     margin: 'auto'
   },
   paperTags: {
@@ -24,7 +24,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 3,
     // borderRadius: 3,
     border: '1px solid #D3D3D3',
-    width: 900,
+    maxWidth: 900,
     margin: 'auto'
   },
 

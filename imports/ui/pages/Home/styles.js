@@ -4,6 +4,9 @@ const styles = theme => ({
     height: '100%',
     width: '100%'
   },
+  dialog: {
+    width: '100%'
+  },
   paper: {
     // position: 'absolute',
     // height: '80%',

@@ -8,7 +8,6 @@ export const TagCategories = new Mongo.Collection('tagCategories');
  * _id,
  * title (category title)
  */
-// TODO do we need separate TagCategories collection?
 export const TagCategoriesSchema = new SimpleSchema({
   _id: { type: SimpleSchema.RegEx.Id },
   title: { type: String }

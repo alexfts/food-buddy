@@ -256,12 +256,14 @@ class SelectGroupForm extends Component {
         <DialogContent>
           {this.state.multi &&
             this.state.multi.length > 0 &&
-            this.state.matches && (
+            (this.state.matches && this.state.matches.length > 0 ? (
               <TopMatches
                 userids={this.state.multi.map(({ value }) => value)}
                 matches={this.state.matches}
               />
-            )}
+            ) : (
+              <div>No results</div>
+            ))}
           {/* && this.state.restrictions && (
                <Paper>
                  Restrictions:

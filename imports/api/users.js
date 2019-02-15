@@ -85,6 +85,28 @@ const UserSchema = new SimpleSchema({
 
 Meteor.users.attachSchema(UserSchema);
 
+const getAllRestrictions = allUserTagPairs => {
+  allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
+    if (acc.hasOwnProperty(tagid)) {
+      acc[tagid].push(user);
+    } else {
+      acc[tagid] = [user];
+    }
+    return acc;
+  }, {});
+
+  allUserTagPairs = Object.keys(allUserTagPairs)
+    .filter(tagid => {
+      const tag = Tags.findOne(tagid);
+      return tag.category.title === 'Dietary Preferences';
+    })
+    .map(tagid => ({
+      tagids: [tagid],
+      users: allUserTagPairs[tagid]
+    }));
+  return allUserTagPairs;
+};
+
 const getTopIndividualTags = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -95,10 +117,18 @@ const getTopIndividualTags = allUserTagPairs => {
     return acc;
   }, {});
 
-  allUserTagPairs = Object.keys(allUserTagPairs).map(tagid => ({
-    tagids: [tagid],
-    users: allUserTagPairs[tagid]
-  }));
+  allUserTagPairs = Object.keys(allUserTagPairs)
+    .filter(tagid => {
+      const tag = Tags.findOne(tagid);
+      return (
+        tag.category.title !== 'Dietary Preferences' &&
+        allUserTagPairs[tagid].length > 1
+      );
+    })
+    .map(tagid => ({
+      tagids: [tagid],
+      users: allUserTagPairs[tagid]
+    }));
   return allUserTagPairs;
 };
 
@@ -211,10 +241,13 @@ Meteor.methods({
     const profile = this.user().profile;
     if (profile && profile.favourites) {
       // remove from favourites if place_id already in favourites
-      const placeInFavourites = profile.favourites.findIndex(
+      const placeInFavourites = profile.favourites.find(
         favourite => favourite.place_id === place.place_id
       );
       if (placeInFavourites) {
+        //Meteor.users.update(this.userId, );
+      } else {
+        //Meteor.users.
       }
     } else {
       Meteor.users.update(this.userId, {
@@ -325,7 +358,8 @@ Meteor.methods({
     results.sort((a, b) => {
       return b.users.length - a.users.length;
     });
-    return results;
+    const restrictions = getAllRestrictions(allUserTagPairs);
+    return { matches: results, restrictions };
   }
 });
 

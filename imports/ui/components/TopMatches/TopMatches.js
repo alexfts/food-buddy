@@ -56,10 +56,10 @@ class TopMatches extends Component {
         <Typography className={classes.title} variant="h5">
           Your top matches:
         </Typography>
-        <Grid
-          container
-          spacing={16}
-          alignItems="center"
+        <div
+          // container
+          // spacing={16}
+          // alignItems="center"
           className={classes.flexSlider}
         >
           <div className={classes.pricePoint}>
@@ -82,7 +82,7 @@ class TopMatches extends Component {
             }
             label="Open now"
           />
-        </Grid>
+        </div>
 
         <Grid
           container

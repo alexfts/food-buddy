@@ -39,7 +39,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   flexSlider: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center'
   }
 });
 

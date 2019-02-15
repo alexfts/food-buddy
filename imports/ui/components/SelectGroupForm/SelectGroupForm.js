@@ -217,63 +217,57 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          scroll={this.state.scroll}
-          aria-labelledby="scroll-dialog-title"
-        >
-          <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
-            <Typography
-              variant="h5"
-              className={classes.title}
-              // color="secondary"
-            >
-              Select your food buddy
-            </Typography>
-            <NoSsr>
-              <Select
-                color="secondary"
-                className={classes.select}
-                classes={classes}
-                styles={selectStyles}
-                textFieldProps={{
-                  label: `You have picked ${
-                    this.state.multi ? this.state.multi.length : 0
-                  } ${
-                    this.state.multi && this.state.multi.length === 1
-                      ? 'buddy'
-                      : 'buddies'
-                  }`,
-                  InputLabelProps: {
-                    shrink: true
-                  }
-                }}
-                options={suggestions}
-                components={selectComponents}
-                value={this.state.multi}
-                onChange={this.handleChange}
-                placeholder="Search a buddy"
-                isMulti
-                fullwidth
-              />
-            </NoSsr>
-          </DialogTitle>
+        <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
+          <Typography
+            variant="h5"
+            className={classes.title}
+            // color="secondary"
+          >
+            Select your food buddy
+          </Typography>
+          <NoSsr>
+            <Select
+              color="secondary"
+              className={classes.select}
+              classes={classes}
+              styles={selectStyles}
+              textFieldProps={{
+                label: `You have picked ${
+                  this.state.multi ? this.state.multi.length : 0
+                } ${
+                  this.state.multi && this.state.multi.length === 1
+                    ? 'buddy'
+                    : 'buddies'
+                }`,
+                InputLabelProps: {
+                  shrink: true
+                }
+              }}
+              options={suggestions}
+              components={selectComponents}
+              value={this.state.multi}
+              onChange={this.handleChange}
+              placeholder="Search a buddy"
+              isMulti
+              fullwidth
+            />
+          </NoSsr>
+        </DialogTitle>
 
-          <DialogContent>
-            <DialogContentText>
-              {this.state.multi &&
-                this.state.multi.length > 0 &&
-                this.state.matches && (
-                  <TopMatches
-                    userids={this.state.multi.map(({ value }) => value)}
-                    matches={this.state.matches}
-                  />
-                )}
-            </DialogContentText>
-          </DialogContent>
+        <DialogContent>
+          <DialogContentText>
+            {this.state.multi &&
+              this.state.multi.length > 0 &&
+              this.state.matches && (
+                <TopMatches
+                  userids={this.state.multi.map(({ value }) => value)}
+                  matches={this.state.matches}
+                />
+              )}
+          </DialogContentText>
+        </DialogContent>
 
-          {/* <DialogActions className={classes.buttons}>
+        {/* <DialogActions className={classes.buttons}>
             {this.state.multi &&
             this.state.multi.length > 0 &&
             this.state.matches ? (
@@ -306,7 +300,6 @@ class SelectGroupForm extends Component {
               </Button>
             )}
           </DialogActions> */}
-        </Dialog>
       </div>
     );
   }

@@ -9,7 +9,6 @@ import {
   Typography
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
 
@@ -37,49 +36,43 @@ class Home extends Component {
     const { classes } = this.props;
 
     return (
-      <Fragment>
-        <div className={classes.container}>
-          <Fab
-            aria-label="Add"
-            className={classes.plate}
-            onClick={this.handleClickOpen('paper')}
-            // onClick={this.handleOpen}
-          >
-            <AddIcon />
-          </Fab>
+      <div className={classes.container}>
+        <Fab
+          aria-label="Add"
+          className={classes.plate}
+          onClick={this.handleClickOpen('paper')}
+        >
+          <AddIcon />
+        </Fab>
 
-          <img src="/fork-and-knife.svg" className={classes.plateImg} />
-
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
+        <img src="/fork-and-knife.svg" className={classes.plateImg} />
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.open}
+          onClose={this.handleClose}
+          className={classes.flexbox}
+          width="100%"
+        >
+          <Dialog
             open={this.state.open}
             onClose={this.handleClose}
-            className={classes.flexbox}
-            width="100%"
+            scroll={this.state.scroll}
+            aria-labelledby="scroll-dialog-title"
           >
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              scroll={this.state.scroll}
-              aria-labelledby="scroll-dialog-title"
-            >
-              <div className={classes.paper}>
-                <SelectGroupForm />
-              </div>
-            </Dialog>
-          </Modal>
-        </div>
-
+            <div className={classes.paper}>
+              <SelectGroupForm />
+            </div>
+          </Dialog>
+        </Modal>
         <div>
           <iframe
             className={classes.map}
             width="100%"
-            height="650"
             src="https://www.google.com/maps/embed/v1/search?q=restaurants%20near%20me&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E"
           />
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

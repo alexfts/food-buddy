@@ -1,5 +1,7 @@
 const styles = theme => ({
   container: {
+    background: 'radial-gradient(ellipse at 55%, #f8ab4f, #f0792b)',
+    height: '100%',
     width: '100%'
   },
   paper: {
@@ -28,15 +30,24 @@ const styles = theme => ({
   },
 
   map: {
-    // maxHeight: '80%'
+    height: 700,
+    maxHeight: '100%'
   },
+
   plateImg: {
+    height: 40,
     position: 'absolute',
-    bottom: 8,
+    bottom: 40,
     left: 0,
-    right: 3,
+    right: 0,
     margin: '0 auto',
-    height: 100
+    width: 'auto',
+
+    '&:hover': {
+      // display: 'block',
+      bottom: 8,
+      height: 100
+    }
   }
 });
 

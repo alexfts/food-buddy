@@ -1,13 +1,6 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Grid,
-  Avatar,
-  Typography,
-  Paper,
-  withStyles
-} from '@material-ui/core';
+import { Avatar, Typography, Paper, withStyles } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
@@ -49,31 +42,6 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
         </Paper>
 
         <div className={classes.divider} />
-        {/* <Paper square elevation={0} className={classes.paperTags}>
-          <Typography variant="h6" className={classes.tagTitle}>
-            Your Tags:
-          </Typography>
-          <ul>
-            {currentUser.profile.tags.map(selectedTag => {
-              return tags.map(tag => {
-                if (tag._id === selectedTag) {
-                  return (
-                    <li>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        className={classes.tagButton}
-                        key={tag._id}
-                      >
-                        {tag.title}
-                      </Button>
-                    </li>
-                  );
-                }
-              });
-            })}
-          </ul>
-        </Paper> */}
 
         <div className={classes.divider} />
 
@@ -99,7 +67,6 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
     </Fragment>
   );
 };
-// }
 
 Profile.propTypes = {
   classes: PropTypes.object.isRequired

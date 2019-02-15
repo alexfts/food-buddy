@@ -13,14 +13,12 @@ import {
   Typography,
   Avatar,
   Paper,
-  Button,
-  Divider
+  Button
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
 import TopMatches from '../TopMatches';
 
-import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';

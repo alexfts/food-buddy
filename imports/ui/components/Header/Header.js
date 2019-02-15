@@ -5,12 +5,10 @@ import { withRouter, Link } from 'react-router-dom';
 import styles from './styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import {
   AccountCircle,
   PowerSettingsNew,
-  LocalDining,
   Restaurant
 } from '@material-ui/icons';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -95,7 +93,7 @@ class Header extends React.Component {
                     </MenuItem>
                     <MenuItem
                       className={classes.menuItem}
-                      onClick={Meteor.logout}
+                      onClick={() => Meteor.logout()}
                       component={Link}
                       to={`/welcome`}
                     >

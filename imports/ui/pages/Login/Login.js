@@ -38,4 +38,8 @@ const Login = ({ classes }) => {
   );
 };
 
+Login.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 export default withStyles(styles)(Login);

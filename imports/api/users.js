@@ -17,11 +17,6 @@ Meteor.users.deny({
   }
 });
 
-Accounts.onCreateUser((_, user) => {
-  user.favourites = [];
-  return user;
-});
-
 const UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
@@ -40,6 +35,13 @@ const UserSchema = new SimpleSchema({
   username: {
     type: String,
     optional: true
+  },
+  favourites: {
+    type: Array,
+    optional: true
+  },
+  'favourites.$': {
+    type: Object
   },
   emails: {
     type: Array,

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import MapComponent from '../../components/Map/Map';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';

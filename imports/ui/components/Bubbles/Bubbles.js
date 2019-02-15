@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import Typography from '@material-ui/core/Typography';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
-import { Tags } from '../../../api/tags';
-import { Chip, Button } from '@material-ui/core';
+import { Chip } from '@material-ui/core';
 
 class Bubbles extends React.Component {
   constructor(props) {
@@ -114,21 +112,14 @@ class Bubbles extends React.Component {
             onClick={() => this.handleSelect(tag)}
           />
         ))}
-        {/* <Button
-          onClick={() => {
-            Meteor.call(
-              'users.updateUserTagsByCategory',
-              ['jBNakiDmZ3WRffLcP', 'QteTDKetbHLAbAifq'],
-              'vjf8fR5EfP8Tejbj9'
-            );
-          }}
-        >
-          Clickme
-        </Button> */}
       </div>
     );
   }
 }
+
+Bubbles.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withTracker(() => {
   Meteor.subscribe('tagCategories');

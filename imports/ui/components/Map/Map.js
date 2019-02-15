@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import Grid from '@material-ui/core/Grid';
 import MediaCard from '../../components/ResultsCard/ResultsCard';
@@ -10,8 +10,7 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker,
-  InfoWindow
+  Marker
 } from 'react-google-maps';
 import { MAP } from 'react-google-maps/lib/constants';
 const refs = {
@@ -33,14 +32,13 @@ class MapComponent extends React.Component {
 
   render() {
     const props = this.props;
-    console.log(props);
+    console.log('MAP', props);
     return (
       <Grid container>
         <Grid item>
           <GoogleMap
             onTilesLoaded={props.fetchPlaces}
             ref={props.onMapMounted}
-            // onBoundsChanged={props.fetchPlaces}
             defaultZoom={15}
             defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
           >
@@ -60,7 +58,6 @@ class MapComponent extends React.Component {
                   // label={(i + 1).toString()}
                   label={place.name.split(' ')[0]}
                   key={i}
-                  //   label={props.places.id}
                   position={{
                     lat: place.geometry.location.lat(),
                     lng: place.geometry.location.lng()
@@ -108,7 +105,6 @@ const Results = compose(
       };
       service.nearbySearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-          // console.log(results);
           updatePlaces(results);
         }
       });

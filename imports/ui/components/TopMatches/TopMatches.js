@@ -58,7 +58,7 @@ class TopMatches extends Component {
         </Typography>
 
         <div className={classes.pricePoint}>{pricePoint.dollars}</div>
-
+        <div>Select Your Budget</div>
         <Slider
           value={this.state.price}
           min={1}
@@ -79,7 +79,6 @@ class TopMatches extends Component {
         <Grid
           container
           spacing={16}
-          // direction="column"
           justify="space-between"
           alignItems="center"
           spacing={16}

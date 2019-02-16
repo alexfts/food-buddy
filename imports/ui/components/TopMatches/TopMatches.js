@@ -21,20 +21,20 @@ class TopMatches extends Component {
     super(props);
     this.state = {
       openNow: true,
-      priceRange: 1,
+      horizontal: 1,
       price: 1
     };
   }
 
-  // handlePriceChange = (event, price) => {
-  //   let dollars = '';
-  //   for (let i = 0; i < price; i++) {
-  //     dollars += '$';
-  //   }
-  //   this.setState({ price, dollars });
-  // };
-  handleChangeSlider = value => {
-    this.setState({ priceRange: value });
+  handlePriceChange = (event, price) => {
+    let dollars = '';
+    for (let i = 0; i < price; i++) {
+      dollars += '$';
+    }
+    this.setState({ price, dollars });
+  };
+  handleChangeHorizontal = value => {
+    this.setState({ horizontal: value });
   };
 
   handleOpenNowChange = event => {
@@ -52,8 +52,8 @@ class TopMatches extends Component {
       classes,
       matches
     } = this.props;
-    const { price, priceRange } = this.state;
-    const priceLabels = {
+    const { price, horizontal } = this.state;
+    const horizontalLabels = {
       1: '$',
       2: '$$',
       3: '$$$',
@@ -91,26 +91,25 @@ class TopMatches extends Component {
             alignItems="center"
             className={classes.pricePoint}
           > */}
+
           <Slider
             className={classes.slider}
-            // value={this.state.price}
-            value={priceRange}
             min={1}
             max={4}
             step={1}
-            labels={priceLabels}
-            handleLabel={priceRange}
-            // onChange={this.handlePriceChange}
-            onChange={this.handleChangeSlider}
+            value={price}
+            // labels={horizontalLabels}
+            // handleLabel={horizontal}
+            onChange={this.handlePriceChange}
           />
           {/* {price.dollars} */}
           {/* <div className={classes.dollars}> */}
-          {/* <ul className={classes.dollars}>
+          <ul className={classes.dollars}>
             <li className={classes.dollar}>$</li>
             <li className={classes.dollar}>$$</li>
             <li className={classes.dollar}>$$$</li>
             <li className={classes.dollar}>$$$$</li>
-          </ul> */}
+          </ul>
           {/* </div> */}
           {/* </Grid> */}
         </div>

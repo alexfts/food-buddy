@@ -39,7 +39,7 @@ const styles = theme => ({
   },
 
   sliderContainer: {
-    width: 420
+    // width: 420
   },
   pricePoint: {
     // color: 'green'
@@ -48,7 +48,8 @@ const styles = theme => ({
     color: 'green',
     width: 420,
     margin: 'auto',
-    zIndex: 0
+    zIndex: 0,
+    listStyle: 'none'
   },
   dollars: {
     display: 'flex',

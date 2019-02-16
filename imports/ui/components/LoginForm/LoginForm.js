@@ -30,14 +30,6 @@ class LoginForm extends Component {
           [FORM_ERROR]: 'Incorrect email and/or password'
         };
       }
-      // err => {
-      //   if (err) {
-      //     console.log('LOGIN ERROR');
-      //     return {
-      //       [FORM_ERROR]: 'Incorrect email and/or password'
-      //     };
-      //   }
-      // });
     } else {
       Accounts.createUser(
         {

@@ -43,7 +43,6 @@ class MediaCard extends React.Component {
   };
 
   toggleFavourite = (place, details) => {
-    console.log('TOGGLEFAVOURITE', place, details);
     Meteor.call('users.changeFavourites', place, details);
   };
 

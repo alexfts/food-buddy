@@ -54,11 +54,11 @@ class Home extends Component {
         }
       });
     let query;
-    if (userTags) {
-      const randomIndex = generateRandomInt(0, userTags.length - 1);
-      if (userTags[randomIndex]) {
-        query = userTags[randomIndex].title;
-      }
+    if (userTags && !this.randomIndex) {
+      this.randomIndex = generateRandomInt(0, userTags.length - 1);
+    }
+    if (userTags && userTags[this.randomIndex]) {
+      query = userTags[this.randomIndex].title;
     }
     return (
       <div className={classes.container}>
@@ -101,7 +101,7 @@ class Home extends Component {
         </Modal>
 
         <div>
-          {query && !this.state.hover && (
+          {query && (
             <div>{`You like ${query} restaurants. Check them out!`}</div>
           )}
           {query && <MapComponent query={query} />}

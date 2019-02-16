@@ -9,7 +9,6 @@ import MapComponent from '../../components/Map/Map';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
-import { TramOutlined, TrendingUpRounded } from '@material-ui/icons';
 
 const generateRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -57,7 +56,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log('RENDER');
     const { classes, tags } = this.props;
     let { userTags } = this.props;
     //if there are tags, pick a random tag
@@ -75,7 +73,6 @@ class Home extends Component {
     if (userTags && userTags[this.randomIndex]) {
       query = userTags[this.randomIndex].title;
     }
-    console.log(query);
     return (
       <div className={classes.container}>
         <Fab
@@ -123,7 +120,7 @@ class Home extends Component {
             anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
             open={query && this.state.displaySnackbar}
             onClose={this.handleCloseSnackbar}
-            autoHideDuration="2000"
+            autoHideDuration={2000}
             ContentProps={{
               'aria-describedby': 'message-id'
             }}

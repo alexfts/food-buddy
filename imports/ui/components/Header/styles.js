@@ -1,7 +1,10 @@
 const styles = theme => ({
   root: {
     background: theme.palette.primary.main,
-    flexGrow: 1
+    flexGrow: 1, 
+    position: 'fixed', 
+    zIndex: 10, 
+    width: '100%'
   },
   flex: {
     flexGrow: 1,

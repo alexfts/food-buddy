@@ -1,7 +1,7 @@
 const styles = theme => ({
   map: {
-    width: '100%',
-    height: 700
+    width: '77%',
+    height: '100%'
   }
 });
 

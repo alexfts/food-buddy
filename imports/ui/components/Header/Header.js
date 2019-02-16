@@ -56,7 +56,7 @@ class Header extends React.Component {
                 color="inherit"
                 aria-label="Menu"
               >
-                <img src="/Food_Buddy.png" height="30" alt="Food Buddy App" />
+                <img src="/Food_Buddy.png" height="40" alt="Food Buddy App" />
               </IconButton>
               {auth && (
                 <div>

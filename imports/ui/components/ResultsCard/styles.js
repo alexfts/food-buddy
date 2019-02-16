@@ -19,8 +19,12 @@ const styles = theme => ({
     height: '100%'
   },
   favouriteButton: {
-    color: '#e91e63'
-  }
+    color: '#e91e63',
+    '&$checked': {
+      color: '#e91e63'
+    }
+  },
+  checked: {}
 });
 
 export default styles;

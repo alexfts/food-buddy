@@ -28,6 +28,15 @@ const UserProfileSchema = new SimpleSchema({
   },
   'tags.$': {
     type: SimpleSchema.RegEx.Id
+  },
+  favourites: {
+    type: Array,
+    optional: true
+  },
+  'favourites.$': {
+    type: Object,
+    blackbox: true,
+    optional: true
   }
 });
 
@@ -35,13 +44,6 @@ const UserSchema = new SimpleSchema({
   username: {
     type: String,
     optional: true
-  },
-  favourites: {
-    type: Array,
-    optional: true
-  },
-  'favourites.$': {
-    type: Object
   },
   emails: {
     type: Array,
@@ -230,7 +232,8 @@ Meteor.methods({
     });
   },
 
-  'users.changeFavourites'(place, details) {
+  'users.changeFavourites'(place, details, shouldAdd) {
+    console.log('>>>>>>users.changeFavourites');
     if (!this.userId) {
       throw new Meteor.Error(
         'users.updateUserTags.not-authorized',
@@ -238,20 +241,38 @@ Meteor.methods({
       );
     }
 
-    const profile = this.user().profile;
-    if (profile && profile.favourites) {
-      // remove from favourites if place_id already in favourites
-      const placeInFavourites = profile.favourites.find(
-        favourite => favourite.place_id === place.place_id
+    const profile = Meteor.user().profile;
+    if (!profile) {
+      throw new Meteor.Error(
+        'users.updateUserTags.not-onboarded',
+        'You are not onboarded.'
       );
-      if (placeInFavourites) {
+    }
+    const placeObject = { ...place, details };
+    console.log('PLACEOBJECT', placeObject);
+
+    if (profile && profile.favourites) {
+      if (shouldAdd) {
         //Meteor.users.update(this.userId, );
+        // CHECK METEOR>USERS.UPDATE docs
+        console.log('FOUND PROFILE & FAVS, ADDING TO SET');
+        Meteor.users.update(
+          { _id: this.userId },
+          {
+            $addToSet: { 'profile.favourites': placeObject }
+          }
+        );
       } else {
         //Meteor.users.
+        console.log('FOUND PROFILE & FAVS, REMOVING FROM SET');
+        Meteor.users.update(this.userId, {
+          $pull: { 'profile.favourites': { place_id: place.place_id } }
+        });
       }
-    } else {
+    } else if (shouldAdd) {
+      console.log('NO PROFILE / FAVS FOUND');
       Meteor.users.update(this.userId, {
-        $set: { 'profile.favourites': [{ ...place, details }] }
+        $set: { 'profile.favourites': [placeObject] }
       });
     }
   },

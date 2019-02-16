@@ -88,18 +88,26 @@ class MediaCard extends React.Component {
                           src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E`}
                           title="Restaurant Image"
                         />
-                        <CardContent>
-                          <Typography component="h2">{place.name}</Typography>
-                          <Typography component="p">
-                            {place.rating ? `Rating: ${place.rating}` : ''}
+                        <CardContent className={classes.content}>
+                        <div className={classes.firstline}>
+                          <Typography className={classes.name}>{place.name}</Typography>
+                          <Typography className={classes.dollar}>
+                            {place.price_level && place.price_level === 1
+                              ? `$`
+                              : place.price_level && place.price_level === 2
+                              ? `$$`
+                              : place.price_level && place.price_level === 3
+                              ? `$$$`
+                              : place.price_level && place.price_level === 4
+                              ? `$$$$`
+                              : ``}
                           </Typography>
-                          <Typography component="p">
-                            {place.price_level
-                              ? `Price Level: ${place.price_level}`
-                              : ''}
-                          </Typography>
+                          </div>
                           <Typography component="p">
                             {place.vicinity}
+                          </Typography>
+                          <Typography component="p">
+                          {place.rating ? `⭐️ ${place.rating}` : ''}
                           </Typography>
                         </CardContent>
                       </a>

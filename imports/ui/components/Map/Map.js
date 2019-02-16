@@ -80,8 +80,8 @@ const Results = compose(
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: 700, width: `100%` }} />,
-    mapElement: <div style={{ height: `100%` }} />
+    containerElement: <div style={{ height: 700, width: `80%` }} />,
+    mapElement: <div style={{ height: 656, top: 64 }} />
   }),
   withScriptjs,
   withGoogleMap,

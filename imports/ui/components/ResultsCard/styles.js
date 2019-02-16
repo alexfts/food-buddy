@@ -3,20 +3,34 @@ const styles = theme => ({
     display: 'flex'
   },
   card: {
-    height: 370,
-    width: 240
+    height: 300,
+    width: '100%'
   },
   media: {
-    height: 200
+    height: 160
+  },
+  content: {
+   fontFamily: 'Arial' 
+  },
+  firstline: {
+    display: 'flex', 
+    justifyContent: 'space-between'
+  },
+  name: {
+    fontSize: 16
+  },
+  dollar: {
+    color: 'green'
   },
   drawer: {
     width: 200,
     flexShrink: 0
   },
   drawerPaper: {
+    background: 'orange',
     top: 64,
-    width: '23%',
-    height: '100%'
+    width: '20%',
+    height: 656
   },
   favouriteButton: {
     color: '#e91e63'

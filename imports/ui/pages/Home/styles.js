@@ -31,7 +31,7 @@ const styles = theme => ({
     bottom: 30,
     left: 0,
     right: 0,
-    margin: '0 auto',
+    margin: '0 40%',
     color: '#fff',
 
     '&:hover': {

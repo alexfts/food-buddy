@@ -72,7 +72,12 @@ class MediaCard extends React.Component {
                   <Card className={classes.card}>
                     <CardActionArea>
                       <a
-                        href={details && details[i].result.website}
+                        href={
+                          details &&
+                          details[i] &&
+                          details[i].result &&
+                          details[i].result.website
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                         className={classes.hrefLink}

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Fab, Dialog, Modal } from '@material-ui/core';
@@ -15,13 +15,16 @@ const generateRandomInt = (min, max) => {
 };
 
 class Home extends Component {
-  state = {
-    multi: null,
-    matches: null,
-    open: false,
-    scroll: 'paper',
-    hover: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      multi: null,
+      matches: null,
+      open: false,
+      scroll: 'paper',
+      hover: false
+    };
+  }
 
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
@@ -98,7 +101,7 @@ class Home extends Component {
         </Modal>
 
         <div>
-          {query && (
+          {query && !this.state.hover && (
             <div>{`You like ${query} restaurants. Check them out!`}</div>
           )}
           {query && <MapComponent query={query} />}

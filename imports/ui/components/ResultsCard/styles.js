@@ -14,9 +14,9 @@ const styles = theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    top: 70,
-    width: 300,
-    height: '89%'
+    top: 64,
+    width: '23%',
+    height: '100%'
   },
   favouriteButton: {
     color: '#e91e63'

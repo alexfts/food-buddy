@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core';
-import { Favorite } from '@material-ui/icons';
+import { withTracker } from 'meteor/react-meteor-data';
+import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
+import {
+  Favorite,
+  FavoriteBorder,
+  SupervisedUserCircleSharp
+} from '@material-ui/icons';
 import styles from './styles';
 import {
   Card,
@@ -42,11 +47,33 @@ class MediaCard extends React.Component {
     });
   };
 
+<<<<<<< HEAD
   toggleFavourite = (place, details) => {
     Meteor.call('users.changeFavourites', place, details);
+=======
+  toggleFavourite = (place, details, e) => {
+    console.log('TOGGLEFAVOURITE', place, details, e.target.checked);
+    Meteor.call('users.changeFavourites', place, details, e.target.checked);
+  };
+
+  shouldCheck = place => {
+    const { user } = this.props;
+    if (!place || !user || !user.profile || !user.profile.favourites)
+      return false;
+    console.log(
+      'shouldcheck',
+      user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
+        undefined
+    );
+    return (
+      user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
+      undefined
+    );
+>>>>>>> 5d25c7652535403dbd592ef13327bcf3d43c0a4b
   };
 
   render() {
+    console.log('hellow');
     const { classes, places } = this.props;
     const details = this.state.result;
     return (
@@ -84,7 +111,7 @@ class MediaCard extends React.Component {
                         <CardMedia
                           className={classes.media}
                           component="img"
-                          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=AIzaSyCsLQmoYlsOqd5yWQpnkbwbpa76UmYwz8E`}
+                          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss`}
                           title="Restaurant Image"
                         />
                         <CardContent>
@@ -103,7 +130,7 @@ class MediaCard extends React.Component {
                         </CardContent>
                       </a>
                     </CardActionArea>
-                    <IconButton
+                    {/* <IconButton
                       onClick={() => {
                         if (details && details[i].result) {
                           this.toggleFavourite(place, details[i].result);
@@ -113,7 +140,26 @@ class MediaCard extends React.Component {
                       className={classes.favouriteButton}
                     >
                       <Favorite />
-                    </IconButton>
+                    </IconButton> */}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          icon={<FavoriteBorder />}
+                          checkedIcon={<Favorite />}
+                          value="favourite"
+                          classes={{
+                            root: classes.favouriteButton,
+                            checked: classes.checked
+                          }}
+                          checked={this.shouldCheck(place)}
+                          onChange={e => {
+                            if (details && details[i]) {
+                              this.toggleFavourite(place, details[i].result, e);
+                            }
+                          }}
+                        />
+                      }
+                    />
                   </Card>
                 </ListItem>
               );
@@ -127,4 +173,8 @@ class MediaCard extends React.Component {
 MediaCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withStyles(styles)(MediaCard);
+export default withTracker(() => {
+  return {
+    user: Meteor.user()
+  };
+})(withStyles(styles)(MediaCard));

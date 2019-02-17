@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Fab, Dialog, Modal } from '@material-ui/core';
+import { Fab, Dialog, Modal, Snackbar } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
@@ -22,18 +22,30 @@ class Home extends Component {
       matches: null,
       open: false,
       scroll: 'paper',
-      hover: false
+      hover: false,
+      displaySnackbar: false
     };
+  }
+
+  componentDidMount() {
+    // Delay showing the snackbar right away for a better UX
+    setTimeout(() => {
+      this.setState({ displaySnackbar: true });
+    }, 2000);
   }
 
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
+
   handleOpen = () => {
     this.setState({ open: true });
   };
   handleClose = () => {
     this.setState({ open: false });
+  };
+  handleCloseSnackbar = () => {
+    this.setState({ displaySnackbar: false });
   };
 
   mouseOver = () => {
@@ -45,20 +57,21 @@ class Home extends Component {
 
   render() {
     const { classes, tags } = this.props;
+    let { userTags } = this.props;
     //if there are tags, pick a random tag
-    const userTags = Meteor.user()
-      .profile.tags.map(tagId => tags.find(t => t._id === tagId))
+    userTags = userTags
+      .map(tagId => tags.find(t => t._id === tagId))
       .filter(tag => {
         if (tag && tag.category) {
           return tag.category.title !== 'Dietary Preferences';
         }
       });
     let query;
-    if (userTags) {
-      const randomIndex = generateRandomInt(0, userTags.length - 1);
-      if (userTags[randomIndex]) {
-        query = userTags[randomIndex].title;
-      }
+    if (userTags && !this.randomIndex) {
+      this.randomIndex = generateRandomInt(0, userTags.length - 1);
+    }
+    if (userTags && userTags[this.randomIndex]) {
+      query = userTags[this.randomIndex].title;
     }
     return (
       <div className={classes.container}>
@@ -101,10 +114,20 @@ class Home extends Component {
         </Modal>
 
         <div>
-          {query && !this.state.hover && (
-            <div>{`You like ${query} restaurants. Check them out!`}</div>
-          )}
           {query && <MapComponent query={query} />}
+
+          <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+            open={query && this.state.displaySnackbar}
+            onClose={this.handleCloseSnackbar}
+            autoHideDuration={2000}
+            ContentProps={{
+              'aria-describedby': 'message-id'
+            }}
+            message={
+              <span id="message-id">{`You like ${query} restaurants. Check them out!`}</span>
+            }
+          />
         </div>
       </div>
     );
@@ -119,6 +142,7 @@ export default withTracker(() => {
   Meteor.subscribe('tags');
 
   return {
-    tags: Tags.find({}).fetch()
+    tags: Tags.find({}).fetch(),
+    userTags: Meteor.user().profile.tags
   };
 })(withStyles(styles)(Home));

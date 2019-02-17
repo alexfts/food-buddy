@@ -1,14 +1,9 @@
-import React, { useImperativeHandle } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
-import {
-  Favorite,
-  FavoriteBorder,
-  SupervisedUserCircleSharp, 
-  Star
-} from '@material-ui/icons';
+import { Favorite, FavoriteBorder, Star } from '@material-ui/icons';
 import styles from './styles';
 import {
   Card,
@@ -49,7 +44,6 @@ class MediaCard extends React.Component {
   };
 
   toggleFavourite = (place, details, e) => {
-    console.log('TOGGLEFAVOURITE', place, details, e.target.checked);
     Meteor.call('users.changeFavourites', place, details, e.target.checked);
   };
 
@@ -57,11 +51,7 @@ class MediaCard extends React.Component {
     const { user } = this.props;
     if (!place || !user || !user.profile || !user.profile.favourites)
       return false;
-    console.log(
-      'shouldcheck',
-      user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
-        undefined
-    );
+
     return (
       user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
       undefined
@@ -69,7 +59,6 @@ class MediaCard extends React.Component {
   };
 
   render() {
-    console.log('hellow');
     const { classes, places } = this.props;
     const details = this.state.result;
     return (
@@ -111,19 +100,21 @@ class MediaCard extends React.Component {
                           title="Restaurant Image"
                         />
                         <CardContent className={classes.content}>
-                        <div className={classes.firstline}>
-                          <Typography className={classes.name}>{place.name}</Typography>
-                          <Typography className={classes.dollar}>
-                            {place.price_level && place.price_level === 1
-                              ? `$`
-                              : place.price_level && place.price_level === 2
-                              ? `$$`
-                              : place.price_level && place.price_level === 3
-                              ? `$$$`
-                              : place.price_level && place.price_level === 4
-                              ? `$$$$`
-                              : ``}
-                          </Typography>
+                          <div className={classes.firstline}>
+                            <Typography className={classes.name}>
+                              {place.name}
+                            </Typography>
+                            <Typography className={classes.dollar}>
+                              {place.price_level && place.price_level === 1
+                                ? `$`
+                                : place.price_level && place.price_level === 2
+                                ? `$$`
+                                : place.price_level && place.price_level === 3
+                                ? `$$$`
+                                : place.price_level && place.price_level === 4
+                                ? `$$$$`
+                                : ``}
+                            </Typography>
                           </div>
                           <Typography component="p">
                             {place.vicinity}
@@ -131,40 +122,34 @@ class MediaCard extends React.Component {
                         </CardContent>
                       </a>
                     </CardActionArea>
-                    {/* <IconButton
-                      onClick={() => {
-                        if (details && details[i].result) {
-                          this.toggleFavourite(place, details[i].result);
-                        }
-                      }}
-                      aria-label="Add to favourites"
-                      className={classes.favouriteButton}
-                    >
-                      <Favorite />
-                    </IconButton> */}
                     <div className={classes.starheart}>
-                    <Typography component="p">
-                      <Star className={classes.star} /> {place.rating ? ` ${place.rating}` : ''}
-                          </Typography>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          icon={<FavoriteBorder />}
-                          checkedIcon={<Favorite />}
-                          value="favourite"
-                          classes={{
-                            root: classes.favouriteButton,
-                            checked: classes.checked
-                          }}
-                          checked={this.shouldCheck(place)}
-                          onChange={e => {
-                            if (details && details[i]) {
-                              this.toggleFavourite(place, details[i].result, e);
-                            }
-                          }}
-                        />
-                      }
-                    />
+                      <Typography component="p">
+                        <Star className={classes.star} />{' '}
+                        {place.rating ? ` ${place.rating}` : ''}
+                      </Typography>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            icon={<FavoriteBorder />}
+                            checkedIcon={<Favorite />}
+                            value="favourite"
+                            classes={{
+                              root: classes.favouriteButton,
+                              checked: classes.checked
+                            }}
+                            checked={this.shouldCheck(place)}
+                            onChange={e => {
+                              if (details && details[i]) {
+                                this.toggleFavourite(
+                                  place,
+                                  details[i].result,
+                                  e
+                                );
+                              }
+                            }}
+                          />
+                        }
+                      />
                     </div>
                   </Card>
                 </ListItem>

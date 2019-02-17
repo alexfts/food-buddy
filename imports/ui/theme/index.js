@@ -15,15 +15,18 @@ export default createMuiTheme({
       // dark: '#3b3dac',
       // contrastText: '#fff'
     },
-
     error: {
       main: '#f5ef40'
     },
-
     bg: {
       main: '#212121'
     }
   },
+
+  slider: {
+    handleFillColor: '#6ba048'
+  },
+
   typography: {
     useNextVariants: true
   }

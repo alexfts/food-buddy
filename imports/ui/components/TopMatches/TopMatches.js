@@ -14,54 +14,25 @@ import {
   Switch
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Slider from '@material-ui/lab/Slider';
+import PriceSlider from '../Slider';
 
 class TopMatches extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openNow: true,
-      horizontal: 1,
-      price: 1
+      openNow: true
     };
   }
-
-  handlePriceChange = (event, price) => {
-    let dollars = '';
-    for (let i = 0; i < price; i++) {
-      dollars += '$';
-    }
-    this.setState({ price, dollars });
-  };
-  handleChangeHorizontal = value => {
-    this.setState({ horizontal: value });
-  };
 
   handleOpenNowChange = event => {
     this.setState({ openNow: event.target.checked });
   };
 
   render() {
-    const {
-      userids,
-      users,
-      currentUser,
-      currentUserId,
-      allTags,
-      tagCategories,
-      classes,
-      matches
-    } = this.props;
-    const { price, horizontal } = this.state;
-    const horizontalLabels = {
-      1: '$',
-      2: '$$',
-      3: '$$$',
-      4: '$$$$'
-    };
+    const { allTags, classes, matches } = this.props;
 
     return matches ? (
-      <div>
+      <div className={classes.container}>
         <Grid
           container
           justify="space-between"
@@ -82,72 +53,43 @@ class TopMatches extends Component {
             label="Open now"
           />
         </Grid>
-        <div className={classes.pricePoint}>
-          {/* <Grid
-            container
-            spacing={16}
-            direction="column"
-            justify="space-evenly"
-            alignItems="center"
-            className={classes.pricePoint}
-          > */}
 
-          <Slider
-            className={classes.slider}
-            min={1}
-            max={4}
-            step={1}
-            value={price}
-            // labels={horizontalLabels}
-            // handleLabel={horizontal}
-            onChange={this.handlePriceChange}
-          />
-          {/* {price.dollars} */}
-          {/* <div className={classes.dollars}> */}
-          <ul className={classes.dollars}>
-            <li className={classes.dollar}>$</li>
-            <li className={classes.dollar}>$$</li>
-            <li className={classes.dollar}>$$$</li>
-            <li className={classes.dollar}>$$$$</li>
-          </ul>
-          {/* </div> */}
-          {/* </Grid> */}
-        </div>
+        <PriceSlider />
 
-        <Grid
+        {/* <Grid
           container
           spacing={16}
           justify="space-between"
           alignItems="center"
-        >
-          {matches.map(({ tagids, users }) => {
-            const userTags = allTags.filter(tag => tagids.includes(tag._id));
-            const userTagTitles = userTags.map(tag => tag.title);
-            return (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                key={userTagTitles.join(', ')}
-                className={classes.matches}
-              >
-                <Typography className={classes.tagTitle} color="primary">
-                  {userTagTitles.join(' or ')}
-                </Typography>
-                <div className={classes.flexMatches}>
-                  <Typography className={classes.matchesLabel}>
-                    Match:
-                  </Typography>
-                  {users.map(user => (
-                    <Chip
-                      className={classes.user}
-                      key={user._id}
-                      label={user.username}
-                      color="default"
-                      variant="default"
-                    />
-                  ))}
-                </div>
+        > */}
+        {matches.map(({ tagids, users }) => {
+          const userTags = allTags.filter(tag => tagids.includes(tag._id));
+          const userTagTitles = userTags.map(tag => tag.title);
+          return (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              key={userTagTitles.join(', ')}
+              className={classes.matches}
+            >
+              <Typography className={classes.tagTitle} color="primary">
+                {userTagTitles.join(' or ')}
+              </Typography>
+
+              {/* <div className={classes.flexMatches}> */}
+              <Typography className={classes.matchesLabel}>Match:</Typography>
+              {users.map(user => (
+                <Chip
+                  className={classes.user}
+                  key={user._id}
+                  label={user.username}
+                  color="default"
+                  variant="default"
+                />
+              ))}
+              {/* </div> */}
+              <div>
                 <Button
                   variant="contained"
                   color="primary"
@@ -167,13 +109,14 @@ class TopMatches extends Component {
                 >
                   Select
                 </Button>
-              </Grid>
-            );
-          })}
-        </Grid>
+              </div>
+            </Grid>
+          );
+        })}
+        {/* </Grid> */}
       </div>
     ) : (
-      <div>U suck</div>
+      <div>No matches found</div>
     );
   }
 }

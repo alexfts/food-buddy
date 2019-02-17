@@ -25,6 +25,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import PriceSlider from '../Slider';
 
 /** Components to customize the style and behaviour of Select
  *  See https://react-select.com/components#replacing-components
@@ -222,21 +223,8 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        {/* <Dialog
-        className={classes.form}
-        open={this.state.open}
-        onClose={this.handleClose}
-        scroll={this.state.scroll}
-        aria-labelledby="scroll-dialog-title"
-      > */}
         <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
-          <Typography
-            variant="h5"
-            className={classes.title}
-            // color="secondary"
-          >
-            Select your food buddy
-          </Typography>
+          <Typography className={classes.title}>Create your group:</Typography>
           <NoSsr>
             <Select
               color="secondary"
@@ -263,10 +251,12 @@ class SelectGroupForm extends Component {
               isMulti
               fullwidth
             />
+
+            {/* <PriceSlider /> */}
           </NoSsr>
         </DialogTitle>
 
-        <DialogContent>
+        <DialogContent className={classes.dialogContent}>
           {this.state.multi &&
             this.state.multi.length > 0 &&
             (this.state.matches && this.state.matches.length > 0 ? (
@@ -283,7 +273,6 @@ class SelectGroupForm extends Component {
               <RestrictionsWarning restrictions={this.state.restrictions} />
             )}
         </DialogContent>
-        {/* </Dialog> */}
       </div>
     );
   }

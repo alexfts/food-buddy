@@ -13,7 +13,6 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 2,
-    // borderRadius: 3,
     border: '1px solid #D3D3D3',
     maxWidth: 900,
     margin: 'auto'
@@ -22,7 +21,6 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 3,
-    // borderRadius: 3,
     border: '1px solid #D3D3D3',
     maxWidth: 900,
     margin: 'auto'
@@ -37,11 +35,11 @@ const styles = theme => ({
   // profileAvatar: {},
   avatarStyle: {
     marginBottom: '0.8rem',
-    height: 85,
-    width: 85
+    height: 90,
+    width: 90
   },
   gravatar: {
-    transform: 'scale(1.7)'
+    transform: 'scale(1.8)'
   },
   userStyle: {
     fontWeight: 500,

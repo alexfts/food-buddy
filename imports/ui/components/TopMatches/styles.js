@@ -1,9 +1,14 @@
 const styles = theme => ({
+  container: {
+    width: '100%'
+  },
   topMatchesHeader: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 20
   },
   title: {
+    fontSize: '1.2rem',
     marginRight: 10
     // textAlign: 'center'
   },
@@ -17,10 +22,11 @@ const styles = theme => ({
     height: '100%'
   },
   matchesLabel: {
-    // fontStyle: 'italic',
     color: '#696969',
+    fontSize: 10,
     fontWeight: 400,
-    marginRight: 8
+    marginLeft: 8,
+    marginBottom: '-1px'
   },
   flexMatches: {
     display: 'flex',
@@ -36,32 +42,6 @@ const styles = theme => ({
     fontWeight: 400,
     margin: '0.5rem 0'
     // textTransform: 'capitalize'
-  },
-
-  sliderContainer: {
-    // width: 420
-  },
-  pricePoint: {
-    // color: 'green'
-  },
-  slider: {
-    color: 'green',
-    width: 420,
-    margin: 'auto',
-    zIndex: 0,
-    listStyle: 'none'
-  },
-  dollars: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    listStyle: 'none',
-
-    paddingTop: 10,
-    width: '100%'
-  },
-  dollar: {
-    // margin: 'auto',
-    width: 50
   }
 });
 

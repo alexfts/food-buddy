@@ -6,7 +6,8 @@ import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
 import {
   Favorite,
   FavoriteBorder,
-  SupervisedUserCircleSharp
+  SupervisedUserCircleSharp, 
+  Star
 } from '@material-ui/icons';
 import styles from './styles';
 import {
@@ -127,9 +128,6 @@ class MediaCard extends React.Component {
                           <Typography component="p">
                             {place.vicinity}
                           </Typography>
-                          <Typography component="p">
-                          {place.rating ? `⭐️ ${place.rating}` : ''}
-                          </Typography>
                         </CardContent>
                       </a>
                     </CardActionArea>
@@ -144,6 +142,10 @@ class MediaCard extends React.Component {
                     >
                       <Favorite />
                     </IconButton> */}
+                    <div className={classes.starheart}>
+                    <Typography component="p">
+                      <Star className={classes.star} /> {place.rating ? ` ${place.rating}` : ''}
+                          </Typography>
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -163,6 +165,7 @@ class MediaCard extends React.Component {
                         />
                       }
                     />
+                    </div>
                   </Card>
                 </ListItem>
               );

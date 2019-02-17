@@ -3,24 +3,39 @@ const styles = theme => ({
     display: 'flex'
   },
   card: {
-    height: 300,
+    height: 260,
     width: '100%'
   },
   media: {
     height: 160
   },
   content: {
-   fontFamily: 'Arial' 
+   fontFamily: 'Arial', 
+   padding: 8,
+   '&:last-child': {
+    paddingBottom: 0
+    }
   },
+ 
   firstline: {
     display: 'flex', 
     justifyContent: 'space-between'
   },
   name: {
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   dollar: {
     color: 'green'
+  },
+  starheart: {
+    display: 'flex', 
+    justifyContent: 'space-between'
+  },
+  star: {
+    paddingLeft: 8,
+    paddingTop: 10,
+    color: 'yellow'
   },
   drawer: {
     width: 200,

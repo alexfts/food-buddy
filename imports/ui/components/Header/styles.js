@@ -2,7 +2,7 @@ const styles = theme => ({
   root: {
     background: theme.palette.primary.main,
     flexGrow: 1, 
-    position: 'fixed', 
+    position: 'fixed',
     zIndex: 10, 
     width: '100%'
   },
@@ -11,7 +11,6 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    maxWidth: 1200,
     margin: 'auto'
   },
   logo: {

@@ -1,6 +1,18 @@
+import green from '@material-ui/core/colors/green';
+
 const styles = theme => ({
   root: {
     display: 'flex'
+  },
+  success: {
+    backgroundColor: green[600]
+  },
+  successIcon: {
+    marginRight: '10px'
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center'
   },
   card: {
     height: 260,
@@ -16,7 +28,16 @@ const styles = theme => ({
       paddingBottom: 0
     }
   },
-
+  share: {
+    height: '15px'
+  },
+  chipAvatar: {
+    width: '100%',
+    height: 'auto'
+  },
+  chip: {
+    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
+  },
   firstline: {
     display: 'flex',
     justifyContent: 'space-between'
@@ -36,9 +57,6 @@ const styles = theme => ({
     paddingLeft: 8,
     paddingTop: 10,
     color: 'yellow'
-  },
-  share: {
-    height: '15px'
   },
   drawer: {
     width: 200,

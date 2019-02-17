@@ -1,14 +1,7 @@
-import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { Tags } from './tags';
 import SimpleSchema from 'simpl-schema';
 import { TagCategories } from './tagCategories';
-import { common } from '@material-ui/core/colors';
-
-/**
- * Once the user is onboarded, Users collection must contain profile object
- * with name (user's name) and tags (a list of _id's from Tags collection)
- */
 
 // Deny all client-side updates to user documents
 Meteor.users.deny({
@@ -17,6 +10,11 @@ Meteor.users.deny({
   }
 });
 
+/**
+ * Users collection must contain profile object with:
+ * tags (a list of _id's from Tags collection) -- optional before onboarding
+ * favourites (a list of place objects from google api) -- optional
+ */
 const UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
@@ -233,7 +231,6 @@ Meteor.methods({
   },
 
   'users.changeFavourites'(place, details, shouldAdd) {
-    console.log('>>>>>>users.changeFavourites');
     if (!this.userId) {
       throw new Meteor.Error(
         'users.updateUserTags.not-authorized',
@@ -249,13 +246,9 @@ Meteor.methods({
       );
     }
     const placeObject = { ...place, details };
-    console.log('PLACEOBJECT', placeObject);
 
     if (profile && profile.favourites) {
       if (shouldAdd) {
-        //Meteor.users.update(this.userId, );
-        // CHECK METEOR>USERS.UPDATE docs
-        console.log('FOUND PROFILE & FAVS, ADDING TO SET');
         Meteor.users.update(
           { _id: this.userId },
           {
@@ -263,14 +256,11 @@ Meteor.methods({
           }
         );
       } else {
-        //Meteor.users.
-        console.log('FOUND PROFILE & FAVS, REMOVING FROM SET');
         Meteor.users.update(this.userId, {
           $pull: { 'profile.favourites': { place_id: place.place_id } }
         });
       }
     } else if (shouldAdd) {
-      console.log('NO PROFILE / FAVS FOUND');
       Meteor.users.update(this.userId, {
         $set: { 'profile.favourites': [placeObject] }
       });

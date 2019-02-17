@@ -4,6 +4,7 @@ import styles from './styles';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
+import { Typography } from '@material-ui/core';
 
 const RestrictionsWarning = ({ restrictions, tags }) => {
   return (
@@ -15,15 +16,19 @@ const RestrictionsWarning = ({ restrictions, tags }) => {
         const usernames = users.map(user => user.username).join(', ');
         return (
           <div key={tagid}>
-            {`${usernames} ${
-              users.length > 1 ? 'have' : 'has'
-            } a dietary restriction: ${tag.title}`}
+            <Typography>
+              {`${usernames} ${
+                users.length > 1 ? 'have' : 'has'
+              } a dietary restriction: ${tag.title}`}
+            </Typography>
           </div>
         );
       })}
     </div>
   );
 };
+
+RestrictionsWarning.propTypes = {};
 
 export default withTracker(() => {
   Meteor.subscribe('tags');

@@ -65,7 +65,11 @@ class MapComponent extends React.Component {
         </Grid>
         <Grid>
           {props.places && (
-            <MediaCard places={props.places} mediaCardRef={this.mediaCardRef} />
+            <MediaCard
+              places={props.places}
+              mediaCardRef={this.mediaCardRef}
+              userMatches={props.userMatches}
+            />
           )}
         </Grid>
       </Grid>
@@ -78,8 +82,8 @@ const Results = compose(
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: 700, width: `100%` }} />,
-    mapElement: <div style={{ height: `100%` }} />
+    containerElement: <div style={{ height: 700, width: `80%` }} />,
+    mapElement: <div style={{ height: 656, top: 64 }} />
   }),
   withScriptjs,
   withGoogleMap,

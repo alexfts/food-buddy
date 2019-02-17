@@ -37,8 +37,8 @@ class LoginForm extends Component {
           email: values.email,
           password: values.password
         },
-        args => {
-          console.log(args);
+        err => {
+          if (err) console.log(err);
         }
       );
     }

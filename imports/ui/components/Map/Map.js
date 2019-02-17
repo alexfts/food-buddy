@@ -24,15 +24,11 @@ class MapComponent extends React.Component {
   }
 
   handleMarkerClicked = markerIndex => {
-    console.log(markerIndex);
-    console.log(this.mediaCardRef.current.offsetTop);
     window.scrollTo(0, this.mediaCardRef.current.offsetTop + markerIndex * 100);
   };
 
   render() {
     const props = this.props;
-
-    console.log('MAP', props);
     const { classes } = this.props;
     return (
       <Grid container>

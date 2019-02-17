@@ -10,15 +10,15 @@ const styles = theme => ({
     height: 160
   },
   content: {
-   fontFamily: 'Arial', 
-   padding: 8,
-   '&:last-child': {
-    paddingBottom: 0
+    fontFamily: 'Arial',
+    padding: 8,
+    '&:last-child': {
+      paddingBottom: 0
     }
   },
- 
+
   firstline: {
-    display: 'flex', 
+    display: 'flex',
     justifyContent: 'space-between'
   },
   name: {
@@ -29,13 +29,16 @@ const styles = theme => ({
     color: 'green'
   },
   starheart: {
-    display: 'flex', 
+    display: 'flex',
     justifyContent: 'space-between'
   },
   star: {
     paddingLeft: 8,
     paddingTop: 10,
     color: 'yellow'
+  },
+  share: {
+    height: '15px'
   },
   drawer: {
     width: 200,

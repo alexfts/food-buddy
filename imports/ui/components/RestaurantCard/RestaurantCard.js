@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
-import { Favorite, FavoriteBorder, Star } from '@material-ui/icons';
+import { Favorite, FavoriteBorder, Star, Share } from '@material-ui/icons';
 import styles from './styles';
 import {
   Card,
@@ -13,10 +13,34 @@ import {
   Typography,
   Drawer,
   List,
-  ListItem
+  ListItem,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  Button
 } from '@material-ui/core/';
 
 class RestaurantCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openShareDialog: false
+    };
+  }
+
+  handleOpenShareDialog = () => {
+    if (this.props.userMatches) {
+      this.setState({ openShareDialog: true });
+    }
+  };
+
+  handleCloseShareDialog = () => {
+    this.setState({ openShareDialog: false });
+  };
+
   toggleFavourite = (place, details, e) => {
     Meteor.call('users.changeFavourites', place, details, e.target.checked);
   };
@@ -78,6 +102,11 @@ class RestaurantCard extends Component {
             <Star className={classes.star} />{' '}
             {place.rating ? ` ${place.rating}` : ''}
           </Typography>
+          {this.props.userMatches && (
+            <IconButton aria-label="Share" onClick={this.handleOpenShareDialog}>
+              <Share className={classes.share} />
+            </IconButton>
+          )}
           <FormControlLabel
             control={
               <Checkbox
@@ -96,6 +125,35 @@ class RestaurantCard extends Component {
             }
           />
         </div>
+        <Dialog
+          open={this.state.openShareDialog}
+          onClose={this.handleCloseShareDialog}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Share</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To subscribe to this website, please enter your email address
+              here. We will send updates occasionally.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Email Address"
+              type="email"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleCloseShareDialog} color="secondary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleCloseShareDialog} color="secondary">
+              Subscribe
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Card>
     );
   }

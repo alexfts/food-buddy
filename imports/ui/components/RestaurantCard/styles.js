@@ -16,7 +16,9 @@ const styles = theme => ({
       paddingBottom: 0
     }
   },
-
+  share: {
+    height: '15px'
+  },
   firstline: {
     display: 'flex',
     justifyContent: 'space-between'

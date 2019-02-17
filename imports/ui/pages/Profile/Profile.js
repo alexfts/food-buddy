@@ -46,7 +46,7 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
 
         <Paper square elevation={0} className={classes.paperTags}>
           <Typography variant="h6" className={classes.editTitle}>
-            Edit your preferences below <Edit />
+            Edit your preferences below
           </Typography>
           {tagCategories.map(({ _id, title }) => (
             <Fragment key={_id}>

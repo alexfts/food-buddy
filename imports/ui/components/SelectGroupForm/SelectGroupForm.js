@@ -8,6 +8,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import {
   NoSsr,
   Chip,
+  Dialog,
   MenuItem,
   TextField,
   Typography,
@@ -24,6 +25,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import PriceSlider from '../Slider';
 
 /** Components to customize the style and behaviour of Select
  *  See https://react-select.com/components#replacing-components
@@ -105,7 +107,7 @@ function MultiValue(props) {
       label={props.children}
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
-      color="primary"
+      color="secondary"
       variant="outlined"
     />
   );
@@ -192,6 +194,9 @@ class SelectGroupForm extends Component {
     );
   };
 
+  handleClickOpen = scroll => () => {
+    this.setState({ open: true, scroll });
+  };
   handleClose = () => {
     this.setState({ open: false });
   };
@@ -218,42 +223,40 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
-        <Typography
-          variant="h5"
-          className={classes.title}
-          // color="secondary"
-        >
-          Select your food buddy
-        </Typography>
-        <NoSsr>
-          <Select
-            color="secondary"
-            className={classes.select}
-            classes={classes}
-            styles={selectStyles}
-            textFieldProps={{
-              label: `You have picked ${
-                this.state.multi ? this.state.multi.length : 0
-              } ${
-                this.state.multi && this.state.multi.length === 1
-                  ? 'buddy'
-                  : 'buddies'
-              }`,
-              InputLabelProps: {
-                shrink: true
-              }
-            }}
-            options={suggestions}
-            components={selectComponents}
-            value={this.state.multi}
-            onChange={this.handleChange}
-            placeholder="Search a buddy"
-            isMulti
-            fullwidth
-          />
-        </NoSsr>
+        <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
+          <Typography className={classes.title}>Create your group:</Typography>
+          <NoSsr>
+            <Select
+              color="secondary"
+              className={classes.select}
+              classes={classes}
+              styles={selectStyles}
+              textFieldProps={{
+                label: `You have picked ${
+                  this.state.multi ? this.state.multi.length : 0
+                } ${
+                  this.state.multi && this.state.multi.length === 1
+                    ? 'buddy'
+                    : 'buddies'
+                }`,
+                InputLabelProps: {
+                  shrink: true
+                }
+              }}
+              options={suggestions}
+              components={selectComponents}
+              value={this.state.multi}
+              onChange={this.handleChange}
+              placeholder="Search a buddy"
+              isMulti
+              fullwidth
+            />
 
-        <DialogContent>
+            {/* <PriceSlider /> */}
+          </NoSsr>
+        </DialogTitle>
+
+        <DialogContent className={classes.dialogContent}>
           {this.state.multi &&
             this.state.multi.length > 0 &&
             (this.state.matches && this.state.matches.length > 0 ? (

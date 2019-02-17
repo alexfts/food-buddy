@@ -4,15 +4,17 @@ const styles = theme => ({
     height: '100%',
     width: '100%'
   },
+  dialog: {
+    width: '100%'
+  },
   paper: {
     // position: 'absolute',
     // height: '80%',
     margin: 'auto',
-    // backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: 'none',
     width: '600px',
-    height: 600
+    minHeight: 600
   },
   flexbox: {
     display: 'flex',
@@ -27,12 +29,13 @@ const styles = theme => ({
 
   fab: {
     position: 'absolute',
-    zIndex: 1,
+    color: '#fff',
     bottom: 30,
     left: 0,
     right: 0,
     margin: '0 40%',
     color: '#fff',
+    zIndex: 2,
 
     '&:hover': {
       background: '#fff',
@@ -46,16 +49,11 @@ const styles = theme => ({
     position: 'absolute',
     bottom: 6,
     left: 0,
-    right: 2,
-    margin: '0 auto',
+    right: 0,
+    margin: '0 37.5%',
     width: 'auto',
-    height: 105
-
-    // '&:hover': {
-    //   background: '#fff',
-    //   color: '#353535',
-    //   transform: 'scale(2)'
-    // }
+    height: 105,
+    zIndex: 1
   }
 });
 

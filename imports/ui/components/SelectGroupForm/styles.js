@@ -7,18 +7,21 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     margin: '5%',
-    // width: 600,
     maxWidth: '100%'
   },
   title: {
-    fontSize: '1.5rem',
+    fontSize: '1.4rem',
     fontWeight: 550,
     marginBottom: '1rem',
     textAlign: 'center'
     // width: '100%'
   },
+
   dialogTitle: {
-    padding: 20,
+    padding: '0 20px',
+    width: '100%'
+  },
+  dialogContent: {
     width: '100%'
   },
   input: {
@@ -26,11 +29,15 @@ const styles = theme => ({
     padding: 0
   },
   chipAvatar: {
-    width: '32px',
-    height: '32px'
+    width: '30px',
+    height: '30px'
   },
   avatar: {
     marginRight: '10px'
+  },
+  chipAvatar: {
+    width: '100%',
+    height: 'auto'
   },
   valueContainer: {
     display: 'flex',

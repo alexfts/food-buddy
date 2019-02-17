@@ -69,7 +69,11 @@ class MapComponent extends React.Component {
         </Grid>
         <Grid>
           {props.places && (
-            <MediaCard places={props.places} mediaCardRef={this.mediaCardRef} />
+            <MediaCard
+              places={props.places}
+              mediaCardRef={this.mediaCardRef}
+              userMatches={props.userMatches}
+            />
           )}
         </Grid>
       </Grid>

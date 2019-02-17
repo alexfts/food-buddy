@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Favorite, FavoriteBorder, Star, Share } from '@material-ui/icons';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import styles from './styles';
 import {
   Card,
@@ -20,25 +21,40 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-  Button
+  Button,
+  Chip,
+  Avatar,
+  Snackbar,
+  SnackbarContent
 } from '@material-ui/core/';
+import Gravatar from 'react-gravatar';
 
 class RestaurantCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openShareDialog: false
+      openShareDialog: false,
+      shareSuccess: false
     };
   }
 
   handleOpenShareDialog = () => {
-    if (this.props.userMatches) {
+    const { userMatches, user } = this.props;
+
+    if (userMatches && userMatches.some(u => u._id !== user._id)) {
       this.setState({ openShareDialog: true });
     }
   };
 
-  handleCloseShareDialog = () => {
+  handleCloseShareDialog = success => {
     this.setState({ openShareDialog: false });
+    if (success) {
+      this.setState({ shareSuccess: true });
+    }
+  };
+
+  closeSnackBar = () => {
+    this.setState({ shareSuccess: false });
   };
 
   toggleFavourite = (place, details, e) => {
@@ -57,7 +73,7 @@ class RestaurantCard extends Component {
   };
 
   render() {
-    const { place, details, user, classes } = this.props;
+    const { place, details, user, classes, userMatches } = this.props;
     const photoReference =
       details &&
       details.photos &&
@@ -102,8 +118,12 @@ class RestaurantCard extends Component {
             <Star className={classes.star} />{' '}
             {place.rating ? ` ${place.rating}` : ''}
           </Typography>
-          {this.props.userMatches && (
-            <IconButton aria-label="Share" onClick={this.handleOpenShareDialog}>
+          {userMatches && (
+            <IconButton
+              color="secondary"
+              aria-label="Share"
+              onClick={this.handleOpenShareDialog}
+            >
               <Share className={classes.share} />
             </IconButton>
           )}
@@ -132,28 +152,67 @@ class RestaurantCard extends Component {
         >
           <DialogTitle id="form-dialog-title">Share</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-            />
+            <Typography className={classes.name}>Your buddies:</Typography>
+            {userMatches &&
+              userMatches
+                .filter(u => u._id !== user._id)
+                .map(u => {
+                  return (
+                    <Chip
+                      key={u._id}
+                      className={classes.chip}
+                      avatar={
+                        <Avatar>
+                          <Gravatar
+                            email={
+                              u.emails && u.emails[0] && u.emails[0].address
+                            }
+                            className={classes.chipAvatar}
+                          />
+                        </Avatar>
+                      }
+                      label={u.username}
+                      color="secondary"
+                      variant="outlined"
+                    />
+                  );
+                })}
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleCloseShareDialog} color="secondary">
+            <Button
+              onClick={() => this.handleCloseShareDialog()}
+              color="secondary"
+            >
               Cancel
             </Button>
-            <Button onClick={this.handleCloseShareDialog} color="secondary">
-              Subscribe
+            <Button
+              onClick={() => this.handleCloseShareDialog(true)}
+              color="secondary"
+            >
+              Share
             </Button>
           </DialogActions>
         </Dialog>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left'
+          }}
+          open={this.state.shareSuccess}
+          onClose={this.closeSnackBar}
+          autoHideDuration={2000}
+        >
+          <SnackbarContent
+            className={classes.success}
+            aria-describedby="client-snackbar"
+            message={
+              <span id="client-snackbar" className={classes.message}>
+                <CheckCircleIcon className={classes.successIcon} />
+                {'The users have been notified. Happy lunching!'}
+              </span>
+            }
+          />
+        </Snackbar>
       </Card>
     );
   }

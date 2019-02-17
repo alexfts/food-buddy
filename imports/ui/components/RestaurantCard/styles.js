@@ -1,6 +1,18 @@
+import green from '@material-ui/core/colors/green';
+
 const styles = theme => ({
   root: {
     display: 'flex'
+  },
+  success: {
+    backgroundColor: green[600]
+  },
+  successIcon: {
+    marginRight: '10px'
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center'
   },
   card: {
     height: 260,
@@ -18,6 +30,13 @@ const styles = theme => ({
   },
   share: {
     height: '15px'
+  },
+  chipAvatar: {
+    width: '100%',
+    height: 'auto'
+  },
+  chip: {
+    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
   },
   firstline: {
     display: 'flex',

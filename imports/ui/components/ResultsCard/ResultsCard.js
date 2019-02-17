@@ -77,7 +77,11 @@ class MediaCard extends React.Component {
               const placeDetails = details && details[i] && details[i].result;
               return (
                 <ListItem key={place.id}>
-                  <RestaurantCard place={place} details={placeDetails} />
+                  <RestaurantCard
+                    place={place}
+                    details={placeDetails}
+                    userMatches={this.props.userMatches}
+                  />
                 </ListItem>
               );
             })}

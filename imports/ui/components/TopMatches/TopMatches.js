@@ -103,7 +103,8 @@ class TopMatches extends Component {
                         .map(title => `(${title})`)
                         .join(' OR '),
                       price: this.state.price,
-                      openNow: this.state.openNow
+                      openNow: this.state.openNow,
+                      userMatches: users
                     }
                   }}
                 >

@@ -16,7 +16,9 @@ const styles = theme => ({
   },
   card: {
     height: 260,
-    width: '100%'
+    width: '100%',
+    borderRadius: 0,
+    border: '1px solid #D3D3D3'
   },
   media: {
     height: 160

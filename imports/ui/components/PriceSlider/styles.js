@@ -34,7 +34,7 @@ const styles = theme => ({
     width: '100%'
   },
   dollar: {
-    color: '#f0792b',
+    color: theme.palette.primary.dark,
     // color: '#6ba048',
     fontWeight: 450,
     letterSpacing: 1.1,

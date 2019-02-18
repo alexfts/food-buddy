@@ -14,7 +14,6 @@ const styles = theme => ({
     fontWeight: 550,
     marginBottom: '1rem',
     textAlign: 'center'
-    // width: '100%'
   },
 
   dialogTitle: {

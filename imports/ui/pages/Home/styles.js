@@ -35,8 +35,8 @@ const styles = theme => ({
     bottom: 30,
     left: 0,
     right: 0,
-    margin: '0 40%',
-    zIndex: 2,
+    margin: '0 38%',
+    zIndex: 5,
 
     '&:hover': {
       background: '#fff',
@@ -49,12 +49,12 @@ const styles = theme => ({
   plateImg: {
     position: 'absolute',
     bottom: 3,
-    left: 2,
-    right: 0,
-    margin: '0 37.5%',
+    left: 0,
+    right: 10,
+    margin: '0 36%',
     width: 'auto',
     height: 110,
-    zIndex: 1
+    zIndex: 4
   }
 });
 

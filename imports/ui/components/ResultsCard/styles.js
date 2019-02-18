@@ -35,7 +35,7 @@ const styles = theme => ({
   star: {
     paddingLeft: 8,
     paddingTop: 10,
-    color: 'yellow'
+    color: '#fbc12f'
   },
   share: {
     height: '15px'
@@ -45,10 +45,11 @@ const styles = theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    background: 'orange',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    // opacity: 0.2,
     top: 64,
-    width: '20%',
-    height: 656
+    width: '20%'
+    // height: 656
   },
   favouriteButton: {
     color: '#e91e63',

@@ -9,11 +9,13 @@ const styles = theme => ({
   },
   title: {
     fontSize: '1.2rem',
-    marginRight: 10
-    // textAlign: 'center'
+    fontWeight: 550,
+    marginRight: 10,
+    marginBottom: '1rem',
+    textAlign: 'center'
   },
   tagTitle: {
-    color: '#f0792b',
+    color: theme.palette.primary.dark,
     fontSize: '1.3rem',
     fontWeight: 550,
     letterSpacing: 1.1

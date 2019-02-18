@@ -35,15 +35,15 @@ class TopMatches extends Component {
 
     return matches ? (
       <div className={classes.container}>
+        <Typography className={classes.title} variant="h5">
+          Your top matches:
+        </Typography>
         <Grid
           container
           justify="space-between"
           align="center"
           className={classes.topMatchesHeader}
         >
-          <Typography className={classes.title} variant="h5">
-            Your top matches:
-          </Typography>
           <FormControlLabel
             control={
               <Switch
@@ -54,9 +54,9 @@ class TopMatches extends Component {
             }
             label="Open now"
           />
-        </Grid>
 
-        <PriceSlider />
+          <PriceSlider />
+        </Grid>
 
         {/* <Grid
           container

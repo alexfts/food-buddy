@@ -106,7 +106,7 @@ const Results = compose(
         maxPriceLevel: price
       };
       service.nearbySearch(request, (results, status) => {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
           updatePlaces(results);
         }
       });

@@ -28,10 +28,14 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // Delay showing the snackbar right away for a better UX
-    setTimeout(() => {
+    // Delay showing the snackbar right away for better UX
+    this.timer = setTimeout(() => {
       this.setState({ displaySnackbar: true });
     }, 2000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   handleClickOpen = scroll => () => {

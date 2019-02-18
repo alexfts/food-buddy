@@ -91,7 +91,11 @@ class RestaurantCard extends Component {
             <CardMedia
               className={classes.media}
               component="img"
-              src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss`}
+              src={
+                photoReference
+                  ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss`
+                  : 'https://via.placeholder.com/200x150?text=No+image+found'
+              }
               title="Restaurant Image"
             />
             <CardContent className={classes.content}>

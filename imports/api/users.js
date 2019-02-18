@@ -3,18 +3,12 @@ import { Tags } from './tags';
 import SimpleSchema from 'simpl-schema';
 import { TagCategories } from './tagCategories';
 
-// Deny all client-side updates to user documents
 Meteor.users.deny({
   update() {
     return true;
   }
 });
 
-/**
- * Users collection must contain profile object with:
- * tags (a list of _id's from Tags collection) -- optional before onboarding
- * favourites (a list of place objects from google api) -- optional
- */
 const UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
@@ -37,7 +31,6 @@ const UserProfileSchema = new SimpleSchema({
     optional: true
   }
 });
-
 const UserSchema = new SimpleSchema({
   username: {
     type: String,
@@ -82,9 +75,9 @@ const UserSchema = new SimpleSchema({
     optional: true
   }
 });
-
 Meteor.users.attachSchema(UserSchema);
 
+/* Helper function to find dietary restrictions for all users */
 const getAllRestrictions = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -107,6 +100,7 @@ const getAllRestrictions = allUserTagPairs => {
   return allUserTagPairs;
 };
 
+/* Helper function to get top tags across all users */
 const getTopIndividualTags = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -164,6 +158,7 @@ const findCommonTags = (cuisineTagUserPairs, foodTypeTagUserPairs) => {
   return results;
 };
 
+/* Helper function to get top tags for cuisines and food types together across all users */
 const getTopIntersectingTags = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -245,14 +240,14 @@ Meteor.methods({
         'You are not onboarded.'
       );
     }
-    const placeObject = { ...place, details };
+    const placeWithDetails = { ...place, details };
 
     if (profile && profile.favourites) {
       if (shouldAdd) {
         Meteor.users.update(
           { _id: this.userId },
           {
-            $addToSet: { 'profile.favourites': placeObject }
+            $addToSet: { 'profile.favourites': placeWithDetails }
           }
         );
       } else {
@@ -262,7 +257,7 @@ Meteor.methods({
       }
     } else if (shouldAdd) {
       Meteor.users.update(this.userId, {
-        $set: { 'profile.favourites': [placeObject] }
+        $set: { 'profile.favourites': [placeWithDetails] }
       });
     }
   },

@@ -30,7 +30,7 @@ const styles = theme => ({
   },
   chipAvatar: {
     width: '30px',
-    height: '30px'
+    height: 'auto'
   },
   avatar: {
     marginRight: '10px'

@@ -13,6 +13,7 @@ const styles = theme => ({
     // textAlign: 'center'
   },
   tagTitle: {
+    color: '#f0792b',
     fontSize: '1.3rem',
     fontWeight: 550,
     letterSpacing: 1.1
@@ -23,19 +24,22 @@ const styles = theme => ({
   },
   matchesLabel: {
     color: '#696969',
-    fontSize: 10,
+    // fontSize: 10,
     fontWeight: 400,
-    marginLeft: 8,
-    marginBottom: '-1px'
+    marginLeft: 5,
+    marginRight: 10
   },
   flexMatches: {
     display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap'
+    alignItems: 'center'
   },
   user: {
     marginTop: 3,
     marginRight: 5
+  },
+  gravatar: {
+    height: 'auto',
+    width: 32
   },
   button: {
     color: 'white',

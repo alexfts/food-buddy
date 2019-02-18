@@ -21,7 +21,7 @@
     "jss": "^9.8.7",
     "meteor-node-stubs": "^0.4.1",
     "prop-types": "^15.6.2",
-    "react": "^16.8.1",
+    "react": "^16.8.2",
     "react-dom": "^16.8.1",
     "react-final-form": "^4.0.2",
     "react-google-maps": "^9.4.5",

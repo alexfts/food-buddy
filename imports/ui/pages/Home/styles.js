@@ -13,8 +13,8 @@ const styles = theme => ({
     margin: 'auto',
     boxShadow: theme.shadows[5],
     outline: 'none',
-    width: '600px',
-    minHeight: 600
+    width: '600px'
+    // minHeight: 600
   },
   flexbox: {
     display: 'flex',

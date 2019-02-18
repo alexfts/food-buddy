@@ -252,8 +252,6 @@ class SelectGroupForm extends Component {
               isMulti
               fullwidth
             />
-
-            {/* <PriceSlider /> */}
           </NoSsr>
         </DialogTitle>
 

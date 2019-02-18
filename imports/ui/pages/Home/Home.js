@@ -111,7 +111,6 @@ class Home extends Component {
             onClose={this.handleClose}
             scroll={this.state.scroll}
             aria-labelledby="scroll-dialog-title"
-            height="100%"
           >
             <div className={classes.paper}>
               <SelectGroupForm />
@@ -143,9 +142,7 @@ class Home extends Component {
             ContentProps={{
               'aria-describedby': 'message-id'
             }}
-            message={
-              <span id="message-id">{`Create your group here!`}</span>
-            }
+            message={<span id="message-id">{`Create your group here!`}</span>}
           />
         </div>
       </div>

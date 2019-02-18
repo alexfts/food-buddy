@@ -33,7 +33,7 @@ class MediaCard extends React.Component {
     const placeDetails = places.map(async place => {
       const placeid = place.place_id;
       const data = new Promise((resolve, reject) => {
-        Meteor.call('googleMapsWebsite.geocode', placeid, (err, result) => {
+        Meteor.call('googleMaps.getDetails', placeid, (err, result) => {
           if (!err) return resolve(result);
         });
       });

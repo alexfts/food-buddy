@@ -3,18 +3,12 @@ import { Tags } from './tags';
 import SimpleSchema from 'simpl-schema';
 import { TagCategories } from './tagCategories';
 
-// Deny all client-side updates to user documents
 Meteor.users.deny({
   update() {
     return true;
   }
 });
 
-/**
- * Users collection must contain profile object with:
- * tags (a list of _id's from Tags collection) -- optional before onboarding
- * favourites (a list of place objects from google api) -- optional
- */
 const UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
@@ -37,7 +31,6 @@ const UserProfileSchema = new SimpleSchema({
     optional: true
   }
 });
-
 const UserSchema = new SimpleSchema({
   username: {
     type: String,
@@ -82,7 +75,6 @@ const UserSchema = new SimpleSchema({
     optional: true
   }
 });
-
 Meteor.users.attachSchema(UserSchema);
 
 const getAllRestrictions = allUserTagPairs => {

@@ -30,7 +30,6 @@ const styles = theme => ({
   fab: {
     color: '#fff',
     fontWeight: 500,
-
     position: 'absolute',
     bottom: 30,
     left: 0,
@@ -57,9 +56,20 @@ const styles = theme => ({
     zIndex: 4
   },
   snackbar: {
-    left: 600,
-    bottom: 100, 
-    textAlign: 'center'
+    left: 25,
+    top: 70
+  },
+  groupMessage: {
+    bottom: 100,
+    left: 455,
+    zIndex: 10, 
+    position: 'absolute', 
+    color: 'white', 
+    fontWeight: 'bold', 
+    fontSize: 20, 
+    background: theme.palette.secondary.main, 
+    padding: 12,
+    borderRadius: '50%'
   }
 });
 

@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
-import Layout from '../../routes/layout';
+import Layout from '../../routes/Layout';
 import { BrowserRouter } from 'react-router-dom';
 
 class App extends Component {

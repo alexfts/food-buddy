@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
-import PriceSlider from '../Slider';
+import PriceSlider from '../PriceSlider';
 
 class TopMatches extends Component {
   constructor(props) {

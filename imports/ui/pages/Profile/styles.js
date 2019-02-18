@@ -15,7 +15,8 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     border: '1px solid #D3D3D3',
     maxWidth: 900,
-    margin: 'auto'
+    margin: 'auto',
+    marginTop: '6%'
   },
   paperTags: {
     ...theme.mixins.gutters(),

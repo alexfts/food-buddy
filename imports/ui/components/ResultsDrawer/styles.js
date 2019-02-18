@@ -7,6 +7,9 @@ const styles = theme => ({
     width: 200,
     flexShrink: 0
   },
+  drawerList: {
+    marginBottom: 70
+  },
   drawerPaper: {
     backgroundColor: 'rgba(255,255,255,0.2)',
     // backgroundImage: 'url(/fast_food_bg.jpg)',

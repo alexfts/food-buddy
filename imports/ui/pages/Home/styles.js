@@ -34,8 +34,8 @@ const styles = theme => ({
     position: 'absolute',
     bottom: 30,
     left: 0,
-    right: 0,
-    margin: '0 38%',
+    right: 100,
+    margin: 'auto',
     zIndex: 5,
 
     '&:hover': {
@@ -50,15 +50,15 @@ const styles = theme => ({
     position: 'absolute',
     bottom: 3,
     left: 0,
-    right: 10,
-    margin: '0 36%',
+    right: 102,
+    margin: 'auto',
     width: 'auto',
     height: 110,
     zIndex: 4
   },
   snackbar: {
     left: 600,
-    bottom: 100, 
+    bottom: 100,
     textAlign: 'center'
   }
 });

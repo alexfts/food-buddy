@@ -126,12 +126,25 @@ class Home extends Component {
             anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
             open={query && this.state.displaySnackbar}
             onClose={this.handleCloseSnackbar}
-            autoHideDuration={2000}
+            autoHideDuration={5000}
             ContentProps={{
               'aria-describedby': 'message-id'
             }}
             message={
               <span id="message-id">{`You like ${query} restaurants. Check them out!`}</span>
+            }
+          />
+          <Snackbar
+            className={classes.snackbar}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            open={query && this.state.displaySnackbar}
+            onClose={this.handleCloseSnackbar}
+            autoHideDuration={8000}
+            ContentProps={{
+              'aria-describedby': 'message-id'
+            }}
+            message={
+              <span id="message-id">{`Create your group here!`}</span>
             }
           />
         </div>

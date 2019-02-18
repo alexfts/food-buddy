@@ -55,6 +55,11 @@ const styles = theme => ({
     width: 'auto',
     height: 110,
     zIndex: 4
+  },
+  snackbar: {
+    left: 600,
+    bottom: 100, 
+    textAlign: 'center'
   }
 });
 

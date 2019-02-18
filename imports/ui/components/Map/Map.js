@@ -394,7 +394,12 @@ class MapComponent extends React.Component {
   }
 
   handleMarkerClicked = markerIndex => {
-    window.scrollTo(0, this.mediaCardRef.current.offsetTop + markerIndex * 100);
+    if (this.mediaCardRef.current && markerIndex) {
+      window.scrollTo(
+        0,
+        this.mediaCardRef.current.offsetTop + markerIndex * 100
+      );
+    }
   };
 
   render() {

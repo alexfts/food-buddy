@@ -31,8 +31,10 @@ class TopMatches extends Component {
   };
 
   render() {
-    const { allTags, classes, matches } = this.props;
-
+    const { allTags, classes, matches, userids } = this.props;
+    const groupMembers = userids.map(userid =>
+      this.props.users.find(u => u._id === userid)
+    );
     return matches ? (
       <div className={classes.container}>
         <Typography className={classes.title} variant="h5">
@@ -58,13 +60,7 @@ class TopMatches extends Component {
           />
         </Grid>
 
-        {/* <Grid
-          container
-          spacing={16}
-          justify="space-between"
-          alignItems="center"
-        > */}
-        {matches.map(({ tagids, users }) => {
+        {matches.map(({ tagids, users }, i) => {
           const userTags = allTags.filter(tag => tagids.includes(tag._id));
           const userTagTitles = userTags.map(tag => tag.title);
           return (
@@ -72,7 +68,7 @@ class TopMatches extends Component {
               item
               xs={12}
               sm={6}
-              key={userTagTitles.join(', ')}
+              key={userTagTitles.join(',')}
               className={classes.matches}
             >
               <Typography className={classes.tagTitle}>
@@ -82,24 +78,21 @@ class TopMatches extends Component {
               <div className={classes.flexMatches}>
                 <Typography className={classes.matchesLabel}>Match:</Typography>
                 {users.map(user => (
-                  <>
-                    {console.log(users)}
-                    <Chip
-                      className={classes.user}
-                      key={user._id}
-                      label={user.username}
-                      color="default"
-                      variant="outlined"
-                      avatar={
-                        <Avatar>
-                          <Gravatar
-                            className={classes.gravatar}
-                            email={user.emails[0].address}
-                          />
-                        </Avatar>
-                      }
-                    />
-                  </>
+                  <Chip
+                    className={classes.user}
+                    key={user._id}
+                    label={user.username}
+                    color="default"
+                    variant="outlined"
+                    avatar={
+                      <Avatar>
+                        <Gravatar
+                          className={classes.gravatar}
+                          email={user.emails[0].address}
+                        />
+                      </Avatar>
+                    }
+                  />
                 ))}
               </div>
 
@@ -118,7 +111,7 @@ class TopMatches extends Component {
                         .join(' OR '),
                       price: this.state.price,
                       openNow: this.state.openNow,
-                      userMatches: users
+                      userMatches: groupMembers
                     }
                   }}
                 >
@@ -128,7 +121,6 @@ class TopMatches extends Component {
             </Grid>
           );
         })}
-        {/* </Grid> */}
       </div>
     ) : (
       <div>No matches found</div>

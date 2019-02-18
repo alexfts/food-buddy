@@ -7,12 +7,12 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     // margin: '2%',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    minHeight: 600
   },
   bgimg: {
     backgroundImage: 'url(/fast_food_bg.jpg)',
     backgroundPosition: 'center',
-    // backgroundSize: '50%',
     height: 100,
     width: '100%'
   },
@@ -26,6 +26,11 @@ const styles = theme => ({
     textAlign: 'center'
   },
   dialogTitle: {
+    padding: '0 20px',
+    width: '100%'
+  },
+  dialogTitleEmpty: {
+    minHeight: 600,
     padding: '0 20px',
     width: '100%'
   },
@@ -85,6 +90,10 @@ const styles = theme => ({
   },
   select: {
     width: '100%'
+  },
+  selectEmpty: {
+    width: '100%',
+    minHeight: 300
   },
   cancelButton: {
     // color: 'white',

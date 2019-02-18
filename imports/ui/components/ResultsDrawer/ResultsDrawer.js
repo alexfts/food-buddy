@@ -61,7 +61,7 @@ class MediaCard extends React.Component {
           }}
           anchor="right"
         >
-          <List>
+          <List className={classes.list}>
             {places.map((place, i) => {
               const placeDetails = details && details[i] && details[i].result;
               return (

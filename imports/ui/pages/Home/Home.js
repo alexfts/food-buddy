@@ -111,7 +111,6 @@ class Home extends Component {
             onClose={this.handleClose}
             scroll={this.state.scroll}
             aria-labelledby="scroll-dialog-title"
-            height="100%"
           >
             <div className={classes.paper}>
               <SelectGroupForm />

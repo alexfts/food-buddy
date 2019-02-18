@@ -63,6 +63,9 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center'
   },
+  shareButton: {
+    zIndex: 3
+  },
   drawer: {
     width: 200,
     flexShrink: 0

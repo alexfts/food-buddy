@@ -425,12 +425,16 @@ class MapComponent extends React.Component {
                       icon: {
                         url:
                           'https://www.web2market.com/store/pub/media/wysiwyg/icon-map.png',
-                        scaledSize: { width: 40, height: 40 }
-                      },
-                      fontColor: 'white'
+                        scaledSize: { width: 40, height: 40 },
+                        labelOrigin: new google.maps.Point(40, -10)
+                      }
                     }}
                     // label={(i + 1).toString()}
-                    defaultLabel={place.name.split(' ')[0]}
+                    label={{
+                      color: 'coral',
+                      fontWeight: '700',
+                      text: place.name.split(' ')[0]
+                    }}
                     key={i}
                     position={{
                       lat: place.geometry.location.lat(),

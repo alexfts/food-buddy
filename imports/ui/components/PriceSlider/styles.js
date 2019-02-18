@@ -24,7 +24,7 @@ const styles = theme => ({
     listStyle: 'none'
   },
   ul: {
-    marginTop: 10,
+    marginTop: 5,
     paddingLeft: 0
   },
   dollars: {
@@ -34,7 +34,7 @@ const styles = theme => ({
     width: '100%'
   },
   dollar: {
-    color: theme.palette.primary.main,
+    color: '#f0792b',
     // color: '#6ba048',
     fontWeight: 450,
     letterSpacing: 1.1,

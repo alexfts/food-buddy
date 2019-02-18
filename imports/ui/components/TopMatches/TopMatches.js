@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
 import {
+  Avatar,
   Grid,
   Typography,
   Button,
@@ -13,6 +14,7 @@ import {
   FormControlLabel,
   Switch
 } from '@material-ui/core';
+import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
 import PriceSlider from '../PriceSlider';
 
@@ -73,22 +75,34 @@ class TopMatches extends Component {
               key={userTagTitles.join(', ')}
               className={classes.matches}
             >
-              <Typography className={classes.tagTitle} color="primary">
+              <Typography className={classes.tagTitle}>
                 {userTagTitles.join(' or ')}
               </Typography>
 
-              {/* <div className={classes.flexMatches}> */}
-              <Typography className={classes.matchesLabel}>Match:</Typography>
-              {users.map(user => (
-                <Chip
-                  className={classes.user}
-                  key={user._id}
-                  label={user.username}
-                  color="default"
-                  variant="default"
-                />
-              ))}
-              {/* </div> */}
+              <div className={classes.flexMatches}>
+                <Typography className={classes.matchesLabel}>Match:</Typography>
+                {users.map(user => (
+                  <>
+                    {console.log(users)}
+                    <Chip
+                      className={classes.user}
+                      key={user._id}
+                      label={user.username}
+                      color="default"
+                      variant="outlined"
+                      avatar={
+                        <Avatar>
+                          <Gravatar
+                            className={classes.gravatar}
+                            email={user.emails[0].address}
+                          />
+                        </Avatar>
+                      }
+                    />
+                  </>
+                ))}
+              </div>
+
               <div>
                 <Button
                   variant="contained"

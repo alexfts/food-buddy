@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Fab, Dialog, Modal, Snackbar } from '@material-ui/core';
+import { Fab, Dialog, Modal, Snackbar, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
@@ -111,7 +111,6 @@ class Home extends Component {
             onClose={this.handleClose}
             scroll={this.state.scroll}
             aria-labelledby="scroll-dialog-title"
-            height="100%"
           >
             <div className={classes.paper}>
               <SelectGroupForm />
@@ -123,6 +122,7 @@ class Home extends Component {
           {query && <MapComponent query={query} />}
 
           <Snackbar
+            className={classes.snackbar}
             anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
             open={query && this.state.displaySnackbar}
             onClose={this.handleCloseSnackbar}
@@ -134,19 +134,7 @@ class Home extends Component {
               <span id="message-id">{`You like ${query} restaurants. Check them out!`}</span>
             }
           />
-          <Snackbar
-            className={classes.snackbar}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            open={query && this.state.displaySnackbar}
-            onClose={this.handleCloseSnackbar}
-            autoHideDuration={8000}
-            ContentProps={{
-              'aria-describedby': 'message-id'
-            }}
-            message={
-              <span id="message-id">{`Create your group here!`}</span>
-            }
-          />
+          <Typography className={classes.groupMessage}>Create your group below!</Typography>
         </div>
       </div>
     );

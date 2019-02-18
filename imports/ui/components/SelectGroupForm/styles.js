@@ -6,17 +6,25 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '5%',
+    // margin: '2%',
     maxWidth: '100%'
   },
+  bgimg: {
+    backgroundImage: 'url(/fast_food_bg.jpg)',
+    backgroundPosition: 'center',
+    // backgroundSize: '50%',
+    height: 100,
+    width: '100%'
+  },
+
   title: {
     fontSize: '1.4rem',
     fontWeight: 550,
+    paddingTop: 20,
+    paddingLeft: 0,
     marginBottom: '1rem',
     textAlign: 'center'
-    // width: '100%'
   },
-
   dialogTitle: {
     padding: '0 20px',
     width: '100%'
@@ -30,7 +38,7 @@ const styles = theme => ({
   },
   chipAvatar: {
     width: '30px',
-    height: '30px'
+    height: 'auto'
   },
   avatar: {
     marginRight: '10px'

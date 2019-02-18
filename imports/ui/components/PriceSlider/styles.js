@@ -10,7 +10,8 @@ const styles = theme => ({
     letterSpacing: 1.1,
     fontWeight: 500,
     fontSize: '1rem',
-    paddingLeft: '1rem'
+    // paddingLeft: '1rem',
+    width: 100
   },
   sliderContainer: {
     width: '75%'
@@ -24,7 +25,7 @@ const styles = theme => ({
     listStyle: 'none'
   },
   ul: {
-    marginTop: 10,
+    marginTop: 5,
     paddingLeft: 0
   },
   dollars: {
@@ -34,7 +35,7 @@ const styles = theme => ({
     width: '100%'
   },
   dollar: {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.dark,
     // color: '#6ba048',
     fontWeight: 450,
     letterSpacing: 1.1,

@@ -25,7 +25,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import PriceSlider from '../Slider';
+import PriceSlider from '../PriceSlider';
 
 /** Components to customize the style and behaviour of Select
  *  See https://react-select.com/components#replacing-components
@@ -223,6 +223,7 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
+        <div className={classes.bgimg} />
         <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
           <Typography className={classes.title}>Create your group:</Typography>
           <NoSsr>

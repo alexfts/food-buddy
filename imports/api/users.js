@@ -1,16 +1,8 @@
-import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { Tags } from './tags';
 import SimpleSchema from 'simpl-schema';
 import { TagCategories } from './tagCategories';
-import { common } from '@material-ui/core/colors';
 
-/**
- * Once the user is onboarded, Users collection must contain profile object
- * with name (user's name) and tags (a list of _id's from Tags collection)
- */
-
-// Deny all client-side updates to user documents
 Meteor.users.deny({
   update() {
     return true;
@@ -39,7 +31,6 @@ const UserProfileSchema = new SimpleSchema({
     optional: true
   }
 });
-
 const UserSchema = new SimpleSchema({
   username: {
     type: String,
@@ -84,9 +75,9 @@ const UserSchema = new SimpleSchema({
     optional: true
   }
 });
-
 Meteor.users.attachSchema(UserSchema);
 
+/* Helper function to find dietary restrictions for all users */
 const getAllRestrictions = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -109,6 +100,7 @@ const getAllRestrictions = allUserTagPairs => {
   return allUserTagPairs;
 };
 
+/* Helper function to get top tags across all users */
 const getTopIndividualTags = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -166,6 +158,7 @@ const findCommonTags = (cuisineTagUserPairs, foodTypeTagUserPairs) => {
   return results;
 };
 
+/* Helper function to get top tags for cuisines and food types together across all users */
 const getTopIntersectingTags = allUserTagPairs => {
   allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
     if (acc.hasOwnProperty(tagid)) {
@@ -233,7 +226,6 @@ Meteor.methods({
   },
 
   'users.changeFavourites'(place, details, shouldAdd) {
-    console.log('>>>>>>users.changeFavourites');
     if (!this.userId) {
       throw new Meteor.Error(
         'users.updateUserTags.not-authorized',
@@ -248,31 +240,24 @@ Meteor.methods({
         'You are not onboarded.'
       );
     }
-    const placeObject = { ...place, details };
-    console.log('PLACEOBJECT', placeObject);
+    const placeWithDetails = { ...place, details };
 
     if (profile && profile.favourites) {
       if (shouldAdd) {
-        //Meteor.users.update(this.userId, );
-        // CHECK METEOR>USERS.UPDATE docs
-        console.log('FOUND PROFILE & FAVS, ADDING TO SET');
         Meteor.users.update(
           { _id: this.userId },
           {
-            $addToSet: { 'profile.favourites': placeObject }
+            $addToSet: { 'profile.favourites': placeWithDetails }
           }
         );
       } else {
-        //Meteor.users.
-        console.log('FOUND PROFILE & FAVS, REMOVING FROM SET');
         Meteor.users.update(this.userId, {
           $pull: { 'profile.favourites': { place_id: place.place_id } }
         });
       }
     } else if (shouldAdd) {
-      console.log('NO PROFILE / FAVS FOUND');
       Meteor.users.update(this.userId, {
-        $set: { 'profile.favourites': [placeObject] }
+        $set: { 'profile.favourites': [placeWithDetails] }
       });
     }
   },

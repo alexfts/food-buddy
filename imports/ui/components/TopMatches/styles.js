@@ -4,15 +4,18 @@ const styles = theme => ({
   },
   topMatchesHeader: {
     display: 'flex',
-    alignItems: 'center',
-    paddingTop: 20
+    alignItems: 'center'
   },
   title: {
     fontSize: '1.2rem',
-    marginRight: 10
-    // textAlign: 'center'
+    fontWeight: 550,
+    marginRight: 10,
+    marginBottom: '1rem',
+    paddingTop: 20,
+    textAlign: 'center'
   },
   tagTitle: {
+    color: theme.palette.primary.dark,
     fontSize: '1.3rem',
     fontWeight: 550,
     letterSpacing: 1.1
@@ -23,25 +26,31 @@ const styles = theme => ({
   },
   matchesLabel: {
     color: '#696969',
-    fontSize: 10,
+    // fontSize: 10,
     fontWeight: 400,
-    marginLeft: 8,
-    marginBottom: '-1px'
+    marginLeft: 5,
+    marginRight: 10
   },
   flexMatches: {
     display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap'
+    alignItems: 'center'
   },
   user: {
     marginTop: 3,
     marginRight: 5
+  },
+  gravatar: {
+    height: 'auto',
+    width: 32
   },
   button: {
     color: 'white',
     fontWeight: 400,
     margin: '0.5rem 0'
     // textTransform: 'capitalize'
+  },
+  switch: {
+    marginLeft: 0
   }
 });
 

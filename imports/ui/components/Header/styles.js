@@ -1,9 +1,9 @@
 const styles = theme => ({
   root: {
     background: theme.palette.primary.main,
-    flexGrow: 1, 
+    flexGrow: 1,
     position: 'fixed',
-    zIndex: 10, 
+    zIndex: 10,
     width: '100%'
   },
   flex: {
@@ -13,9 +13,22 @@ const styles = theme => ({
     justifyContent: 'space-between',
     margin: 'auto'
   },
-  logo: {
-    marginTop: -6
+
+  fblogo: {
+    display: 'flex',
+    alignItems: 'center'
   },
+  logo: {
+    marginTop: -4,
+    marginBottom: -2,
+    paddingRight: '1.2rem',
+    height: 50,
+    width: 'auto'
+  },
+  textLogo: {
+    height: 30
+  },
+
   menu: {
     color: '#fff',
     height: '2.3rem',

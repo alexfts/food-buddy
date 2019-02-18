@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
 import {
+  Avatar,
   Grid,
   Typography,
   Button,
@@ -13,8 +14,9 @@ import {
   FormControlLabel,
   Switch
 } from '@material-ui/core';
+import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
-import PriceSlider from '../Slider';
+import PriceSlider from '../PriceSlider';
 
 class TopMatches extends Component {
   constructor(props) {
@@ -33,18 +35,20 @@ class TopMatches extends Component {
 
     return matches ? (
       <div className={classes.container}>
+        <Typography className={classes.title} variant="h5">
+          Your top matches:
+        </Typography>
         <Grid
           container
           justify="space-between"
           align="center"
           className={classes.topMatchesHeader}
         >
-          <Typography className={classes.title} variant="h5">
-            Your top matches:
-          </Typography>
+          <PriceSlider />
           <FormControlLabel
             control={
               <Switch
+                className={classes.switch}
                 checked={this.state.openNow}
                 onChange={this.handleOpenNowChange}
                 value="openNow"
@@ -53,8 +57,6 @@ class TopMatches extends Component {
             label="Open now"
           />
         </Grid>
-
-        <PriceSlider />
 
         {/* <Grid
           container
@@ -73,22 +75,34 @@ class TopMatches extends Component {
               key={userTagTitles.join(', ')}
               className={classes.matches}
             >
-              <Typography className={classes.tagTitle} color="primary">
+              <Typography className={classes.tagTitle}>
                 {userTagTitles.join(' or ')}
               </Typography>
 
-              {/* <div className={classes.flexMatches}> */}
-              <Typography className={classes.matchesLabel}>Match:</Typography>
-              {users.map(user => (
-                <Chip
-                  className={classes.user}
-                  key={user._id}
-                  label={user.username}
-                  color="default"
-                  variant="default"
-                />
-              ))}
-              {/* </div> */}
+              <div className={classes.flexMatches}>
+                <Typography className={classes.matchesLabel}>Match:</Typography>
+                {users.map(user => (
+                  <>
+                    {console.log(users)}
+                    <Chip
+                      className={classes.user}
+                      key={user._id}
+                      label={user.username}
+                      color="default"
+                      variant="outlined"
+                      avatar={
+                        <Avatar>
+                          <Gravatar
+                            className={classes.gravatar}
+                            email={user.emails[0].address}
+                          />
+                        </Avatar>
+                      }
+                    />
+                  </>
+                ))}
+              </div>
+
               <div>
                 <Button
                   variant="contained"
@@ -103,7 +117,8 @@ class TopMatches extends Component {
                         .map(title => `(${title})`)
                         .join(' OR '),
                       price: this.state.price,
-                      openNow: this.state.openNow
+                      openNow: this.state.openNow,
+                      userMatches: users
                     }
                   }}
                 >

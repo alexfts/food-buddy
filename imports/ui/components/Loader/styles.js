@@ -12,7 +12,7 @@ const styles = theme => ({
     height: '100vh'
   },
   loading: {
-    color: 'white',
+    color: theme.palette.primary.main,
     width: '100%',
     // fontSize: '3rem',
     fontWeight: 500,

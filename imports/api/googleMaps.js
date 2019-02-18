@@ -6,7 +6,14 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    async 'googleMapsWebsite.geocode'(placeid) {
+    async 'googleMaps.getDetails'(placeid) {
+      if (!this.userId) {
+        throw new Meteor.Error(
+          'users.updateUserTags.not-authorized',
+          'You are not logged in.'
+        );
+      }
+
       const data = new Promise((resolve, reject) => {
         googleMaps.place(
           {

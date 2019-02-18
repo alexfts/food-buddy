@@ -82,7 +82,26 @@ const styles = theme => ({
       color: '#e91e63'
     }
   },
-  checked: {}
+  checked: {},
+
+  shareCard: {
+    borderRadius: 0
+  },
+  shareCardHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  shareTitle: {
+    fontSize: '1.4rem',
+    fontWeight: 600,
+    paddingBottom: 12
+  },
+  dialogContent: {
+    paddingTop: '0.8rem',
+    paddingBottom: '1.5rem'
+  }
 });
 
 export default styles;

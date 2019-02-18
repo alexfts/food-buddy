@@ -6,18 +6,18 @@ const styles = theme => ({
     paddingTop: 20
   },
   title: {
-    color: '#696969',
+    // color: '#696969',
     letterSpacing: 1.1,
     fontWeight: 500,
-    fontSize: '1rem',
+    // fontSize: '1rem',
     // paddingLeft: '1rem',
-    width: 95
+    width: 100
   },
   sliderContainer: {
+    marginRight: '1.2rem',
     width: '75%'
   },
   slider: {
-    backgroundColor: 'green',
     margin: 'auto',
     paddingLeft: 34,
     paddingRight: 38,

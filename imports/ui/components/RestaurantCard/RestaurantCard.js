@@ -156,12 +156,21 @@ class RestaurantCard extends Component {
           </CardContent>
 
           <Dialog
+            className={classes.dialog}
             open={this.state.openShareDialog}
             onClose={this.handleCloseShareDialog}
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">Share</DialogTitle>
-            <DialogContent>
+            <DialogTitle id="form-dialog-title">
+              <div className={classes.shareCardHeader}>
+                <Typography color="primary" className={classes.shareTitle}>
+                  Share the location with your group!
+                </Typography>
+                <img src="/macarons.png" alt="macarons" width="100" />
+              </div>
+            </DialogTitle>
+
+            <DialogContent className={classes.dialogContent}>
               <Typography className={classes.name}>Your buddies:</Typography>
               {userMatches &&
                 userMatches
@@ -182,8 +191,8 @@ class RestaurantCard extends Component {
                           </Avatar>
                         }
                         label={u.username}
-                        color="secondary"
-                        variant="outlined"
+                        color="default"
+                        variant="default"
                       />
                     );
                   })}
@@ -191,13 +200,15 @@ class RestaurantCard extends Component {
             <DialogActions>
               <Button
                 onClick={() => this.handleCloseShareDialog()}
-                color="secondary"
+                color="primary"
+                variant="outlined"
               >
                 Cancel
               </Button>
               <Button
                 onClick={() => this.handleCloseShareDialog(true)}
-                color="secondary"
+                color="primary"
+                variant="outlined"
               >
                 Share
               </Button>

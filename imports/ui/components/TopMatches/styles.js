@@ -51,7 +51,7 @@ const styles = theme => ({
     // textTransform: 'capitalize'
   },
   switch: {
-    marginLeft: 0
+    letterSpacing: 1.1
   }
 });
 

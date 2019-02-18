@@ -11,7 +11,7 @@ const styles = theme => ({
     fontWeight: 500,
     fontSize: '1rem',
     // paddingLeft: '1rem',
-    width: 100
+    width: 95
   },
   sliderContainer: {
     width: '75%'

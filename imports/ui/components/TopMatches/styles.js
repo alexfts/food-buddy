@@ -4,7 +4,8 @@ const styles = theme => ({
   },
   topMatchesHeader: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   title: {
     fontSize: '1.2rem',

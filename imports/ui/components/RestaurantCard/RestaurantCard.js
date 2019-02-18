@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
-import {
-  CheckCircleIcon,
-  Favorite,
-  FavoriteBorder,
-  Star,
-  Share
-} from '@material-ui/icons';
+import { Favorite, FavoriteBorder, Star, Share } from '@material-ui/icons';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import styles from './styles';
 import {
   Card,
@@ -84,127 +79,129 @@ class RestaurantCard extends Component {
       details.photos[0] &&
       details.photos[0].photo_reference;
     return (
-      <Card className={classes.card}>
-        <CardActionArea>
-          <a
-            href={details && details.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={classes.hrefLink}
-          >
-            <CardMedia
-              className={classes.media}
-              component="img"
-              src={
-                photoReference
-                  ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss`
-                  : 'https://via.placeholder.com/200x150?text=No+image+found'
-              }
-              title="Restaurant Image"
-            />
-            <CardContent className={classes.content}>
-              <div className={classes.firstline}>
-                <Typography className={classes.name}>{place.name}</Typography>
-                <Typography className={classes.dollar}>
-                  {place.price_level && place.price_level === 1
-                    ? `$`
-                    : place.price_level && place.price_level === 2
-                    ? `$$`
-                    : place.price_level && place.price_level === 3
-                    ? `$$$`
-                    : place.price_level && place.price_level === 4
-                    ? `$$$$`
-                    : ``}
-                </Typography>
-              </div>
-              <Typography component="p">{place.vicinity}</Typography>
-
-              <div className={classes.starheart}>
-                <div className={classes.starRating}>
-                  <Star className={classes.star} />
-                  <Typography component="p">
-                    {place.rating ? ` ${place.rating}` : ''}
+      <Fragment>
+        <Card className={classes.card}>
+          <CardActionArea>
+            <a
+              href={details && details.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={classes.hrefLink}
+            >
+              <CardMedia
+                className={classes.media}
+                component="img"
+                src={
+                  photoReference
+                    ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss`
+                    : 'https://via.placeholder.com/200x150?text=No+image+found'
+                }
+                title="Restaurant Image"
+              />
+              <CardContent className={classes.content}>
+                <div className={classes.firstline}>
+                  <Typography className={classes.name}>{place.name}</Typography>
+                  <Typography className={classes.dollar}>
+                    {place.price_level && place.price_level === 1
+                      ? `$`
+                      : place.price_level && place.price_level === 2
+                      ? `$$`
+                      : place.price_level && place.price_level === 3
+                      ? `$$$`
+                      : place.price_level && place.price_level === 4
+                      ? `$$$$`
+                      : ``}
                   </Typography>
                 </div>
-                {userMatches && (
-                  <IconButton
-                    color="secondary"
-                    aria-label="Share"
-                    onClick={this.handleOpenShareDialog}
-                  >
-                    <Share className={classes.share} />
-                  </IconButton>
-                )}
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      icon={<FavoriteBorder />}
-                      checkedIcon={<Favorite />}
-                      value="favourite"
-                      classes={{
-                        root: classes.favouriteButton,
-                        checked: classes.checked
-                      }}
-                      checked={this.shouldCheck(place)}
-                      onChange={e => {
-                        this.toggleFavourite(place, details, e);
-                      }}
-                    />
-                  }
-                />
-              </div>
-            </CardContent>
-          </a>
-        </CardActionArea>
+                <Typography component="p">{place.vicinity}</Typography>
 
-        <Dialog
-          open={this.state.openShareDialog}
-          onClose={this.handleCloseShareDialog}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Share</DialogTitle>
-          <DialogContent>
-            <Typography className={classes.name}>Your buddies:</Typography>
-            {userMatches &&
-              userMatches
-                .filter(u => u._id !== user._id)
-                .map(u => {
-                  return (
-                    <Chip
-                      key={u._id}
-                      className={classes.chip}
-                      avatar={
-                        <Avatar>
-                          <Gravatar
-                            email={
-                              u.emails && u.emails[0] && u.emails[0].address
-                            }
-                            className={classes.chipAvatar}
-                          />
-                        </Avatar>
-                      }
-                      label={u.username}
+                <div className={classes.starheart}>
+                  <div className={classes.starRating}>
+                    <Star className={classes.star} />
+                    <Typography component="p">
+                      {place.rating ? ` ${place.rating}` : ''}
+                    </Typography>
+                  </div>
+                  {userMatches && (
+                    <IconButton
                       color="secondary"
-                      variant="outlined"
-                    />
-                  );
-                })}
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => this.handleCloseShareDialog()}
-              color="secondary"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={() => this.handleCloseShareDialog(true)}
-              color="secondary"
-            >
-              Share
-            </Button>
-          </DialogActions>
-        </Dialog>
+                      aria-label="Share"
+                      onClick={this.handleOpenShareDialog}
+                    >
+                      <Share className={classes.share} />
+                    </IconButton>
+                  )}
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                        value="favourite"
+                        classes={{
+                          root: classes.favouriteButton,
+                          checked: classes.checked
+                        }}
+                        checked={this.shouldCheck(place)}
+                        onChange={e => {
+                          this.toggleFavourite(place, details, e);
+                        }}
+                      />
+                    }
+                  />
+                </div>
+              </CardContent>
+            </a>
+          </CardActionArea>
+
+          <Dialog
+            open={this.state.openShareDialog}
+            onClose={this.handleCloseShareDialog}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Share</DialogTitle>
+            <DialogContent>
+              <Typography className={classes.name}>Your buddies:</Typography>
+              {userMatches &&
+                userMatches
+                  .filter(u => u._id !== user._id)
+                  .map(u => {
+                    return (
+                      <Chip
+                        key={u._id}
+                        className={classes.chip}
+                        avatar={
+                          <Avatar>
+                            <Gravatar
+                              email={
+                                u.emails && u.emails[0] && u.emails[0].address
+                              }
+                              className={classes.chipAvatar}
+                            />
+                          </Avatar>
+                        }
+                        label={u.username}
+                        color="secondary"
+                        variant="outlined"
+                      />
+                    );
+                  })}
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => this.handleCloseShareDialog()}
+                color="secondary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => this.handleCloseShareDialog(true)}
+                color="secondary"
+              >
+                Share
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Card>
         <Snackbar
           anchorOrigin={{
             vertical: 'top',
@@ -225,7 +222,7 @@ class RestaurantCard extends Component {
             }
           />
         </Snackbar>
-      </Card>
+      </Fragment>
     );
   }
 }

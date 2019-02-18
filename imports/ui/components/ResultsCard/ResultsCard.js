@@ -44,10 +44,6 @@ class MediaCard extends React.Component {
     });
   };
 
-<<<<<<< HEAD
-  toggleFavourite = (place, details) => {
-    Meteor.call('users.changeFavourites', place, details);
-=======
   toggleFavourite = (place, details, e) => {
     Meteor.call('users.changeFavourites', place, details, e.target.checked);
   };
@@ -61,7 +57,6 @@ class MediaCard extends React.Component {
       user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
       undefined
     );
->>>>>>> 5d25c7652535403dbd592ef13327bcf3d43c0a4b
   };
 
   render() {

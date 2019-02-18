@@ -467,7 +467,7 @@ const Results = compose(
     containerElement: (
       <div style={{ height: `100%`, minHeight: 420, width: `80%` }} />
     ),
-    mapElement: <div style={{ height: 700, top: 64 }} />
+    mapElement: <div style={{ height: `94vh`, top: 64 }} />
   }),
   withScriptjs,
   withGoogleMap,

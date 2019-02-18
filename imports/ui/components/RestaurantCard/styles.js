@@ -46,16 +46,22 @@ const styles = theme => ({
     fontWeight: 'bold'
   },
   dollar: {
-    color: 'green'
+    color: '#6ba048',
+    // fontWeight: 'bold',
+    letterSpace: 1.2
   },
   starheart: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingLeft: 8
   },
   star: {
-    paddingLeft: 8,
-    paddingTop: 10,
+    paddingRight: 4,
     color: '#fbc12f'
+  },
+  starRating: {
+    display: 'flex',
+    alignItems: 'center'
   },
   drawer: {
     width: 200,

@@ -19,7 +19,7 @@ const styles = theme => ({
     alignItems: 'center'
   },
   logo: {
-    marginTop: -5,
+    marginTop: -4,
     marginBottom: -2,
     paddingRight: '1.2rem',
     height: 50,

@@ -121,11 +121,14 @@ class RestaurantCard extends Component {
             </CardContent>
           </a>
         </CardActionArea>
+
         <div className={classes.starheart}>
-          <Typography component="p">
-            <Star className={classes.star} />{' '}
-            {place.rating ? ` ${place.rating}` : ''}
-          </Typography>
+          <div className={classes.starRating}>
+            <Star className={classes.star} />
+            <Typography component="p">
+              {place.rating ? ` ${place.rating}` : ''}
+            </Typography>
+          </div>
           {userMatches && (
             <IconButton
               color="secondary"
@@ -153,6 +156,7 @@ class RestaurantCard extends Component {
             }
           />
         </div>
+
         <Dialog
           open={this.state.openShareDialog}
           onClose={this.handleCloseShareDialog}

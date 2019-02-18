@@ -11,6 +11,7 @@ import {
   GoogleMap,
   Marker
 } from 'react-google-maps';
+import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import { MAP } from 'react-google-maps/lib/constants';
 
 const refs = {
@@ -409,28 +410,35 @@ class MapComponent extends React.Component {
             defaultCenter={{ lat: 49.2632597, lng: -123.138 }}
             defaultOptions={{ styles: Snazzysnazz }}
           >
-            {props.places &&
-              props.places.map((place, i) => (
-                <Marker
-                  animation={google.maps.Animation.DROP}
-                  onClick={() => this.handleMarkerClicked(i)}
-                  // options={{ icon: { url: ...., scaledSize: ...., size: .... } }}
-                  options={{
-                    icon: {
-                      url:
-                        'https://image.flaticon.com/icons/svg/1149/1149845.svg',
-                      scaledSize: { width: 32, height: 32 }
-                    }
-                  }}
-                  // label={(i + 1).toString()}
-                  label={place.name.split(' ')[0]}
-                  key={i}
-                  position={{
-                    lat: place.geometry.location.lat(),
-                    lng: place.geometry.location.lng()
-                  }}
-                />
-              ))}
+            <MarkerClusterer
+              onClick={props.onMarkerClustererClick}
+              averageCenter
+              enableRetinaIcons
+              gridSize={60}
+            >
+              {props.places &&
+                props.places.map((place, i) => (
+                  <Marker
+                    animation={google.maps.Animation.DROP}
+                    onClick={() => this.handleMarkerClicked(i)}
+                    options={{
+                      icon: {
+                        url:
+                          'https://www.web2market.com/store/pub/media/wysiwyg/icon-map.png',
+                        scaledSize: { width: 40, height: 40 }
+                      },
+                      fontColor: 'white'
+                    }}
+                    // label={(i + 1).toString()}
+                    defaultLabel={place.name.split(' ')[0]}
+                    key={i}
+                    position={{
+                      lat: place.geometry.location.lat(),
+                      lng: place.geometry.location.lng()
+                    }}
+                  />
+                ))}
+            </MarkerClusterer>
           </GoogleMap>
         </Grid>
         <Grid>
@@ -450,7 +458,7 @@ class MapComponent extends React.Component {
 const Results = compose(
   withProps({
     googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss&v=3.exp&libraries=geometry,drawing,places',
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyDUBhvg4WTzreRL5VOJ8LP6Rlb0J1auaoc&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: (
       <div style={{ height: `100%`, minHeight: 420, width: `80%` }} />

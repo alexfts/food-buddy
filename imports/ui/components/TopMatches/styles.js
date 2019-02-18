@@ -4,7 +4,8 @@ const styles = theme => ({
   },
   topMatchesHeader: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   title: {
     fontSize: '1.2rem',
@@ -50,7 +51,7 @@ const styles = theme => ({
     // textTransform: 'capitalize'
   },
   switch: {
-    marginLeft: 0
+    letterSpacing: 1.1
   }
 });
 

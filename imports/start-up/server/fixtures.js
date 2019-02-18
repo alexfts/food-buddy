@@ -70,9 +70,9 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'a@b.c',
       password: 'password',
-      username: 'BabyLungs',
+      username: 'Homer Simpson',
       profile: {
-        name: 'Baby Lungs',
+        name: '',
         tags: Tags.find({
           title: {
             $in: ['Burgers', 'Asian', 'Dumplings', 'Dim Sum', 'Brunch']
@@ -101,9 +101,29 @@ Meteor.startup(() => {
       }
     });
     Accounts.createUser({
+      email: 'timgabrielnguyen@gmail.com',
+      password: 'password',
+      username: 'BabyLungs',
+      profile: {
+        name: 'Baby Lungs',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Burgers',
+              'Burritos',
+              'Rice',
+              'Korean',
+              'Chicken Wings',
+              'BBQ'
+            ]
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
       email: 'ryanreynolds.yvr@gmail.com',
       password: 'password',
-      username: 'ryanreynolds',
+      username: 'RyanReynolds',
       profile: {
         name: 'Ryan Reynolds',
         tags: Tags.find({

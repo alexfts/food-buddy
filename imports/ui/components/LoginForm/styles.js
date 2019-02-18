@@ -1,5 +1,7 @@
 const styles = theme => ({
   container: {
+    display: 'flex',
+    flexWrap: 'wrap',
     paddingTop: '1rem'
   },
   accountForm: {
@@ -34,8 +36,7 @@ const styles = theme => ({
     }
   },
   textField: {
-    // margin: 0
-    border: theme.palette.secondary.main
+    width: '100%'
   },
   formButton: {
     // border: '1px solid #fff',

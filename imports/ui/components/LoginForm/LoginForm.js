@@ -45,6 +45,7 @@ class LoginForm extends Component {
     return (
       <div className={classes.container}>
         <Form
+          autoComplete="off"
           onSubmit={(v, e) => this.onSubmit(v, e)}
           validate={values => {
             return validate(values, this.state.formToggle);
@@ -74,14 +75,13 @@ class LoginForm extends Component {
                         <Fragment>
                           <TextField
                             {...input}
-                            id="outlined-username-input"
+                            id="standard-username-input"
                             label="Username"
                             type="username"
                             autoComplete="off"
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
-                            color="secondary"
                           />
                           {meta.touched && meta.invalid && (
                             <Typography className={classes.errorMessage}>
@@ -100,15 +100,14 @@ class LoginForm extends Component {
                       <Fragment>
                         <TextField
                           {...input}
-                          id="outlined-email-input"
+                          id="standard-email-input"
                           label="Email"
                           className={classes.textField}
                           type="email"
                           name="email"
-                          autoComplete="email"
+                          autoComplete="off"
                           margin="normal"
                           variant="outlined"
-                          color="secondary"
                         />
                         {meta.touched && meta.invalid && (
                           <Typography className={classes.errorMessage}>
@@ -126,14 +125,13 @@ class LoginForm extends Component {
                       <Fragment>
                         <TextField
                           {...input}
-                          id="outlined-password-input"
+                          id="standard-password-input"
                           label="Password"
                           className={classes.textField}
                           type="password"
-                          autoComplete="current-password"
+                          autoComplete="off"
                           margin="normal"
                           variant="outlined"
-                          color="secondary"
                         />
                         {meta.touched && meta.invalid && (
                           <Typography className={classes.errorMessage}>

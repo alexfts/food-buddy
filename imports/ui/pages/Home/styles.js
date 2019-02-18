@@ -28,13 +28,14 @@ const styles = theme => ({
   },
 
   fab: {
-    position: 'absolute',
     color: '#fff',
+    fontWeight: 500,
+
+    position: 'absolute',
     bottom: 30,
     left: 0,
     right: 0,
     margin: '0 40%',
-    color: '#fff',
     zIndex: 2,
 
     '&:hover': {
@@ -43,16 +44,16 @@ const styles = theme => ({
     }
   },
   plate: {
-    // color: '#fff',
+    fontWeight: 500
   },
   plateImg: {
     position: 'absolute',
-    bottom: 6,
-    left: 0,
+    bottom: 3,
+    left: 2,
     right: 0,
     margin: '0 37.5%',
     width: 'auto',
-    height: 105,
+    height: 110,
     zIndex: 1
   }
 });

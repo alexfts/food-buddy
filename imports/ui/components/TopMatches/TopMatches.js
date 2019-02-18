@@ -14,7 +14,7 @@ import {
   Switch
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import PriceSlider from '../Slider';
+import PriceSlider from '../PriceSlider';
 
 class TopMatches extends Component {
   constructor(props) {

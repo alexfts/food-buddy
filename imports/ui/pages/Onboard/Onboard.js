@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  Card,
+  Typography,
+  Step,
+  Stepper,
+  StepLabel,
+  StepContent
+} from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
@@ -16,7 +20,7 @@ import { Link } from 'react-router-dom';
 
 function getSteps() {
   return [
-    'We want to get to know you better! Please select your favourite cusines:',
+    'Select your favourite cusines:',
     'Select your favourite food types:',
     'Select any dietary preferences and extra info:'
   ];
@@ -114,6 +118,16 @@ class Onboard extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Card className={classes.header}>
+          <img className={classes.img} src="/laugh.png" alt="laugh" />
+          <Typography color="primary" className={classes.title}>
+            We want to get to know you better!
+          </Typography>
+          <Typography color="primary" className={classes.subTitle}>
+            Personalize your food palette below
+          </Typography>
+        </Card>
+
         <Stepper
           activeStep={activeStep}
           orientation="vertical"

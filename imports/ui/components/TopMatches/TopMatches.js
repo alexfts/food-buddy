@@ -44,9 +44,11 @@ class TopMatches extends Component {
           align="center"
           className={classes.topMatchesHeader}
         >
+          <PriceSlider />
           <FormControlLabel
             control={
               <Switch
+                className={classes.switch}
                 checked={this.state.openNow}
                 onChange={this.handleOpenNowChange}
                 value="openNow"
@@ -54,8 +56,6 @@ class TopMatches extends Component {
             }
             label="Open now"
           />
-
-          <PriceSlider />
         </Grid>
 
         {/* <Grid

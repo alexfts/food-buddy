@@ -4,14 +4,14 @@ const styles = theme => ({
   },
   topMatchesHeader: {
     display: 'flex',
-    alignItems: 'center',
-    paddingTop: 20
+    alignItems: 'center'
   },
   title: {
     fontSize: '1.2rem',
     fontWeight: 550,
     marginRight: 10,
     marginBottom: '1rem',
+    paddingTop: 20,
     textAlign: 'center'
   },
   tagTitle: {
@@ -48,6 +48,9 @@ const styles = theme => ({
     fontWeight: 400,
     margin: '0.5rem 0'
     // textTransform: 'capitalize'
+  },
+  switch: {
+    marginLeft: 0
   }
 });
 

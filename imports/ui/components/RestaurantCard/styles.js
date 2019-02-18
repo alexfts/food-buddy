@@ -12,7 +12,7 @@ const styles = theme => ({
     alignItems: 'center'
   },
   card: {
-    height: 260,
+    height: '100%',
     width: '100%',
     borderRadius: 0,
     border: '1px solid #D3D3D3'
@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   content: {
     fontFamily: 'Arial',
-    padding: 8,
+    padding: '14px 16px',
     '&:last-child': {
       paddingBottom: 0
     }
@@ -48,12 +48,12 @@ const styles = theme => ({
   dollar: {
     color: '#6ba048',
     // fontWeight: 'bold',
-    letterSpace: 1.2
+    letterSpace: 1.2,
+    marginRight: -5
   },
   starheart: {
     display: 'flex',
-    justifyContent: 'space-between',
-    paddingLeft: 8
+    justifyContent: 'space-between'
   },
   star: {
     paddingRight: 4,

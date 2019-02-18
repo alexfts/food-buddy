@@ -10,7 +10,8 @@ const styles = theme => ({
     letterSpacing: 1.1,
     fontWeight: 500,
     fontSize: '1rem',
-    paddingLeft: '1rem'
+    // paddingLeft: '1rem',
+    width: 100
   },
   sliderContainer: {
     width: '75%'

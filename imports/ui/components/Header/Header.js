@@ -42,20 +42,21 @@ class Header extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <div className={classes.flex}>
-              <IconButton
-                className={classes.fblogo}
-                href="/home"
-                color="inherit"
-                aria-label="Menu"
-                className={classes.textLogo}
-              >
-                <img
-                  src="/logo-thick.png"
-                  alt="Food Buddy logo"
-                  className={classes.logo}
-                />
+              <div className={classes.fblogo}>
+                <IconButton
+                  href="/home"
+                  color="inherit"
+                  aria-label="Menu"
+                  className={classes.textLogo}
+                >
+                  <img
+                    src="/logo-thick.png"
+                    alt="Food Buddy logo"
+                    className={classes.logo}
+                  />
+                </IconButton>
                 <img src="/Food_Buddy.png" height="30" alt="Food Buddy App" />
-              </IconButton>
+              </div>
               {auth && (
                 <div>
                   <IconButton

@@ -223,6 +223,7 @@ class SelectGroupForm extends Component {
 
     return (
       <div className={classes.form}>
+        <div className={classes.bgimg} />
         <DialogTitle id="scroll-dialog-title" className={classes.dialogTitle}>
           <Typography className={classes.title}>Create your group:</Typography>
           <NoSsr>

@@ -118,44 +118,44 @@ class RestaurantCard extends Component {
                 </Typography>
               </div>
               <Typography component="p">{place.vicinity}</Typography>
+
+              <div className={classes.starheart}>
+                <div className={classes.starRating}>
+                  <Star className={classes.star} />
+                  <Typography component="p">
+                    {place.rating ? ` ${place.rating}` : ''}
+                  </Typography>
+                </div>
+                {userMatches && (
+                  <IconButton
+                    color="secondary"
+                    aria-label="Share"
+                    onClick={this.handleOpenShareDialog}
+                  >
+                    <Share className={classes.share} />
+                  </IconButton>
+                )}
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      value="favourite"
+                      classes={{
+                        root: classes.favouriteButton,
+                        checked: classes.checked
+                      }}
+                      checked={this.shouldCheck(place)}
+                      onChange={e => {
+                        this.toggleFavourite(place, details, e);
+                      }}
+                    />
+                  }
+                />
+              </div>
             </CardContent>
           </a>
         </CardActionArea>
-
-        <div className={classes.starheart}>
-          <div className={classes.starRating}>
-            <Star className={classes.star} />
-            <Typography component="p">
-              {place.rating ? ` ${place.rating}` : ''}
-            </Typography>
-          </div>
-          {userMatches && (
-            <IconButton
-              color="secondary"
-              aria-label="Share"
-              onClick={this.handleOpenShareDialog}
-            >
-              <Share className={classes.share} />
-            </IconButton>
-          )}
-          <FormControlLabel
-            control={
-              <Checkbox
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
-                value="favourite"
-                classes={{
-                  root: classes.favouriteButton,
-                  checked: classes.checked
-                }}
-                checked={this.shouldCheck(place)}
-                onChange={e => {
-                  this.toggleFavourite(place, details, e);
-                }}
-              />
-            }
-          />
-        </div>
 
         <Dialog
           open={this.state.openShareDialog}

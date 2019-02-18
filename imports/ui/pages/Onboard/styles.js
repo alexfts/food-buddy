@@ -3,7 +3,10 @@ const styles = theme => ({
     flexGrow: 1,
     paddingTop: 100,
     margin: 'auto',
-    maxWidth: 800
+    maxWidth: 800,
+
+    backgroundImage: 'url(/fast_food_bg.jpg)'
+    // opacity: 0.5
   },
   header: {
     display: 'flex',

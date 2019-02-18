@@ -2,19 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
-import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
-import { Favorite, FavoriteBorder, Star, Share } from '@material-ui/icons';
 import styles from './styles';
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-  Drawer,
-  List,
-  ListItem
-} from '@material-ui/core/';
+import { Typography, Drawer, List, ListItem } from '@material-ui/core/';
 import RestaurantCard from '../RestaurantCard';
 
 class MediaCard extends React.Component {
@@ -91,9 +80,11 @@ class MediaCard extends React.Component {
     );
   }
 }
+
 MediaCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
 export default withTracker(() => {
   return {
     user: Meteor.user()

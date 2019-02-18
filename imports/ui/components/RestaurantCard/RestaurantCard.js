@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
-import { Favorite, FavoriteBorder, Star, Share } from '@material-ui/icons';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import {
+  CheckCircleIcon,
+  Favorite,
+  FavoriteBorder,
+  Star,
+  Share
+} from '@material-ui/icons';
 import styles from './styles';
 import {
   Card,
@@ -12,7 +17,6 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Drawer,
   List,
   ListItem,
   Dialog,

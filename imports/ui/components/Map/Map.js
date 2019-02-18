@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import Grid from '@material-ui/core/Grid';
-import MediaCard from '../../components/ResultsCard/ResultsCard';
+import MediaCard from '../../components/ResultsDrawer/ResultsDrawer';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import { compose, withProps, withHandlers, withState } from 'recompose';
@@ -12,6 +12,7 @@ import {
   Marker
 } from 'react-google-maps';
 import { MAP } from 'react-google-maps/lib/constants';
+
 const refs = {
   map: undefined
 };

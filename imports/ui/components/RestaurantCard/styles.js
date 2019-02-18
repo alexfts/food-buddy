@@ -1,9 +1,6 @@
 import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
-  root: {
-    display: 'flex'
-  },
   success: {
     backgroundColor: green[600]
   },
@@ -58,7 +55,7 @@ const styles = theme => ({
   star: {
     paddingLeft: 8,
     paddingTop: 10,
-    color: 'yellow'
+    color: '#fbc12f'
   },
   drawer: {
     width: 200,

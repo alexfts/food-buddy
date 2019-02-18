@@ -31,16 +31,11 @@ class LoginForm extends Component {
         };
       }
     } else {
-      Accounts.createUser(
-        {
-          username: values.username,
-          email: values.email,
-          password: values.password
-        },
-        err => {
-          if (err) console.log(err);
-        }
-      );
+      Accounts.createUser({
+        username: values.username,
+        email: values.email,
+        password: values.password
+      });
     }
   };
 

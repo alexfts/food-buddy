@@ -70,12 +70,32 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'a@b.c',
       password: 'password',
-      username: 'CptHook',
+      username: 'BabyLungs',
       profile: {
-        name: 'Captain Hook',
+        name: 'Baby Lungs',
         tags: Tags.find({
           title: {
-            $in: ['Burgers', 'Asian', 'Kebab', 'Chicken Wings']
+            $in: ['Burgers', 'Asian', 'Dumplings', 'Dim Sum', 'Brunch']
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
+      email: 'buffkorean@ktv.com',
+      password: 'password',
+      username: 'BuffKorean',
+      profile: {
+        name: 'Buff Korean',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Burgers',
+              'Burritos',
+              'Rice',
+              'Korean',
+              'Chicken Wings',
+              'BBQ'
+            ]
           }
         }).map(tag => tag._id)
       }
@@ -88,7 +108,36 @@ Meteor.startup(() => {
         name: 'Ryan Reynolds',
         tags: Tags.find({
           title: {
-            $in: ['Burgers', 'Thai', 'Kebab', 'Canadian', 'Chicken Wings']
+            $in: [
+              'Burgers',
+              'Thai',
+              'Kebab',
+              'Canadian',
+              'Chicken Wings',
+              'Dim Sum',
+              'Taco'
+            ]
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
+      email: 'hiltonparis728@gmail.com',
+      password: 'password',
+      username: 'ParisHilton',
+      profile: {
+        name: 'Paris Hilton',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Burgers',
+              'French',
+              'Kebab',
+              'American',
+              'Fries',
+              'Brunch',
+              'Low-Carb'
+            ]
           }
         }).map(tag => tag._id)
       }

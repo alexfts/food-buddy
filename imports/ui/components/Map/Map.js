@@ -24,15 +24,11 @@ class MapComponent extends React.Component {
   }
 
   handleMarkerClicked = markerIndex => {
-    console.log(markerIndex);
-    console.log(this.mediaCardRef.current.offsetTop);
     window.scrollTo(0, this.mediaCardRef.current.offsetTop + markerIndex * 100);
   };
 
   render() {
     const props = this.props;
-
-    console.log('MAP', props);
     const { classes } = this.props;
     return (
       <Grid container>
@@ -69,7 +65,11 @@ class MapComponent extends React.Component {
         </Grid>
         <Grid>
           {props.places && (
-            <MediaCard places={props.places} mediaCardRef={this.mediaCardRef} />
+            <MediaCard
+              places={props.places}
+              mediaCardRef={this.mediaCardRef}
+              userMatches={props.userMatches}
+            />
           )}
         </Grid>
       </Grid>
@@ -106,7 +106,7 @@ const Results = compose(
         maxPriceLevel: price
       };
       service.nearbySearch(request, (results, status) => {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
           updatePlaces(results);
         }
       });

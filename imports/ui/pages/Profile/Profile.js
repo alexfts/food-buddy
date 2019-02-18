@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Avatar, Typography, Paper, withStyles } from '@material-ui/core';
-import { Edit } from '@material-ui/icons';
+import { Avatar, Typography, Paper, Grid, withStyles } from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import Gravatar from 'react-gravatar';
 import { Tags } from '../../../api/tags';
@@ -9,6 +8,7 @@ import { TagCategories } from '../../../api/tagCategories';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 import Bubbles from '../../components/Bubbles';
+import RestaurantCard from '../../components/RestaurantCard';
 
 const Profile = ({ currentUser, tags, tagCategories, classes }) => {
   tagCategories = tagCategories.filter(category => category.title !== 'Extra');
@@ -62,6 +62,25 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
             </Fragment>
           ))}
         </Paper>
+
+        {currentUser.profile &&
+          currentUser.profile.favourites &&
+          currentUser.profile.favourites.length > 0 && (
+            <Paper square elevation={0} className={classes.paperTags}>
+              <Typography variant="h6" className={classes.editTitle}>
+                Your favourites
+              </Typography>
+              <Grid container spacing={24}>
+                {currentUser.profile.favourites.map(({ details, ...place }) => {
+                  return (
+                    <Grid item xs={12} sm={4} key={place.place_id}>
+                      <RestaurantCard place={place} details={details} />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Paper>
+          )}
       </div>
     </Fragment>
   );

@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { TagCategoriesSchema } from './tagCategories';
 export const Tags = new Mongo.Collection('tags');
+
 /**
  * Each document in Tags must have:
  * _id
@@ -16,7 +17,6 @@ Tags.schema = new SimpleSchema({
   title: { type: String },
   category: TagCategoriesSchema
 });
-
 Tags.attachSchema(Tags.schema);
 
 if (Meteor.isServer) {

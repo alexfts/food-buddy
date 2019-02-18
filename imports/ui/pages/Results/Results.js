@@ -9,7 +9,15 @@ const Results = props => {
     : 'restaurants';
   const openNow = props.location.state ? props.location.state.openNow : true;
   const price = props.location.state ? props.location.state.price : 1;
-  return <MapComponent query={query} openNow={openNow} price={price} />;
+  const userMatches = props.location.state && props.location.state.userMatches;
+  return (
+    <MapComponent
+      query={query}
+      openNow={openNow}
+      price={price}
+      userMatches={userMatches}
+    />
+  );
 };
 
 export default withStyles(styles)(Results);

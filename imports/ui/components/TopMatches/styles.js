@@ -22,11 +22,9 @@ const styles = theme => ({
     letterSpacing: 1.1,
     width: '100%'
   },
-
   placesList: {
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 20,
     paddingLeft: 18
@@ -38,7 +36,6 @@ const styles = theme => ({
   },
   matchesLabel: {
     color: '#696969',
-    // fontSize: 10,
     fontWeight: 400,
     marginLeft: 5,
     marginRight: 10
@@ -59,7 +56,6 @@ const styles = theme => ({
     color: 'white',
     fontWeight: 400,
     margin: '0.5rem 0'
-    // textTransform: 'capitalize'
   },
   switch: {
     letterSpacing: 1.1,

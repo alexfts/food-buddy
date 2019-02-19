@@ -15,7 +15,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import Bubbles from '../../components/Bubbles';
+import TagSelections from '../../components/TagSelections';
 import { Link } from 'react-router-dom';
 
 function getSteps() {
@@ -36,7 +36,7 @@ class Onboard extends React.Component {
     switch (step) {
       case 0:
         return (
-          <Bubbles
+          <TagSelections
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Cuisine'
             )}
@@ -49,7 +49,7 @@ class Onboard extends React.Component {
         );
       case 1:
         return (
-          <Bubbles
+          <TagSelections
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Food Types'
             )}
@@ -63,7 +63,7 @@ class Onboard extends React.Component {
         );
       case 2:
         return (
-          <Bubbles
+          <TagSelections
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Dietary Preferences'
             )}

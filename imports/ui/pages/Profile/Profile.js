@@ -90,9 +90,23 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
 
 Profile.propTypes = {
   classes: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
-  tags: PropTypes.array.isRequired,
-  tagCategories: PropTypes.array.isRequired 
+  currentUser: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    emails: PropTypes.array.isRequired,
+    profile: PropTypes.object.isRequired
+  }).isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  tagCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default withTracker(() => {

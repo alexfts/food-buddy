@@ -12,7 +12,6 @@ const styles = theme => ({
   profileInfo: {
     background: 'blue'
   },
-
   paperUser: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
@@ -28,14 +27,11 @@ const styles = theme => ({
     border: '1px solid #D3D3D3',
     margin: 'auto'
   },
-
   userCard: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
-    // justifyContent: 'space-between',
   },
-  // profileAvatar: {},
   avatarStyle: {
     marginBottom: '0.8rem',
     height: 90,
@@ -48,7 +44,6 @@ const styles = theme => ({
     fontWeight: 500,
     fontSize: '1.5rem'
   },
-
   divider: {
     margin: 12
   },

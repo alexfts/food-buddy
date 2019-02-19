@@ -1,8 +1,9 @@
 import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
-  root: {
-    display: 'flex'
+  successBar: {
+    top: 350,
+    left: 500
   },
   success: {
     backgroundColor: green[600]
@@ -15,15 +16,17 @@ const styles = theme => ({
     alignItems: 'center'
   },
   card: {
-    height: 260,
-    width: '100%'
+    height: '100%',
+    width: '100%',
+    borderRadius: 0,
+    border: '1px solid #D3D3D3'
   },
   media: {
     height: 160
   },
   content: {
     fontFamily: 'Arial',
-    padding: 8,
+    padding: '14px 16px',
     '&:last-child': {
       paddingBottom: 0
     }
@@ -47,16 +50,24 @@ const styles = theme => ({
     fontWeight: 'bold'
   },
   dollar: {
-    color: 'green'
+    color: '#6ba048',
+    letterSpace: 1.2,
+    marginRight: -5
   },
   starheart: {
     display: 'flex',
     justifyContent: 'space-between'
   },
   star: {
-    paddingLeft: 8,
-    paddingTop: 10,
-    color: 'yellow'
+    paddingRight: 4,
+    color: '#fbc12f'
+  },
+  starRating: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  shareButton: {
+    zIndex: 3
   },
   drawer: {
     width: 200,
@@ -74,7 +85,25 @@ const styles = theme => ({
       color: '#e91e63'
     }
   },
-  checked: {}
+  checked: {},
+  shareCard: {
+    borderRadius: 0
+  },
+  shareCardHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  shareTitle: {
+    fontSize: '1.4rem',
+    fontWeight: 600,
+    paddingBottom: 12
+  },
+  dialogContent: {
+    paddingTop: '0.8rem',
+    paddingBottom: '1.5rem'
+  }
 });
 
 export default styles;

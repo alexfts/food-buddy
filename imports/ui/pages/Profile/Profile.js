@@ -7,7 +7,7 @@ import { Tags } from '../../../api/tags';
 import { TagCategories } from '../../../api/tagCategories';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
-import Bubbles from '../../components/Bubbles';
+import TagSelections from '../../components/TagSelections';
 import RestaurantCard from '../../components/RestaurantCard';
 
 const Profile = ({ currentUser, tags, tagCategories, classes }) => {
@@ -54,7 +54,7 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
                 <Typography variant="h6" className={classes.tagTitle}>
                   {title}:
                 </Typography>
-                <Bubbles
+                <TagSelections
                   tags={tags.filter(tag => tag.category._id === _id)}
                   categoryid={_id}
                 />
@@ -62,6 +62,8 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
             </Fragment>
           ))}
         </Paper>
+
+        <div className={classes.divider} />
 
         {currentUser.profile &&
           currentUser.profile.favourites &&
@@ -87,7 +89,10 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
 };
 
 Profile.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
+  tagCategories: PropTypes.array.isRequired 
 };
 
 export default withTracker(() => {

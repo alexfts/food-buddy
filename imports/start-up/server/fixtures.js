@@ -44,14 +44,7 @@ Meteor.startup(() => {
         name: 'Bob Jr.',
         tags: Tags.find({
           title: {
-            $in: [
-              'Asian',
-              'Gluten free',
-              'Burgers',
-              'Kebab',
-              'Fries',
-              'Chicken Wings'
-            ]
+            $in: ['Asian', 'Gluten free', 'Burgers', 'Fries', 'Chicken Wings']
           }
         }).map(tag => tag._id)
       }
@@ -70,12 +63,59 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'a@b.c',
       password: 'password',
-      username: 'CptHook',
+      username: 'Homer Simpson',
       profile: {
-        name: 'Captain Hook',
+        name: '',
         tags: Tags.find({
           title: {
-            $in: ['Burgers', 'Asian', 'Kebab', 'Chicken Wings']
+            $in: [
+              'Nut-Free',
+              'Burgers',
+              'Asian',
+              'Dumplings',
+              'Dim Sum',
+              'Brunch'
+            ]
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
+      email: 'buffkorean@ktv.com',
+      password: 'password',
+      username: 'BuffKorean',
+      profile: {
+        name: 'Buff Korean',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Burgers',
+              'Burritos',
+              'Rice',
+              'Korean',
+              'Chicken Wings',
+              'BBQ'
+            ]
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
+      email: 'timgabrielnguyen@gmail.com',
+      password: 'password',
+      username: 'BabyLungs',
+      profile: {
+        name: 'Baby Lungs',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Burgers',
+              'Burritos',
+              'Rice',
+              'Korean',
+              'Chicken Wings',
+              'BBQ'
+            ]
           }
         }).map(tag => tag._id)
       }
@@ -83,12 +123,41 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'ryanreynolds.yvr@gmail.com',
       password: 'password',
-      username: 'ryanreynolds',
+      username: 'RyanReynolds',
       profile: {
         name: 'Ryan Reynolds',
         tags: Tags.find({
           title: {
-            $in: ['Burgers', 'Thai', 'Kebab', 'Canadian', 'Chicken Wings']
+            $in: [
+              'Burgers',
+              'Thai',
+
+              'Canadian',
+              'Chicken Wings',
+              'Dim Sum',
+              'Taco'
+            ]
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
+      email: 'hiltonparis728@gmail.com',
+      password: 'password',
+      username: 'ParisHilton',
+      profile: {
+        name: 'Paris Hilton',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Burgers',
+              'French',
+
+              'American',
+              'Fries',
+              'Brunch',
+              'Low-Carb'
+            ]
           }
         }).map(tag => tag._id)
       }

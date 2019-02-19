@@ -1,10 +1,12 @@
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
+import {
+  Button,
+  FormControl,
+  Typography,
+  TextField,
+  Grid
+} from '@material-ui/core';
 import React, { Component, Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { Form, Field } from 'react-final-form';
 import { FORM_ERROR } from 'final-form';
 import validate from './helpers/validation';
@@ -15,21 +17,19 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true,
-      submitError: null
+      loginToggle: true
     };
   }
 
   onSubmit = values => {
-    if (this.state.formToggle) {
-      try {
-        const res = Meteor.loginWithPassword(values.email, values.password);
-        if (!res) throw new Error('Incorrect email and/or password');
-      } catch (err) {
-        return {
-          [FORM_ERROR]: 'Incorrect email and/or password'
-        };
-      }
+    if (this.state.loginToggle) {
+      Meteor.loginWithPassword(values.email, values.password, err => {
+        if (err) {
+          return {
+            [FORM_ERROR]: 'Incorrect email and/or password'
+          };
+        }
+      });
     } else {
       Accounts.createUser(
         {
@@ -38,7 +38,11 @@ class LoginForm extends Component {
           password: values.password
         },
         err => {
-          if (err) console.log(err);
+          if (err) {
+            return {
+              [FORM_ERROR]: 'The user already exists'
+            };
+          }
         }
       );
     }
@@ -50,9 +54,10 @@ class LoginForm extends Component {
     return (
       <div className={classes.container}>
         <Form
+          autoComplete="off"
           onSubmit={(v, e) => this.onSubmit(v, e)}
           validate={values => {
-            return validate(values, this.state.formToggle);
+            return validate(values, this.state.loginToggle);
           }}
           render={({
             handleSubmit,
@@ -71,7 +76,7 @@ class LoginForm extends Component {
                 }}
                 className={classes.accountForm}
               >
-                {!this.state.formToggle && (
+                {!this.state.loginToggle && (
                   <FormControl fullWidth className={classes.formControl}>
                     <Field
                       name="username"
@@ -79,14 +84,13 @@ class LoginForm extends Component {
                         <Fragment>
                           <TextField
                             {...input}
-                            id="outlined-username-input"
+                            id="standard-username-input"
                             label="Username"
                             type="username"
                             autoComplete="off"
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
-                            color="secondary"
                           />
                           {meta.touched && meta.invalid && (
                             <Typography className={classes.errorMessage}>
@@ -105,15 +109,14 @@ class LoginForm extends Component {
                       <Fragment>
                         <TextField
                           {...input}
-                          id="outlined-email-input"
+                          id="standard-email-input"
                           label="Email"
                           className={classes.textField}
                           type="email"
                           name="email"
-                          autoComplete="email"
+                          autoComplete="off"
                           margin="normal"
                           variant="outlined"
-                          color="secondary"
                         />
                         {meta.touched && meta.invalid && (
                           <Typography className={classes.errorMessage}>
@@ -131,14 +134,13 @@ class LoginForm extends Component {
                       <Fragment>
                         <TextField
                           {...input}
-                          id="outlined-password-input"
+                          id="standard-password-input"
                           label="Password"
                           className={classes.textField}
                           type="password"
-                          autoComplete="current-password"
+                          autoComplete="off"
                           margin="normal"
                           variant="outlined"
-                          color="secondary"
                         />
                         {meta.touched && meta.invalid && (
                           <Typography className={classes.errorMessage}>
@@ -155,11 +157,11 @@ class LoginForm extends Component {
                       onClick={() => {
                         form.reset();
                         this.setState({
-                          formToggle: !this.state.formToggle
+                          loginToggle: !this.state.loginToggle
                         });
                       }}
                     >
-                      {this.state.formToggle
+                      {this.state.loginToggle
                         ? 'Create an account'
                         : 'Login to existing account'}
                     </button>
@@ -180,18 +182,13 @@ class LoginForm extends Component {
                       color="secondary"
                       disabled={submitting || pristine || hasValidationErrors}
                     >
-                      {this.state.formToggle ? 'Login' : 'Create'}
+                      {this.state.loginToggle ? 'Login' : 'Create'}
                     </Button>
                   </Grid>
                 </FormControl>
                 {hasSubmitErrors && (
                   <Typography className={classes.errorMessage}>
                     {submitError}
-                  </Typography>
-                )}
-                {this.state.submitError && (
-                  <Typography className={classes.errorMessage}>
-                    {this.state.submitError}
                   </Typography>
                 )}
               </form>

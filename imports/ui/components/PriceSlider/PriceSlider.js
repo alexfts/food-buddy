@@ -27,7 +27,7 @@ class PriceSlider extends Component {
 
     return (
       <div className={classes.root}>
-        <Typography className={classes.title}>Price Range</Typography>
+        <Typography className={classes.title}>Price Range:</Typography>
 
         <div className={classes.sliderContainer}>
           <Slider
@@ -38,7 +38,6 @@ class PriceSlider extends Component {
             value={price}
             onChange={this.handlePriceChange}
           />
-          {/* {price.dollars} */}
 
           <ul className={classes.ul}>
             <Typography className={classes.dollars}>

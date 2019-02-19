@@ -78,52 +78,34 @@ const UserSchema = new SimpleSchema({
 Meteor.users.attachSchema(UserSchema);
 
 /* Helper function to find dietary restrictions for all users */
-const getAllRestrictions = allUserTagPairs => {
-  allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
-    if (acc.hasOwnProperty(tagid)) {
-      acc[tagid].push(user);
-    } else {
-      acc[tagid] = [user];
-    }
-    return acc;
-  }, {});
-
-  allUserTagPairs = Object.keys(allUserTagPairs)
+const getAllRestrictions = tagUsers => {
+  tagUsers = Object.keys(tagUsers)
     .filter(tagid => {
       const tag = Tags.findOne(tagid);
       return tag.category.title === 'Dietary Preferences';
     })
     .map(tagid => ({
       tagids: [tagid],
-      users: allUserTagPairs[tagid]
+      users: tagUsers[tagid]
     }));
-  return allUserTagPairs;
+  return tagUsers;
 };
 
 /* Helper function to get top tags across all users */
-const getTopIndividualTags = allUserTagPairs => {
-  allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
-    if (acc.hasOwnProperty(tagid)) {
-      acc[tagid].push(user);
-    } else {
-      acc[tagid] = [user];
-    }
-    return acc;
-  }, {});
-
-  allUserTagPairs = Object.keys(allUserTagPairs)
+const getTopIndividualTags = tagUsers => {
+  tagUsers = Object.keys(tagUsers)
     .filter(tagid => {
       const tag = Tags.findOne(tagid);
       return (
         tag.category.title !== 'Dietary Preferences' &&
-        allUserTagPairs[tagid].length > 1
+        tagUsers[tagid].length > 1
       );
     })
     .map(tagid => ({
       tagids: [tagid],
-      users: allUserTagPairs[tagid]
+      users: tagUsers[tagid]
     }));
-  return allUserTagPairs;
+  return tagUsers;
 };
 
 const getUserIntersection = (users1, users2) => {
@@ -159,34 +141,25 @@ const findCommonTags = (cuisineTagUserPairs, foodTypeTagUserPairs) => {
 };
 
 /* Helper function to get top tags for cuisines and food types together across all users */
-const getTopIntersectingTags = allUserTagPairs => {
-  allUserTagPairs = allUserTagPairs.reduce((acc, { tagid, user }) => {
-    if (acc.hasOwnProperty(tagid)) {
-      acc[tagid].push(user);
-    } else {
-      acc[tagid] = [user];
-    }
-    return acc;
-  }, {});
-
-  const cuisineTagIds = Object.keys(allUserTagPairs).filter(tagid => {
+const getTopIntersectingTags = tagUsers => {
+  const cuisineTagIds = Object.keys(tagUsers).filter(tagid => {
     const tag = Tags.findOne(tagid);
     return tag.category.title === 'Cuisine';
   });
-  const foodTypeTagIds = Object.keys(allUserTagPairs).filter(tagid => {
+  const foodTypeTagIds = Object.keys(tagUsers).filter(tagid => {
     const tag = Tags.findOne(tagid);
     return tag.category.title === 'Food Types';
   });
 
   const cuisineTagUserPairs = cuisineTagIds.reduce((acc, tagid) => {
-    if (allUserTagPairs[tagid].length > 1) {
-      acc[tagid] = allUserTagPairs[tagid];
+    if (tagUsers[tagid].length > 1) {
+      acc[tagid] = tagUsers[tagid];
     }
     return acc;
   }, {});
   const foodTypeTagUserPairs = foodTypeTagIds.reduce((acc, tagid) => {
-    if (allUserTagPairs[tagid].length > 1) {
-      acc[tagid] = allUserTagPairs[tagid];
+    if (tagUsers[tagid].length > 1) {
+      acc[tagid] = tagUsers[tagid];
     }
     return acc;
   }, {});
@@ -358,13 +331,21 @@ Meteor.methods({
       .map(getUserTagPairs)
       .reduce((a, b) => a.concat(b), []); // flatten all tag-user pairs
 
-    const topIntersectingTags = getTopIntersectingTags(allUserTagPairs);
-    const topIndividualTags = getTopIndividualTags(allUserTagPairs);
+    const tagUsers = allUserTagPairs.reduce((acc, { tagid, user }) => {
+      if (acc.hasOwnProperty(tagid)) {
+        acc[tagid].push(user);
+      } else {
+        acc[tagid] = [user];
+      }
+      return acc;
+    }, {});
+    const topIntersectingTags = getTopIntersectingTags(tagUsers);
+    const topIndividualTags = getTopIndividualTags(tagUsers);
     const results = [...topIntersectingTags, ...topIndividualTags];
     results.sort((a, b) => {
       return b.users.length - a.users.length;
     });
-    const restrictions = getAllRestrictions(allUserTagPairs);
+    const restrictions = getAllRestrictions(tagUsers);
     return { matches: results, restrictions };
   }
 });

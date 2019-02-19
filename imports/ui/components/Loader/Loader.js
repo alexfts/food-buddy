@@ -2,24 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
-import Loader from 'react-loader-spinner';
+import ReactLoader from 'react-loader-spinner';
 
-class Loading extends React.Component {
-  render() {
-    const { classes } = this.props;
+const Loader = ({ classes }) => (
+  <div className={classes.root}>
+    <div className={classes.container}>
+      <ReactLoader
+        type="Ball-Triangle"
+        color="#fb8f2f"
+        height={100}
+        width={100}
+      />
+    </div>
+  </div>
+);
 
-    return (
-      <div className={classes.root}>
-        <div className={classes.container}>
-          <Loader type="Ball-Triangle" color="primary" height={80} width={80} />
-        </div>
-      </div>
-    );
-  }
-}
-
-Loading.propTypes = {
+Loader.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Loading);
+export default withStyles(styles)(Loader);

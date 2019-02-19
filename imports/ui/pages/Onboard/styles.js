@@ -1,40 +1,60 @@
 const styles = theme => ({
   root: {
-    // border: 'solid 2px primary',
     flexGrow: 1,
+    paddingTop: 90,
     margin: 'auto',
-    marginTop: '4%',
+    maxWidth: 800
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
 
-    height: '100%',
-    width: '90%',
-    maxWidth: 650
+    border: '1px solid #D3D3D3',
+    borderBottom: 0,
+    borderRadius: 0,
+    boxShadow: 'none',
+    // padding: '50px 40px',
+    paddingBottom: 36,
+    width: '100%'
+  },
+  bgimg: {
+    borderBottom: '1px solid #D3D3D3',
+    backgroundImage: 'url(/fast_food_bg.jpg)',
+    backgroundPosition: 'center',
+    marginBottom: 30,
+    height: 100,
+    width: '100%'
+  },
+  img: { height: 'auto', width: 100 },
+  title: {
+    fontSize: '1.5rem',
+    fontWeight: 600,
+    textAlgin: 'center'
+  },
+  subTitle: { fontSize: '1.2rem', fontWeight: 500, textAlgin: 'center' },
+
+  stepper: {
+    border: '1px solid #D3D3D3',
+    borderTop: 0,
+    padding: '0 40px 25px 40px'
   },
   actionsContainer: {
     marginBottom: theme.spacing.unit * 2
   },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
+  backButton: {
+    marginTop: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit
   },
   button: {
     // color: 'white',
     fontWeight: 500,
     marginTop: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit
-
-    // '&:hover': {
-    //   background: theme.palette.primary.main
-    // }
-  },
-  backButton: {
-    marginTop: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit
   },
   label: {
     // color: 'white'
-  },
-  stepper: {
-    border: '1px solid #D3D3D3',
-    padding: '50px 40px'
   }
 });
 

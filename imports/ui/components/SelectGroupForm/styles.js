@@ -2,22 +2,33 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   form: {
-    borderRadius: 0,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '5%',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    minHeight: 600
   },
+  bgimg: {
+    backgroundImage: 'url(/fast_food_bg.jpg)',
+    backgroundPosition: 'center',
+    height: 100,
+    width: '100%'
+  },
+
   title: {
     fontSize: '1.4rem',
     fontWeight: 550,
+    paddingTop: 20,
+    paddingLeft: 0,
     marginBottom: '1rem',
     textAlign: 'center'
-    // width: '100%'
   },
-
   dialogTitle: {
+    padding: '0 20px',
+    width: '100%'
+  },
+  dialogTitleEmpty: {
+    minHeight: 600,
     padding: '0 20px',
     width: '100%'
   },
@@ -78,15 +89,11 @@ const styles = theme => ({
   select: {
     width: '100%'
   },
-  cancelButton: {
-    // color: 'white',
-    marginLeft: 10,
-    marginTop: 0
-  },
-  buttons: {
-    // height: '100%',
-    // width: '100%'
-    // borderTop: '1px solid #888888'
+
+  results: {
+    fontSize: '1rem',
+    textAlign: 'center',
+    paddingTop: '3rem'
   }
 });
 

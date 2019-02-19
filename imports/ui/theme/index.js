@@ -3,11 +3,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export default createMuiTheme({
   palette: {
     primary: {
-      main: '#fb8f2f'
-      // main: '#f0792b'
-      // light: '#f39355',
-      // dark: '#a8541e'
-      // main: '#30cfd0'
+      main: '#fb8f2f',
+      dark: '#f0792b'
     },
     secondary: {
       main: '#4055f5',
@@ -16,15 +13,8 @@ export default createMuiTheme({
       contrastText: '#fff'
     },
     error: {
-      main: '#f5ef40'
-    },
-    bg: {
-      main: '#212121'
+      main: '#fb5b2f'
     }
-  },
-
-  slider: {
-    handleFillColor: '#6ba048'
   },
 
   typography: {

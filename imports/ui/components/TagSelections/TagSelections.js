@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { TagCategories } from '../../../api/tagCategories';
 import { Chip } from '@material-ui/core';
 
-class Bubbles extends React.Component {
+class TagSelections extends Component {
   constructor(props) {
     super(props);
     const { currentUser, categoryid, tags } = this.props;
@@ -26,8 +25,20 @@ class Bubbles extends React.Component {
     };
   }
 
-  handleSelect = tag => {
+  updateTagsInDB = () => {
     const { categoryid } = this.props;
+    if (categoryid) {
+      Meteor.call(
+        'users.updateUserTagsByCategory',
+        this.state.selectedTags,
+        categoryid
+      );
+    } else {
+      Meteor.call('users.updateUserTags', this.state.selectedTags);
+    }
+  };
+
+  handleSelect = tag => {
     this.state.selectedTags.some(t => t === tag._id)
       ? this.setState(
           {
@@ -35,60 +46,25 @@ class Bubbles extends React.Component {
               return t !== tag._id;
             })
           },
-          () => {
-            if (categoryid) {
-              Meteor.call(
-                'users.updateUserTagsByCategory',
-                this.state.selectedTags,
-                categoryid
-              );
-            } else {
-              Meteor.call('users.updateUserTags', this.state.selectedTags);
-            }
-          }
+          this.updateTagsInDB
         )
       : this.setState(
           { selectedTags: [...this.state.selectedTags, tag._id] },
-          () => {
-            if (categoryid) {
-              Meteor.call(
-                'users.updateUserTagsByCategory',
-                this.state.selectedTags,
-                categoryid
-              );
-            } else {
-              Meteor.call('users.updateUserTags', this.state.selectedTags);
-            }
-          }
+          this.updateTagsInDB
         );
   };
 
-  sortTagsBySelected(tags) {
+  sortTagsAlphabet(tags) {
     const sortedTags = [...tags];
     sortedTags.sort((tag1, tag2) => {
-      const isTag1Selected = this.state.selectedTags.includes(tag1._id);
-      const isTag2Selected = this.state.selectedTags.includes(tag2._id);
-      if (isTag1Selected !== isTag2Selected) {
-        return isTag1Selected ? -1 : 1;
-      } else {
-        if (tag1.title < tag2.title) return -1;
-        else return 1;
-      }
+      if (tag1.title < tag2.title) return -1;
+      else return 1;
     });
     return sortedTags;
   }
 
-  sortTagsAlphabet(tags) {
-    const sortTags = [...tags];
-    sortTags.sort((tag1, tag2) => {
-      if (tag1.title < tag2.title) return -1;
-      else return 1;
-    });
-    return sortTags;
-  }
-
   render() {
-    const { classes, categoryid } = this.props;
+    const { classes } = this.props;
     const tags = this.sortTagsAlphabet(this.props.tags);
 
     return (
@@ -108,7 +84,6 @@ class Bubbles extends React.Component {
                 ? classes.chipSelected
                 : classes.chip
             }
-            // className={classes.chip}
             onClick={() => this.handleSelect(tag)}
           />
         ))}
@@ -117,14 +92,15 @@ class Bubbles extends React.Component {
   }
 }
 
-Bubbles.propTypes = {
-  classes: PropTypes.object.isRequired
+TagSelections.propTypes = {
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  categoryid: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  tags: PropTypes.array.isRequired
 };
 
 export default withTracker(() => {
-  Meteor.subscribe('tagCategories');
   return {
-    currentUser: Meteor.user(),
-    tagCategories: TagCategories.find({}).fetch()
+    currentUser: Meteor.user()
   };
-})(withStyles(styles, { withTheme: true })(Bubbles));
+})(withStyles(styles, { withTheme: true })(TagSelections));

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Fab, Dialog, Modal, Snackbar } from '@material-ui/core';
+import { Fab, Dialog, Modal, Snackbar, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
-import MapComponent from '../../components/Map/Map';
+import Map from '../../components/Map';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
@@ -82,7 +82,6 @@ class Home extends Component {
         <Fab
           aria-label="Add"
           className={classes.fab}
-          color="primary"
           onClick={this.handleClickOpen('paper')}
           onMouseOver={this.mouseOver}
           onMouseOut={this.mouseOut}
@@ -111,7 +110,6 @@ class Home extends Component {
             onClose={this.handleClose}
             scroll={this.state.scroll}
             aria-labelledby="scroll-dialog-title"
-            height="100%"
           >
             <div className={classes.paper}>
               <SelectGroupForm />
@@ -120,13 +118,14 @@ class Home extends Component {
         </Modal>
 
         <div>
-          {query && <MapComponent query={query} />}
+          {query && <Map query={query} />}
 
           <Snackbar
+            className={classes.snackbar}
             anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
             open={query && this.state.displaySnackbar}
             onClose={this.handleCloseSnackbar}
-            autoHideDuration={2000}
+            autoHideDuration={5000}
             ContentProps={{
               'aria-describedby': 'message-id'
             }}
@@ -134,6 +133,9 @@ class Home extends Component {
               <span id="message-id">{`You like ${query} restaurants. Check them out!`}</span>
             }
           />
+          {/* <Typography className={classes.groupMessage}>
+            Create your group below!
+          </Typography> */}
         </div>
       </div>
     );
@@ -141,7 +143,9 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  userTags: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired
 };
 
 export default withTracker(() => {

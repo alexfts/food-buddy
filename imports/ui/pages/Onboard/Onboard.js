@@ -2,21 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  Card,
+  Typography,
+  Step,
+  Stepper,
+  StepLabel,
+  StepContent
+} from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Tags } from '../../../api/tags';
-import Bubbles from '../../components/Bubbles';
+import TagSelections from '../../components/TagSelections';
 import { Link } from 'react-router-dom';
 
 function getSteps() {
   return [
-    'We want to get to know you better! Please select your favourite cusines:',
+    'Select your favourite cusines:',
     'Select your favourite food types:',
     'Select any dietary preferences and extra info:'
   ];
@@ -32,7 +36,7 @@ class Onboard extends React.Component {
     switch (step) {
       case 0:
         return (
-          <Bubbles
+          <TagSelections
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Cuisine'
             )}
@@ -45,7 +49,7 @@ class Onboard extends React.Component {
         );
       case 1:
         return (
-          <Bubbles
+          <TagSelections
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Food Types'
             )}
@@ -59,7 +63,7 @@ class Onboard extends React.Component {
         );
       case 2:
         return (
-          <Bubbles
+          <TagSelections
             tags={this.props.tags.filter(
               tag => tag.category.title === 'Dietary Preferences'
             )}
@@ -114,6 +118,17 @@ class Onboard extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Card className={classes.header}>
+          <div className={classes.bgimg} />
+          <img className={classes.img} src="/laugh.png" alt="" />
+          <Typography color="primary" className={classes.title}>
+            We want to get to know you better!
+          </Typography>
+          <Typography color="primary" className={classes.subTitle}>
+            Personalize your food palette below
+          </Typography>
+        </Card>
+
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
@@ -165,7 +180,9 @@ class Onboard extends React.Component {
 }
 
 Onboard.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object.isRequired,
+  tagCategories: PropTypes.array.isRequired, 
+  tags: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {

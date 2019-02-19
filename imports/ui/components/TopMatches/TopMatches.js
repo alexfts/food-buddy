@@ -31,20 +31,25 @@ class TopMatches extends Component {
   };
 
   render() {
-    const { allTags, classes, matches } = this.props;
-
+    const { allTags, classes, matches, userids } = this.props;
+    const groupMembers = userids.map(userid =>
+      this.props.users.find(u => u._id === userid)
+    );
     return matches ? (
       <div className={classes.container}>
+        <Typography className={classes.title} variant="h5">
+          Your top matches:
+        </Typography>
         <Grid
           container
           justify="space-between"
           align="center"
           className={classes.topMatchesHeader}
         >
-          <Typography className={classes.title} variant="h5">
-            Your top matches:
-          </Typography>
+          <PriceSlider />
           <FormControlLabel
+            className={classes.switch}
+            label="Open now"
             control={
               <Switch
                 checked={this.state.openNow}
@@ -52,44 +57,36 @@ class TopMatches extends Component {
                 value="openNow"
               />
             }
-            label="Open now"
           />
         </Grid>
 
-        <PriceSlider />
+        <div className={classes.placesList}>
+          {matches.map(({ tagids, users }, i) => {
+            const userTags = allTags.filter(tag => tagids.includes(tag._id));
+            const userTagTitles = userTags.map(tag => tag.title);
+            return (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                key={userTagTitles.join(',')}
+                className={classes.matches}
+              >
+                <Typography className={classes.tagTitle}>
+                  {userTagTitles.join(' or ')}
+                </Typography>
 
-        {/* <Grid
-          container
-          spacing={16}
-          justify="space-between"
-          alignItems="center"
-        > */}
-        {matches.map(({ tagids, users }) => {
-          const userTags = allTags.filter(tag => tagids.includes(tag._id));
-          const userTagTitles = userTags.map(tag => tag.title);
-          return (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              key={userTagTitles.join(', ')}
-              className={classes.matches}
-            >
-              <Typography className={classes.tagTitle}>
-                {userTagTitles.join(' or ')}
-              </Typography>
-
-              <div className={classes.flexMatches}>
-                <Typography className={classes.matchesLabel}>Match:</Typography>
-                {users.map(user => (
-                  <>
-                    {console.log(users)}
+                <div className={classes.flexMatches}>
+                  <Typography className={classes.matchesLabel}>
+                    Match:
+                  </Typography>
+                  {users.map(user => (
                     <Chip
                       className={classes.user}
                       key={user._id}
                       label={user.username}
                       color="default"
-                      variant="outlined"
+                      variant="default"
                       avatar={
                         <Avatar>
                           <Gravatar
@@ -99,36 +96,35 @@ class TopMatches extends Component {
                         </Avatar>
                       }
                     />
-                  </>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              <div>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  component={Link}
-                  size="small"
-                  to={{
-                    pathname: '/results',
-                    state: {
-                      query: userTagTitles
-                        .map(title => `(${title})`)
-                        .join(' OR '),
-                      price: this.state.price,
-                      openNow: this.state.openNow,
-                      userMatches: users
-                    }
-                  }}
-                >
-                  Select
-                </Button>
-              </div>
-            </Grid>
-          );
-        })}
-        {/* </Grid> */}
+                <div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    component={Link}
+                    size="small"
+                    to={{
+                      pathname: '/results',
+                      state: {
+                        query: userTagTitles
+                          .map(title => `(${title})`)
+                          .join(' OR '),
+                        price: this.state.price,
+                        openNow: this.state.openNow,
+                        userMatches: groupMembers
+                      }
+                    }}
+                  >
+                    Select
+                  </Button>
+                </div>
+              </Grid>
+            );
+          })}
+        </div>
       </div>
     ) : (
       <div>No matches found</div>

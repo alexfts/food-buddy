@@ -5,22 +5,36 @@ const styles = theme => ({
   topMatchesHeader: {
     display: 'flex',
     alignItems: 'center',
-    paddingTop: 20
+    justifyContent: 'center'
   },
   title: {
     fontSize: '1.2rem',
-    marginRight: 10
-    // textAlign: 'center'
+    fontWeight: 550,
+    marginRight: 10,
+    marginBottom: '1rem',
+    paddingTop: 20,
+    textAlign: 'center'
   },
   tagTitle: {
-    color: '#f0792b',
+    color: theme.palette.primary.dark,
     fontSize: '1.3rem',
     fontWeight: 550,
-    letterSpacing: 1.1
+    letterSpacing: 1.1,
+    width: '100%'
+  },
+
+  placesList: {
+    display: 'flex',
+    flexDirection: 'column',
+    // alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 20,
+    paddingLeft: 18
   },
   matches: {
     marginTop: '20px',
-    height: '100%'
+    height: '100%',
+    maxWidth: '100%'
   },
   matchesLabel: {
     color: '#696969',
@@ -46,6 +60,10 @@ const styles = theme => ({
     fontWeight: 400,
     margin: '0.5rem 0'
     // textTransform: 'capitalize'
+  },
+  switch: {
+    letterSpacing: 1.1,
+    fongWeight: 500
   }
 });
 

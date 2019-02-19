@@ -467,7 +467,7 @@ class MapComponent extends React.Component {
 const Results = compose(
   withProps({
     googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyDUBhvg4WTzreRL5VOJ8LP6Rlb0J1auaoc&v=3.exp&libraries=geometry,drawing,places',
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyA27rwWEMvWiG5EFFRJP6czivVgL4AMDTQ&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: (
       <div style={{ height: `100%`, minHeight: 420, width: `80%` }} />

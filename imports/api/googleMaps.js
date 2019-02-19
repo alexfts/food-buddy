@@ -2,7 +2,8 @@ import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isServer) {
   const googleMaps = require('@google/maps').createClient({
-    key: 'AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss'
+    key:
+      process.env.GOOGLE_MAPS_KEY || 'AIzaSyA27rwWEMvWiG5EFFRJP6czivVgL4AMDTQ'
   });
 
   Meteor.methods({

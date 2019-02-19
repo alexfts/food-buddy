@@ -14,7 +14,6 @@ const styles = theme => ({
     height: 100,
     width: '100%'
   },
-
   title: {
     fontSize: '1.4rem',
     fontWeight: 550,
@@ -89,7 +88,6 @@ const styles = theme => ({
   select: {
     width: '100%'
   },
-
   results: {
     fontSize: '1rem',
     textAlign: 'center',

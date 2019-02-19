@@ -8,30 +8,23 @@ import { withTracker } from 'meteor/react-meteor-data';
 import {
   NoSsr,
   Chip,
-  Dialog,
   MenuItem,
   TextField,
   Typography,
   Avatar,
-  Paper,
-  Button
+  DialogContent,
+  DialogTitle,
+  Paper
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import classNames from 'classnames';
 import TopMatches from '../TopMatches';
 import RestrictionsWarning from '../RestrictionsWarning';
 
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import PriceSlider from '../PriceSlider';
-
 /** Components to customize the style and behaviour of Select
  *  See https://react-select.com/components#replacing-components
  *  For full reference
  **/
-
 const selectComponents = {
   Control,
   Menu,
@@ -169,40 +162,36 @@ function ValueContainer(props) {
 }
 
 class SelectGroupForm extends Component {
-  state = {
-    multi: null,
-    matches: null,
-    restrictions: null,
-    open: true,
-    scroll: 'paper'
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedUsers: null,
+      matches: null,
+      restrictions: null
+    };
+  }
 
   handleChange = value => {
     this.setState(
       {
-        multi: value
+        selectedUsers: value
       },
       () => {
-        const userids = this.state.multi.map(({ value }) => value);
+        const userids = this.state.selectedUsers.map(({ value }) => value);
         Meteor.call(
           'users.findMatches',
           [...userids, this.props.currentUserId],
-          (err, { matches, restrictions }) =>
-            this.setState({ matches, restrictions })
+          (err, { matches, restrictions }) => {
+            if (!err) this.setState({ matches, restrictions });
+          }
         );
       }
     );
   };
 
-  handleClickOpen = scroll => () => {
-    this.setState({ open: true, scroll });
-  };
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   render() {
     const { classes, users, currentUserId } = this.props;
+    const { selectedUsers, matches, restrictions } = this.state;
     const suggestions = users
       .filter(user => user._id !== currentUserId)
       .filter(user => user.profile && user.profile.tags) // only onboarded users
@@ -234,9 +223,9 @@ class SelectGroupForm extends Component {
               styles={selectStyles}
               textFieldProps={{
                 label: `You have picked ${
-                  this.state.multi ? this.state.multi.length : 0
+                  selectedUsers ? selectedUsers.length : 0
                 } ${
-                  this.state.multi && this.state.multi.length === 1
+                  selectedUsers && selectedUsers.length === 1
                     ? 'buddy'
                     : 'buddies'
                 }`,
@@ -246,7 +235,7 @@ class SelectGroupForm extends Component {
               }}
               options={suggestions}
               components={selectComponents}
-              value={this.state.multi}
+              value={selectedUsers}
               onChange={this.handleChange}
               placeholder="Search a buddy"
               isMulti
@@ -256,23 +245,21 @@ class SelectGroupForm extends Component {
         </DialogTitle>
 
         <DialogContent className={classes.dialogContent}>
-          {this.state.multi &&
-            this.state.multi.length > 0 &&
-            (this.state.matches && this.state.matches.length > 0 ? (
+          {selectedUsers &&
+            selectedUsers.length > 0 &&
+            (matches && matches.length > 0 ? (
               <TopMatches
-                userids={this.state.multi.map(({ value }) => value)}
-                matches={this.state.matches}
+                userids={selectedUsers.map(({ value }) => value)}
+                matches={matches}
               />
             ) : (
               <Typography className={classes.results}>
                 Loading Results...
               </Typography>
             ))}
-          {this.state.multi &&
-            this.state.multi.length > 0 &&
-            this.state.restrictions && (
-              <RestrictionsWarning restrictions={this.state.restrictions} />
-            )}
+          {selectedUsers && selectedUsers.length > 0 && restrictions && (
+            <RestrictionsWarning restrictions={restrictions} />
+          )}
         </DialogContent>
       </div>
     );
@@ -280,14 +267,22 @@ class SelectGroupForm extends Component {
 }
 
 SelectGroupForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+      emails: PropTypes.array.isRequired,
+      profile: PropTypes.object.isRequired
+    })
+  ).isRequired,
+  currentUserId: PropTypes.string
 };
 
 export default withTracker(() => {
   Meteor.subscribe('users');
 
   return {
-    currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
     users: Meteor.users.find({}).fetch()
   };

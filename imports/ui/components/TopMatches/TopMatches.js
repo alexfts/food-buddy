@@ -76,34 +76,38 @@ class TopMatches extends Component {
                 key={userTagTitles.join(',')}
                 className={classes.matches}
               >
-                <Typography className={classes.tagTitle}>
-                  {userTagTitles.join(' or ')}
-                </Typography>
+                <div className={classes.wrapper}>
+                  <div>
+                    <Typography className={classes.tagTitle}>
+                      {userTagTitles.join(' or ')}
+                    </Typography>
 
-                <div className={classes.flexMatches}>
-                  <Typography className={classes.matchesLabel}>
-                    Match:
-                  </Typography>
-                  {users.map(user => (
-                    <Chip
-                      className={classes.user}
-                      key={user._id}
-                      label={user.username}
-                      color="default"
-                      variant="default"
-                      avatar={
-                        <Avatar>
-                          <Gravatar
-                            className={classes.gravatar}
-                            email={user.emails[0].address}
+                    <Grid container className={classes.group}>
+                      <Typography className={classes.matchesLabel}>
+                        Match:
+                      </Typography>
+                      <div className={classes.flexMatches}>
+                        {users.map(user => (
+                          <Chip
+                            className={classes.user}
+                            key={user._id}
+                            label={user.username}
+                            color="default"
+                            variant="default"
+                            avatar={
+                              <Avatar>
+                                <Gravatar
+                                  className={classes.gravatar}
+                                  email={user.emails[0].address}
+                                />
+                              </Avatar>
+                            }
                           />
-                        </Avatar>
-                      }
-                    />
-                  ))}
-                </div>
+                        ))}
+                      </div>
+                    </Grid>
+                  </div>
 
-                <div>
                   <Button
                     variant="contained"
                     color="primary"

@@ -47,7 +47,8 @@ const styles = theme => ({
   },
   name: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingBottom: 12
   },
   dollar: {
     color: '#6ba048',
@@ -81,6 +82,8 @@ const styles = theme => ({
   },
   favouriteButton: {
     color: '#e91e63',
+    marginRight: -20,
+
     '&$checked': {
       color: '#e91e63'
     }

@@ -5,7 +5,7 @@ import { Fab, Dialog, Modal, Snackbar, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
-import MapComponent from '../../components/Map/Map';
+import Map from '../../components/Map';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
@@ -118,7 +118,7 @@ class Home extends Component {
         </Modal>
 
         <div>
-          {query && <MapComponent query={query} />}
+          {query && <Map query={query} />}
 
           <Snackbar
             className={classes.snackbar}
@@ -144,7 +144,7 @@ class Home extends Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  userTags: PropTypes.array.isRequired, 
+  userTags: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired
 };
 

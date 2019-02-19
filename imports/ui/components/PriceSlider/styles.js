@@ -2,15 +2,11 @@ const styles = theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    // alignItems: 'center',
     paddingTop: 20
   },
   title: {
-    // color: '#696969',
     letterSpacing: 1.1,
     fontWeight: 500,
-    // fontSize: '1rem',
-    // paddingLeft: '1rem',
     width: 100
   },
   sliderContainer: {
@@ -36,7 +32,6 @@ const styles = theme => ({
   },
   dollar: {
     color: theme.palette.primary.dark,
-    // color: '#6ba048',
     fontWeight: 450,
     letterSpacing: 1.1,
     textAlign: 'center',

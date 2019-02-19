@@ -1,5 +1,5 @@
 import React from 'react';
-import MapComponent from '../../components/Map/Map';
+import Map from '../../components/Map';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
@@ -11,7 +11,7 @@ const Results = props => {
   const price = props.location.state ? props.location.state.price : 1;
   const userMatches = props.location.state && props.location.state.userMatches;
   return (
-    <MapComponent
+    <Map
       query={query}
       openNow={openNow}
       price={price}

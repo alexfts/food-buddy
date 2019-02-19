@@ -1,10 +1,12 @@
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
+import {
+  Button,
+  FormControl,
+  Typography,
+  TextField,
+  Grid
+} from '@material-ui/core';
 import React, { Component, Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { Form, Field } from 'react-final-form';
 import { FORM_ERROR } from 'final-form';
 import validate from './helpers/validation';

@@ -38,7 +38,6 @@ class PriceSlider extends Component {
             value={price}
             onChange={this.handlePriceChange}
           />
-          {/* {price.dollars} */}
 
           <ul className={classes.ul}>
             <Typography className={classes.dollars}>

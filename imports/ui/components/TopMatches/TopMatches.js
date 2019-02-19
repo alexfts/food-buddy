@@ -22,7 +22,7 @@ class TopMatches extends Component {
     super(props);
     this.state = {
       openNow: true,
-      price: undefined
+      price: 1
     };
   }
 

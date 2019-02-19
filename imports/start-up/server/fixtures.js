@@ -15,7 +15,7 @@ Meteor.startup(() => {
       .namedContext()
       .validationErrors();
     if (errors && errors.length > 0) {
-      console.log(errors);
+      throw new Error('Error inserting tag categories');
     }
   }
 
@@ -31,7 +31,7 @@ Meteor.startup(() => {
       .namedContext()
       .validationErrors();
     if (errors && errors.length > 0) {
-      console.log(errors);
+      throw new Error('Error inserting tags');
     }
   }
 
@@ -176,7 +176,7 @@ Meteor.startup(() => {
       .namedContext()
       .validationErrors();
     if (errors && errors.length > 0) {
-      console.log(errors);
+      throw new Error('Error inserting users');
     }
   }
 });

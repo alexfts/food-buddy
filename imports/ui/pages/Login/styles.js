@@ -10,7 +10,6 @@ const styles = theme => ({
     height: '100vh',
     width: '100vw'
   },
-
   logo: {
     paddingBottom: '1.3rem',
     height: 'auto',
@@ -20,11 +19,7 @@ const styles = theme => ({
     }
   },
   textLogo: {
-    // paddingBottom: '2.2rem',
     height: 50
-    // [theme.breakpoints.up('sm')]: {
-    //   height: 45
-    // }
   },
   loginForm: {
     display: 'flex',
@@ -32,14 +27,11 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-
     backgroundImage: 'url("/pasta.png"), url("/berrybowl.png")',
     backgroundPosition: 'top left, bottom right',
     backgroundRepeat: 'no-repeat, no-repeat',
     backgroundAttachment: 'fixed, fixed',
     backgroundSize: '36%, 26%',
-    // height: '100vh',
-    // width: '100vw',
     [theme.breakpoints.up('sm')]: {
       backgroundSize: '28%, 22%'
     },

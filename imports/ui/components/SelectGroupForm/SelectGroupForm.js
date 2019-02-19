@@ -273,7 +273,7 @@ SelectGroupForm.propTypes = {
       _id: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
       emails: PropTypes.array.isRequired,
-      profile: PropTypes.object.isRequired
+      profile: PropTypes.object
     })
   ).isRequired,
   currentUserId: PropTypes.string

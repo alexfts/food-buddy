@@ -14,11 +14,8 @@ class PriceSlider extends Component {
   }
 
   handlePriceChange = (event, price) => {
-    let dollars = '';
-    for (let i = 0; i < price; i++) {
-      dollars += '$';
-    }
-    this.setState({ price, dollars });
+    this.setState({ price });
+    this.props.handlePriceChange(price);
   };
 
   render() {
@@ -54,7 +51,8 @@ class PriceSlider extends Component {
 }
 
 PriceSlider.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  handlePriceChange: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(PriceSlider);

@@ -10,12 +10,10 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-
     border: '1px solid #D3D3D3',
     borderBottom: 0,
     borderRadius: 0,
     boxShadow: 'none',
-    // padding: '50px 40px',
     paddingBottom: 36,
     width: '100%'
   },
@@ -34,7 +32,6 @@ const styles = theme => ({
     textAlgin: 'center'
   },
   subTitle: { fontSize: '1.2rem', fontWeight: 500, textAlgin: 'center' },
-
   stepper: {
     border: '1px solid #D3D3D3',
     borderTop: 0,
@@ -48,14 +45,11 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   },
   button: {
-    // color: 'white',
     fontWeight: 500,
     marginTop: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit
   },
-  label: {
-    // color: 'white'
-  }
+  label: {}
 });
 
 export default styles;

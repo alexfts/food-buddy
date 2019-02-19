@@ -13,7 +13,6 @@ const styles = theme => ({
     justifyContent: 'space-between',
     margin: 'auto'
   },
-
   fblogo: {
     display: 'flex',
     alignItems: 'center'
@@ -28,7 +27,6 @@ const styles = theme => ({
   textLogo: {
     height: 30
   },
-
   menu: {
     color: '#fff',
     height: '2.3rem',

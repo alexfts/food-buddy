@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { TagCategories } from '../../../api/tagCategories';
 import { Chip } from '@material-ui/core';
 
 class TagSelections extends Component {
@@ -12,7 +11,6 @@ class TagSelections extends Component {
     super(props);
     const { currentUser, categoryid, tags } = this.props;
     let selectedTags = [];
-    // initialize selectedTags to the tags that the user has in the DB
     if (currentUser.profile && currentUser.profile.tags) {
       selectedTags = currentUser.profile.tags;
       if (categoryid) {
@@ -27,8 +25,20 @@ class TagSelections extends Component {
     };
   }
 
-  handleSelect = tag => {
+  updateTagsInDB = () => {
     const { categoryid } = this.props;
+    if (categoryid) {
+      Meteor.call(
+        'users.updateUserTagsByCategory',
+        this.state.selectedTags,
+        categoryid
+      );
+    } else {
+      Meteor.call('users.updateUserTags', this.state.selectedTags);
+    }
+  };
+
+  handleSelect = tag => {
     this.state.selectedTags.some(t => t === tag._id)
       ? this.setState(
           {
@@ -36,45 +46,25 @@ class TagSelections extends Component {
               return t !== tag._id;
             })
           },
-          () => {
-            if (categoryid) {
-              Meteor.call(
-                'users.updateUserTagsByCategory',
-                this.state.selectedTags,
-                categoryid
-              );
-            } else {
-              Meteor.call('users.updateUserTags', this.state.selectedTags);
-            }
-          }
+          this.updateTagsInDB
         )
       : this.setState(
           { selectedTags: [...this.state.selectedTags, tag._id] },
-          () => {
-            if (categoryid) {
-              Meteor.call(
-                'users.updateUserTagsByCategory',
-                this.state.selectedTags,
-                categoryid
-              );
-            } else {
-              Meteor.call('users.updateUserTags', this.state.selectedTags);
-            }
-          }
+          this.updateTagsInDB
         );
   };
 
   sortTagsAlphabet(tags) {
-    const sortTags = [...tags];
-    sortTags.sort((tag1, tag2) => {
+    const sortedTags = [...tags];
+    sortedTags.sort((tag1, tag2) => {
       if (tag1.title < tag2.title) return -1;
       else return 1;
     });
-    return sortTags;
+    return sortedTags;
   }
 
   render() {
-    const { classes, categoryid } = this.props;
+    const { classes } = this.props;
     const tags = this.sortTagsAlphabet(this.props.tags);
 
     return (
@@ -94,7 +84,6 @@ class TagSelections extends Component {
                 ? classes.chipSelected
                 : classes.chip
             }
-            // className={classes.chip}
             onClick={() => this.handleSelect(tag)}
           />
         ))}
@@ -111,9 +100,7 @@ TagSelections.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe('tagCategories');
   return {
-    currentUser: Meteor.user(),
-    tagCategories: TagCategories.find({}).fetch()
+    currentUser: Meteor.user()
   };
 })(withStyles(styles, { withTheme: true })(TagSelections));

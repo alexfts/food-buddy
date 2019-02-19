@@ -1,20 +1,23 @@
 const styles = theme => ({
+  root: {
+    paddingTop: '4%',
+    paddingBottom: '3%',
+    margin: 'auto',
+    maxWidth: 870
+  },
   profileContainer: {
-    width: '100%',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   profileInfo: {
     background: 'blue'
   },
-  root: {
-    padding: '2% 8%'
-  },
+
   paperUser: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 2,
     border: '1px solid #D3D3D3',
-    maxWidth: 900,
     margin: 'auto',
     marginTop: '6%'
   },
@@ -23,7 +26,6 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2.5,
     paddingBottom: theme.spacing.unit * 3,
     border: '1px solid #D3D3D3',
-    maxWidth: 900,
     margin: 'auto'
   },
 
@@ -53,9 +55,10 @@ const styles = theme => ({
   editTitle: {
     color: '#696969',
     fontSize: '1.2rem',
+    fontWeight: 500,
     textAlign: 'center',
     paddingTop: 10,
-    paddingBottom: 30
+    paddingBottom: 25
   },
   tagsContainer: {
     display: 'flex',

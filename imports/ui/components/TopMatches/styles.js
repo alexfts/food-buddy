@@ -19,11 +19,22 @@ const styles = theme => ({
     color: theme.palette.primary.dark,
     fontSize: '1.3rem',
     fontWeight: 550,
-    letterSpacing: 1.1
+    letterSpacing: 1.1,
+    width: '100%'
+  },
+
+  placesList: {
+    display: 'flex',
+    flexDirection: 'column',
+    // alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 20,
+    paddingLeft: 18
   },
   matches: {
     marginTop: '20px',
-    height: '100%'
+    height: '100%',
+    maxWidth: '100%'
   },
   matchesLabel: {
     color: '#696969',
@@ -51,7 +62,8 @@ const styles = theme => ({
     // textTransform: 'capitalize'
   },
   switch: {
-    letterSpacing: 1.1
+    letterSpacing: 1.1,
+    fongWeight: 500
   }
 });
 

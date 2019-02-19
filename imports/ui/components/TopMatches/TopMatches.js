@@ -49,7 +49,7 @@ class TopMatches extends Component {
           <PriceSlider />
           <FormControlLabel
             className={classes.switch}
-            label="Open now:"
+            label="Open now"
             control={
               <Switch
                 checked={this.state.openNow}
@@ -60,67 +60,71 @@ class TopMatches extends Component {
           />
         </Grid>
 
-        {matches.map(({ tagids, users }, i) => {
-          const userTags = allTags.filter(tag => tagids.includes(tag._id));
-          const userTagTitles = userTags.map(tag => tag.title);
-          return (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              key={userTagTitles.join(',')}
-              className={classes.matches}
-            >
-              <Typography className={classes.tagTitle}>
-                {userTagTitles.join(' or ')}
-              </Typography>
+        <div className={classes.placesList}>
+          {matches.map(({ tagids, users }, i) => {
+            const userTags = allTags.filter(tag => tagids.includes(tag._id));
+            const userTagTitles = userTags.map(tag => tag.title);
+            return (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                key={userTagTitles.join(',')}
+                className={classes.matches}
+              >
+                <Typography className={classes.tagTitle}>
+                  {userTagTitles.join(' or ')}
+                </Typography>
 
-              <div className={classes.flexMatches}>
-                <Typography className={classes.matchesLabel}>Match:</Typography>
-                {users.map(user => (
-                  <Chip
-                    className={classes.user}
-                    key={user._id}
-                    label={user.username}
-                    color="default"
-                    variant="outlined"
-                    avatar={
-                      <Avatar>
-                        <Gravatar
-                          className={classes.gravatar}
-                          email={user.emails[0].address}
-                        />
-                      </Avatar>
-                    }
-                  />
-                ))}
-              </div>
+                <div className={classes.flexMatches}>
+                  <Typography className={classes.matchesLabel}>
+                    Match:
+                  </Typography>
+                  {users.map(user => (
+                    <Chip
+                      className={classes.user}
+                      key={user._id}
+                      label={user.username}
+                      color="default"
+                      variant="default"
+                      avatar={
+                        <Avatar>
+                          <Gravatar
+                            className={classes.gravatar}
+                            email={user.emails[0].address}
+                          />
+                        </Avatar>
+                      }
+                    />
+                  ))}
+                </div>
 
-              <div>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  component={Link}
-                  size="small"
-                  to={{
-                    pathname: '/results',
-                    state: {
-                      query: userTagTitles
-                        .map(title => `(${title})`)
-                        .join(' OR '),
-                      price: this.state.price,
-                      openNow: this.state.openNow,
-                      userMatches: groupMembers
-                    }
-                  }}
-                >
-                  Select
-                </Button>
-              </div>
-            </Grid>
-          );
-        })}
+                <div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    component={Link}
+                    size="small"
+                    to={{
+                      pathname: '/results',
+                      state: {
+                        query: userTagTitles
+                          .map(title => `(${title})`)
+                          .join(' OR '),
+                        price: this.state.price,
+                        openNow: this.state.openNow,
+                        userMatches: groupMembers
+                      }
+                    }}
+                  >
+                    Select
+                  </Button>
+                </div>
+              </Grid>
+            );
+          })}
+        </div>
       </div>
     ) : (
       <div>No matches found</div>

@@ -216,6 +216,7 @@ class RestaurantCard extends Component {
           </Dialog>
         </Card>
         <Snackbar
+          className={classes.successBar}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'left'

@@ -15,27 +15,34 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true,
-      submitError: null
+      loginToggle: true
     };
   }
 
   onSubmit = values => {
-    if (this.state.formToggle) {
-      try {
-        const res = Meteor.loginWithPassword(values.email, values.password);
-        if (!res) throw new Error('Incorrect email and/or password');
-      } catch (err) {
-        return {
-          [FORM_ERROR]: 'Incorrect email and/or password'
-        };
-      }
-    } else {
-      Accounts.createUser({
-        username: values.username,
-        email: values.email,
-        password: values.password
+    if (this.state.loginToggle) {
+      Meteor.loginWithPassword(values.email, values.password, err => {
+        if (err) {
+          return {
+            [FORM_ERROR]: 'Incorrect email and/or password'
+          };
+        }
       });
+    } else {
+      Accounts.createUser(
+        {
+          username: values.username,
+          email: values.email,
+          password: values.password
+        },
+        err => {
+          if (err) {
+            return {
+              [FORM_ERROR]: 'The user already exists'
+            };
+          }
+        }
+      );
     }
   };
 
@@ -48,7 +55,7 @@ class LoginForm extends Component {
           autoComplete="off"
           onSubmit={(v, e) => this.onSubmit(v, e)}
           validate={values => {
-            return validate(values, this.state.formToggle);
+            return validate(values, this.state.loginToggle);
           }}
           render={({
             handleSubmit,
@@ -67,7 +74,7 @@ class LoginForm extends Component {
                 }}
                 className={classes.accountForm}
               >
-                {!this.state.formToggle && (
+                {!this.state.loginToggle && (
                   <FormControl fullWidth className={classes.formControl}>
                     <Field
                       name="username"
@@ -148,11 +155,11 @@ class LoginForm extends Component {
                       onClick={() => {
                         form.reset();
                         this.setState({
-                          formToggle: !this.state.formToggle
+                          loginToggle: !this.state.loginToggle
                         });
                       }}
                     >
-                      {this.state.formToggle
+                      {this.state.loginToggle
                         ? 'Create an account'
                         : 'Login to existing account'}
                     </button>
@@ -173,18 +180,13 @@ class LoginForm extends Component {
                       color="secondary"
                       disabled={submitting || pristine || hasValidationErrors}
                     >
-                      {this.state.formToggle ? 'Login' : 'Create'}
+                      {this.state.loginToggle ? 'Login' : 'Create'}
                     </Button>
                   </Grid>
                 </FormControl>
                 {hasSubmitErrors && (
                   <Typography className={classes.errorMessage}>
                     {submitError}
-                  </Typography>
-                )}
-                {this.state.submitError && (
-                  <Typography className={classes.errorMessage}>
-                    {this.state.submitError}
                   </Typography>
                 )}
               </form>

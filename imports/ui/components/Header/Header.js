@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import styles from './styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import {
   AccountCircle,
   PowerSettingsNew,
   Restaurant
 } from '@material-ui/icons';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 
 class Header extends React.Component {
   state = {

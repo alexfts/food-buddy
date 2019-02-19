@@ -93,7 +93,7 @@ class RestaurantCard extends Component {
                 component="img"
                 src={
                   photoReference
-                    ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyCH-SLwYe4Bh5wo8CIiEuAj00W6v0Bkxss`
+                    ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyA27rwWEMvWiG5EFFRJP6czivVgL4AMDTQ`
                     : 'https://via.placeholder.com/200x150?text=No+image+found'
                 }
                 title="Restaurant Image"

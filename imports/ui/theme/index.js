@@ -13,7 +13,7 @@ export default createMuiTheme({
       contrastText: '#fff'
     },
     error: {
-      main: '#f5ef40'
+      main: '#fb5b2f'
     }
   },
 

@@ -107,8 +107,8 @@ function MultiValue(props) {
       label={props.children}
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
-      color="secondary"
-      variant="outlined"
+      color="default"
+      variant="default"
     />
   );
 }
@@ -264,7 +264,9 @@ class SelectGroupForm extends Component {
                 matches={this.state.matches}
               />
             ) : (
-              <div>No results</div>
+              <Typography className={classes.results}>
+                Loading Results...
+              </Typography>
             ))}
           {this.state.multi &&
             this.state.multi.length > 0 &&

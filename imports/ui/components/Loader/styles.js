@@ -14,7 +14,6 @@ const styles = theme => ({
   loading: {
     color: theme.palette.primary.main,
     width: '100%',
-    // fontSize: '3rem',
     fontWeight: 500,
     lineHeight: 1.5,
     textAlign: 'center',

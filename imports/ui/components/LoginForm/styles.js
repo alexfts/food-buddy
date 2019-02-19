@@ -15,7 +15,6 @@ const styles = theme => ({
     color: theme.palette.secondary.main,
     letterSpace: 2
   },
-
   formControl: {
     marginBottom: theme.spacing.unit * 2,
     width: '100%'
@@ -39,12 +38,10 @@ const styles = theme => ({
     width: '100%'
   },
   formButton: {
-    // border: '1px solid #fff',
     borderRadius: '2px',
     color: '#fff',
     marginTop: theme.spacing.unit * 2,
     width: 130,
-    // fontWeight: 600,
     letterSpace: 5
   }
 });

@@ -82,7 +82,6 @@ class Home extends Component {
         <Fab
           aria-label="Add"
           className={classes.fab}
-          color="primary"
           onClick={this.handleClickOpen('paper')}
           onMouseOver={this.mouseOver}
           onMouseOut={this.mouseOut}
@@ -134,7 +133,9 @@ class Home extends Component {
               <span id="message-id">{`You like ${query} restaurants. Check them out!`}</span>
             }
           />
-          <Typography className={classes.groupMessage}>Create your group below!</Typography>
+          {/* <Typography className={classes.groupMessage}>
+            Create your group below!
+          </Typography> */}
         </div>
       </div>
     );

@@ -63,6 +63,8 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
           ))}
         </Paper>
 
+        <div className={classes.divider} />
+
         {currentUser.profile &&
           currentUser.profile.favourites &&
           currentUser.profile.favourites.length > 0 && (

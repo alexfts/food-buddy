@@ -119,7 +119,8 @@ class Onboard extends React.Component {
     return (
       <div className={classes.root}>
         <Card className={classes.header}>
-          <img className={classes.img} src="/laugh.png" alt="laugh" />
+          <div className={classes.bgimg} />
+          <img className={classes.img} src="/laugh.png" alt="" />
           <Typography color="primary" className={classes.title}>
             We want to get to know you better!
           </Typography>

@@ -6,7 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 import { Typography } from '@material-ui/core';
 
-const RestrictionsWarning = ({ restrictions, tags }) => {
+const RestrictionsWarning = ({ restrictions, tags, classes }) => {
   return (
     <div>
       {restrictions.map(restriction => {
@@ -15,8 +15,8 @@ const RestrictionsWarning = ({ restrictions, tags }) => {
         const users = restriction.users;
         const usernames = users.map(user => user.username).join(', ');
         return (
-          <div key={tagid}>
-            <Typography>
+          <div key={tagid} className={classes.container}>
+            <Typography className={classes.restriction}>
               {`${usernames} ${
                 users.length > 1 ? 'have' : 'has'
               } a dietary restriction: ${tag.title}`}
@@ -28,7 +28,9 @@ const RestrictionsWarning = ({ restrictions, tags }) => {
   );
 };
 
-RestrictionsWarning.propTypes = {};
+RestrictionsWarning.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withTracker(() => {
   Meteor.subscribe('tags');

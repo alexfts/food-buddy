@@ -44,14 +44,7 @@ Meteor.startup(() => {
         name: 'Bob Jr.',
         tags: Tags.find({
           title: {
-            $in: [
-              'Asian',
-              'Gluten free',
-              'Burgers',
-              'Kebab',
-              'Fries',
-              'Chicken Wings'
-            ]
+            $in: ['Asian', 'Gluten free', 'Burgers', 'Fries', 'Chicken Wings']
           }
         }).map(tag => tag._id)
       }
@@ -75,7 +68,14 @@ Meteor.startup(() => {
         name: '',
         tags: Tags.find({
           title: {
-            $in: ['Burgers', 'Asian', 'Dumplings', 'Dim Sum', 'Brunch']
+            $in: [
+              'Nut-Free',
+              'Burgers',
+              'Asian',
+              'Dumplings',
+              'Dim Sum',
+              'Brunch'
+            ]
           }
         }).map(tag => tag._id)
       }
@@ -131,7 +131,7 @@ Meteor.startup(() => {
             $in: [
               'Burgers',
               'Thai',
-              'Kebab',
+
               'Canadian',
               'Chicken Wings',
               'Dim Sum',
@@ -152,7 +152,7 @@ Meteor.startup(() => {
             $in: [
               'Burgers',
               'French',
-              'Kebab',
+
               'American',
               'Fries',
               'Brunch',

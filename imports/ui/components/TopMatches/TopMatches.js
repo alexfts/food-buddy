@@ -50,7 +50,7 @@ class TopMatches extends Component {
           align="center"
           className={classes.topMatchesHeader}
         >
-          <PriceSlider handlePriceChange={handlePriceChange} />
+          <PriceSlider handlePriceChange={this.handlePriceChange} />
           <FormControlLabel
             className={classes.switch}
             label="Open now"

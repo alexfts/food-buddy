@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Fab, Dialog, Modal, Snackbar, Typography } from '@material-ui/core';
+import { Fab, Dialog, Modal, Snackbar } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import styles from './styles';
 import SelectGroupForm from '../../components/SelectGroupForm';
@@ -10,16 +10,10 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
 
-const generateRandomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      multi: null,
-      matches: null,
       open: false,
       scroll: 'paper',
       hover: false,
@@ -27,27 +21,25 @@ class Home extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     // Delay showing the snackbar right away for better UX
     this.timer = setTimeout(() => {
       this.setState({ displaySnackbar: true });
     }, 2000);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     clearTimeout(this.timer);
-  }
+  };
 
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
   handleClose = () => {
     this.setState({ open: false });
   };
+
   handleCloseSnackbar = () => {
     this.setState({ displaySnackbar: false });
   };
@@ -55,11 +47,16 @@ class Home extends Component {
   mouseOver = () => {
     this.setState({ hover: true });
   };
+
   mouseOut = () => {
     this.setState({ hover: false });
   };
 
   render() {
+    const generateRandomInt = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+
     const { classes, tags } = this.props;
     let { userTags } = this.props;
     //if there are tags, pick a random tag
@@ -133,9 +130,6 @@ class Home extends Component {
               <span id="message-id">{`You like ${query} restaurants. Check them out!`}</span>
             }
           />
-          {/* <Typography className={classes.groupMessage}>
-            Create your group below!
-          </Typography> */}
         </div>
       </div>
     );
@@ -144,8 +138,13 @@ class Home extends Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  userTags: PropTypes.array.isRequired,
-  tags: PropTypes.array.isRequired
+  userTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      category: PropTypes.object
+    })
+  ).isRequired
 };
 
 export default withTracker(() => {

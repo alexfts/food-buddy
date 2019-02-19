@@ -1,3 +1,3 @@
-import MediaCard from './MediaCard';
+import ResultsDrawer from './ResultsDrawer';
 
-export default MediaCard;
+export default ResultsDrawer;

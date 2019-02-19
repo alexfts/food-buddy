@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import styles from './styles';
-import { Typography, Drawer, List, ListItem } from '@material-ui/core/';
+import { Drawer, List, ListItem } from '@material-ui/core/';
 import RestaurantCard from '../RestaurantCard';
 
-class MediaCard extends React.Component {
+class ResultsDrawer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: null
+      restaurantDetails: null
     };
   }
 
@@ -29,7 +29,7 @@ class MediaCard extends React.Component {
       return await data;
     });
     this.setState({
-      result: await Promise.all(placeDetails)
+      restaurantDetails: await Promise.all(placeDetails)
     });
   };
 
@@ -50,7 +50,7 @@ class MediaCard extends React.Component {
 
   render() {
     const { classes, places } = this.props;
-    const details = this.state.result;
+    const details = this.state.restaurantDetails;
     return (
       <div className={classes.root}>
         <Drawer
@@ -81,7 +81,7 @@ class MediaCard extends React.Component {
   }
 }
 
-MediaCard.propTypes = {
+ResultsDrawer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -89,4 +89,4 @@ export default withTracker(() => {
   return {
     user: Meteor.user()
   };
-})(withStyles(styles)(MediaCard));
+})(withStyles(styles)(ResultsDrawer));

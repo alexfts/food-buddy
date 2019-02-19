@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import MediaCard from '../../components/ResultsDrawer/ResultsDrawer';
+import ResultsDrawer from '../../components/ResultsDrawer';
 import { withStyles } from '@material-ui/core/styles';
 import styles, { snazzyMapsStyles } from './styles';
 import { compose, withProps, withHandlers, withState } from 'recompose';
@@ -69,7 +69,7 @@ const Map = ({
         </GoogleMap>
       </Grid>
       <Grid>
-        {places && <MediaCard places={places} userMatches={userMatches} />}
+        {places && <ResultsDrawer places={places} userMatches={userMatches} />}
       </Grid>
     </Grid>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
@@ -18,17 +18,20 @@ import { Tags } from '../../../api/tags';
 import TagSelections from '../../components/TagSelections';
 import { Link } from 'react-router-dom';
 
-function getSteps() {
-  return [
-    'Select your favourite cusines:',
-    'Select your favourite food types:',
-    'Select any dietary preferences and extra info:'
-  ];
-}
+class Onboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeStep: 0
+    };
+  }
 
-class Onboard extends React.Component {
-  state = {
-    activeStep: 0
+  getSteps = () => {
+    return [
+      'Select your favourite cusines:',
+      'Select your favourite food types:',
+      'Select any dietary preferences and extra info:'
+    ];
   };
 
   getStepContent = step => {
@@ -113,7 +116,7 @@ class Onboard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const steps = getSteps();
+    const steps = this.getSteps();
     const { activeStep } = this.state;
 
     return (
@@ -181,8 +184,18 @@ class Onboard extends React.Component {
 
 Onboard.propTypes = {
   classes: PropTypes.object.isRequired,
-  tagCategories: PropTypes.array.isRequired, 
-  tags: PropTypes.array.isRequired,
+  tagCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default withTracker(() => {

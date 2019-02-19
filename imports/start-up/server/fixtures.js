@@ -15,7 +15,7 @@ Meteor.startup(() => {
       .namedContext()
       .validationErrors();
     if (errors && errors.length > 0) {
-      console.log(errors);
+      throw new Error('Error inserting tag categories');
     }
   }
 
@@ -31,7 +31,7 @@ Meteor.startup(() => {
       .namedContext()
       .validationErrors();
     if (errors && errors.length > 0) {
-      console.log(errors);
+      throw new Error('Error inserting tags');
     }
   }
 
@@ -39,9 +39,9 @@ Meteor.startup(() => {
     Accounts.createUser({
       email: 'test@test.com',
       password: 'password',
-      username: 'BobJr',
+      username: 'appleseed',
       profile: {
-        name: 'Bob Jr.',
+        name: 'Johnny Appleseed',
         tags: Tags.find({
           title: {
             $in: ['Asian', 'Gluten free', 'Burgers', 'Fries', 'Chicken Wings']
@@ -56,7 +56,9 @@ Meteor.startup(() => {
       profile: {
         name: 'Hobbs',
         tags: Tags.find({
-          title: { $in: ['Vegetarian', 'Burgers', 'Fries', 'Bubble Tea'] }
+          title: {
+            $in: ['Vegetarian', 'Burgers', 'Fries', 'Bubble Tea', 'Asian']
+          }
         }).map(tag => tag._id)
       }
     });
@@ -81,7 +83,7 @@ Meteor.startup(() => {
       }
     });
     Accounts.createUser({
-      email: 'buffkorean@ktv.com',
+      email: 'buffkoreankimchi@gmail.com',
       password: 'password',
       username: 'BuffKorean',
       profile: {
@@ -94,27 +96,9 @@ Meteor.startup(() => {
               'Rice',
               'Korean',
               'Chicken Wings',
-              'BBQ'
-            ]
-          }
-        }).map(tag => tag._id)
-      }
-    });
-    Accounts.createUser({
-      email: 'timgabrielnguyen@gmail.com',
-      password: 'password',
-      username: 'BabyLungs',
-      profile: {
-        name: 'Baby Lungs',
-        tags: Tags.find({
-          title: {
-            $in: [
-              'Burgers',
-              'Burritos',
-              'Rice',
-              'Korean',
-              'Chicken Wings',
-              'BBQ'
+              'BBQ',
+              'Japanese',
+              'Asian'
             ]
           }
         }).map(tag => tag._id)
@@ -131,11 +115,11 @@ Meteor.startup(() => {
             $in: [
               'Burgers',
               'Thai',
-
               'Canadian',
               'Chicken Wings',
               'Dim Sum',
-              'Taco'
+              'Taco',
+              'Asian'
             ]
           }
         }).map(tag => tag._id)
@@ -152,11 +136,30 @@ Meteor.startup(() => {
             $in: [
               'Burgers',
               'French',
-
               'American',
               'Fries',
               'Brunch',
               'Low-Carb'
+            ]
+          }
+        }).map(tag => tag._id)
+      }
+    });
+    Accounts.createUser({
+      email: 'babylungs@red.com',
+      password: 'boomtown',
+      username: 'BabyLungs',
+      profile: {
+        name: '',
+        tags: Tags.find({
+          title: {
+            $in: [
+              'Japanese',
+              'Korean',
+              'Asian',
+              'Dumplings',
+              'Dim Sum',
+              'Vietnamese'
             ]
           }
         }).map(tag => tag._id)
@@ -173,7 +176,7 @@ Meteor.startup(() => {
       .namedContext()
       .validationErrors();
     if (errors && errors.length > 0) {
-      console.log(errors);
+      throw new Error('Error inserting users');
     }
   }
 });

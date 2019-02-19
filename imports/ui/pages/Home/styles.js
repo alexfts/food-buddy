@@ -29,7 +29,7 @@ const styles = theme => ({
 
   fab: {
     // background: '#f50057',
-    backgroundImage: 'linear-gradient(to top, #ff0844 0%, #f8ab4f 100%)',
+    backgroundImage: 'linear-gradient(to top, #f50057 0%, #f8ab4f 100%)',
     border: '3px solid #353535',
     color: '#fff',
     fontWeight: 500,

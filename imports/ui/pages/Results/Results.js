@@ -1,15 +1,14 @@
 import React from 'react';
 import Map from '../../components/Map';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import styles from './styles';
 
-const Results = props => {
-  const query = props.location.state
-    ? props.location.state.query
-    : 'restaurants';
-  const openNow = props.location.state ? props.location.state.openNow : true;
-  const price = props.location.state ? props.location.state.price : 1;
-  const userMatches = props.location.state && props.location.state.userMatches;
+const Results = ({ location }) => {
+  const query = location.state ? location.state.query : 'restaurants';
+  const openNow = location.state ? location.state.openNow : true;
+  const price = location.state ? location.state.price : 1;
+  const userMatches = location.state && location.state.userMatches;
   return (
     <Map
       query={query}
@@ -18,6 +17,11 @@ const Results = props => {
       userMatches={userMatches}
     />
   );
+};
+
+Results.propTypes = {
+  classes: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Results);

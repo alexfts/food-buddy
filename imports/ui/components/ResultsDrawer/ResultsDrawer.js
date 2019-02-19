@@ -33,23 +33,8 @@ class ResultsDrawer extends React.Component {
     });
   };
 
-  toggleFavourite = (place, details, e) => {
-    Meteor.call('users.changeFavourites', place, details, e.target.checked);
-  };
-
-  shouldCheck = place => {
-    const { user } = this.props;
-    if (!place || !user || !user.profile || !user.profile.favourites)
-      return false;
-
-    return (
-      user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
-      undefined
-    );
-  };
-
   render() {
-    const { classes, places } = this.props;
+    const { classes, places, userMatches } = this.props;
     const details = this.state.restaurantDetails;
     return (
       <div className={classes.root}>
@@ -65,11 +50,11 @@ class ResultsDrawer extends React.Component {
             {places.map((place, i) => {
               const placeDetails = details && details[i] && details[i].result;
               return (
-                <ListItem key={place.id}>
+                <ListItem key={place.place_id}>
                   <RestaurantCard
                     place={place}
                     details={placeDetails}
-                    userMatches={this.props.userMatches}
+                    userMatches={userMatches}
                   />
                 </ListItem>
               );
@@ -82,7 +67,13 @@ class ResultsDrawer extends React.Component {
 }
 
 ResultsDrawer.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  places: PropTypes.arrayOf(
+    PropTypes.shape({
+      place_id: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  userMatches: PropTypes.array
 };
 
 export default withTracker(() => {

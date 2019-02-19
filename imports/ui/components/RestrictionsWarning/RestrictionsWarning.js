@@ -17,7 +17,7 @@ const RestrictionsWarning = ({ restrictions, tags, classes }) => {
         return (
           <div key={tagid} className={classes.container}>
             <Typography className={classes.restriction}>
-              {`${usernames} ${
+              {`*${usernames} ${
                 users.length > 1 ? 'have' : 'has'
               } a dietary restriction: ${tag.title}`}
             </Typography>

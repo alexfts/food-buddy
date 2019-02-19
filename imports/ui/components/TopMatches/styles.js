@@ -15,6 +15,7 @@ const styles = theme => ({
     paddingTop: 20,
     textAlign: 'center'
   },
+
   tagTitle: {
     color: theme.palette.primary.dark,
     fontSize: '1.3rem',
@@ -22,11 +23,9 @@ const styles = theme => ({
     letterSpacing: 1.1,
     width: '100%'
   },
-
   placesList: {
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 20,
     paddingLeft: 18
@@ -38,15 +37,15 @@ const styles = theme => ({
   },
   matchesLabel: {
     color: '#696969',
-    // fontSize: 10,
     fontWeight: 400,
     marginLeft: 5,
     marginRight: 10
   },
-  flexMatches: {
+  group: {
     display: 'flex',
-    alignItems: 'center'
+    flexWrap: 'nowrap'
   },
+
   user: {
     marginTop: 3,
     marginRight: 5
@@ -57,13 +56,22 @@ const styles = theme => ({
   },
   button: {
     color: 'white',
-    fontWeight: 400,
-    margin: '0.5rem 0'
-    // textTransform: 'capitalize'
+    fontWeight: 500,
+    marginRight: 20,
+    padding: '6px 15px'
   },
   switch: {
     letterSpacing: 1.1,
     fongWeight: 500
+  },
+  wrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 15
+  },
+  tagsWrapper: {
+    width: 370
   }
 });
 

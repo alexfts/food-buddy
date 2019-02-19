@@ -4,7 +4,6 @@ import styles from './styles';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tags } from '../../../api/tags';
-import { TagCategories } from '../../../api/tagCategories';
 import {
   Avatar,
   Grid,
@@ -22,12 +21,17 @@ class TopMatches extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openNow: true
+      openNow: true,
+      price: 1
     };
   }
 
   handleOpenNowChange = event => {
     this.setState({ openNow: event.target.checked });
+  };
+
+  handlePriceChange = price => {
+    this.setState({ price });
   };
 
   render() {
@@ -46,7 +50,7 @@ class TopMatches extends Component {
           align="center"
           className={classes.topMatchesHeader}
         >
-          <PriceSlider />
+          <PriceSlider handlePriceChange={this.handlePriceChange} />
           <FormControlLabel
             className={classes.switch}
             label="Open now"
@@ -72,34 +76,38 @@ class TopMatches extends Component {
                 key={userTagTitles.join(',')}
                 className={classes.matches}
               >
-                <Typography className={classes.tagTitle}>
-                  {userTagTitles.join(' or ')}
-                </Typography>
+                <div className={classes.wrapper}>
+                  <div>
+                    <Typography className={classes.tagTitle}>
+                      {userTagTitles.join(' or ')}
+                    </Typography>
 
-                <div className={classes.flexMatches}>
-                  <Typography className={classes.matchesLabel}>
-                    Match:
-                  </Typography>
-                  {users.map(user => (
-                    <Chip
-                      className={classes.user}
-                      key={user._id}
-                      label={user.username}
-                      color="default"
-                      variant="default"
-                      avatar={
-                        <Avatar>
-                          <Gravatar
-                            className={classes.gravatar}
-                            email={user.emails[0].address}
+                    <Grid container className={classes.group}>
+                      <Typography className={classes.matchesLabel}>
+                        Match:
+                      </Typography>
+                      <div className={classes.flexMatches}>
+                        {users.map(user => (
+                          <Chip
+                            className={classes.user}
+                            key={user._id}
+                            label={user.username}
+                            color="default"
+                            variant="default"
+                            avatar={
+                              <Avatar>
+                                <Gravatar
+                                  className={classes.gravatar}
+                                  email={user.emails[0].address}
+                                />
+                              </Avatar>
+                            }
                           />
-                        </Avatar>
-                      }
-                    />
-                  ))}
-                </div>
+                        ))}
+                      </div>
+                    </Grid>
+                  </div>
 
-                <div>
                   <Button
                     variant="contained"
                     color="primary"
@@ -133,19 +141,39 @@ class TopMatches extends Component {
 }
 
 TopMatches.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  allTags: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  matches: PropTypes.arrayOf(
+    PropTypes.shape({
+      tagids: PropTypes.arrayOf(PropTypes.string),
+      users: PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          username: PropTypes.string.isRequired,
+          emails: PropTypes.arrayOf(PropTypes.object).isRequired
+        })
+      )
+    })
+  ),
+  userids: PropTypes.arrayOf(PropTypes.string).isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default withTracker(() => {
   Meteor.subscribe('tags');
-  Meteor.subscribe('tagCategories');
   Meteor.subscribe('users');
 
   return {
-    currentUser: Meteor.user(),
-    currentUserId: Meteor.userId(),
     users: Meteor.users.find({}).fetch(),
-    allTags: Tags.find({}).fetch(),
-    tagCategories: TagCategories.find({}).fetch()
+    allTags: Tags.find({}).fetch()
   };
 })(withStyles(styles)(TopMatches));

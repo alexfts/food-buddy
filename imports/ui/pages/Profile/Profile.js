@@ -87,7 +87,10 @@ const Profile = ({ currentUser, tags, tagCategories, classes }) => {
 };
 
 Profile.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
+  tagCategories: PropTypes.array.isRequired 
 };
 
 export default withTracker(() => {

@@ -179,7 +179,9 @@ class Onboard extends React.Component {
 }
 
 Onboard.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object.isRequired,
+  tagCategories: PropTypes.array.isRequired, 
+  tags: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {

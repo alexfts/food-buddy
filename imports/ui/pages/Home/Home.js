@@ -142,7 +142,9 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  userTags: PropTypes.array.isRequired, 
+  tags: PropTypes.array.isRequired
 };
 
 export default withTracker(() => {

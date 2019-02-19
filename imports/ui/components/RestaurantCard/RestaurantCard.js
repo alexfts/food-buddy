@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
-import { IconButton, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Favorite, FavoriteBorder, Star, Share } from '@material-ui/icons';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import styles from './styles';
@@ -11,15 +10,14 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  IconButton,
+  FormControlLabel,
+  Checkbox,
   Typography,
-  List,
-  ListItem,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  TextField,
   Button,
   Chip,
   Avatar,
@@ -60,11 +58,10 @@ class RestaurantCard extends Component {
     Meteor.call('users.changeFavourites', place, details, e.target.checked);
   };
 
-  shouldCheck = place => {
+  shouldCheckFavourite = place => {
     const { user } = this.props;
     if (!place || !user || !user.profile || !user.profile.favourites)
       return false;
-
     return (
       user.profile.favourites.find(fav => fav.place_id === place.place_id) !==
       undefined
@@ -145,7 +142,7 @@ class RestaurantCard extends Component {
                       root: classes.favouriteButton,
                       checked: classes.checked
                     }}
-                    checked={this.shouldCheck(place)}
+                    checked={this.shouldCheckFavourite(place)}
                     onChange={e => {
                       this.toggleFavourite(place, details, e);
                     }}
@@ -199,7 +196,7 @@ class RestaurantCard extends Component {
             </DialogContent>
             <DialogActions>
               <Button
-                onClick={() => this.handleCloseShareDialog()}
+                onClick={this.handleCloseShareDialog}
                 color="primary"
                 variant="outlined"
               >
@@ -242,8 +239,35 @@ class RestaurantCard extends Component {
 }
 
 RestaurantCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  place: PropTypes.shape({
+    name: PropTypes.string,
+    place_id: PropTypes.string,
+    rating: PropTypes.number,
+    vicinity: PropTypes.string,
+    price_level: PropTypes.number
+  }),
+  details: PropTypes.shape({
+    website: PropTypes.string,
+    photos: PropTypes.arrayOf(
+      PropTypes.shape({
+        photo_reference: PropTypes.string
+      })
+    )
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string,
+    profile: PropTypes.object
+  }),
+  userMatches: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      username: PropTypes.string,
+      emails: PropTypes.array
+    })
+  )
 };
+
 export default withTracker(() => {
   return {
     user: Meteor.user()

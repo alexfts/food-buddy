@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import PropTypes from 'prop-types';
@@ -29,7 +29,23 @@ const RestrictionsWarning = ({ restrictions, tags, classes }) => {
 };
 
 RestrictionsWarning.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      title: PropTypes.string
+    })
+  ).isRequired,
+  restrictions: PropTypes.arrayOf(
+    PropTypes.shape({
+      tagids: PropTypes.arrayOf(PropTypes.string).isRequired,
+      users: PropTypes.arrayOf(
+        PropTypes.shape({
+          username: PropTypes.string
+        })
+      ).isRequired
+    })
+  ).isRequired
 };
 
 export default withTracker(() => {

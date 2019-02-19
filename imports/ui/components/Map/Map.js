@@ -79,9 +79,9 @@ Map.propTypes = {
   classes: PropTypes.object.isRequired,
   fetchPlaces: PropTypes.func.isRequired,
   onMapMounted: PropTypes.func.isRequired,
-  onMarkerClustererClick: PropTypes.func.isRequired,
-  places: PropTypes.array.isRequired,
-  userMatches: PropTypes.array.isRequired
+  onMarkerClustererClick: PropTypes.func,
+  places: PropTypes.oneOfType([PropTypes.array, PropTypes.string]).isRequired,
+  userMatches: PropTypes.array
 };
 
 export default compose(

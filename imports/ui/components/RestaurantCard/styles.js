@@ -3,7 +3,7 @@ import green from '@material-ui/core/colors/green';
 const styles = theme => ({
   successBar: {
     top: 350,
-    left: 500 
+    left: 500
   },
   success: {
     backgroundColor: green[600]
@@ -51,7 +51,6 @@ const styles = theme => ({
   },
   dollar: {
     color: '#6ba048',
-    // fontWeight: 'bold',
     letterSpace: 1.2,
     marginRight: -5
   },
@@ -87,7 +86,6 @@ const styles = theme => ({
     }
   },
   checked: {},
-
   shareCard: {
     borderRadius: 0
   },

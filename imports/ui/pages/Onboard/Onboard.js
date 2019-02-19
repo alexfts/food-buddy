@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 
 class Onboard extends Component {
   constructor(props) {
+    super(props);
     this.state = {
       activeStep: 0
     };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
@@ -7,11 +7,12 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Chip } from '@material-ui/core';
 
-class TagSelections extends React.Component {
+class TagSelections extends Component {
   constructor(props) {
     super(props);
     const { currentUser, categoryid, tags } = this.props;
     let selectedTags = [];
+    // initialize selectedTags to the tags that the user has in the DB
     if (currentUser.profile && currentUser.profile.tags) {
       selectedTags = currentUser.profile.tags;
       if (categoryid) {
@@ -63,21 +64,6 @@ class TagSelections extends React.Component {
         );
   };
 
-  sortTagsBySelected(tags) {
-    const sortedTags = [...tags];
-    sortedTags.sort((tag1, tag2) => {
-      const isTag1Selected = this.state.selectedTags.includes(tag1._id);
-      const isTag2Selected = this.state.selectedTags.includes(tag2._id);
-      if (isTag1Selected !== isTag2Selected) {
-        return isTag1Selected ? -1 : 1;
-      } else {
-        if (tag1.title < tag2.title) return -1;
-        else return 1;
-      }
-    });
-    return sortedTags;
-  }
-
   sortTagsAlphabet(tags) {
     const sortTags = [...tags];
     sortTags.sort((tag1, tag2) => {
@@ -118,7 +104,10 @@ class TagSelections extends React.Component {
 }
 
 TagSelections.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  categoryid: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  tags: PropTypes.array.isRequired
 };
 
 export default withTracker(() => {

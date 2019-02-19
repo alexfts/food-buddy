@@ -7,7 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { TagCategories } from '../../../api/tagCategories';
 import { Chip } from '@material-ui/core';
 
-class Bubbles extends React.Component {
+class TagSelections extends React.Component {
   constructor(props) {
     super(props);
     const { currentUser, categoryid, tags } = this.props;
@@ -117,7 +117,7 @@ class Bubbles extends React.Component {
   }
 }
 
-Bubbles.propTypes = {
+TagSelections.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -127,4 +127,4 @@ export default withTracker(() => {
     currentUser: Meteor.user(),
     tagCategories: TagCategories.find({}).fetch()
   };
-})(withStyles(styles, { withTheme: true })(Bubbles));
+})(withStyles(styles, { withTheme: true })(TagSelections));

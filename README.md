@@ -4,7 +4,7 @@ Welcome to food buddy an app where you can decide where to eat with a group of f
 
 # Screenshots
 
-<img src="./public/login-screenshot.png" alt="Login Screen" width="80px" height="500px">
+<img src="./public/login-screenshot.png" alt="Login Screen" width="800px" height="500px">
 
 <img src="./public/onboarding-screenshot.png" alt="Onboarding Screen" width="800px" height="500px">
 

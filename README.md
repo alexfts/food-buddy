@@ -1,26 +1,35 @@
-# food-buddy
+# Food Buddy
 
-Welcome to food buddy an app where you can decide where to eat with a group of friends based on your preferences. With the help of the Google Maps API we can filter throught restaurants near you and give suggestions based on the most common preference of the group.
+Welcome to Food Buddy!  We've created a Meteor app that helps you decide where to eat with your friends.  It takes into consideration your whole groups' food preferences and dietary restrictions.  We've filtered through restaurants options near you with the help of the Google Maps API.  
 
-# Screenshots
+## Onboarding
 
-<img src="./public/login-screenshot.png" alt="Login Screen" width="800px" height="500px">
+![](OnboardGiphy.gif)
 
-<img src="./public/onboarding-screenshot.png" alt="Onboarding Screen" width="800px" height="500px">
+## Getting a Group Together
 
-<img src="./public/home-screenshot.png" alt="Home Screen" width="800px" height="500px">
+![](GroupGiphy.gif)
 
-<img src="./public/createGroup-screenshot.png" alt="Group Form" width="800px" height="500px">
-
-# Technologies Used
+## Technologies Used
 
 - Meteor
 - Mongo DB
 - React
+- React Router
 - Material UI
 - Google Maps API
-- Simple Schema
 
-# Authors
+## Installation
 
-Sophie Virtue, Alex Fetisova, Victor Guo, Jen Yiu, Kyle Tecson
+```bash
+npm install
+meteor
+```
+
+## Authors
+
+- Alex Fetisova  [Github](https://github.com/alexfts) [LinkedIn](https://www.linkedin.com/in/fetisova/)
+- Victor Guo     [Github](https://github.com/Vikkkkk) [LinkedIn](https://www.linkedin.com/in/victor-guo-05981576/)
+- Kyle Tecson    [Github](https://github.com/kyltec) [LinkedIn](https://www.linkedin.com/in/kyle-tecson-9b6952175/)
+- Sophie Virtue  [Github](https://github.com/SophieVirtue) [LinkedIn](https://www.linkedin.com/in/sophie-virtue-65467849/)
+- Jen Yiu        [Github](https://github.com/jenjjy) [LinkedIn](https://www.linkedin.com/in/jennifer-yiu-12145836/)
